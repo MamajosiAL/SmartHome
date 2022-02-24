@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="3" author="Mathias Clement">
+        <createTable tableName="room" schemaName="smarthome">
+            <column name="roomid" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="house_id" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="room"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="house_id"
+                                 constraintName="fk_house"
+                                 referencedTableName="house"
+                                 referencedColumnNames="houseid"
+                                 referencedTableSchemaName="smarthome"
+        />
+        <addColumn tableName="house_user" schemaName="smarthome">
+            <column name="isadmin" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

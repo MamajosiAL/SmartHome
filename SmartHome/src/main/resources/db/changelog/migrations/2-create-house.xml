@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2" author="Mathias Clement">
+        <createTable tableName="house" schemaName="smarthome">
+            <column name="houseid" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="house_user" schemaName="smarthome">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="houseid" type="bigint"/>
+            <column name="userid" type="bigint"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="house_user"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="houseid"
+                                 constraintName="fk_house"
+                                 referencedTableName="house"
+                                 referencedColumnNames="houseid"
+                                 referencedTableSchemaName="smarthome"
+        />
+        <addForeignKeyConstraint baseTableName="house_user"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="userid"
+                                 constraintName="fk_user"
+                                 referencedTableName="user"
+                                 referencedColumnNames="userid"
+                                 referencedTableSchemaName="smarthome"
+        />
+
+    </changeSet>
+</databaseChangeLog>
