@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">SmartHome-Mobile</string>
+    <string name="NetworkTitle">Houses</string>
+    <string name="RoomsTitle">Rooms</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_houses">Houses</string>
+    <string name="menu_consumption">Consumption</string>
+    <string name="menu_manage">Manage</string>
+    <string name="appName" translatable="false">Smart Home</string>
+    <string name="title_houses">Houses</string>
+    <string name="title_manage">Manage</string>
+    <string name="title_consumption">Consumption</string>
+    <string name="app_name" translatable="false">Smart Home</string>
 </resources>

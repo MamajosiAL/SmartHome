@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="NetworkTitle">Huizen</string>
+    <string name="RoomsTitle">Ruimtes</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="menu_manage">Beheer</string>
+    <string name="menu_consumption">Verbruik</string>
+    <string name="menu_home" translatable="false">Huizen</string>
+    <string name="title_houses">Huizen</string>
+    <string name="title_manage">Beheer</string>
+    <string name="title_consumption">Consumptie</string>
+    <string name="menu_houses">Huizen</string>
+</resources>
