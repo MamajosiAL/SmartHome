@@ -155,6 +155,7 @@ public class UserController {
                 .firstname(userDTO.getFirstname())
                 .name(userDTO.getName())
                 .email(userDTO.getEmail())
+                .password(userDTO.getPassword())
                 .build();
     }
 
