@@ -1,7 +1,6 @@
 package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.HouseDTO;
-import com.ucll.smarthome.dto.UserDTO;
 import com.ucll.smarthome.persistence.entities.House;
 import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;

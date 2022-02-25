@@ -100,7 +100,7 @@ public class UserController {
         if (userId <= 0L) throw new IllegalArgumentException("User Id is missing");
         Optional<User> user = dao.findById(userId);
         if (user.isPresent()){
-            return new UserDTO.Builder().id(user.get().getId()).username(user.get().getUsername()).name(user.get().getUsername())
+            return new UserDTO.Builder().id(user.get().getId()).username(user.get().getUsername()).name(user.get().getName())
                     .firstname(user.get().getFirstname()).email(user.get().getEmail()).build();
         }else {
             throw new IllegalArgumentException("No user found with id: " + userId);
@@ -125,7 +125,7 @@ public class UserController {
                               .firstname(rec.getUser().getFirstname())
                               .username(rec.getUser().getUsername())
                               .email(rec.getUser().getEmail())
-                              .password(rec.getUser().getPassword()).build());
+                              .build());
               return stream.collect(Collectors.toList());
         }
 
@@ -155,7 +155,6 @@ public class UserController {
                 .firstname(userDTO.getFirstname())
                 .name(userDTO.getName())
                 .email(userDTO.getEmail())
-                .password(userDTO.getPassword())
                 .build();
     }
 
