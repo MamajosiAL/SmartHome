@@ -39,10 +39,10 @@ public class UserRestController {
 
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity updateUser(@PathVariable("id") long id, @RequestBody UserDTO userDTO){
+    @PutMapping
+    public ResponseEntity updateUser( @RequestBody UserDTO userDTO){
         try {
-            userDTO.setId(id);
+
             userController.updateUser(userDTO);
             return new ResponseEntity(HttpStatus.OK);
         }catch (IllegalArgumentException e){
@@ -57,8 +57,12 @@ public class UserRestController {
         return Optional.of(userController.getAllUsers());
     }
     @GetMapping("/house/{id}")
-    public Optional<List<UserDTO>> getUsersByHouse(@PathVariable("id")long houseid){
-        return Optional.ofNullable(userController.getUsersByHouse(houseid));
+    public ResponseEntity<Optional<List<UserDTO>>> getUsersByHouse(@PathVariable("id")long houseid){
+        try {
+            return new ResponseEntity(Optional.ofNullable(userController.getUsersByHouse(houseid)),HttpStatus.OK) ;
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
     }
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable("id") long id){

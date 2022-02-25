@@ -22,10 +22,5 @@
                                  referencedColumnNames="houseid"
                                  referencedTableSchemaName="smarthome"
         />
-        <addColumn tableName="house_user" schemaName="smarthome">
-            <column name="isadmin" type="boolean">
-                <constraints nullable="true"/>
-            </column>
-        </addColumn>
     </changeSet>
 </databaseChangeLog>

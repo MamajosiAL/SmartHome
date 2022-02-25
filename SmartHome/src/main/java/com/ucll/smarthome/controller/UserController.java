@@ -2,6 +2,7 @@ package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.UserDTO;
 import com.ucll.smarthome.persistence.entities.House;
+import com.ucll.smarthome.persistence.entities.House_User;
 import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.UserDAO;
@@ -137,13 +138,15 @@ public class UserController {
      */
     public void deleteUser(long userId) throws IllegalArgumentException {
         if (userId <= 0L) throw new IllegalArgumentException("Invalid id");
-
-        //checking if the house exists
         getUserById(userId);
 
+        User user = dao.getById(userId);
 
-        house_userController.deleteRegistratieHouseUser(house_userController.getByUser(dao.getById(userId)));
-        dao.deleteById(userId);
+       boolean result =  house_userController.getByUser(user).stream().anyMatch(House_User::isOwner);
+       if (result) throw new IllegalArgumentException("You still have house(s) that you have created. Delete these first if you want to delete your account");
+
+       house_userController.deleteRegistratieHouseUser(house_userController.getByUser(dao.getById(userId)));
+       dao.deleteById(userId);
     }
 
     private User userDtoToUser(UserDTO userDTO){

@@ -47,7 +47,7 @@ public class HouseController {
         House house = houseDtoToHouse(houseDTO);
         dao.save(house);
 
-        house_userController.createRegistratieHouseUser(house,user.get());
+        house_userController.createRegistratoinHouseUser(house,user.get());
 
     }
 

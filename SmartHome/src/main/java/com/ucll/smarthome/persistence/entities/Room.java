@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "room",schema = "smarthome")
 public class Room {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "roomid",nullable = false,updatable = false)

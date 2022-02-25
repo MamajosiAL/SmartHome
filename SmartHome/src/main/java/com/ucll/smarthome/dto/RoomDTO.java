@@ -1,9 +1,12 @@
 package com.ucll.smarthome.dto;
 
+import com.ucll.smarthome.persistence.entities.House;
+
 public class RoomDTO {
     private long id;
     private String name;
     private long houseid;
+
 
     public RoomDTO() {
     }
@@ -12,7 +15,9 @@ public class RoomDTO {
         setId(builder.id);
         setName(builder.name);
         setHouseid(builder.houseid);
+
     }
+
 
     public long getId() {
         return id;
@@ -38,6 +43,8 @@ public class RoomDTO {
         this.houseid = houseid;
     }
 
+
+
     public static final class Builder {
         private long id;
         private String name;
@@ -60,6 +67,8 @@ public class RoomDTO {
             houseid = val;
             return this;
         }
+
+
 
         public RoomDTO build() {
             return new RoomDTO(this);
