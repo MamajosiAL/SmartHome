@@ -35,7 +35,7 @@ public class ManageActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.navHouses:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HousesActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

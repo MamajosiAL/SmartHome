@@ -11,4 +11,15 @@
     <string name="title_manage">Manage</string>
     <string name="title_consumption">Consumption</string>
     <string name="app_name" translatable="false">Smart Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="firstName">First name</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="owner">Owner</string>
+    <string name="InternetGrantedMessage">Internet Permission Granted</string>
+    <string name="InternetNotGrantedMessage">Internet Permission Denied</string>
+    <string name="WakeLockGranted">Wake Lock Permission Granted</string>
+    <string name="WakeLockNotGranted">Wake Lock Permission Denied</string>
 </resources>
