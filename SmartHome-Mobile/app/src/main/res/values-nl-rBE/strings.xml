@@ -5,9 +5,11 @@
     <string name="action_settings">Instellingen</string>
     <string name="menu_manage">Beheer</string>
     <string name="menu_consumption">Verbruik</string>
-    <string name="menu_home" translatable="false">Huizen</string>
+    <string name="menu_home">Huizen</string>
     <string name="title_houses">Huizen</string>
     <string name="title_manage">Beheer</string>
     <string name="title_consumption">Consumptie</string>
     <string name="menu_houses">Huizen</string>
+    <string name="owner">Eigenaar</string>
+    <string name="name">Naam</string>
 </resources>

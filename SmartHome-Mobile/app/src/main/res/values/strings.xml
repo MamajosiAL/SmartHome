@@ -11,4 +11,7 @@
     <string name="title_manage">Manage</string>
     <string name="title_consumption">Consumption</string>
     <string name="app_name" translatable="false">Smart Home</string>
+    <string name="owner">Owner</string>
+    <string name="name">Name</string>
+    <string name="menu_home">Houses</string>
 </resources>
