@@ -70,11 +70,10 @@ public class UserRestController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteUser(@PathVariable("id") long id ){
-
+    @DeleteMapping
+    public ResponseEntity deleteUser(){
         try {
-            userController.deleteUser(id);
+            userController.deleteUser();
             return new ResponseEntity("User successful deleted",HttpStatus.ACCEPTED);
 
         }catch (IllegalArgumentException e){

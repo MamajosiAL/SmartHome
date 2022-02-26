@@ -33,7 +33,6 @@ public class HouseRestController {
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @PutMapping("/{id}")
@@ -48,15 +47,17 @@ public class HouseRestController {
             return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
     @GetMapping
     public Optional<List<HouseDTO>> getAllHouses(){
         return Optional.of(houseController.getAllHouses());
     }
 
-    @GetMapping("/user/{id}")
-    public Optional<List<HouseDTO>> getHousesByUser(@PathVariable("id") long userid){
-        return Optional.ofNullable(houseController.getHousesByUser(userid));
+    @GetMapping("/user")
+    public Optional<List<HouseDTO>> getHousesByUser(){
+        return Optional.ofNullable(houseController.getHousesByUser());
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<HouseDTO> getHouseById(@PathVariable("id") long id){
 
@@ -66,6 +67,7 @@ public class HouseRestController {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteHouse(@PathVariable("id") long id ){
 

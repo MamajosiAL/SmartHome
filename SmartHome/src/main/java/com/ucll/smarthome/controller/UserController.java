@@ -1,6 +1,7 @@
 package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.UserDTO;
+import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.House;
 import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
@@ -25,14 +26,16 @@ public class UserController {
     private final UserDAO dao;
     private final HouseDAO houseDAO;
     private final House_UserController house_userController;
+    private final UserSecurityFunc userSecurityFunc;
 
 
 
     @Autowired
-    public UserController(UserDAO dao, HouseDAO houseDAO, House_UserController house_userController) {
+    public UserController(UserDAO dao, HouseDAO houseDAO, House_UserController house_userController, UserSecurityFunc userSecurityFunc) {
         this.dao = dao;
         this.houseDAO = houseDAO;
         this.house_userController = house_userController;
+        this.userSecurityFunc = userSecurityFunc;
     }
 
 
@@ -71,7 +74,8 @@ public class UserController {
         if (userDTO.getEmail() == null || userDTO.getEmail().trim().equals("")) throw new IllegalArgumentException("Updating user failed. Email not filled in.");
         //if (userDTO.getPassword() == null || userDTO.getPassword().trim().equals("")) throw new IllegalArgumentException("Updating user failed. Password not filled in.");
 
-        Optional<User> user = dao.findById(userDTO.getId());
+        long userId = userSecurityFunc.getLoggedInUserId();
+        Optional<User> user = dao.findById(userId);
         if (user.isPresent()){
             user.get().setUsername(userDTO.getUsername());
             user.get().setName(userDTO.getName());
@@ -96,7 +100,7 @@ public class UserController {
      * @throws IllegalArgumentException if something goes wrong with the info what went wrong
      */
     public UserDTO getUserById(long userId) throws IllegalArgumentException{
-        if (userId <= 0L) throw new IllegalArgumentException("User Id is missing");
+
         Optional<User> user = dao.findById(userId);
         if (user.isPresent()){
             return new UserDTO.Builder().id(user.get().getId()).username(user.get().getUsername()).name(user.get().getUsername())
@@ -132,15 +136,13 @@ public class UserController {
 
     /**
      * deletes a user and its registrations(house_user)
-     * @param userId id to find user
      * @throws IllegalArgumentException if something goes wrong with the info what went wrong
      */
-    public void deleteUser(long userId) throws IllegalArgumentException {
-        if (userId <= 0L) throw new IllegalArgumentException("Invalid id");
+    public void deleteUser() throws IllegalArgumentException {
 
+        long userId = userSecurityFunc.getLoggedInUserId();
         //checking if the house exists
         getUserById(userId);
-
 
         house_userController.deleteRegistratieHouseUser(house_userController.getByUser(dao.getById(userId)));
         dao.deleteById(userId);
