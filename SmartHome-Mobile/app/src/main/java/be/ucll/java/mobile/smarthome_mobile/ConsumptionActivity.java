@@ -16,10 +16,13 @@ public class ConsumptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consumption);
 
+        initialiseNavigation();
+    }
+    private void initialiseNavigation() {
         //initialise navigation variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         //set selected
-        bottomNavigationView.setSelectedItemId(R.id.navConsumption);
+        bottomNavigationView.setSelectedItemId(R.id.navManage);
         //perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

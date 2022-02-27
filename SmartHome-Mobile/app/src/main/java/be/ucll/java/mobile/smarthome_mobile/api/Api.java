@@ -1,9 +1,10 @@
-package be.ucll.java.mobile.smarthome_mobile;
+package be.ucll.java.mobile.smarthome_mobile.api;
 
+import be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface;
 import retrofit.RestAdapter;
 
 public class Api {
-    public static ApiInterface getClient() {
+    public static HouseApiInterface getClient() {
 
         // change your base URL
         RestAdapter adapter = new RestAdapter.Builder()
@@ -11,7 +12,7 @@ public class Api {
                 .build(); //Finally building the adapter
 
         //Creating object for our interface
-        ApiInterface api = adapter.create(ApiInterface.class);
+        HouseApiInterface api = adapter.create(HouseApiInterface.class);
         return api; // return the APIInterface object
     }
 }

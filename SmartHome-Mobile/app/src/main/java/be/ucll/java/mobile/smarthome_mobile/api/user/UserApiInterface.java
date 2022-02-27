@@ -1,4 +1,4 @@
-package be.ucll.java.mobile.smarthome_mobile;
+package be.ucll.java.mobile.smarthome_mobile.api.user;
 
 import java.util.List;
 
@@ -9,13 +9,13 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 
-public interface ApiInterface {
+public interface UserApiInterface {
 
 
 // For POST request
 
     @FormUrlEncoded    // annotation that used with POST type request
-    @POST("/houses") // specify the sub url for our base url
+    @POST("/users") // specify the sub url for our base url
     public void addHouse(
             @Field("name") String name);
             //@Field("user_pass") String user_pass, Callback<House> callback);
@@ -24,7 +24,7 @@ public interface ApiInterface {
 
 // for GET request
 
-    @GET("/houses") // specify the sub url for our base url
+    @GET("/users") // specify the sub url for our base url
     public void getHouseList(Callback<List<House>> callback);
             // House is a POJO class which receives the response of this API
 

@@ -20,7 +20,7 @@
             android:fontFamily="sans-serif"
             android:text="@string/title_consumption"
             android:textAlignment="center"
-            android:textColor="@color/dark"
+            android:textColor="@color/textColorBlue"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

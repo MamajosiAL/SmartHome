@@ -12,4 +12,13 @@
     <string name="menu_houses">Huizen</string>
     <string name="owner">Eigenaar</string>
     <string name="name">Naam</string>
+    <string name="userId">Gebruiker ID</string>
+    <string name="firstName">Voornaam</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="title_activity_register">Registreren</string>
+    <string name="notImplementedMessage">Waarschuwing: nog niet geïmplementeerd!</string>
+    <string name="register">Registreer</string>
+    <string name="ownedDevices">Eigen apparaten</string>
+    <string name="createAccount">Maak account aan</string>
+    <string name="password">Wachtwoord</string>
 </resources>

@@ -12,6 +12,26 @@ public class House {
     @Expose
     private Integer userid;
 
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public House() {
+    }
+
+    /**
+     *
+     * @param name
+     * @param id
+     * @param userid
+     */
+    public House(Integer id, String name, Integer userid) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.userid = userid;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -50,4 +70,5 @@ public class House {
         this.userid = userid;
         return this;
     }
+
 }

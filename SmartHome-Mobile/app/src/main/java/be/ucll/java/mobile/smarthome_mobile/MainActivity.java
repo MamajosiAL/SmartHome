@@ -2,6 +2,7 @@ package be.ucll.java.mobile.smarthome_mobile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,12 +10,17 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
+import be.ucll.java.mobile.smarthome_mobile.api.Api;
+import be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter;
 import be.ucll.java.mobile.smarthome_mobile.pojo.House;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -66,13 +72,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         recyclerViewHouses = findViewById(R.id.recyclerViewHouses);
         getHousesListData();
 
+        //fabAddHouse for adding a new house
+        FloatingActionButton fab = findViewById(R.id.fabAddHouse);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, getText(R.string.notImplementedMessage), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        initialiseNavigation();
+    }
+
+    private void initialiseNavigation() {
+
+        //disable darkmode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         //initialise navigation variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         //set selected
-        bottomNavigationView.setSelectedItemId(R.id.navHouses);
+        bottomNavigationView.setSelectedItemId(R.id.navManage);
         //perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -80,12 +105,12 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
 
                     case R.id.navConsumption:
-                        startActivity(new Intent(getApplicationContext(),ConsumptionActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ConsumptionActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.navManage:
-                        startActivity(new Intent(getApplicationContext(),ManageActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ManageActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

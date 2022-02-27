@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -15,7 +17,18 @@ public class ManageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage);
+        Button registerButton = findViewById(R.id.buttonAccount);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ManageActivity.this,RegisterActivity.class));
+                overridePendingTransition(0,0);
+            }
+        });
+        initialiseNavigation();
+    }
 
+    private void initialiseNavigation() {
         //initialise navigation variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         //set selected
@@ -27,7 +40,7 @@ public class ManageActivity extends AppCompatActivity {
                 switch (item.getItemId()){
 
                     case R.id.navConsumption:
-                        startActivity(new Intent(getApplicationContext(),ConsumptionActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ConsumptionActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
@@ -35,7 +48,7 @@ public class ManageActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.navHouses:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

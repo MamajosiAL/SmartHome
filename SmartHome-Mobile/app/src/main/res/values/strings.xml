@@ -14,4 +14,22 @@
     <string name="owner">Owner</string>
     <string name="name">Name</string>
     <string name="menu_home">Houses</string>
+    <string name="userId">User ID</string>
+    <string name="firstName">First name</string>
+    <string name="username">Username</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="title_activity_register">Register</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="notImplementedMessage">Warning: not implemented yet!</string>
+    <string name="register">Register</string>
+    <string name="ownedDevices">Owned devices</string>
+    <string name="createAccount">Create new account</string>
+    <string name="password">Password</string>
 </resources>
