@@ -46,6 +46,17 @@ public class UserSecurityFunc {
         }
     }
 
+    public Boolean checkCurrentUserIsOwner(long houseId){
+        Optional<House_User> house_user = getHouseUser(houseId);
+
+        if(getHouseUser(houseId).isEmpty()){
+            throw new NotFoundException("User is not part of this house");
+        }else{
+            return house_user.get().isOwner();
+        }
+    }
+
+
     public Optional<House_User> getHouseUser(long houseId){
         Optional<User> user = userDAO.findById(getLoggedInUserId());
         Optional<House> house = houseDAO.findById(houseId);

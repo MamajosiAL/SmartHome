@@ -5,7 +5,6 @@ import com.ucll.smarthome.config.UserDetailService;
 import com.ucll.smarthome.dto.UserLoginDTO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
 

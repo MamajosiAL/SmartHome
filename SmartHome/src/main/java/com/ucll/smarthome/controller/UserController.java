@@ -3,7 +3,6 @@ package com.ucll.smarthome.controller;
 import com.ucll.smarthome.dto.UserDTO;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.House;
-import com.ucll.smarthome.persistence.entities.House_User;
 import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.UserDAO;
@@ -157,6 +156,7 @@ public class UserController {
                 .firstname(userDTO.getFirstname())
                 .name(userDTO.getName())
                 .email(userDTO.getEmail())
+                .password(userDTO.getPassword())
                 .build();
     }
 
