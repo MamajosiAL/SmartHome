@@ -3,6 +3,7 @@ package com.ucll.smarthome.controllerREST;
 import com.ucll.smarthome.controller.LoginController;
 import com.ucll.smarthome.dto.UserLoginDTO;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,9 @@ public class LoginRestController {
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @PostMapping("/user")
-    public UserDetails Authentication(@RequestBody UserLoginDTO userLoginDTO) throws Exception {
-        return loginController.Authentication(userLoginDTO);
+    @PostMapping
+    public ResponseEntity Authentication(@RequestBody UserLoginDTO userLoginDTO) throws Exception {
+        loginController.Authentication(userLoginDTO);
+        return new ResponseEntity(userLoginDTO.getUsername() + " Logged in", HttpStatus.ACCEPTED);
     }
 }

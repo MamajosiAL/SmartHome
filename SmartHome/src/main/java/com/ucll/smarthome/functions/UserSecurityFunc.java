@@ -1,7 +1,6 @@
 package com.ucll.smarthome.functions;
 
 import com.ucll.smarthome.config.UserPrincipal;
-import com.ucll.smarthome.dto.UserDTO;
 import com.ucll.smarthome.persistence.entities.House;
 import com.ucll.smarthome.persistence.entities.House_User;
 import com.ucll.smarthome.persistence.entities.User;
@@ -28,11 +27,13 @@ public class UserSecurityFunc {
     }
 
     public long getLoggedInUserId(){
-        UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userPrincipal.getUser().getId();
+        try {
+            UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return userPrincipal.getUser().getId();
+        }catch (ClassCastException e){
+            throw new NotFoundException("User does not exist");
+        }
     }
-
-    // Check if logged in user is equal to current
 
     // checks if user is admin of house
     public Boolean checkCurrentUserIsAdmin(long houseId){

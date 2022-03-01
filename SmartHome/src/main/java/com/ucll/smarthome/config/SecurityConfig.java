@@ -1,5 +1,6 @@
 package com.ucll.smarthome.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,9 +17,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // pw encoder voor eventueel de in-memory Auth indien nodig
     private final BCryptPasswordEncoder passwordEncoder;
-
     private final UserDetailService userDetailService;
 
+    @Autowired
     public SecurityConfig(BCryptPasswordEncoder passwordEncoder, UserDetailService userDetailService ) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailService = userDetailService;
@@ -27,7 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // authorization moet nog toegepast worden.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic();
+        http.httpBasic()
+                .and()
+                .csrf().disable();
     }
 
     @Override

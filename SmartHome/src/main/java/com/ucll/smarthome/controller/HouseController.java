@@ -92,7 +92,7 @@ public class HouseController {
         Optional<House> house = dao.findById(houseId);
 
         if (house.isEmpty()) throw new IllegalArgumentException("No house found with id: " + houseId);
-        if (userSecurityFunc.getHouseUser(houseId).isEmpty()) throw new IllegalArgumentException("No house found with id: " + houseId);
+        if (userSecurityFunc.getHouseUser(houseId).isEmpty()) throw new IllegalArgumentException("user has no access to this house");
 
         return new HouseDTO.Builder().id(house.get().getHouseId()).name(house.get().getName()).build();
     }
