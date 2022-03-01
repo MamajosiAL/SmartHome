@@ -104,4 +104,18 @@ public class HouseRestController {
             return new ResponseEntity(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
+
+    @DeleteMapping("/{houseid}/user/{userid}")
+    public ResponseEntity deleteUserFromHouse(@PathVariable("houseid") long houseid, @PathVariable("userid") long userid){
+        try {
+            houseController.deleteUserFromHouse(houseid,userid);
+            return new ResponseEntity("User is successfully deleted from hosue", HttpStatus.ACCEPTED);
+        }catch (IllegalArgumentException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException ex ){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
+        }catch (AccessDeniedException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.FORBIDDEN);
+        }
+    }
 }

@@ -5,12 +5,13 @@ import com.ucll.smarthome.dto.HouseDTO;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 
 import com.ucll.smarthome.persistence.entities.House;
+import com.ucll.smarthome.persistence.entities.House_User;
 import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.UserDAO;
 import com.vaadin.flow.router.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AuthorizationServiceException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 
 import javax.transaction.Transactional;
@@ -75,7 +76,7 @@ public class HouseController {
             if(userSecurityFunc.checkCurrentUserIsAdmin(h.get().getHouseId())){
                 h.get().setName(houseDTO.getName());
             }else{
-                throw new AuthorizationServiceException("You are not an admin of this house.");
+                throw new AccessDeniedException("You are not an admin of this house.");
             }
         } else {
             throw new NotFoundException("The house you want to update is not found.");
@@ -94,7 +95,7 @@ public class HouseController {
         Optional<House> house = dao.findById(houseId);
 
         if (house.isEmpty()) throw new IllegalArgumentException("No house found with id: " + houseId);
-        if (userSecurityFunc.getHouseUser(houseId).isEmpty()) throw new IllegalArgumentException("user has no access to this house");
+        if (userSecurityFunc.getHouseUser(houseId).isEmpty()) throw new NotFoundException("user has no access to this house");
 
         return new HouseDTO.Builder().id(house.get().getHouseId()).name(house.get().getName()).build();
     }
@@ -138,13 +139,26 @@ public class HouseController {
      * @param houseid id to search house
      * @throws IllegalArgumentException if something goes wrong with the info what went wrong
      */
-    public void deleteHouse(long houseid) throws IllegalArgumentException {
+    public void deleteHouse(long houseid) throws IllegalArgumentException{
         if (houseid <= 0L) throw new IllegalArgumentException("Invalid id");
 
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(houseid))  throw new IllegalArgumentException("The house you want to delete is not yours");
+        if(!userSecurityFunc.checkCurrentUserIsOwner(houseid))  throw new AccessDeniedException("The house you want to delete is not yours");
 
         house_userController.deleteRegistratieHouseUser(house_userController.getByHouse(dao.getById(houseid)));
         dao.deleteById(houseid);
+    }
+
+    /**
+     * Delete user from house as Owner
+     * @param houseid house id to find house_user
+     * @param userid user id to find house_user
+     */
+    public void deleteUserFromHouse(long houseid, long userid){
+        long loggedInUserId = userSecurityFunc.getLoggedInUserId();
+        if(!userSecurityFunc.checkCurrentUserIsOwner(loggedInUserId)) throw new AccessDeniedException("Logged in user is not owner of this house");
+
+        House_User house_user = house_userController.getHouseUserByHouseIdAndUserId(houseid,userid);
+        house_userController.deleteSingleHouseUser(house_user);
     }
 
 
