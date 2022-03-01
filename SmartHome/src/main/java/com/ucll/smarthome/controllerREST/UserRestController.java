@@ -1,5 +1,6 @@
 package com.ucll.smarthome.controllerREST;
 
+import com.ucll.smarthome.config.UserPrincipal;
 import com.ucll.smarthome.controller.House_UserController;
 import com.ucll.smarthome.controller.UserController;
 import com.ucll.smarthome.dto.UserDTO;
@@ -28,15 +29,13 @@ public class UserRestController {
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody UserDTO userDTO){
-
         try {
             userController.createUser(userDTO);
-            return new  ResponseEntity("User succesfully created",HttpStatus.OK);
+            return new  ResponseEntity("User successfully created",HttpStatus.OK);
 
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @PutMapping
@@ -56,6 +55,7 @@ public class UserRestController {
     public Optional<List<UserDTO>> getAllUsers(){
         return Optional.of(userController.getAllUsers());
     }
+
     @GetMapping("/house/{id}")
     public ResponseEntity<Optional<List<UserDTO>>> getUsersByHouse(@PathVariable("id")long houseid){
         try {
@@ -64,6 +64,7 @@ public class UserRestController {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable("id") long id){
 
@@ -74,17 +75,14 @@ public class UserRestController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteUser(@PathVariable("id") long id ){
-
+    @DeleteMapping
+    public ResponseEntity deleteUser(){
         try {
-            userController.deleteUser(id);
+            userController.deleteUser();
             return new ResponseEntity("User successful deleted",HttpStatus.ACCEPTED);
 
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
-
-
 }

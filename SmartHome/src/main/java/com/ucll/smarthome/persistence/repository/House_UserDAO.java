@@ -7,10 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface House_UserDAO extends JpaRepository<House_User,Long> {
 
     List<House_User> findAllByUser(User user);
     List<House_User> findAllByHouse(House house);
+    Optional<House_User> findByHouseAndUser(House house, User user);
 }
