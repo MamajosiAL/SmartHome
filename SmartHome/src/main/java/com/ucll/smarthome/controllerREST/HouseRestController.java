@@ -8,6 +8,7 @@ import com.vaadin.flow.router.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,11 +41,12 @@ public class HouseRestController {
     @PutMapping("/isadmin")
     public ResponseEntity updateUseIsAdmin(@RequestBody House_UserDTO house_userDTO){
         try {
-
             house_userController.updateRegistrationHouseUsser(house_userDTO);
             return new  ResponseEntity("Is updated",HttpStatus.ACCEPTED);
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 
@@ -73,6 +75,8 @@ public class HouseRestController {
             return new ResponseEntity<>(Optional.ofNullable(houseController.getHousesByUser()),HttpStatus.OK);
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException ex ){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 
@@ -83,6 +87,8 @@ public class HouseRestController {
             return new ResponseEntity(houseController.getHouseById(id),HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException ex ){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 
@@ -92,9 +98,10 @@ public class HouseRestController {
         try {
             houseController.deleteHouse(id);
             return new ResponseEntity("House successful deleted",HttpStatus.ACCEPTED);
-
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (AccessDeniedException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
 }

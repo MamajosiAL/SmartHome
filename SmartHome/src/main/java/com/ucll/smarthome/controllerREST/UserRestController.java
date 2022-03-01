@@ -1,6 +1,5 @@
 package com.ucll.smarthome.controllerREST;
 
-import com.ucll.smarthome.config.UserPrincipal;
 import com.ucll.smarthome.controller.House_UserController;
 import com.ucll.smarthome.controller.UserController;
 import com.ucll.smarthome.dto.UserDTO;
@@ -62,6 +61,8 @@ public class UserRestController {
             return new ResponseEntity(Optional.ofNullable(userController.getUsersByHouse(houseid)),HttpStatus.OK) ;
         } catch (IllegalArgumentException e) {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException ex ){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 
@@ -83,6 +84,8 @@ public class UserRestController {
 
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException ex ){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 }
