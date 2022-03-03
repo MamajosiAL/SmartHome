@@ -8,6 +8,7 @@ import com.vaadin.flow.router.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,17 +36,17 @@ public class HouseRestController {
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @PutMapping("/isadmin")
     public ResponseEntity updateUseIsAdmin(@RequestBody House_UserDTO house_userDTO){
         try {
-
             house_userController.updateRegistrationHouseUsser(house_userDTO);
             return new  ResponseEntity("Is updated",HttpStatus.ACCEPTED);
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 
@@ -61,20 +62,24 @@ public class HouseRestController {
             return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
     @GetMapping
     public Optional<List<HouseDTO>> getAllHouses(){
         return Optional.of(houseController.getAllHouses());
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<Optional<List<HouseDTO>>> getHousesByUser(@PathVariable("id") long userid){
+
+    @GetMapping("/user")
+    public ResponseEntity<Optional<List<HouseDTO>>> getHousesByUser(){
         try {
-            return new ResponseEntity<>(Optional.ofNullable(houseController.getHousesByUser(userid)),HttpStatus.OK);
+            return new ResponseEntity<>(Optional.ofNullable(houseController.getHousesByUser()),HttpStatus.OK);
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException ex ){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
-
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<HouseDTO> getHouseById(@PathVariable("id") long id){
 
@@ -82,17 +87,35 @@ public class HouseRestController {
             return new ResponseEntity(houseController.getHouseById(id),HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException ex ){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteHouse(@PathVariable("id") long id ){
 
         try {
             houseController.deleteHouse(id);
             return new ResponseEntity("House successful deleted",HttpStatus.ACCEPTED);
-
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (AccessDeniedException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @DeleteMapping("/{houseid}/user/{userid}")
+    public ResponseEntity deleteUserFromHouse(@PathVariable("houseid") long houseid, @PathVariable("userid") long userid){
+        try {
+            houseController.deleteUserFromHouse(houseid,userid);
+            return new ResponseEntity("User is successfully deleted from hosue", HttpStatus.ACCEPTED);
+        }catch (IllegalArgumentException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException ex ){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
+        }catch (AccessDeniedException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
 }

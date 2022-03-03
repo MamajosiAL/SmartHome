@@ -1,11 +1,14 @@
 package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.House_UserDTO;
+import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.House;
 import com.ucll.smarthome.persistence.entities.House_User;
 import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.House_UserDAO;
+import com.ucll.smarthome.persistence.repository.UserDAO;
+import com.vaadin.flow.router.NotFoundException;
 import org.springframework.stereotype.Controller;
 
 import javax.transaction.Transactional;
@@ -18,12 +21,15 @@ public class House_UserController {
 
     private final House_UserDAO dao;
     private final HouseDAO houseDAO;
+    private final UserDAO userDAO;
+    private final UserSecurityFunc userSecurityFunc;
 
 
-
-    public House_UserController(House_UserDAO dao, HouseDAO houseDAO) {
+    public House_UserController(House_UserDAO dao, HouseDAO houseDAO, UserDAO userDAO, UserSecurityFunc userSecurityFunc) {
         this.dao = dao;
         this.houseDAO = houseDAO;
+        this.userDAO = userDAO;
+        this.userSecurityFunc = userSecurityFunc;
     }
 
     /**
@@ -45,8 +51,9 @@ public class House_UserController {
 
 
     public void updateRegistrationHouseUsser(House_UserDTO house_userDTO) throws IllegalArgumentException{
-        if (house_userDTO.getId() <= 0) throw new  IllegalArgumentException("Ivalid id");
+        if (house_userDTO.getId() <= 0) throw new  IllegalArgumentException("Invalid id");
         House_User hs = houseUserExist(house_userDTO.getId());
+        if(userSecurityFunc.checkCurrentUserIsOwner(hs.getHouse().getHouseId())) throw new NotFoundException("logged in user is not owner of this house");
         hs.setAdmin(house_userDTO.getIsadmin());
     }
 
@@ -75,7 +82,44 @@ public class House_UserController {
      */
     public void deleteRegistratieHouseUser(List<House_User> lst) {
         dao.deleteAll(lst);
+    }
 
+    /**
+     * Delete single house_user
+     * @param house_user
+     */
+    public void deleteSingleHouseUser(House_User house_user){
+        dao.delete(house_user);
+    }
+
+    /**
+     * Get house_user by :
+     * @param house object to find house_user in dao
+     * @param user object to find house_user in dao
+     * @return house_user
+     */
+    public House_User getHouseUserByHouseAndUser(House house, User user){
+        Optional<House_User> house_user = dao.findByHouseAndUser(house,user);
+        if(house_user.isEmpty()) throw new NotFoundException("user is not part of house");
+        return house_user.get();
+    }
+
+    /**
+     * Get house_user by:
+     * @param houseid id to find house_user in dao
+     * @param userid id to find house_user in dao
+     * @return house_user
+     */
+    public House_User getHouseUserByHouseIdAndUserId(long houseid, long userid){
+        if (houseid <= 0L) throw new IllegalArgumentException("Invalid houseid");
+        if (userid <= 0L) throw new IllegalArgumentException("Invalid userid");
+
+        Optional<House> house = houseDAO.findById(houseid);
+        Optional<User> user = userDAO.findById(userid);
+        if(house.isEmpty()) throw new NotFoundException("house not found");
+        if(user.isEmpty()) throw new NotFoundException("user not found");
+
+        return getHouseUserByHouseAndUser(house.get(),user.get());
     }
 
     private House_User houseUserExist(long id) throws IllegalArgumentException{

@@ -1,13 +1,14 @@
 package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.UserDTO;
+import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.House;
-import com.ucll.smarthome.persistence.entities.House_User;
 import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.UserDAO;
 import com.vaadin.flow.router.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import javax.transaction.Transactional;
@@ -26,14 +27,17 @@ public class UserController {
     private final UserDAO dao;
     private final HouseDAO houseDAO;
     private final House_UserController house_userController;
-
+    private final UserSecurityFunc userSecurityFunc;
+    private final BCryptPasswordEncoder passwordEncoder;
 
 
     @Autowired
-    public UserController(UserDAO dao, HouseDAO houseDAO, House_UserController house_userController) {
+    public UserController(UserDAO dao, HouseDAO houseDAO, House_UserController house_userController, UserSecurityFunc userSecurityFunc, BCryptPasswordEncoder passwordEncoder) {
         this.dao = dao;
         this.houseDAO = houseDAO;
         this.house_userController = house_userController;
+        this.userSecurityFunc = userSecurityFunc;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -52,10 +56,10 @@ public class UserController {
         if (userDTO.getEmail() == null || userDTO.getEmail().length() == 0) throw new IllegalArgumentException("Creating user failed. Email not filled in.");
         if (userDTO.getPassword() == null || userDTO.getPassword().length() == 0) throw new IllegalArgumentException("Creating user failed. Password not filled in.");
 
+        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+
         User u = userDtoToUser(userDTO);
         dao.save(u);
-
-
     }
 
     /**
@@ -72,7 +76,8 @@ public class UserController {
         if (userDTO.getEmail() == null || userDTO.getEmail().trim().equals("")) throw new IllegalArgumentException("Updating user failed. Email not filled in.");
         //if (userDTO.getPassword() == null || userDTO.getPassword().trim().equals("")) throw new IllegalArgumentException("Updating user failed. Password not filled in.");
 
-        Optional<User> user = dao.findById(userDTO.getId());
+        long userId = userSecurityFunc.getLoggedInUserId();
+        Optional<User> user = dao.findById(userId);
         if (user.isPresent()){
             user.get().setUsername(userDTO.getUsername());
             user.get().setName(userDTO.getName());
@@ -81,7 +86,6 @@ public class UserController {
 
             //TODO maybe the ability to change password
         }else  {
-
             throw new NotFoundException("The user you want to update is not found");
         }
 
@@ -97,7 +101,6 @@ public class UserController {
      * @throws IllegalArgumentException if something goes wrong with the info what went wrong
      */
     public UserDTO getUserById(long userId) throws IllegalArgumentException{
-        if (userId <= 0L) throw new IllegalArgumentException("User Id is missing");
         Optional<User> user = dao.findById(userId);
         if (user.isPresent()){
             return new UserDTO.Builder().id(user.get().getId()).username(user.get().getUsername()).name(user.get().getName())
@@ -114,6 +117,8 @@ public class UserController {
      */
     public List<UserDTO> getUsersByHouse(long houseid) throws IllegalArgumentException{
         if (houseid <= 0L) throw new IllegalArgumentException("Invalid id");
+        if(userSecurityFunc.getHouseUser(houseid).isEmpty()) throw new NotFoundException("User is not part of this house") ;
+
         Optional<House> h = houseDAO.findById(houseid) ;
         if (h.isEmpty()){
             throw new IllegalArgumentException("House not found to get users");
@@ -128,25 +133,21 @@ public class UserController {
                               .build());
               return stream.collect(Collectors.toList());
         }
-
     }
 
     /**
      * deletes a user and its registrations(house_user)
-     * @param userId id to find user
      * @throws IllegalArgumentException if something goes wrong with the info what went wrong
      */
-    public void deleteUser(long userId) throws IllegalArgumentException {
-        if (userId <= 0L) throw new IllegalArgumentException("Invalid id");
+
+    public void deleteUser() throws IllegalArgumentException {
+
+        long userId = userSecurityFunc.getLoggedInUserId();
+        //checking if the house exists
         getUserById(userId);
 
-        User user = dao.getById(userId);
-
-       boolean result =  house_userController.getByUser(user).stream().anyMatch(House_User::isOwner);
-       if (result) throw new IllegalArgumentException("You still have house(s) that you have created. Delete these first if you want to delete your account");
-
-       house_userController.deleteRegistratieHouseUser(house_userController.getByUser(dao.getById(userId)));
-       dao.deleteById(userId);
+        house_userController.deleteRegistratieHouseUser(house_userController.getByUser(dao.getById(userId)));
+        dao.deleteById(userId);
     }
 
     private User userDtoToUser(UserDTO userDTO){
