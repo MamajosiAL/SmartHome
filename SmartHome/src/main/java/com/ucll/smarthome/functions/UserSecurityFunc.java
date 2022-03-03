@@ -7,9 +7,9 @@ import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.House_UserDAO;
 import com.ucll.smarthome.persistence.repository.UserDAO;
+import com.vaadin.flow.router.NotFoundException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 
 import java.util.Optional;
 
