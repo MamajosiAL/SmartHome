@@ -6,4 +6,8 @@
     <include file="db/changelog/migrations/1-create-user.xml"/>
     <include file="db/changelog/migrations/2-create-house.xml"/>
     <include file="db/changelog/migrations/3-create-room.xml"/>
+    <include file="db/changelog/migrations/4-create-category.xml"/>
+    <include file="db/changelog/migrations/5-insert-category-values.xml"/>
+    <include file="db/changelog/migrations/6-create-device.xml"/>
+    <include file="db/changelog/migrations/7-create-type-programme.xml"/>
 </databaseChangeLog>

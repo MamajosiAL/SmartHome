@@ -37,6 +37,15 @@ public class HouseRestController {
         }
 
     }
+    @PostMapping("/register")
+    public ResponseEntity registerUserToHouseNotOwner(@RequestBody HouseDTO houseDTO){
+        try{
+            house_userController.registerUserToHouseNotOwner(houseDTO);
+            return new ResponseEntity("User successfully added to your house", HttpStatus.OK);
+        }catch (IllegalArgumentException ex){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PutMapping("/isadmin")
     public ResponseEntity updateUseIsAdmin(@RequestBody House_UserDTO house_userDTO){
@@ -73,7 +82,6 @@ public class HouseRestController {
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
-
     }
     @GetMapping("/{id}")
     public ResponseEntity<HouseDTO> getHouseById(@PathVariable("id") long id){
