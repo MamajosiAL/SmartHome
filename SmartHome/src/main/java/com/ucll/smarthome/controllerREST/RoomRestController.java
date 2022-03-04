@@ -3,11 +3,11 @@ package com.ucll.smarthome.controllerREST;
 import com.ucll.smarthome.controller.RoomController;
 import com.ucll.smarthome.dto.RoomDTO;
 import com.ucll.smarthome.dto.UserDTO;
-import com.ucll.smarthome.persistence.entities.Room;
 import com.vaadin.flow.router.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,11 +32,13 @@ public class RoomRestController {
 
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (AccessDeniedException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.FORBIDDEN);
         }
 
     }
     @PutMapping
-public ResponseEntity updateRoom( @RequestBody RoomDTO roomDTO){
+    public ResponseEntity updateRoom( @RequestBody RoomDTO roomDTO){
         try {
             roomController.updateRoom(roomDTO);
             return new ResponseEntity(HttpStatus.OK);
@@ -44,6 +46,8 @@ public ResponseEntity updateRoom( @RequestBody RoomDTO roomDTO){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }catch (NotFoundException ex ){
             return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
+        }catch (AccessDeniedException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
 
@@ -56,6 +60,7 @@ public ResponseEntity updateRoom( @RequestBody RoomDTO roomDTO){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getRoomById(@PathVariable("id") long id){
 
@@ -63,6 +68,8 @@ public ResponseEntity updateRoom( @RequestBody RoomDTO roomDTO){
             return new ResponseEntity(roomController.getRoomById(id),HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        } catch (NotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 
@@ -75,6 +82,8 @@ public ResponseEntity updateRoom( @RequestBody RoomDTO roomDTO){
 
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (AccessDeniedException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
 
