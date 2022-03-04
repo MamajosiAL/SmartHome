@@ -28,6 +28,10 @@ public class RegisterView extends VerticalLayout {
 
     FormLayout formLayout = new FormLayout();
     public RegisterView() {
+        addClassName("Register-view");
+        setSizeFull();
+        setAlignItems(Alignment.CENTER);
+        setJustifyContentMode(JustifyContentMode.CENTER);
         buttonCancel.addClickListener(buttonClickEvent -> handelclickEventCancel(buttonClickEvent));
         buttonCreate.addClickListener(buttonClickEvent -> handelclickEventCreate(buttonClickEvent));
         formLayout.add(
@@ -37,22 +41,17 @@ public class RegisterView extends VerticalLayout {
                 password, confirmPassword,
                 buttonCancel, buttonCreate
         );
-        formLayout.setResponsiveSteps(
-                // Use one column by default
-                new FormLayout.ResponsiveStep("0", 1),
-                // Use two columns, if layout's width exceeds 500px
-                new FormLayout.ResponsiveStep("500px", 2)
-        );
-// Stretch the username field over 2 columns
-        formLayout.setColspan(username, 2);
+
+
+        add(formLayout);
     }
 
     private void handelclickEventCreate(ClickEvent<Button> buttonClickEvent) {
-        getUI().ifPresent(ui -> ui.navigate(""));
+        getUI().ifPresent(ui -> ui.navigate("login"));
     }
 
     private void handelclickEventCancel(ClickEvent<Button> buttonClickEvent) {
-        getUI().ifPresent(ui -> ui.navigate(""));
+        getUI().ifPresent(ui -> ui.navigate("login"));
     }
 }
 
