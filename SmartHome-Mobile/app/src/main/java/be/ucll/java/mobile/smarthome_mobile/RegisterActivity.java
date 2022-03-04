@@ -26,6 +26,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static be.ucll.java.mobile.smarthome_mobile.util.TxtValidator.validate;
+
 public class RegisterActivity extends AppCompatActivity implements Callback<String> {
     private final String TAG = "RegisterActivity";
     private EditText name, username, firstName,email, password;
@@ -79,15 +81,7 @@ public class RegisterActivity extends AppCompatActivity implements Callback<Stri
 
     }
 
-    private boolean validate(EditText editText) {
-        // check the lenght of the enter data in EditText and give error if its empty
-        if (editText.getText().toString().trim().length() > 0) {
-            return true; // returs true if field is not empty
-        }
-        editText.setError(getString(R.string.missingValuesInFields));
-        editText.requestFocus();
-        return false;
-    }
+
 
     private void initialiseNavigation() {
         //initialise navigation variable

@@ -21,7 +21,7 @@ public class ManageActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             Fragment body;
-            if (AuthorizationManager.getInstance(ManageActivity.this).signedIn()) {
+            if (AuthorizationManager.getInstance(ManageActivity.this).isSignedIn()) {
                 body = new ManageLoggedInFragment();
             } else {
                 body = new ManageLoggedOutFragment();

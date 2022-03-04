@@ -226,18 +226,8 @@ be/ucll/java/mobile/smarthome_mobile/api/user/UsersViewHolder.java
 androidx/lifecycle/viewmodel/R.java
  androidx.lifecycle.viewmodel.R
  androidx.lifecycle.viewmodel.R$id
-androidx/vectordrawable/animated/R.java
- androidx.vectordrawable.animated.R
- androidx.vectordrawable.animated.R$attr
- androidx.vectordrawable.animated.R$color
- androidx.vectordrawable.animated.R$dimen
- androidx.vectordrawable.animated.R$drawable
- androidx.vectordrawable.animated.R$id
- androidx.vectordrawable.animated.R$integer
- androidx.vectordrawable.animated.R$layout
- androidx.vectordrawable.animated.R$string
- androidx.vectordrawable.animated.R$style
- androidx.vectordrawable.animated.R$styleable
+be/ucll/java/mobile/smarthome_mobile/ManageLoggedOutFragment.java
+ be.ucll.java.mobile.smarthome_mobile.ManageLoggedOutFragment
 androidx/legacy/v4/R.java
  androidx.legacy.v4.R
  androidx.legacy.v4.R$attr
@@ -250,6 +240,8 @@ androidx/legacy/v4/R.java
  androidx.legacy.v4.R$string
  androidx.legacy.v4.R$style
  androidx.legacy.v4.R$styleable
+be/ucll/java/mobile/smarthome_mobile/util/TxtValidator.java
+ be.ucll.java.mobile.smarthome_mobile.util.TxtValidator
 androidx/navigation/common/R.java
  androidx.navigation.common.R
  androidx.navigation.common.R$attr
@@ -360,18 +352,8 @@ androidx/loader/R.java
  androidx.loader.R$string
  androidx.loader.R$style
  androidx.loader.R$styleable
-androidx/viewpager2/R.java
- androidx.viewpager2.R
- androidx.viewpager2.R$attr
- androidx.viewpager2.R$color
- androidx.viewpager2.R$dimen
- androidx.viewpager2.R$drawable
- androidx.viewpager2.R$id
- androidx.viewpager2.R$integer
- androidx.viewpager2.R$layout
- androidx.viewpager2.R$string
- androidx.viewpager2.R$style
- androidx.viewpager2.R$styleable
+be/ucll/java/mobile/smarthome_mobile/ManageActivity.java
+ be.ucll.java.mobile.smarthome_mobile.ManageActivity
 androidx/legacy/coreutils/R.java
  androidx.legacy.coreutils.R
  androidx.legacy.coreutils.R$attr
@@ -476,7 +458,27 @@ be/ucll/java/mobile/smarthome_mobile/LoginActivity.java
 androidx/lifecycle/viewmodel/savedstate/R.java
  androidx.lifecycle.viewmodel.savedstate.R
  androidx.lifecycle.viewmodel.savedstate.R$id
-be/ucll/java/mobile/smarthome_mobile/ManageActivity.java
- be.ucll.java.mobile.smarthome_mobile.ManageActivity
-be/ucll/java/mobile/smarthome_mobile/ManageLoggedOutFragment.java
- be.ucll.java.mobile.smarthome_mobile.ManageLoggedOutFragment
+androidx/vectordrawable/animated/R.java
+ androidx.vectordrawable.animated.R
+ androidx.vectordrawable.animated.R$attr
+ androidx.vectordrawable.animated.R$color
+ androidx.vectordrawable.animated.R$dimen
+ androidx.vectordrawable.animated.R$drawable
+ androidx.vectordrawable.animated.R$id
+ androidx.vectordrawable.animated.R$integer
+ androidx.vectordrawable.animated.R$layout
+ androidx.vectordrawable.animated.R$string
+ androidx.vectordrawable.animated.R$style
+ androidx.vectordrawable.animated.R$styleable
+androidx/viewpager2/R.java
+ androidx.viewpager2.R
+ androidx.viewpager2.R$attr
+ androidx.viewpager2.R$color
+ androidx.viewpager2.R$dimen
+ androidx.viewpager2.R$drawable
+ androidx.viewpager2.R$id
+ androidx.viewpager2.R$integer
+ androidx.viewpager2.R$layout
+ androidx.viewpager2.R$string
+ androidx.viewpager2.R$style
+ androidx.viewpager2.R$styleable

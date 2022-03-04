@@ -11,6 +11,7 @@ import be.ucll.java.mobile.smarthome_mobile.pojo.User;
 
 public class AuthorizationManager {
     private static AuthorizationManager instance;
+    private boolean isSignedIn;
     private final Context context;
     private User currentUser;
     private User userTemp;
@@ -29,14 +30,24 @@ public class AuthorizationManager {
             throw new SignupException("already logged in!");
         }else {
             currentUser = user;
+            isSignedIn = true;
             Toast.makeText(context, context.getString(R.string.signinSucces), Toast.LENGTH_LONG).show();
         }
 
 
     }
 
+    public boolean isSignedIn() {
+        return isSignedIn;
+    }
+
+    public void setSignedIn(boolean signedIn) {
+        isSignedIn = signedIn;
+    }
+
     public void signOut(){
         currentUser = null;
+        isSignedIn = false;
         Toast.makeText(context, context.getString(R.string.signoutSucces), Toast.LENGTH_LONG).show();
     }
 
@@ -46,9 +57,5 @@ public class AuthorizationManager {
 
     public User getUserTemp() {
         return userTemp;
-    }
-
-    public boolean signedIn(){
-        return currentUser!=null;
     }
 }
