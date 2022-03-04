@@ -1,5 +1,6 @@
 package be.ucll.java.mobile.smarthome_mobile.api.house;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,11 +32,11 @@ public class HousesAdapter extends RecyclerView.Adapter<HousesViewHolder>{
         return housesViewHolder;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(HousesViewHolder holder, final int position) {
         // set the data
-        holder.name.setText(context.getText(R.string.name) + ": " + houses.get(position).getName());
-        holder.userId.setText(context.getText(R.string.owner) + ": " + houses.get(position).getUserid());
+        holder.name.setText(houses.get(position).getName());
         // implement setONCLickListener on itemView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

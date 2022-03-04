@@ -103,7 +103,7 @@
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/buttonAccount"
+            app:layout_constraintBottom_toTopOf="@+id/btnAccountDetails"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtRegisterEmail" />

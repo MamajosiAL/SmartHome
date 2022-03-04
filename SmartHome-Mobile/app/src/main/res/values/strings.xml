@@ -32,4 +32,15 @@
     <string name="ownedDevices">Owned devices</string>
     <string name="createAccount">Create new account</string>
     <string name="password">Password</string>
+    <string name="missingValuesInFields">Warning: missing values in fields</string>
+    <string name="signinSucces">Succesfully signed in</string>
+    <string name="signoutSucces">Succesfully logged out</string>
+    <string name="login">Login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">Log out</string>
+    <string name="myAccount">My account</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_log_out">LogOutActivity</string>
 </resources>

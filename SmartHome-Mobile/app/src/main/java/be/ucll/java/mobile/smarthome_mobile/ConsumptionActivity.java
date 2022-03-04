@@ -22,7 +22,7 @@ public class ConsumptionActivity extends AppCompatActivity {
         //initialise navigation variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         //set selected
-        bottomNavigationView.setSelectedItemId(R.id.navManage);
+        bottomNavigationView.setSelectedItemId(R.id.navConsumption);
         //perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

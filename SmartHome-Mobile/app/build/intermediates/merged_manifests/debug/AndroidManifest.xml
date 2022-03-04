@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="22"
+        android:minSdkVersion="30"
         android:targetSdkVersion="30" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,6 +21,18 @@
         android:testOnly="true"
         android:theme="@style/Theme.SmartHomeMobile"
         android:usesCleartextTraffic="true" >
+        <activity
+            android:name="be.ucll.java.mobile.smarthome_mobile.LogOutActivity"
+            android:label="@string/title_activity_log_out"
+            android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />
+        <activity
+            android:name="be.ucll.java.mobile.smarthome_mobile.AccountActivity"
+            android:label="@string/title_activity_account"
+            android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />
+        <activity
+            android:name="be.ucll.java.mobile.smarthome_mobile.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />
         <activity android:name="be.ucll.java.mobile.smarthome_mobile.ManageActivity" />
         <activity android:name="be.ucll.java.mobile.smarthome_mobile.ConsumptionActivity" />
         <activity android:name="be.ucll.java.mobile.smarthome_mobile.RegisterActivity" />
@@ -31,6 +43,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
     </application>
 
 </manifest>

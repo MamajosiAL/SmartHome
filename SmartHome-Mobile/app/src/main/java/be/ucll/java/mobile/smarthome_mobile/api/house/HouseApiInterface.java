@@ -3,29 +3,23 @@ package be.ucll.java.mobile.smarthome_mobile.api.house;
 import java.util.List;
 
 import be.ucll.java.mobile.smarthome_mobile.pojo.House;
-import retrofit.Callback;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.GET;
-import retrofit.http.POST;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface HouseApiInterface {
+    // For POST request
 
+    @POST("/house")
+    Call<String> postHouse(@Body House house);
 
-// For POST request
-
-    @FormUrlEncoded    // annotation that used with POST type request
-    @POST("/houses") // specify the sub url for our base url
-    public void addHouse(
-            @Field("name") String name);
-            //@Field("user_pass") String user_pass, Callback<House> callback);
-            //name and user_pass are the post parameters and SignUpResponse is a POJO class which recieves the response of this API
-
-
-// for GET request
-
-    @GET("/houses") // specify the sub url for our base url
-    public void getHouseList(Callback<List<House>> callback);
-            // House is a POJO class which receives the response of this API
+    // for GET request
+    @GET("/houses/user/{userid}")
+    Call<List<House>> getHousesWithAccessForUserWithId(@Path("userid") Integer id);
 
 }

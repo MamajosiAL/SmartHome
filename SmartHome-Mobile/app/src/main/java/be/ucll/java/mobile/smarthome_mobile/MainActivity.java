@@ -5,58 +5,80 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.List;
-
-import be.ucll.java.mobile.smarthome_mobile.api.Api;
+import be.ucll.java.mobile.smarthome_mobile.api.Connection;
+import be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter;
 import be.ucll.java.mobile.smarthome_mobile.pojo.House;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Callback<List<House>> {
+    private final String TAG = this.getClass().getSimpleName();
     private RecyclerView recyclerViewHouses;
+    private ProgressDialog progressDialog;
     List<House> houses;
-    private String apiUrl = "http://localhost:8080/houses";
 
-    private void getHousesListData() {
-        // display a progress dialog
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setCancelable(false); // set cancelable to false
-        progressDialog.setMessage("Please Wait"); // set message
-        progressDialog.show(); // show progress dialog
+    public void getHousesListData() {
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.create();
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
 
-        // Api is a class in which we define a method getClient() that returns the API Interface class object
-        // getUsersList() is a method in API Interface class, in this method we define our API sub url
-        Api.getClient().getHouseList(new Callback<List<House>>() {
-            @Override
-            public void success(List<House> housesData, Response response) {
-                // in this method we will get the response from API
-                progressDialog.dismiss(); //dismiss progress dialog
-                houses = housesData;
-                setDataInRecyclerView(); // call a method in which we have implement our GET type web API
-            }
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Connection.getUrl())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
 
-            @Override
-            public void failure(RetrofitError error) {
-                // if error occurs in network transaction then we can get the error in this method.
-                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-                progressDialog.dismiss(); //dismiss progress dialog
+        HouseApiInterface houseApi = retrofit.create(HouseApiInterface.class);
 
-            }
-        });
+        Call<List<House>> call = houseApi.getHousesWithAccessForUserWithId(1);
+        call.enqueue(this);
+
+    }
+
+    /**
+     * Invoked for a received HTTP response.
+     * <p>
+     * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
+     * Call {@link Response#isSuccessful()} to determine if the response indicates success.
+     *  @param call
+     * @param response
+     */
+    @Override
+    public void onResponse(Call<List<House>> call, Response<List<House>> response) {
+        houses = response.body();
+        setDataInRecyclerView();
+    }
+
+    /**
+     * Invoked when a network exception occurred talking to the server or when an unexpected
+     * exception occurred creating the request or processing the response.
+     *
+     * @param call
+     * @param t
+     */
+    @Override
+    public void onFailure(Call<List<House>> call, Throwable t) {
+        Toast.makeText(MainActivity.this, t.toString(), Toast.LENGTH_LONG).show();
+        Log.e(TAG,t.getMessage());
+        progressDialog.dismiss();
     }
 
     private void setDataInRecyclerView() {
@@ -97,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         //initialise navigation variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         //set selected
-        bottomNavigationView.setSelectedItemId(R.id.navManage);
+        bottomNavigationView.setSelectedItemId(R.id.navHouses);
         //perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

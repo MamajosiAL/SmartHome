@@ -12,12 +12,20 @@
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\drawable\\ic_settings_24.xml"
     },
     {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_foreground.png"
+    },
+    {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_foreground.png.flat",
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_foreground.png"
     },
     {
-        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
-        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_foreground.png"
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_log_out.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\content_log_out.xml"
+    },
+    {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_manage_logged_in.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\fragment_manage_logged_in.xml"
     },
     {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
@@ -48,8 +56,8 @@
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
-        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_login.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\activity_login.xml"
     },
     {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_navigation.xml.flat",
@@ -64,6 +72,14 @@
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\navigation_nav_graph.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\navigation\\nav_graph.xml"
+    },
+    {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_account.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\activity_account.xml"
+    },
+    {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\drawable_selector.xml.flat",
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\drawable\\selector.xml"
     },
@@ -74,6 +90,10 @@
     {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
     },
     {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_manage.xml.flat",
@@ -96,24 +116,40 @@
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\activity_consumption.xml"
     },
     {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_account.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\content_account.xml"
+    },
+    {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_foreground.png.flat",
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_manage_logged_out.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\fragment_manage_logged_out.xml"
     },
     {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_houses_list_item.xml.flat",
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\houses_list_item.xml"
     },
     {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_log_out.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\activity_log_out.xml"
+    },
+    {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_login.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\layout\\content_login.xml"
+    },
+    {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_manage_24.xml.flat",
-        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\drawable\\ic_manage_24.xml"
-    },
-    {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_manage_24.xml.flat",
+        "source": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\src\\main\\res\\drawable\\ic_manage_24.xml"
     },
     {
         "merged": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",

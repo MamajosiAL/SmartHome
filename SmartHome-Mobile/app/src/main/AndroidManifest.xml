@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.ucll.java.mobile.smarthome_mobile">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHomeMobile"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ManageActivity"></activity>
+        <activity
+            android:name=".LogOutActivity"
+            android:label="@string/title_activity_log_out"
+            android:theme="@style/Theme.SmartHomeMobile.NoActionBar"></activity>
+        <activity
+            android:name=".AccountActivity"
+            android:label="@string/title_activity_account"
+            android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />
+        <activity android:name=".ManageActivity" />
         <activity android:name=".ConsumptionActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">

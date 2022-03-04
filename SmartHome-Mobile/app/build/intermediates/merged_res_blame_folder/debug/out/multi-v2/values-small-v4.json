@@ -4,7 +4,7 @@
             "outputFile": "D:\\Programmeren\\Fase2\\GIP5\\SmartHome\\SmartHome-Mobile\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-small-v4\\values-small-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\mathi\\.gradle\\caches\\transforms-2\\files-2.1\\c63d4a666c0a1ba98c2e2f24b9638d9e\\material-1.2.1\\res\\values-small-v4\\values-small-v4.xml",
+                    "source": "C:\\Users\\mathi\\.gradle\\caches\\transforms-2\\files-2.1\\be10ddfa6fedf6d16adddac5be69ea75\\material-1.4.0-beta01\\res\\values-small-v4\\values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
