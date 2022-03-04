@@ -18,6 +18,9 @@ public class House_User {
     @Column(name = "isadmin")
     private boolean isAdmin;
 
+    @Column(name = "isowner")
+    private boolean isOwner;
+
     public House_User() {
     }
 
@@ -26,6 +29,16 @@ public class House_User {
         setUser(builder.user);
         setHouse(builder.house);
         setAdmin(builder.isAdmin);
+        setOwner(builder.isOwner);
+    }
+
+
+    public boolean isOwner() {
+        return isOwner;
+    }
+
+    public void setOwner(boolean owner) {
+        isOwner = owner;
     }
 
     public boolean isAdmin() {
@@ -66,6 +79,7 @@ public class House_User {
         private User user;
         private House house;
         private boolean isAdmin;
+        private boolean isOwner;
 
         public Builder() {
         }
@@ -87,6 +101,11 @@ public class House_User {
 
         public Builder isAdmin(boolean val) {
             isAdmin = val;
+            return this;
+        }
+
+        public Builder isOwner(boolean val) {
+            isOwner = val;
             return this;
         }
 

@@ -19,6 +19,12 @@
             </column>
             <column name="houseid" type="bigint"/>
             <column name="userid" type="bigint"/>
+            <column name="isadmin" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+            <column name="isowner" type="boolean">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="house_user"
