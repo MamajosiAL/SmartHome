@@ -1,7 +1,6 @@
 package com.ucll.smarthome.controllerREST;
 
 import com.ucll.smarthome.controller.AudioController;
-import com.ucll.smarthome.controller.SensorController;
 import com.ucll.smarthome.dto.AudioDTO;
 import com.ucll.smarthome.dto.DeviceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +64,16 @@ public class AudioRestController {
             audioController.deleteAudioDevice(deviceid);
             return new ResponseEntity("Audio device successfully deleted",HttpStatus.OK);
 
+        }catch (IllegalArgumentException ex){
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("{id}/changestatus")
+    public ResponseEntity changeStatus(@PathVariable("id") long audioid){
+        try{
+            audioController.changeStatus(audioid);
+            return new ResponseEntity("audio status changed",HttpStatus.OK);
         }catch (IllegalArgumentException ex){
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }

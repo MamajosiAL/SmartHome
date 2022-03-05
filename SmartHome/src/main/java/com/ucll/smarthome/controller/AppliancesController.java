@@ -2,6 +2,7 @@ package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.AppliancesDTO;
 import com.ucll.smarthome.persistence.entities.Appliances;
+import com.ucll.smarthome.persistence.entities.Device;
 import com.ucll.smarthome.persistence.entities.Room;
 import com.ucll.smarthome.persistence.entities.Type;
 import com.ucll.smarthome.persistence.repository.AppliancesDAO;
@@ -22,12 +23,14 @@ public class AppliancesController {
     private final AppliancesDAO aplDao;
     private final TypeDAO typeDAO;
     private final RoomController roomController;
+    private final ConsumptionController consumptionController;
 
     @Autowired
-    public AppliancesController(AppliancesDAO aplDao, TypeDAO typeDAO, RoomController roomController) {
+    public AppliancesController(AppliancesDAO aplDao, TypeDAO typeDAO, RoomController roomController, ConsumptionController consumptionController) {
         this.aplDao = aplDao;
         this.typeDAO = typeDAO;
         this.roomController = roomController;
+        this.consumptionController = consumptionController;
     }
 
     public void createApplianceDevice(AppliancesDTO aplDTO) throws IllegalArgumentException{
@@ -82,4 +85,10 @@ public class AppliancesController {
         if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");
         return device.get();
     }
+
+    public void changeStatus(long deviceid){
+        Device device = appliancesExists(deviceid);
+        consumptionController.deviceChangeStatus(device);
+    }
+
 }

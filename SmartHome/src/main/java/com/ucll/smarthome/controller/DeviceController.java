@@ -16,10 +16,12 @@ import java.util.stream.Stream;
 public class DeviceController {
     private final DeviceDAO deviceDAO;
     private final RoomController roomController;
+    private final ConsumptionController consumptionController;
 
-    public DeviceController(DeviceDAO deviceDAO, RoomController roomController) {
+    public DeviceController(DeviceDAO deviceDAO, RoomController roomController, ConsumptionController consumptionController) {
         this.deviceDAO = deviceDAO;
         this.roomController = roomController;
+        this.consumptionController = consumptionController;
     }
 
     public void createDevice(DeviceDTO deviceDTO) throws IllegalArgumentException{
@@ -65,9 +67,14 @@ public class DeviceController {
         deviceDAO.delete(device);
     }
 
-    private Device deviceExists(long deviceid) throws IllegalArgumentException{
+    public Device deviceExists(long deviceid) throws IllegalArgumentException{
         Optional<Device> device = deviceDAO.findById(deviceid);
         if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");
         return device.get();
+    }
+
+    public void changeStatus(long deviceid){
+        Device device = deviceExists(deviceid);
+        consumptionController.deviceChangeStatus(device);
     }
 }

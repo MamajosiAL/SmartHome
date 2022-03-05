@@ -67,4 +67,14 @@ public class SensorRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PutMapping("{id}/changestatus")
+    public ResponseEntity changeStatus(@PathVariable("id") long sensorid){
+        try{
+            sensorController.changeStatus(sensorid);
+            return new ResponseEntity("sensor status changed",HttpStatus.OK);
+        }catch (IllegalArgumentException ex){
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

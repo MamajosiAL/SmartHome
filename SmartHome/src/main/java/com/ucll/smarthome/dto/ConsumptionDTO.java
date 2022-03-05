@@ -1,51 +1,41 @@
-package com.ucll.smarthome.persistence.entities;
+package com.ucll.smarthome.dto;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "consumption", schema = "smarthome")
-public class Consumption {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "consumptionid")
+public class ConsumptionDTO {
     private Long consumptionId;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "deviceid")
-    private Device device;
-
-    @Column(name = "startDatumEnTijd")
+    private Long deviceId;
     private LocalDateTime startDatumEnTijd;
-
-    @Column(name = "aantalMinuten")
     private int aantalMinuten;
-
-    @Column(name = "unit")
     private String unit;
-
-    @Column(name = "consumptionperhour")
     private double consumptionPerHour;
 
-    public Consumption() {
+    public ConsumptionDTO() {
     }
 
-    private Consumption(Builder builder){
-        setConsumptionId(builder.consumtionId);
-        setDevice(builder.device);
+    public ConsumptionDTO(Builder builder) {
+        setConsumptionId(builder.consumptionId);
+        setDeviceId(builder.deviceId);
         setStartDatumEnTijd(builder.startDatumEnTijd);
         setAantalMinuten(builder.aantalMinuten);
         setUnit(builder.unit);
         setConsumptionPerHour(builder.consumptionPerHour);
     }
 
-    public Device getDevice() {
-        return device;
+    public Long getConsumptionId() {
+        return consumptionId;
     }
 
-    public void setDevice(Device device) {
-        this.device = device;
+    public void setConsumptionId(Long consumptionId) {
+        this.consumptionId = consumptionId;
+    }
+
+    public Long getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(long deviceId) {
+        this.deviceId = deviceId;
     }
 
     public LocalDateTime getStartDatumEnTijd() {
@@ -72,12 +62,8 @@ public class Consumption {
         this.unit = unit;
     }
 
-    public Long getConsumptionId() {
-        return consumptionId;
-    }
-
-    public void setConsumptionId(Long consumptionId) {
-        this.consumptionId = consumptionId;
+    public void setDeviceId(Long deviceId) {
+        this.deviceId = deviceId;
     }
 
     public double getConsumptionPerHour() {
@@ -88,50 +74,46 @@ public class Consumption {
         this.consumptionPerHour = consumptionPerHour;
     }
 
-    public static final class Builder{
-        private Long consumtionId;
-        private Device device;
+    public static final class Builder {
+        private Long consumptionId;
+        private Long deviceId;
         private LocalDateTime startDatumEnTijd;
         private int aantalMinuten;
         private String unit;
         private double consumptionPerHour;
 
-        public Builder(){
+        public Builder(){}
 
-        }
-
-        public Builder id(Long val) {
-            consumtionId = val;
+        public Builder consumptionId(Long val){
+            consumptionId = val;
             return this;
         }
 
-        public Builder startDatumEnTijd(LocalDateTime val) {
+        public Builder device(Long val){
+            deviceId = val;
+            return this;
+        }
+
+        public Builder startDatumEnTijd(LocalDateTime val){
             startDatumEnTijd = val;
             return this;
         }
 
-        public Builder aantalMinuten(int val) {
+        public Builder aantalMinuten(int val){
             aantalMinuten = val;
             return this;
         }
 
-        public Builder unit(String val) {
+        public Builder unit(String val){
             unit = val;
             return this;
         }
 
-        public Builder device(Device val){
-            device = val;
-            return this;
-        }
-
-        public Builder consumptionPerHour(double val){
+        private Builder consumptionPerHour(double val){
             consumptionPerHour = val;
             return this;
         }
 
-        public Consumption build() {
-            return new Consumption(this);
-        }
+        public ConsumptionDTO build() { return new ConsumptionDTO(this); }
     }
 }
