@@ -10,6 +10,7 @@ import com.vaadin.flow.router.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +52,8 @@ public class UserController {
         if (userDTO.getFirstname() == null || userDTO.getFirstname().length() == 0) throw new IllegalArgumentException("Creating user failed. Firstname not filled in.");
         if (userDTO.getEmail() == null || userDTO.getEmail().length() == 0) throw new IllegalArgumentException("Creating user failed. Email not filled in.");
         if (userDTO.getPassword() == null || userDTO.getPassword().length() == 0) throw new IllegalArgumentException("Creating user failed. Password not filled in.");
+
+        if(dao.findUserByUsername(userDTO.getUsername()).isPresent()) throw new IllegalArgumentException("This username is already taken.");
 
         User u = userDtoToUser(userDTO);
         dao.save(u);
