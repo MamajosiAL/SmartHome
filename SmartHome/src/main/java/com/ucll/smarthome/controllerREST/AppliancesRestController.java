@@ -67,4 +67,14 @@ public class AppliancesRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PutMapping("{id}/changestatus")
+    public ResponseEntity changeStatus(@PathVariable("id") long applianceid){
+        try{
+            aplController.changeStatus(applianceid);
+            return new ResponseEntity("appliance status changed",HttpStatus.OK);
+        }catch (IllegalArgumentException ex){
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

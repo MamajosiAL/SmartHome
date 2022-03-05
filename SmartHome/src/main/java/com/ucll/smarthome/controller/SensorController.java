@@ -1,6 +1,7 @@
 package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.SensorDTO;
+import com.ucll.smarthome.persistence.entities.Device;
 import com.ucll.smarthome.persistence.entities.Room;
 import com.ucll.smarthome.persistence.entities.Sensor;
 import com.ucll.smarthome.persistence.repository.SensorDAO;
@@ -19,11 +20,13 @@ public class SensorController {
 
     private final SensorDAO sensorDAO;
     private final RoomController roomController;
+    private final ConsumptionController consumptionController;
 
     @Autowired
-    public SensorController(SensorDAO sensorDAO, RoomController roomController) {
+    public SensorController(SensorDAO sensorDAO, RoomController roomController, ConsumptionController consumptionController) {
         this.sensorDAO = sensorDAO;
         this.roomController = roomController;
+        this.consumptionController = consumptionController;
     }
 
     public void createSensorDevice(SensorDTO sensorDTO) throws IllegalArgumentException{
@@ -71,4 +74,10 @@ public class SensorController {
         if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");
         return device.get();
     }
+
+    public void changeStatus(long deviceid){
+        Device device = sensorExists(deviceid);
+        consumptionController.deviceChangeStatus(device);
+    }
+
 }

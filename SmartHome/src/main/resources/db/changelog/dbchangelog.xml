@@ -10,4 +10,6 @@
     <include file="db/changelog/migrations/5-insert-category-values.xml"/>
     <include file="db/changelog/migrations/6-create-device.xml"/>
     <include file="db/changelog/migrations/7-create-type-programme.xml"/>
+    <include file="db/changelog/migrations/8-create-consumptiontable.xml"/>
+    <include file="db/changelog/migrations/9-create-consumptionlog.xml"/>
 </databaseChangeLog>

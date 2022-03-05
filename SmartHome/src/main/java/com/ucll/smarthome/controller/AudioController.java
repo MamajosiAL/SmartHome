@@ -2,6 +2,7 @@ package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.AudioDTO;
 import com.ucll.smarthome.persistence.entities.Audio;
+import com.ucll.smarthome.persistence.entities.Device;
 import com.ucll.smarthome.persistence.entities.Room;
 import com.ucll.smarthome.persistence.repository.AudioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,13 @@ public class AudioController {
 
     private final AudioDAO audioDAO;
     private final RoomController roomController;
+    private final ConsumptionController consumptionController;
 
     @Autowired
-    public AudioController(AudioDAO audioDAO, RoomController roomController) {
+    public AudioController(AudioDAO audioDAO, RoomController roomController, ConsumptionController consumptionController) {
         this.audioDAO = audioDAO;
         this.roomController = roomController;
+        this.consumptionController = consumptionController;
     }
 
     public void createAudioDevice(AudioDTO audioDTO) throws IllegalArgumentException{
@@ -74,4 +77,10 @@ public class AudioController {
         if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");
         return device.get();
     }
+
+    public void changeStatus(long deviceid){
+        Device device = audioExists(deviceid);
+        consumptionController.deviceChangeStatus(device);
+    }
+
 }

@@ -67,4 +67,13 @@ public class DeviceRestController {
         }
     }
 
+    @PutMapping("{id}/changestatus")
+    public ResponseEntity changeStatus(@PathVariable("id") long deviceid){
+        try{
+            deviceController.changeStatus(deviceid);
+            return new ResponseEntity("device status changed",HttpStatus.OK);
+        }catch (IllegalArgumentException ex){
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
