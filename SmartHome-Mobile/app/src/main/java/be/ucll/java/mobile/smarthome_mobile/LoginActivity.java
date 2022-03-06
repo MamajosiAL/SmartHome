@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
@@ -108,7 +110,11 @@ public class LoginActivity extends AppCompatActivity implements Callback<String>
 
         UserApiInterface userApi = getClient().create(UserApiInterface.class);
 
-        Call<String> call = userApi.login(new Login(usernameString,passwordString));
+        String base = usernameString + ":" + passwordString;
+
+        String authHeader = "Basic " + Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
+
+        Call<String> call = userApi.login(new Login(usernameString,passwordString), authHeader);
         call.enqueue(this);
     }
 
