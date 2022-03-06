@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="10" author="Mathias Clement">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT (*) FROM smarthome.type WHERE id=1 OR id = 2 OR id = 3 OR id = 4 OR id = 5
+            </sqlCheck>
+        </preConditions>
+        <insert tableName="type" schemaName="smarthome">
+            <column name="id" value="1"/>
+            <column name="name" value="oven"/>
+        </insert>
+        <insert tableName="type" schemaName="smarthome">
+            <column name="id" value="2"/>
+            <column name="name" value="Cooling Devices"/>
+        </insert>
+        <insert tableName="type" schemaName="smarthome">
+            <column name="id" value="3"/>
+            <column name="name" value="Washing Machine"/>
+        </insert>
+        <insert tableName="type" schemaName="smarthome">
+            <column name="id" value="4"/>
+            <column name="name" value="Dishwasher"/>
+        </insert>
+        <insert tableName="type" schemaName="smarthome">
+            <column name="id" value="5"/>
+            <column name="name" value="Dryer"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

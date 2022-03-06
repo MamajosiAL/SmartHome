@@ -1,7 +1,7 @@
 package com.ucll.smarthome.controllerREST;
 
-import com.ucll.smarthome.controller.AudioController;
-import com.ucll.smarthome.dto.AudioDTO;
+import com.ucll.smarthome.controller.MediaController;
+import com.ucll.smarthome.dto.MediaDTO;
 import com.ucll.smarthome.dto.DeviceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,19 +12,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/audios")
-public class AudioRestController {
+public class MediaRestController {
 
-    private final AudioController audioController;
+    private final MediaController mediaController;
 
     @Autowired
-    public AudioRestController(AudioController audioController) {
-        this.audioController = audioController;
+    public MediaRestController(MediaController mediaController) {
+        this.mediaController = mediaController;
     }
 
     @PostMapping
-    public ResponseEntity createAudioDevice(@RequestBody AudioDTO audioDTO){
+    public ResponseEntity createAudioDevice(@RequestBody MediaDTO mediaDTO){
         try {
-            audioController.createAudioDevice(audioDTO);
+            mediaController.createAudioDevice(mediaDTO);
             return new ResponseEntity("Audio device successfully created", HttpStatus.OK);
         }catch (IllegalArgumentException ex){
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
@@ -32,9 +32,9 @@ public class AudioRestController {
     }
 
     @PutMapping
-    public ResponseEntity updateAudioDevice(@RequestBody AudioDTO audioDTO){
+    public ResponseEntity updateAudioDevice(@RequestBody MediaDTO mediaDTO){
         try {
-            audioController.updateAudioDevice(audioDTO);
+            mediaController.updateAudioDevice(mediaDTO);
             return new ResponseEntity("Audio device successfully updated",HttpStatus.OK);
 
         }catch (IllegalArgumentException ex){
@@ -44,7 +44,7 @@ public class AudioRestController {
     @GetMapping("/{id}")
     public ResponseEntity<DeviceDTO> getAudioDeviceById(@PathVariable("id") long deviceid){
         try {
-            return new ResponseEntity(audioController.getAudioDeviceById(deviceid),HttpStatus.OK);
+            return new ResponseEntity(mediaController.getAudioDeviceById(deviceid),HttpStatus.OK);
         }catch (IllegalArgumentException ex){
             return new ResponseEntity(ex.getMessage(),HttpStatus.BAD_REQUEST);
         }
@@ -53,7 +53,7 @@ public class AudioRestController {
     @GetMapping("/room/{id}")
     public ResponseEntity<List<DeviceDTO>> getAudioDevicesByRoom(@PathVariable("id") long roomid){
         try {
-            return new ResponseEntity(audioController.getAdioDevicesByRoom(roomid),HttpStatus.OK);
+            return new ResponseEntity(mediaController.getAdioDevicesByRoom(roomid),HttpStatus.OK);
         }catch (IllegalArgumentException ex){
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -61,7 +61,7 @@ public class AudioRestController {
     @DeleteMapping("{id}")
     public ResponseEntity deletAudioDevice(@PathVariable("id") long deviceid){
         try{
-            audioController.deleteAudioDevice(deviceid);
+            mediaController.deleteAudioDevice(deviceid);
             return new ResponseEntity("Audio device successfully deleted",HttpStatus.OK);
 
         }catch (IllegalArgumentException ex){
@@ -72,7 +72,7 @@ public class AudioRestController {
     @PutMapping("{id}/changestatus")
     public ResponseEntity changeStatus(@PathVariable("id") long audioid){
         try{
-            audioController.changeStatus(audioid);
+            mediaController.changeStatus(audioid);
             return new ResponseEntity("audio status changed",HttpStatus.OK);
         }catch (IllegalArgumentException ex){
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);

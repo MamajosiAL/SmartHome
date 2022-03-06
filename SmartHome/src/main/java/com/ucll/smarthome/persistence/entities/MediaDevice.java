@@ -5,55 +5,47 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("3")
-public class Sensor extends Device {
+@DiscriminatorValue("2")
+public class MediaDevice extends Device {
+    @Column(name = "volume")
+    private int volume;
 
-    @Column(name = "sensortype")
-    private String sensorType;
-    @Column(name = "sensordata")
-    private double sensordata;
-
-    public Sensor() {
+    public MediaDevice() {
     }
 
-    private Sensor(Builder builder) {
+    private MediaDevice(Builder builder) {
+        setVolume(builder.volume);
         setId(builder.id);
         setCategoryid(builder.categoryid);
         setName(builder.name);
         setStatus(builder.status);
         setRoom(builder.room);
-        setSensorType(builder.sensorType);
-        setSensordata(builder.sensordata);
     }
 
 
-    public String getSensorType() {
-        return sensorType;
+    public int getVolume() {
+        return volume;
     }
 
-    public void setSensorType(String sensorType) {
-        this.sensorType = sensorType;
-    }
-
-    public double getSensordata() {
-        return sensordata;
-    }
-
-    public void setSensordata(double sensordata) {
-        this.sensordata = sensordata;
+    public void setVolume(int volume) {
+        this.volume = volume;
     }
 
 
     public static final class Builder {
+        private int volume;
         private Long id;
         private int categoryid;
         private String name;
         private boolean status;
         private Room room;
-        private String sensorType;
-        private double sensordata;
 
         public Builder() {
+        }
+
+        public Builder volume(int val) {
+            volume = val;
+            return this;
         }
 
         public Builder id(Long val) {
@@ -81,18 +73,8 @@ public class Sensor extends Device {
             return this;
         }
 
-        public Builder sensorType(String val) {
-            sensorType = val;
-            return this;
-        }
-
-        public Builder sensordata(double val) {
-            sensordata = val;
-            return this;
-        }
-
-        public Sensor build() {
-            return new Sensor(this);
+        public MediaDevice build() {
+            return new MediaDevice(this);
         }
     }
 }

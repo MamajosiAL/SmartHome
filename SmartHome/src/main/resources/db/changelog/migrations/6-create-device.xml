@@ -19,6 +19,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="type_id" type="bigint"/>
+            <column name="program_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
             <column name="category_id" type="bigint">
                 <constraints nullable="true"/>
             </column>
@@ -58,5 +61,6 @@
                                  referencedColumnNames="roomid"
                                  referencedTableSchemaName="smarthome"
         />
+
     </changeSet>
 </databaseChangeLog>
