@@ -37,6 +37,15 @@ public class HouseRestController {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+    @PostMapping("/register")
+    public ResponseEntity registerUserToHouseNotOwner(@RequestBody HouseDTO houseDTO){
+        try{
+            house_userController.registerUserToHouseNotOwner(houseDTO);
+            return new ResponseEntity("User successfully added to your house", HttpStatus.OK);
+        }catch (IllegalArgumentException ex){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PutMapping("/isadmin")
     public ResponseEntity updateUseIsAdmin(@RequestBody House_UserDTO house_userDTO){
