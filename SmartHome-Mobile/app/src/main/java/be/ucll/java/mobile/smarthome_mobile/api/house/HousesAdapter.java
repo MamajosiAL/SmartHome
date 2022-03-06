@@ -49,7 +49,7 @@ public class HousesAdapter extends RecyclerView.Adapter<HousesViewHolder>{
 
     @Override
     public int getItemCount() {
-        return houses.size(); // size of the list items
+        return houses!=null?houses.size():0; // size of the list items
     }
 
 

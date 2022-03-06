@@ -1,10 +1,10 @@
 package be.ucll.java.mobile.smarthome_mobile.api.user;
 
-import java.util.List;
+import be.ucll.java.mobile.smarthome_mobile.pojo.Login;
 import be.ucll.java.mobile.smarthome_mobile.pojo.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -19,5 +19,6 @@ public interface UserApiInterface {
     @GET("/users")
     Call<User> getUserById(@Query("id") Integer id);
 
-    Call<String> login(@Field("username") String usernameString, @Field("password") String passwordString);
+    @POST("/login")
+    Call<String> login(@Body Login credentials);
 }

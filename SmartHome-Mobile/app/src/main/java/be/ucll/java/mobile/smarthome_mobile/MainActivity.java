@@ -21,6 +21,7 @@ import java.util.List;
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter;
+import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
 import be.ucll.java.mobile.smarthome_mobile.pojo.House;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,48 +38,25 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Hou
     public void getHousesListData() {
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.create();
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        try {
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Connection.getUrl())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Connection.getUrl())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
 
-        HouseApiInterface houseApi = retrofit.create(HouseApiInterface.class);
+            HouseApiInterface houseApi = retrofit.create(HouseApiInterface.class);
 
-        Call<List<House>> call = houseApi.getHousesWithAccessForUserWithId(1);
-        call.enqueue(this);
+            Call<List<House>> call = houseApi.getHousesWithAccessForUserWithId(1);
+            call.enqueue(this);
+        }catch (Exception e){
+            throw new DataNotFoundException(e.getCause());
+        }
 
-    }
 
-    /**
-     * Invoked for a received HTTP response.
-     * <p>
-     * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
-     * Call {@link Response#isSuccessful()} to determine if the response indicates success.
-     *  @param call
-     * @param response
-     */
-    @Override
-    public void onResponse(Call<List<House>> call, Response<List<House>> response) {
-        houses = response.body();
-        setDataInRecyclerView();
-    }
-
-    /**
-     * Invoked when a network exception occurred talking to the server or when an unexpected
-     * exception occurred creating the request or processing the response.
-     *
-     * @param call
-     * @param t
-     */
-    @Override
-    public void onFailure(Call<List<House>> call, Throwable t) {
-        Toast.makeText(MainActivity.this, t.toString(), Toast.LENGTH_LONG).show();
-        Log.e(TAG,t.getMessage());
-        progressDialog.dismiss();
     }
 
     private void setDataInRecyclerView() {
@@ -97,7 +75,12 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Hou
 
 
         recyclerViewHouses = findViewById(R.id.recyclerViewHouses);
-        getHousesListData();
+        try {
+            getHousesListData();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         //fabAddHouse for adding a new house
         FloatingActionButton fab = findViewById(R.id.fabAddHouse);
@@ -110,6 +93,26 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Hou
         });
 
         initialiseNavigation();
+    }
+
+    @Override
+    public void onResponse(Call<List<House>> call, Response<List<House>> response) {
+        houses = response.body();
+        setDataInRecyclerView();
+    }
+
+    /**
+     * Invoked when a network exception occurred talking to the server or when an unexpected
+     * exception occurred creating the request or processing the response.
+     *
+     * @param call
+     * @param t
+     */
+    @Override
+    public void onFailure(Call<List<House>> call, Throwable t) {
+        Toast.makeText(MainActivity.this, t.toString(), Toast.LENGTH_LONG).show();
+        Log.e(TAG,t.getMessage());
+        progressDialog.dismiss();
     }
 
     private void initialiseNavigation() {

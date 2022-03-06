@@ -49,12 +49,12 @@ public class ManageLoggedOutFragment extends Fragment {
             logIn = root.findViewById(R.id.btnLogIn);
             register = root.findViewById(R.id.btnRegisterPage);
             logIn.setOnClickListener(v -> {
-                Log.d(TAG, "Button " + logIn.getClass().getSimpleName()+" pressed");
+                Log.d(TAG, "btnLogIn pressed");
                 startActivity(new Intent(getContext(), LoginActivity.class));
             });
 
             register.setOnClickListener(v -> {
-                Log.d(TAG, "Button " + register.getClass().getSimpleName()+" pressed");
+                Log.d(TAG, "btnRegisterPage pressed");
                 startActivity(new Intent(getContext(), RegisterActivity.class));
             });
         }catch (Exception e){
