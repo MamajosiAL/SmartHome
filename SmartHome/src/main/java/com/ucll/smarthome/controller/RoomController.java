@@ -7,7 +7,9 @@ import com.ucll.smarthome.persistence.entities.Room;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.RoomDAO;
 import com.vaadin.flow.router.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.transaction.Transactional;
@@ -24,6 +26,7 @@ public class RoomController {
     private final HouseDAO houseDAO;
     private final UserSecurityFunc userSecurityFunc;
 
+    @Autowired
     public RoomController(RoomDAO dao, HouseDAO houseDAO, UserSecurityFunc userSecurityFunc) {
         this.dao = dao;
         this.houseDAO = houseDAO;
@@ -83,7 +86,7 @@ public class RoomController {
     }
 
 
-    private Room roomExists(long roomid ) throws IllegalArgumentException{
+    public Room roomExists(long roomid) throws IllegalArgumentException{
         Optional<Room> r = dao.findById(roomid);
         if (r.isPresent()) {
            return r.get();
