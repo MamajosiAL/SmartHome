@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -50,7 +51,7 @@ public class UserController {
         //General input check
         if (userDTO == null) throw new IllegalArgumentException("Creating user failed. Iputdata missing.");
         //required fields check
-        if (userDTO.getUsername() == null || userDTO.getUsername().length() == 0) throw new IllegalArgumentException("Creating user failed. Username not filled in.");
+        if (userDTO.getUsername() == null || userDTO.getUsername().length() == 0 || Objects.equals(userDTO.getUsername(), "logout")) throw new IllegalArgumentException("Creating user failed. Username not filled in.");
         if (userDTO.getName() == null || userDTO.getName().length() == 0) throw new IllegalArgumentException("Creating user failed. Name not filled in.");
         if (userDTO.getFirstname() == null || userDTO.getFirstname().length() == 0) throw new IllegalArgumentException("Creating user failed. Firstname not filled in.");
         if (userDTO.getEmail() == null || userDTO.getEmail().length() == 0) throw new IllegalArgumentException("Creating user failed. Email not filled in.");
