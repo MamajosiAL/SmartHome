@@ -15,6 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String LOGIN_URL = "/vaadin/login";
+    private static final String LOGIN_FAILURE_URL = "/vaadin/login?error";
+    private static final String LOGOUT_SUCCESS_URL = "/vaadin/login";
+
+    private static final String HOME_URL = "/vaadin/";
     // pw encoder voor eventueel de in-memory Auth indien nodig
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserDetailService userDetailService;
@@ -28,9 +33,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // authorization moet nog toegepast worden.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic()
+        http.httpBasic().and()
+                .authorizeRequests()
                 .and()
-                .csrf().disable();
+                .formLogin()
+                .loginPage(LOGIN_URL).permitAll()
+                .loginProcessingUrl(LOGIN_URL)
+                .failureUrl(LOGIN_FAILURE_URL)
+                .successForwardUrl(HOME_URL)
+                .and()
+                .logout()
+                .logoutSuccessUrl(LOGOUT_SUCCESS_URL)
+                .and().csrf()
+                .disable();
     }
 
     @Override

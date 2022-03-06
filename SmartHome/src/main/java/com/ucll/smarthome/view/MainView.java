@@ -104,6 +104,9 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
 
     private void handleclickEvent(ClickEvent<Button> buttonClickEvent) {
         getUI().ifPresent(ui -> ui.navigate("login"));
+
+        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+        logoutHandler.logout(VaadinServletRequest.getCurrent().getHttpServletRequest(), null, null);
     }
 
 
