@@ -21,7 +21,9 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinServletRequest;
 import liquibase.pro.packaged.I;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import javax.annotation.PostConstruct;
 
@@ -44,7 +46,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
     private Tabs tabs;
     public MainView() {
         //misschien nog een + met de naam van de user
-        H3 header = new H3("SmartHome van");
+        H3 header = new H3("SmartHome van" );
         header.setId("header-layout");
 
         //hier nog misschien een image
@@ -61,7 +63,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
                 new Html("<span>&nbsp;&nbsp;</span>"),
                 header,
                 new Html("<span>&nbsp;&nbsp;</span>"),
-                new Icon(VaadinIcon.HOME),img, logoutButton);
+                new Icon(VaadinIcon.HOME),/*img,*/ logoutButton);
         tab1 = new Tab(tabname1);
         tab2 = new Tab(tabname2);
         //hier misschien nog dat ge tab 3 alleen ziet als admin?
