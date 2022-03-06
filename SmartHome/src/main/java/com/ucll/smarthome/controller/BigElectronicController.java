@@ -1,11 +1,9 @@
 package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.BigElectronicDTO;
-import com.ucll.smarthome.persistence.entities.BigElectronicDevice;
-import com.ucll.smarthome.persistence.entities.Device;
-import com.ucll.smarthome.persistence.entities.Room;
-import com.ucll.smarthome.persistence.entities.Type;
+import com.ucll.smarthome.persistence.entities.*;
 import com.ucll.smarthome.persistence.repository.BigElectronicDAO;
+import com.ucll.smarthome.persistence.repository.ProgrammeDAO;
 import com.ucll.smarthome.persistence.repository.TypeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,13 +19,15 @@ public class BigElectronicController {
 
     private final BigElectronicDAO beDao;
     private final TypeDAO typeDAO;
+    private final ProgrammeDAO programmeDAO;
     private final RoomController roomController;
     private final ConsumptionController consumptionController;
 
     @Autowired
-    public BigElectronicController(BigElectronicDAO beDao, TypeDAO typeDAO, RoomController roomController, ConsumptionController consumptionController) {
+    public BigElectronicController(BigElectronicDAO beDao, TypeDAO typeDAO, ProgrammeDAO programmeDAO, RoomController roomController, ConsumptionController consumptionController) {
         this.beDao = beDao;
         this.typeDAO = typeDAO;
+        this.programmeDAO = programmeDAO;
         this.roomController = roomController;
         this.consumptionController = consumptionController;
     }
@@ -45,16 +45,33 @@ public class BigElectronicController {
                 .room(roomController.roomExists(beDTO.getRoomid())).build();
         beDao.save(appliances);
     }
+    private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO , Programme programme) throws IllegalArgumentException{
+
+            BigElectronicDevice apl = appliancesExists(beDTO.getId());
+            apl.setName(beDTO.getName());
+            apl.setStatus(beDTO.isStatus());
+            apl.setProgramme(programme);
+            apl.setType(getType(programme.getType()).orElse(null));
+            apl.setTempature(programme.getTempature());
+            apl.setTimer(programme.getTimer());
+
+    }
     public void updateApplianceDevice(BigElectronicDTO beDTO) throws IllegalArgumentException{
         if (beDTO == null ) throw new IllegalArgumentException("Input data missing");
         if (beDTO.getName() == null || beDTO.getName().trim().equals("")) throw new IllegalArgumentException("Name of device is not filled in");
+        Optional<Programme> programme = programmeDAO.findById(beDTO.getProgramid());
+        if (programme.isPresent()){
+            updateBeDeviceWithProgramme(beDTO,programme.get());
+        }else{
 
-        BigElectronicDevice apl = appliancesExists(beDTO.getId());
-        apl.setName(beDTO.getName());
-        apl.setStatus(beDTO.isStatus());
-        apl.setType(getType(beDTO.getType()).orElse(null));
-        apl.setTempature(beDTO.getTempature());
-        apl.setTimer(beDTO.getTimer());
+            BigElectronicDevice apl = appliancesExists(beDTO.getId());
+            apl.setName(beDTO.getName());
+            apl.setStatus(beDTO.isStatus());
+            apl.setType(getType(beDTO.getType()).orElse(null));
+            apl.setTempature(beDTO.getTempature());
+            apl.setTimer(beDTO.getTimer());
+        }
+
 
     }
 
