@@ -111,6 +111,15 @@ public class UserController {
     }
 
     /**
+     * get userid from security context
+     * @return the current logged in user
+     */
+    public UserDTO getUser(){
+        long userid = userSecurityFunc.getLoggedInUserId();
+        return getUserById(userid);
+    }
+
+    /**
      * @param houseid to find house
      * @return a list of userDTO that are registered to the found house
      * @throws IllegalArgumentException if something goes wrong with the info what went wrong
