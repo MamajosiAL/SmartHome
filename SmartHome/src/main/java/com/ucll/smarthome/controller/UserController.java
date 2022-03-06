@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +59,8 @@ public class UserController {
 
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
+        if(dao.findUserByUsername(userDTO.getUsername()).isPresent()) throw new IllegalArgumentException("This username is already taken.");
+
         User u = userDtoToUser(userDTO);
         dao.save(u);
     }
@@ -101,6 +104,7 @@ public class UserController {
      * @throws IllegalArgumentException if something goes wrong with the info what went wrong
      */
     public UserDTO getUserById(long userId) throws IllegalArgumentException{
+        if (userId <= 0L) throw new IllegalArgumentException("User Id is missing");
         Optional<User> user = dao.findById(userId);
         if (user.isPresent()){
             return new UserDTO.Builder().id(user.get().getId()).username(user.get().getUsername()).name(user.get().getName())

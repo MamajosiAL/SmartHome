@@ -1,5 +1,6 @@
 package com.ucll.smarthome.controller;
 
+import com.ucll.smarthome.dto.HouseDTO;
 import com.ucll.smarthome.dto.House_UserDTO;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.House;
@@ -9,6 +10,8 @@ import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.House_UserDAO;
 import com.ucll.smarthome.persistence.repository.UserDAO;
 import com.vaadin.flow.router.NotFoundException;
+import com.ucll.smarthome.persistence.repository.UserDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.transaction.Transactional;
@@ -24,7 +27,7 @@ public class House_UserController {
     private final UserDAO userDAO;
     private final UserSecurityFunc userSecurityFunc;
 
-
+    @Autowired
     public House_UserController(House_UserDAO dao, HouseDAO houseDAO, UserDAO userDAO, UserSecurityFunc userSecurityFunc) {
         this.dao = dao;
         this.houseDAO = houseDAO;
@@ -42,9 +45,20 @@ public class House_UserController {
         if (h == null ) throw new IllegalArgumentException("House is needed");
         if (h.getHouseId()<= 0L || h.getHouseId() == null) throw new IllegalArgumentException("House id is missing");
 
-
-
         House_User hs = new House_User.Builder().house(h).user(user).isAdmin(true).isOwner(true).build();
+        dao.save(hs);
+    }
+
+    public void registerUserToHouseNotOwner(HouseDTO houseDTO) throws IllegalArgumentException{
+        if (houseDTO == null ) throw new IllegalArgumentException("House is needed");
+        if (houseDTO.getId()<= 0L || houseDTO.getUserid() <= 0) throw new IllegalArgumentException("House id is missing");
+
+        Optional<House> h = houseDAO.findById(houseDTO.getId());
+        if (h.isEmpty()) throw new IllegalArgumentException("House couldn't be found");
+        Optional<User> u = userDAO.findById(houseDTO.getUserid());
+        if (u.isEmpty())throw new IllegalArgumentException("User couldn't be found");
+
+        House_User hs = new House_User.Builder().house(h.get()).user(u.get()).isAdmin(false).isOwner(false).build();
         dao.save(hs);
     }
 

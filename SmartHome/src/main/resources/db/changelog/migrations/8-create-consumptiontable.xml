@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="8" author="Allan Rasson">
+        <createTable tableName="consumption" schemaName="smarthome">
+            <column name="consumptionid" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="deviceid" type="bigint" />
+            <column name="aantal_minuten" type="bigint" defaultValue="0" >
+                <constraints nullable="false" />
+            </column>
+            <column name="start_datum_en_tijd" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="unit" type="varchar(20)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="consumptionperhour" type="double">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="consumption"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="deviceid"
+                                 constraintName="fk_device_consumption"
+                                 referencedTableName="device"
+                                 referencedColumnNames="id"
+                                 referencedTableSchemaName="smarthome"
+        />
+    </changeSet>
+
+</databaseChangeLog>
