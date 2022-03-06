@@ -51,7 +51,7 @@ public class UserRestController {
         }
     }
 
-    @GetMapping
+    @GetMapping("user")
     public ResponseEntity getUser(){
         try{
             return new ResponseEntity(userController.getUser(), HttpStatus.OK);
