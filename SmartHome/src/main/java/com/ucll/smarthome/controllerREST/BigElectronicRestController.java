@@ -20,7 +20,7 @@ public class BigElectronicRestController {
         this.beController = beController;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createApplianceDevice(@RequestBody BigElectronicDTO beDTO){
         try {
             beController.createApplianceDevice(beDTO);
@@ -30,7 +30,7 @@ public class BigElectronicRestController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity updateApplianceDevice(@RequestBody BigElectronicDTO beDTO){
         try {
             beController.updateApplianceDevice(beDTO);
@@ -57,7 +57,7 @@ public class BigElectronicRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity deleteApplianceDevice(@PathVariable("id") long deviceid){
         try{
             beController.deleteApplianceDeviceById(deviceid);

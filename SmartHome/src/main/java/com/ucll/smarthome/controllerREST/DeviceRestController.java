@@ -19,7 +19,7 @@ public class DeviceRestController {
     }
 
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createDevice(@RequestBody DeviceDTO deviceDTO){
         try {
             deviceController.createDevice(deviceDTO);
@@ -29,7 +29,7 @@ public class DeviceRestController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity updateDevice(@RequestBody DeviceDTO deviceDTO){
         try {
             deviceController.updateDevice(deviceDTO);
@@ -56,7 +56,7 @@ public class DeviceRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("{id}/delete")
     public ResponseEntity deleteDevice(@PathVariable("id") long deviceid){
         try{
             deviceController.deleteDeviceById(deviceid);

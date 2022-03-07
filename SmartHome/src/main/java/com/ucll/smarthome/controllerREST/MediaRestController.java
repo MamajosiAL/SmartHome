@@ -21,7 +21,7 @@ public class MediaRestController {
         this.mediaController = mediaController;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createAudioDevice(@RequestBody MediaDTO mediaDTO){
         try {
             mediaController.createAudioDevice(mediaDTO);
@@ -31,7 +31,7 @@ public class MediaRestController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity updateAudioDevice(@RequestBody MediaDTO mediaDTO){
         try {
             mediaController.updateAudioDevice(mediaDTO);
@@ -58,7 +58,7 @@ public class MediaRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("{id}/delete")
     public ResponseEntity deletAudioDevice(@PathVariable("id") long deviceid){
         try{
             mediaController.deleteAudioDevice(deviceid);
