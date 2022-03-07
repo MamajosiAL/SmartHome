@@ -65,6 +65,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
                 new Html("<span>&nbsp;&nbsp;</span>"),
                 new Icon(VaadinIcon.HOME),/*img,*/ logoutButton);
         tab1 = new Tab(tabname1);
+
         tab2 = new Tab(tabname2);
         //hier misschien nog dat ge tab 3 alleen ziet als admin?
         tab3 = new Tab(tabname3);

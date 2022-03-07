@@ -6,7 +6,15 @@
     margin-left: auto;
     margin-right: 5px;
 }
-
+#vaadin-text-field-input-0 {
+    border-style: none;
+    border-width: 0px;
+    border-color: white;
+}
+h5 {
+    color: rgba(255, 0, 0,0.8);
+    border-radius: 25px;
+}
 html {
     --lumo-primary-text-color: rgb(114, 22, 243);
     --lumo-primary-color-50pct: rgba(114, 22, 243, 0.5);

@@ -1,6 +1,7 @@
 package com.ucll.smarthome.config;
 
 import com.ucll.smarthome.view.LoginView;
+import com.ucll.smarthome.view.RegisterView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
@@ -18,7 +19,7 @@ public class SecuredVaadinServiceInitListener implements VaadinServiceInitListen
 
     }
     private void authenticateNavigation(BeforeEnterEvent event) {
-        if (!LoginView.class.equals(event.getNavigationTarget()) && !SecurityUtils.isUserLoggedIn()) {
+        if (!LoginView.class.equals(event.getNavigationTarget()) && !RegisterView.class.equals(event.getNavigationTarget()) && !SecurityUtils.isUserLoggedIn()) {
             event.rerouteTo(LoginView.class);
         }
     }
