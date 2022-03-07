@@ -19,7 +19,7 @@ public interface HouseApiInterface {
     Call<String> postHouse(@Body House house);
 
     // for GET request
-    @GET("/houses/user/{userid}")
-    Call<List<House>> getHousesWithAccessForUserWithId(@Path("userid") Integer id);
+    @GET("/houses/user")
+    Call<List<House>> getHousesWithAccessForUserWithId();
 
 }
