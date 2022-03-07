@@ -16,11 +16,11 @@
         </insert>
         <insert tableName="category" schemaName="smarthome">
             <column name="id" value="2"/>
-            <column name="name" value="audio"/>
+            <column name="name" value="mediaDevice"/>
         </insert>
         <insert tableName="category" schemaName="smarthome">
             <column name="id" value="3"/>
-            <column name="name" value="sensor"/>
+            <column name="name" value="sensorDevice"/>
         </insert>
         <insert tableName="category" schemaName="smarthome">
             <column name="id" value="4"/>

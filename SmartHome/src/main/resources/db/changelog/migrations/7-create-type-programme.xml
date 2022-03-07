@@ -20,6 +20,12 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="tempature" type="decimal">
+                <constraints nullable="true"/>
+            </column>
+            <column name="timer" type="time">
+                <constraints nullable="true"/>
+            </column>
             <column name="type_id" type="bigint"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="programme"
@@ -35,6 +41,14 @@
                                  baseColumnNames="type_id"
                                  constraintName="fk_type"
                                  referencedTableName="type"
+                                 referencedColumnNames="id"
+                                 referencedTableSchemaName="smarthome"
+        />
+        <addForeignKeyConstraint baseTableName="device"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="program_id"
+                                 constraintName="fk_program"
+                                 referencedTableName="programme"
                                  referencedColumnNames="id"
                                  referencedTableSchemaName="smarthome"
         />
