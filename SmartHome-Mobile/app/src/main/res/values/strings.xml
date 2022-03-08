@@ -46,4 +46,5 @@
     <string name="redirectedToLogin">You will be redirected to login</string>
     <string name="addNewHouse">Add new house</string>
     <string name="add">Add</string>
+    <string name="responseErrorCode"><![CDATA[\"Error! --> Responsecode: \"]]></string>
 </resources>

@@ -14,12 +14,11 @@ import retrofit2.http.Query;
 
 public interface HouseApiInterface {
     // For POST request
-
-    @POST("/house/create")
-    Call<String> postHouse(@Body House house);
+    @POST("/houses/create")
+    Call<String> addHouse(@Body House house, @Header("Cookie") String authHeader);
 
     // for GET request
     @GET("/houses/user")
-    Call<List<House>> getHousesWithAccessForUserWithId();
+    Call<List<House>> getHousesWithAccessForUserInSession(@Header("Cookie") String authHeader);
 
 }

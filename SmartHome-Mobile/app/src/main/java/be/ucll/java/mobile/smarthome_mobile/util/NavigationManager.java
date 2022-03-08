@@ -29,7 +29,6 @@ public class NavigationManager {
 
     @SuppressLint("NonConstantResourceId")
     public static void initialise(AppCompatActivity context) {
-
         //disable darkmode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 

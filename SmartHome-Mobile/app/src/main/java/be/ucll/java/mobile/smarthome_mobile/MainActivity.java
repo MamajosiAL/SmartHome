@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Hou
 
             HouseApiInterface houseApi = retrofit.create(HouseApiInterface.class);
 
-            Call<List<House>> call = houseApi.getHousesWithAccessForUserWithId();
+            Call<List<House>> call = houseApi.getHousesWithAccessForUserInSession(AuthorizationManager.getInstance(this).getSessionId());
             call.enqueue(this);
         }catch (Exception e){
             throw new DataNotFoundException(e.getCause());

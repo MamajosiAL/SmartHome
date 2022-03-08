@@ -129,6 +129,9 @@ public class LoginActivity extends AppCompatActivity implements Callback<String>
                 String cookie = response.headers().get("Set-Cookie");
                 Log.d(TAG,"Succes! Session-cookie: "+ cookie);
                 authorizationManager.signIn(cookie);
+            }else {
+                Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
+                progressDialog.dismiss();
             }
         }
     }

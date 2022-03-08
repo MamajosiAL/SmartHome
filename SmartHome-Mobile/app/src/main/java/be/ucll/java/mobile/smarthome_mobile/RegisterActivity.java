@@ -99,8 +99,15 @@ public class RegisterActivity extends AppCompatActivity implements Callback<Stri
 
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            overridePendingTransition(0,0);
+        if (response != null && response.body() != null) {
+            if (response.isSuccessful()) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(0, 0);
+            }else {
+                Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
+                progressDialog.dismiss();
+            }
+        }
     }
 
     @Override
