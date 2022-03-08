@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHomeMobile"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddHouseActivity"></activity>
+        <activity android:name=".HouseActivity"></activity>
+        <activity android:name=".AddHouseActivity" />
         <activity
             android:name=".LogOutActivity"
             android:label="@string/title_activity_log_out"
