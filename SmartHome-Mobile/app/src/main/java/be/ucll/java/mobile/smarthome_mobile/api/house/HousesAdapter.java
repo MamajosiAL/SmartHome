@@ -2,15 +2,18 @@ package be.ucll.java.mobile.smarthome_mobile.api.house;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import be.ucll.java.mobile.smarthome_mobile.HouseActivity;
 import be.ucll.java.mobile.smarthome_mobile.R;
 import be.ucll.java.mobile.smarthome_mobile.pojo.House;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Room;
@@ -25,11 +28,10 @@ public class HousesAdapter extends RecyclerView.Adapter<HousesViewHolder>{
     }
 
     @Override
-    public HousesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HousesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.houses_list_item, null);
-        HousesViewHolder housesViewHolder = new HousesViewHolder(view);
-        return housesViewHolder;
+        return new HousesViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
@@ -41,8 +43,11 @@ public class HousesAdapter extends RecyclerView.Adapter<HousesViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // display a toast with user name
-                Toast.makeText(context, houses.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, HouseActivity.class);
+                intent.putExtra("houseId", houses.get(position).getId());
+                intent.putExtra("houseName", houses.get(position).getName());
+                context.startActivity(intent);
+
             }
         });
     }

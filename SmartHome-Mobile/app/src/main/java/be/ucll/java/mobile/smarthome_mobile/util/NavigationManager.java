@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import be.ucll.java.mobile.smarthome_mobile.ConsumptionActivity;
+import be.ucll.java.mobile.smarthome_mobile.DeviceActivity;
+import be.ucll.java.mobile.smarthome_mobile.HouseActivity;
 import be.ucll.java.mobile.smarthome_mobile.LoginActivity;
 import be.ucll.java.mobile.smarthome_mobile.MainActivity;
 import be.ucll.java.mobile.smarthome_mobile.ManageActivity;
@@ -36,8 +38,10 @@ public class NavigationManager {
         bottomNavigationView = context.findViewById(R.id.bottomNavigation);
 
         //set selected
-        if (context instanceof MainActivity) {
-            bottomNavigationView.setSelectedItemId(R.id.navHouses);
+        if (context instanceof MainActivity||
+            context instanceof HouseActivity||
+            context instanceof DeviceActivity) {
+                bottomNavigationView.setSelectedItemId(R.id.navHouses);
         } else if (context instanceof ConsumptionActivity){
             bottomNavigationView.setSelectedItemId(R.id.navConsumption);
         }else{

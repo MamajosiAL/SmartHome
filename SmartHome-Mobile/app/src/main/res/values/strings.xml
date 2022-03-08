@@ -47,4 +47,5 @@
     <string name="addNewHouse">Add new house</string>
     <string name="add">Add</string>
     <string name="responseErrorCode"><![CDATA[\"Error! --> Responsecode: \"]]></string>
+    <string name="rooms">Rooms</string>
 </resources>

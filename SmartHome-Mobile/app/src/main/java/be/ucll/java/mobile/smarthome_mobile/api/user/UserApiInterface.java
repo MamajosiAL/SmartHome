@@ -9,6 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 
@@ -24,5 +25,9 @@ public interface UserApiInterface {
     @POST("/login")
     Call<String> login(@Body Login credentials , @Header("Authorization") String authHeader);
 
+    @PUT("/users/update")
+    Call<String> updateUser(@Body User user, @Header("Authorization") String authHeader);
 
+    @GET("/users/user")
+    Call<String> getUser(@Header("Authorization") String authHeader);
 }

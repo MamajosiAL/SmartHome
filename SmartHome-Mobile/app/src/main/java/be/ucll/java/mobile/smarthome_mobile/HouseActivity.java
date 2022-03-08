@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -33,6 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HouseActivity extends AppCompatActivity implements Callback<List<Room>> {
     private final String TAG = this.getClass().getSimpleName();
     private RecyclerView recyclerViewRooms;
+    private TextView title;
     private ProgressDialog progressDialog;
     List<Room> roomsFromHouse;
 
@@ -59,7 +61,7 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
                 throw new NullPointerException("The id of the selected house is 0");
             }
 
-            Call<List<Room>> call = roomsApi.getRoomsFromHouseWithAccessForUserInSession(houseId,AuthorizationManager.getInstance(this).getSessionId());
+            Call<List<Room>> call = roomsApi.getRoomsFromHouseWithAccessForUserInSession(houseId, AuthorizationManager.getInstance(this).getSessionId());
             call.enqueue(this);
         }catch (Exception e){
             throw new DataNotFoundException(e.getCause());
@@ -81,10 +83,14 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house);
+
         NavigationManager.initialise(this);
+
+        title = findViewById(R.id.titleHouse);
 
         if (AuthorizationManager.getInstance(this).isSignedIn()) {
             recyclerViewRooms = findViewById(R.id.recyclerViewHouses);
+            title.setText(this.getIntent().getStringExtra("houseName"));
             try {
                 getRoomsListData();
             } catch (Exception e) {

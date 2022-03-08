@@ -19,4 +19,6 @@ public interface RoomsApiInterface {
     // for GET request
     @GET("/rooms/house")
     Call<List<Room>> getRoomsFromHouseWithAccessForUserInSession(@Query("id") Integer houseid, @Header("Cookie") String authHeader);
+
+
 }

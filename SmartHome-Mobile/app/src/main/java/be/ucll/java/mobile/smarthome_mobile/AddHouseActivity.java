@@ -75,10 +75,6 @@ public class AddHouseActivity extends AppCompatActivity implements Callback<Stri
             if(TxtValidator.validate(name) && authorizationManager.isSignedIn()){
                 addHouse();
             }
-
-
-
-
         });
     }
 
