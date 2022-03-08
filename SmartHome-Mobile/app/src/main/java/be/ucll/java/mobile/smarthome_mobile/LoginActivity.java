@@ -74,6 +74,13 @@ public class LoginActivity extends AppCompatActivity implements Callback<String>
         username = findViewById(R.id.txtLogInUsername);
         password = findViewById(R.id.txtLogInPassword);
         Button logIn = findViewById(R.id.btnLogInForm);
+        Button toRegisterPage = findViewById(R.id.btnLogInFormToRegisterPage);
+
+        // implement setOnClickListener event on register Button
+        toRegisterPage.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+            overridePendingTransition(0, 0);
+        });
 
         // implement setOnClickListener event on sign up Button
         logIn.setOnClickListener(view -> {
