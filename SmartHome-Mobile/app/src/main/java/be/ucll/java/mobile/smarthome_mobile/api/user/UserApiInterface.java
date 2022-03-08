@@ -1,9 +1,12 @@
 package be.ucll.java.mobile.smarthome_mobile.api.user;
 
+import java.util.List;
+
 import be.ucll.java.mobile.smarthome_mobile.pojo.Login;
 import be.ucll.java.mobile.smarthome_mobile.pojo.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -18,10 +21,6 @@ public interface UserApiInterface {
     @POST("/users/create")
     Call<String> postUser(@Body User user);
 
-    // for GET request
-    @GET("/users")
-    Call<User> getUserById(@Query("id") Integer id);
-
     @POST("/login")
     Call<String> login(@Body Login credentials , @Header("Authorization") String authHeader);
 
@@ -30,4 +29,14 @@ public interface UserApiInterface {
 
     @GET("/users/user")
     Call<String> getUser(@Header("Authorization") String authHeader);
+
+    @GET("/users/house")
+    Call<List<User>> getUsersByHouseId(@Query("id") Integer houseid, @Header("Authorization") String authHeader);
+
+    // for GET request
+    @GET("/users")
+    Call<User> getUserById(@Query("id") Integer id);
+
+    @DELETE("users/delete")
+    Call<User> deleteCurrentLoggedInUser(@Header("Authorization") String authHeader);
 }
