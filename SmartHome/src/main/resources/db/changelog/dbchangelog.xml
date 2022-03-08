@@ -12,4 +12,6 @@
     <include file="db/changelog/migrations/7-create-type-programme.xml"/>
     <include file="db/changelog/migrations/8-create-consumptiontable.xml"/>
     <include file="db/changelog/migrations/9-create-consumptionlog.xml"/>
+    <include file="db/changelog/migrations/10-insert-type-values.xml"/>
+    <include file="db/changelog/migrations/11-insert-progamme-values.xml"/>
 </databaseChangeLog>

@@ -20,7 +20,7 @@ public class SensorRestController {
         this.sensorController = sensorController;
     }
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity createSensorDevice(@RequestBody SensorDTO sensorDTO){
         try {
             sensorController.createSensorDevice(sensorDTO);
@@ -30,7 +30,7 @@ public class SensorRestController {
         }
     }
 
-    @PutMapping
+    @PutMapping("update")
     public ResponseEntity updateSenorDevice(@RequestBody SensorDTO sensorDTO){
         try {
             sensorController.updateSensorDevice(sensorDTO);
@@ -57,7 +57,7 @@ public class SensorRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("{id}/delete")
     public ResponseEntity deleteSensorDevice(@PathVariable("id") long deviceid){
         try{
             sensorController.deleteSensorDeviceById(deviceid);

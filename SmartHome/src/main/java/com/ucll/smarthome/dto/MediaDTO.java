@@ -1,12 +1,12 @@
 package com.ucll.smarthome.dto;
 
-public class AudioDTO extends DeviceDTO {
+public class MediaDTO extends DeviceDTO {
     private int volume;
 
-    public AudioDTO() {
+    public MediaDTO() {
     }
 
-    private AudioDTO(Builder builder) {
+    private MediaDTO(Builder builder) {
         setVolume(builder.volume);
         setId(builder.id);
         setName(builder.name);
@@ -64,8 +64,8 @@ public class AudioDTO extends DeviceDTO {
             return this;
         }
 
-        public AudioDTO build() {
-            return new AudioDTO(this);
+        public MediaDTO build() {
+            return new MediaDTO(this);
         }
     }
 }

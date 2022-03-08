@@ -27,7 +27,7 @@ public class UserRestController {
         this.house_userController = house_userController;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createUser(@RequestBody UserDTO userDTO){
         try {
             userController.createUser(userDTO);
@@ -38,7 +38,7 @@ public class UserRestController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity updateUser( @RequestBody UserDTO userDTO){
         try {
 
@@ -88,7 +88,7 @@ public class UserRestController {
         }
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete")
     public ResponseEntity deleteUser(){
         try {
             userController.deleteUser();
