@@ -21,6 +21,7 @@
         android:testOnly="true"
         android:theme="@style/Theme.SmartHomeMobile"
         android:usesCleartextTraffic="true" >
+        <activity android:name="be.ucll.java.mobile.smarthome_mobile.AddHouseActivity" />
         <activity
             android:name="be.ucll.java.mobile.smarthome_mobile.LogOutActivity"
             android:label="@string/title_activity_log_out"

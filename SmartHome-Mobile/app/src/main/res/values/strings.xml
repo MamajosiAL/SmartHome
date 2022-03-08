@@ -44,4 +44,6 @@
     <string name="title_activity_account">AccountActivity</string>
     <string name="title_activity_log_out">LogOutActivity</string>
     <string name="redirectedToLogin">You will be redirected to login</string>
+    <string name="addNewHouse">Add new house</string>
+    <string name="add">Add</string>
 </resources>

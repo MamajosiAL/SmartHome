@@ -4,13 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
@@ -68,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Hou
         recyclerViewHouses.setAdapter(housesAdapter); // set the Adapter to RecyclerView
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,12 +85,9 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Hou
 
         //fabAddHouse for adding a new house
         FloatingActionButton fab = findViewById(R.id.fabAddHouse);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, getText(R.string.notImplementedMessage), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+        fab.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), AddHouseActivity.class));
+            overridePendingTransition(0, 0);
         });
     }
 
@@ -103,13 +97,6 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Hou
         setDataInRecyclerView();
     }
 
-    /**
-     * Invoked when a network exception occurred talking to the server or when an unexpected
-     * exception occurred creating the request or processing the response.
-     *
-     * @param call
-     * @param t
-     */
     @Override
     public void onFailure(Call<List<House>> call, Throwable t) {
         Toast.makeText(MainActivity.this, t.toString(), Toast.LENGTH_LONG).show();

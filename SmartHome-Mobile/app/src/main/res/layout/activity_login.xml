@@ -52,7 +52,8 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtLogInUsername" />
+            app:layout_constraintTop_toBottomOf="@+id/txtLogInUsername"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/btnLogInForm"

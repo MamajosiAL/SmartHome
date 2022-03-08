@@ -84,7 +84,6 @@ androidx/fragment/R.java
  androidx.fragment.R$styleable
 be/ucll/java/mobile/smarthome_mobile/MainActivity.java
  be.ucll.java.mobile.smarthome_mobile.MainActivity
- be.ucll.java.mobile.smarthome_mobile.MainActivity$1
 be/ucll/java/mobile/smarthome_mobile/HousesAdapter.java
  be.ucll.java.mobile.smarthome_mobile.HousesAdapter
  be.ucll.java.mobile.smarthome_mobile.HousesAdapter$1
@@ -97,6 +96,8 @@ androidx/navigation/R.java
  androidx.navigation.R$attr
  androidx.navigation.R$id
  androidx.navigation.R$styleable
+be/ucll/java/mobile/smarthome_mobile/AddHouseActivity.java
+ be.ucll.java.mobile.smarthome_mobile.AddHouseActivity
 be/ucll/java/mobile/smarthome_mobile/api/user/UserApi.java
  be.ucll.java.mobile.smarthome_mobile.api.user.UserApi
 be/ucll/java/mobile/smarthome_mobile/api/user/UsersAdapter.java
