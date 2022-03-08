@@ -4,7 +4,7 @@ import com.ucll.smarthome.dto.SensorDTO;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.Device;
 import com.ucll.smarthome.persistence.entities.Room;
-import com.ucll.smarthome.persistence.entities.Sensor;
+import com.ucll.smarthome.persistence.entities.SensorDevice;
 import com.ucll.smarthome.persistence.repository.SensorDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,13 +40,13 @@ public class SensorController {
         Room room = roomController.roomExists(sensorDTO.getRoomid());
         if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
 
-        Sensor sensor = new Sensor.Builder()
+        SensorDevice sensorDevice = new SensorDevice.Builder()
                 .name(sensorDTO.getName())
                 .status(sensorDTO.isStatus())
                 .sensorType(sensorDTO.getSensorType())
                 .sensordata(sensorDTO.getSensordata())
                 .room(roomController.roomExists(sensorDTO.getRoomid())).build();
-        sensorDAO.save(sensor);
+        sensorDAO.save(sensorDevice);
     }
 
     public void updateSensorDevice(SensorDTO sensorDTO) throws IllegalArgumentException{
@@ -56,17 +56,18 @@ public class SensorController {
         Room room = roomController.roomExists(sensorDTO.getRoomid());
         if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
 
-        Sensor sensor = sensorExists(sensorDTO.getId());
-        sensor.setName(sensorDTO.getName());
-        sensor.setStatus(sensorDTO.isStatus());
-        sensor.setSensorType(sensorDTO.getName());
-        sensor.setSensordata(sensorDTO.getSensordata());
+        SensorDevice sensorDevice = sensorExists(sensorDTO.getId());
+        sensorDevice.setName(sensorDTO.getName());
+        sensorDevice.setStatus(sensorDTO.isStatus());
+        sensorDevice.setSensorType(sensorDTO.getName());
+        sensorDevice.setSensordata(sensorDTO.getSensordata());
     }
     public SensorDTO getSensorDeviceById(long deviceid) throws IllegalArgumentException{
-        Sensor sensor = sensorExists(deviceid);
-        if(userSecurityFunc.getHouseUser(sensor.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
-        return new SensorDTO.Builder().id(sensor.getId()).name(sensor.getName()).status(sensor.isStatus()).build();
+        SensorDevice sensorDevice = sensorExists(deviceid);
+        if(userSecurityFunc.getHouseUser(sensorDevice.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
+        return new SensorDTO.Builder().id(sensorDevice.getId()).name(sensorDevice.getName()).status(sensorDevice.isStatus()).build();
     }
+
     public List<SensorDTO> getSonsorDevicesByRoom(long roomid) throws IllegalArgumentException{
         if (roomid <= 0L) throw new IllegalArgumentException("Invalid id");
         Room room = roomController.roomExists(roomid);
@@ -77,15 +78,16 @@ public class SensorController {
                 .map(rec-> new SensorDTO.Builder().id(rec.getId()).name(rec.getName()).status(rec.isStatus()).sensorType(rec.getSensorType()).sensordata(rec.getSensordata()).build());
         return stream.collect(Collectors.toList());
     }
+
     public void deleteSensorDeviceById(long deviceid) throws IllegalArgumentException{
         if (deviceid <= 0L) throw new IllegalArgumentException("Invalid id");
-        Sensor sensor = sensorExists(deviceid);
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(sensor.getRoom().getHouse().getHouseId())) throw new NotFoundException("User is not admin of this house");
-        sensorDAO.delete(sensor);
+        SensorDevice sensorDevice = sensorExists(deviceid);
+        if(!userSecurityFunc.checkCurrentUserIsAdmin(sensorDevice.getRoom().getHouse().getHouseId())) throw new NotFoundException("User is not admin of this house");
+        sensorDAO.delete(sensorDevice);
 
     }
-    private Sensor sensorExists(long deviceid) throws IllegalArgumentException{
-        Optional<Sensor> device = sensorDAO.findById(deviceid);
+    private SensorDevice sensorExists(long deviceid) throws IllegalArgumentException{
+        Optional<SensorDevice> device = sensorDAO.findById(deviceid);
         if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");
         return device.get();
     }

@@ -5,47 +5,55 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("2")
-public class Audio extends Device {
-    @Column(name = "volume")
-    private int volume;
+@DiscriminatorValue("3")
+public class SensorDevice extends Device {
 
-    public Audio() {
+    @Column(name = "sensortype")
+    private String sensorType;
+    @Column(name = "sensordata")
+    private double sensordata;
+
+    public SensorDevice() {
     }
 
-    private Audio(Builder builder) {
-        setVolume(builder.volume);
+    private SensorDevice(Builder builder) {
         setId(builder.id);
         setCategoryid(builder.categoryid);
         setName(builder.name);
         setStatus(builder.status);
         setRoom(builder.room);
+        setSensorType(builder.sensorType);
+        setSensordata(builder.sensordata);
     }
 
 
-    public int getVolume() {
-        return volume;
+    public String getSensorType() {
+        return sensorType;
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
+    public void setSensorType(String sensorType) {
+        this.sensorType = sensorType;
+    }
+
+    public double getSensordata() {
+        return sensordata;
+    }
+
+    public void setSensordata(double sensordata) {
+        this.sensordata = sensordata;
     }
 
 
     public static final class Builder {
-        private int volume;
         private Long id;
         private int categoryid;
         private String name;
         private boolean status;
         private Room room;
+        private String sensorType;
+        private double sensordata;
 
         public Builder() {
-        }
-
-        public Builder volume(int val) {
-            volume = val;
-            return this;
         }
 
         public Builder id(Long val) {
@@ -73,8 +81,18 @@ public class Audio extends Device {
             return this;
         }
 
-        public Audio build() {
-            return new Audio(this);
+        public Builder sensorType(String val) {
+            sensorType = val;
+            return this;
+        }
+
+        public Builder sensordata(double val) {
+            sensordata = val;
+            return this;
+        }
+
+        public SensorDevice build() {
+            return new SensorDevice(this);
         }
     }
 }

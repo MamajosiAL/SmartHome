@@ -26,7 +26,7 @@ public class HouseRestController {
         this.house_userController = house_userController;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createHouse(@RequestBody HouseDTO houseDTO){
 
         try {
@@ -47,7 +47,7 @@ public class HouseRestController {
         }
     }
 
-    @PutMapping("/isadmin")
+    @PutMapping("/setadmin")
     public ResponseEntity updateUseIsAdmin(@RequestBody House_UserDTO house_userDTO){
         try {
             house_userController.updateRegistrationHouseUsser(house_userDTO);
@@ -59,8 +59,7 @@ public class HouseRestController {
         }
     }
 
-
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity updateHouse( @RequestBody HouseDTO houseDTO){
         try {
             houseController.updateHouse(houseDTO);

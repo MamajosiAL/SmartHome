@@ -20,7 +20,7 @@ public class ConsumptionRestController {
         this.consumptionController = consumptionController;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createConsumption(@RequestBody ConsumptionDTO consumptionDTO){
         try {
             consumptionController.createConsumption(consumptionDTO);

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="11" author="Mathias Clement">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT (*) FROM smarthome.programme WHERE id=1 OR id = 2 OR id = 3 OR id = 4 OR id = 5 OR id = 6
+                                                        OR id = 7 OR id = 8 OR id = 9  OR id = 10 OR id = 11 OR id = 12
+                                                        OR id = 13 OR id = 14 OR id = 15 OR id = 16 OR id = 17 OR id = 18
+                                                        OR id = 19 OR id = 20 OR id = 21 OR id = 22 OR id = 23
+            </sqlCheck>
+        </preConditions>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="1"/>
+            <column name="name" value="Fan Oven"/>
+            <column name="tempature" value="0"/>
+            <column name="type_id" value="1"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="2"/>
+            <column name="name" value="Grill"/>
+            <column name="tempature" value="0"/>
+            <column name="type_id" value="1"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="3"/>
+            <column name="name" value="Conventional Heating"/>
+            <column name="tempature" value="0"/>
+            <column name="type_id" value="1"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="4"/>
+            <column name="name" value="Fan with Grill"/>
+            <column name="tempature" value="0"/>
+            <column name="type_id" value="1"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="5"/>
+            <column name="name" value="Oven Defrosting"/>
+            <column name="tempature" value="0"/>
+            <column name="type_id" value="1"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="6"/>
+            <column name="name" value="Bottom element with grill"/>
+            <column name="tempature" value="0"/>
+            <column name="type_id" value="1"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="7"/>
+            <column name="name" value="Plate warming"/>
+            <column name="tempature" value="0"/>
+            <column name="type_id" value="1"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="8"/>
+            <column name="name" value="Oven warming"/>
+            <column name="tempature" value="0"/>
+            <column name="type_id" value="1"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="9"/>
+            <column name="name" value="Prewash"/>
+            <column name="tempature" value="50"/>
+            <column name="timer" value="00:35:00"/>
+            <column name="type_id" value="3"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="10"/>
+            <column name="name" value="Cotton Cycle"/>
+            <column name="tempature" value="40"/>
+            <column name="timer" value="02:00:00"/>
+            <column name="type_id" value="3"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="11"/>
+            <column name="name" value="Economy"/>
+            <column name="tempature" value="30"/>
+            <column name="timer" value="01:30:00"/>
+            <column name="type_id" value="3"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="12"/>
+            <column name="name" value="Quick Wash"/>
+            <column name="tempature" value="30"/>
+            <column name="timer" value="00:40:00"/>
+            <column name="type_id" value="3"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="13"/>
+            <column name="name" value="Mixed Load"/>
+            <column name="tempature" value="55"/>
+            <column name="timer" value="01:00:00"/>
+            <column name="type_id" value="3"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="14"/>
+            <column name="name" value="Delicate"/>
+            <column name="tempature" value="35"/>
+            <column name="timer" value="00:50:00"/>
+            <column name="type_id" value="3"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="15"/>
+            <column name="name" value="Intensive wash"/>
+            <column name="tempature" value="70"/>
+            <column name="timer" value="02:00:00"/>
+            <column name="type_id" value="4"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="16"/>
+            <column name="name" value="Normal wash"/>
+            <column name="tempature" value="50"/>
+            <column name="timer" value="02:00:00"/>
+            <column name="type_id" value="4"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="17"/>
+            <column name="name" value="Light wash"/>
+            <column name="tempature" value="40"/>
+            <column name="timer" value="01:30:00"/>
+            <column name="type_id" value="4"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="18"/>
+            <column name="name" value="Eco"/>
+            <column name="tempature" value="53"/>
+            <column name="timer" value="03:00:00"/>
+            <column name="type_id" value="4"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="19"/>
+            <column name="name" value="Rapid"/>
+            <column name="tempature" value="40"/>
+            <column name="timer" value="00:35:00"/>
+            <column name="type_id" value="4"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="20"/>
+            <column name="name" value="Very Dry"/>
+            <column name="tempature" value="55"/>
+            <column name="timer" value="00:45:00"/>
+            <column name="type_id" value="5"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="21"/>
+            <column name="name" value="Cupboard Dry"/>
+            <column name="tempature" value="60"/>
+            <column name="timer" value="01:53:00"/>
+            <column name="type_id" value="5"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="22"/>
+            <column name="name" value="Iron Dry"/>
+            <column name="tempature" value="45"/>
+            <column name="timer" value="00:50:00"/>
+            <column name="type_id" value="5"/>
+        </insert>
+        <insert tableName="programme" schemaName="smarthome">
+            <column name="id" value="23"/>
+            <column name="name" value="Cotton Dry"/>
+            <column name="tempature" value="58"/>
+            <column name="timer" value="00:40:00"/>
+            <column name="type_id" value="5"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
