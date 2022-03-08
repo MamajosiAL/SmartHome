@@ -23,6 +23,7 @@ import be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
 import be.ucll.java.mobile.smarthome_mobile.pojo.House;
+import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Hou
             }
         });
 
-        initialiseNavigation();
+        BottomNavigationManager.initialise(this);
     }
 
     @Override
@@ -115,37 +116,5 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Hou
         progressDialog.dismiss();
     }
 
-    private void initialiseNavigation() {
-
-        //disable darkmode
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        //initialise navigation variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        //set selected
-        bottomNavigationView.setSelectedItemId(R.id.navHouses);
-        //perform ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-
-                    case R.id.navConsumption:
-                        startActivity(new Intent(getApplicationContext(), ConsumptionActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.navManage:
-                        startActivity(new Intent(getApplicationContext(), ManageActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.navHouses:
-                        return true;
-
-                }
-                return false;
-            }
-        });
-    }
 
 }

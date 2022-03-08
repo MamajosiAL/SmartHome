@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
+import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
+
 public class LogOutActivity extends AppCompatActivity {
 
     @Override
@@ -19,5 +21,6 @@ public class LogOutActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
+        BottomNavigationManager.initialise(this);
     }
 }

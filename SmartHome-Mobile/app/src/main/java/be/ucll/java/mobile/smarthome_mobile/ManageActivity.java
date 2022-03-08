@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
+import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
 
 public class ManageActivity extends AppCompatActivity {
 
@@ -29,36 +30,8 @@ public class ManageActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentManage_container_view, body, null)
                     .commit();
-            
-            initialiseNavigation();
+
+            BottomNavigationManager.initialise(this);
         }
-    }
-    private void initialiseNavigation () {
-        //initialise navigation variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        //set selected
-        bottomNavigationView.setSelectedItemId(R.id.navManage);
-        //perform ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-
-                case R.id.navConsumption:
-                    startActivity(new Intent(getApplicationContext(), ConsumptionActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-
-                case R.id.navManage:
-                    startActivity(new Intent(getApplicationContext(), ManageActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-
-                case R.id.navHouses:
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-
-            }
-            return false;
-        });
     }
 }

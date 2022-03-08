@@ -19,6 +19,7 @@ import android.widget.Toast;
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.user.UserApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.pojo.User;
+import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity implements Callback<Stri
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        initialiseNavigation();
+        BottomNavigationManager.initialise(this);
 
         // init the EditText and Button
         username = findViewById(R.id.txtRegisterusername);
@@ -46,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements Callback<Stri
         name = findViewById(R.id.txtRegisterName);
         email = findViewById(R.id.txtRegisterEmail);
         password = findViewById(R.id.txtRegisterPassword);
-        register = findViewById(R.id.buttonAccount);
+        register = findViewById(R.id.btnRegister);
 
         // implement setOnClickListener event on sign up Button
         register.setOnClickListener(new View.OnClickListener() {
@@ -77,35 +78,6 @@ public class RegisterActivity extends AppCompatActivity implements Callback<Stri
             Log.e(TAG,e.getMessage());
         }
 
-    }
-
-    private void initialiseNavigation() {
-        //initialise navigation variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        //set selected
-        bottomNavigationView.setSelectedItemId(R.id.navManage);
-        //perform ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()){
-
-                case R.id.navConsumption:
-                    startActivity(new Intent(getApplicationContext(), ConsumptionActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
-
-                case R.id.navManage:
-                    startActivity(new Intent(getApplicationContext(), ManageActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
-
-                case R.id.navHouses:
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
-
-            }
-            return false;
-        });
     }
 
     public void startRequest(User user) {

@@ -10,6 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
+import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
+
 public class AccountActivity extends AppCompatActivity {
 
     @Override
@@ -27,5 +29,6 @@ public class AccountActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        BottomNavigationManager.initialise(this);
     }
 }

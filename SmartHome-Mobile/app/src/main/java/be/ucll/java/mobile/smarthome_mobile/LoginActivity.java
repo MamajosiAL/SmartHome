@@ -28,6 +28,7 @@ import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.user.UserApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Login;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
+import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.ReceivedCookiesInterceptor;
 import okhttp3.Interceptor;
 import okhttp3.JavaNetCookieJar;
@@ -86,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<String>
                 login();
             }
         });
-        initialiseNavigation();
+        BottomNavigationManager.initialise(this);
     }
 
     private void login() {
@@ -116,39 +117,6 @@ public class LoginActivity extends AppCompatActivity implements Callback<String>
 
         Call<String> call = userApi.login(new Login(usernameString,passwordString), authHeader);
         call.enqueue(this);
-    }
-
-
-
-    private void initialiseNavigation () {
-        //initialise navigation variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-
-//        //set selected
-//        bottomNavigationView.setSelectedItemId(R.id.navManage);
-
-        //perform ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-
-                case R.id.navConsumption:
-                    startActivity(new Intent(getApplicationContext(), ConsumptionActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-
-                case R.id.navManage:
-                    startActivity(new Intent(getApplicationContext(), ManageActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-
-                case R.id.navHouses:
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-
-            }
-            return false;
-        });
     }
 
     @Override
