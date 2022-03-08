@@ -15,7 +15,7 @@ import retrofit2.http.Query;
 public interface HouseApiInterface {
     // For POST request
 
-    @POST("/house")
+    @POST("/house/create")
     Call<String> postHouse(@Body House house);
 
     // for GET request

@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements Callback<Stri
         name = findViewById(R.id.txtRegisterName);
         email = findViewById(R.id.txtRegisterEmail);
         password = findViewById(R.id.txtRegisterPassword);
-        register = findViewById(R.id.btnRegister);
+        register = findViewById(R.id.buttonAccount);
 
         // implement setOnClickListener event on sign up Button
         register.setOnClickListener(new View.OnClickListener() {

@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface UserApiInterface {
     // For POST request
-    @POST("/users")
+    @POST("/users/create")
     Call<String> postUser(@Body User user);
 
     // for GET request
