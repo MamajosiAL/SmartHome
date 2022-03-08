@@ -1,21 +1,31 @@
 package be.ucll.java.mobile.smarthome_mobile.util;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import be.ucll.java.mobile.smarthome_mobile.ConsumptionActivity;
+import be.ucll.java.mobile.smarthome_mobile.LoginActivity;
 import be.ucll.java.mobile.smarthome_mobile.MainActivity;
 import be.ucll.java.mobile.smarthome_mobile.ManageActivity;
 import be.ucll.java.mobile.smarthome_mobile.R;
+import be.ucll.java.mobile.smarthome_mobile.RegisterActivity;
 
-public class BottomNavigationManager {
+public class NavigationManager {
+    private static final String TAG = "NavigationManager";
     static BottomNavigationView bottomNavigationView;
+
+    private static void redirectToLogin(AppCompatActivity context) {
+        Toast.makeText(context, context.getText(R.string.redirectedToLogin), Toast.LENGTH_LONG).show();
+        Log.d(TAG, (String) context.getText(R.string.redirectedToLogin));
+
+        context.startActivity(new Intent(context, LoginActivity.class));
+        context.overridePendingTransition(0, 0);
+    }
 
     @SuppressLint("NonConstantResourceId")
     public static void initialise(AppCompatActivity context) {
@@ -58,5 +68,10 @@ public class BottomNavigationManager {
             }
             return false;
         });
+
+        //redirect if user is not logged and current context(Activity) is not equal to Register or Login
+        if ((!AuthorizationManager.getInstance(context).isSignedIn()) && !((context instanceof LoginActivity) || (context instanceof RegisterActivity))){
+            redirectToLogin(context);
+        }
     }
 }

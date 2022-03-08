@@ -1,12 +1,9 @@
 package be.ucll.java.mobile.smarthome_mobile;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,20 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
-import java.util.HashSet;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.user.UserApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Login;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
-import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
+import be.ucll.java.mobile.smarthome_mobile.util.NavigationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.ReceivedCookiesInterceptor;
-import okhttp3.Interceptor;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -75,6 +68,8 @@ public class LoginActivity extends AppCompatActivity implements Callback<String>
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        NavigationManager.initialise(this);
+
         // init the EditText and Button
         username = findViewById(R.id.txtLogInUsername);
         password = findViewById(R.id.txtLogInPassword);
@@ -87,7 +82,6 @@ public class LoginActivity extends AppCompatActivity implements Callback<String>
                 login();
             }
         });
-        BottomNavigationManager.initialise(this);
     }
 
     private void login() {

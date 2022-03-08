@@ -3,13 +3,10 @@ package be.ucll.java.mobile.smarthome_mobile;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
-import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
+import be.ucll.java.mobile.smarthome_mobile.util.NavigationManager;
 
 public class ManageActivity extends AppCompatActivity {
 
@@ -31,7 +28,7 @@ public class ManageActivity extends AppCompatActivity {
                     .replace(R.id.fragmentManage_container_view, body, null)
                     .commit();
 
-            BottomNavigationManager.initialise(this);
+            NavigationManager.initialise(this);
         }
     }
 }

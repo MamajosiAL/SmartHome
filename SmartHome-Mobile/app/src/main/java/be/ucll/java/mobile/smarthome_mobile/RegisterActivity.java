@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -19,7 +18,7 @@ import android.widget.Toast;
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.user.UserApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.pojo.User;
-import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
+import be.ucll.java.mobile.smarthome_mobile.util.NavigationManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,7 +38,8 @@ public class RegisterActivity extends AppCompatActivity implements Callback<Stri
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        BottomNavigationManager.initialise(this);
+
+        NavigationManager.initialise(this);
 
         // init the EditText and Button
         username = findViewById(R.id.txtRegisterusername);

@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
-import be.ucll.java.mobile.smarthome_mobile.util.BottomNavigationManager;
+import be.ucll.java.mobile.smarthome_mobile.util.NavigationManager;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -18,6 +18,9 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+
+        NavigationManager.initialise(this);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -29,6 +32,5 @@ public class AccountActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        BottomNavigationManager.initialise(this);
     }
 }
