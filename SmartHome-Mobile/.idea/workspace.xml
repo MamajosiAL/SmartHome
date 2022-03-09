@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d936c4c8-e92c-43b6-add8-b5b31189f0f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/SmartHome-Mobile.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/SmartHome-Mobile.app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/controller/HouseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/controller/HouseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/controller/House_UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/controller/House_UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/dto/HouseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/dto/HouseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/BeheerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/BeheerView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/ConsumptieView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/ConsumptieView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/HuisView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/HuisView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/RegisterView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/RegisterView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/RoomForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/RoomForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +27,34 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SmartHome-Mobile" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SmartHome-Mobile" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SmartHome-Mobile" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">

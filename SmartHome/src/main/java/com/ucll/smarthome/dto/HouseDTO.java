@@ -3,7 +3,9 @@ package com.ucll.smarthome.dto;
 public class HouseDTO {
     private long id;
     private String name;
-    private long userid;
+    private String username;
+    private boolean isowner;
+    private boolean isAdmin;
 
     public HouseDTO() {
     }
@@ -11,7 +13,26 @@ public class HouseDTO {
     private HouseDTO(Builder builder) {
         setId(builder.id);
         setName(builder.name);
-        setUserid(builder.userid);
+        setUsername(builder.username);
+        setIsowner(builder.isowner);
+        setAdmin(builder.isAdmin);
+    }
+
+
+    public boolean isIsowner() {
+        return isowner;
+    }
+
+    public void setIsowner(boolean isowner) {
+        this.isowner = isowner;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public long getId() {
@@ -30,18 +51,21 @@ public class HouseDTO {
         this.name = name;
     }
 
-    public long getUserid() {
-        return userid;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserid(long userid) {
-        this.userid = userid;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
 
     public static final class Builder {
         private long id;
         private String name;
-        private long userid;
+        private String username;
+        private boolean isowner;
+        private boolean isAdmin;
 
         public Builder() {
         }
@@ -56,8 +80,18 @@ public class HouseDTO {
             return this;
         }
 
-        public Builder userid(long val){
-            userid = val;
+        public Builder username(String val) {
+            username = val;
+            return this;
+        }
+
+        public Builder isowner(boolean val) {
+            isowner = val;
+            return this;
+        }
+
+        public Builder isAdmin(boolean val) {
+            isAdmin = val;
             return this;
         }
 

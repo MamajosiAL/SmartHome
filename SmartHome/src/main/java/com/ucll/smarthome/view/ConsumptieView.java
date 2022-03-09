@@ -23,7 +23,7 @@ public class ConsumptieView extends VerticalLayout {
 
     public void loadData() {
 
-        System.err.println("Autowiring failed");
+        //System.err.println("Autowiring failed");
 
     }
 }

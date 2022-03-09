@@ -17,6 +17,11 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
+import com.vaadin.flow.server.VaadinSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+
+import java.util.Locale;
 
 
 @Route("register")
@@ -24,7 +29,13 @@ import com.vaadin.flow.router.*;
 @CssImport("styles/main-view.css")
 public class RegisterView extends VerticalLayout {
 
+    @Autowired
     private final UserController userController;
+
+    @Autowired
+    private MessageSource msgSrc;
+    private Locale loc;
+
     private VerticalLayout vrl;
     private FormLayout registerForm;
     private H1 hTitel;
@@ -41,6 +52,8 @@ public class RegisterView extends VerticalLayout {
 
 
     public RegisterView() {
+        msgSrc = BeanUtil.getBean(MessageSource.class);
+        loc = VaadinSession.getCurrent().getLocale();
 
         userController = BeanUtil.getBean(UserController.class);
         vrl = new VerticalLayout();

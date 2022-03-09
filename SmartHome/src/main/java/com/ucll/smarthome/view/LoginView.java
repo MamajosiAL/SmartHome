@@ -2,6 +2,7 @@ package com.ucll.smarthome.view;
 
 import com.ucll.smarthome.controller.UserController;
 import com.ucll.smarthome.dto.UserDTO;
+import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -17,12 +18,21 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+
+import java.util.Locale;
 
 @Route("login")
 @PageTitle("login")
 @CssImport("styles/main-view.css")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
-    private final LoginForm login = new LoginForm();
+
+    @Autowired
+    private MessageSource msgSrc;
+    private Locale loc;
+
 
     private VerticalLayout vrl;
     private Button buttonRegister = new Button("Register");
@@ -30,6 +40,9 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
     private LoginForm frmLogin;
 
     public LoginView(){
+        msgSrc = BeanUtil.getBean(MessageSource.class);
+        loc = VaadinSession.getCurrent().getLocale();
+
         addClassName("login-view");
 
         i18n = LoginI18n.createDefault();
@@ -56,7 +69,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent){
         if(beforeEnterEvent.getLocation().getQueryParameters().getParameters().containsKey("error"))
         {
-            login.setError(true);
+            frmLogin.setError(true);
 
         }
     }

@@ -1,20 +1,17 @@
 package com.ucll.smarthome.view;
 
-import com.ucll.smarthome.controller.UserController;
+import com.ucll.smarthome.functions.BeanUtil;
+import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Html;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -22,20 +19,27 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinServletRequest;
-import liquibase.pro.packaged.I;
+import com.vaadin.flow.server.VaadinSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import javax.annotation.PostConstruct;
+import java.util.Locale;
 
-@Route("")
+@Route("main")
 @PageTitle("Home")
 @CssImport("styles/main-view.css")
 public class MainView extends AppLayout  implements BeforeEnterObserver{
+    @Autowired
+    private MessageSource msgSrc;
+    private Locale loc;
+    private final UserSecurityFunc sec;
+
     private HuisView hview;
     private ConsumptieView cView;
     private BeheerView bView;
 
-    private UserController userController;
     private Button logoutButton;
     private Tab tab1;
     private static final String tabname1 = "huizen";
@@ -44,7 +48,12 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
     private Tab tab3;
     private static final String tabname3 = "beheer";
     private Tabs tabs;
-    public MainView() {
+
+    public MainView(UserSecurityFunc sec) {
+        this.sec = sec;
+        msgSrc = BeanUtil.getBean(MessageSource.class);
+        loc = VaadinSession.getCurrent().getLocale();
+
         //misschien nog een + met de naam van de user
         H3 header = new H3("SmartHome van" );
         header.setId("header-layout");
@@ -93,7 +102,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
 
     @PostConstruct
     private void setMainViewContent() {
-        hview = new HuisView();
+        hview = new HuisView(sec);
         hview.loadData();
 
         cView = new ConsumptieView();
@@ -115,6 +124,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
 
     @Override
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent){
+
         //if(){
            // BeforeEnterEvent.rerouteTo("login");
         //}

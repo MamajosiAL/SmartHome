@@ -2,24 +2,24 @@ package com.ucll.smarthome.dto;
 
 public class House_UserDTO {
 
-    private long id;
+    private long houseid;
     private boolean isadmin;
 
     public House_UserDTO() {
     }
 
     private House_UserDTO(Builder builder) {
-        setId(builder.id);
+        setHouseid(builder.houseid);
         setIsadmin(builder.isadmin);
     }
 
 
-    public long getId() {
-        return id;
+    public long getHouseid() {
+        return houseid;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setHouseid(long houseid) {
+        this.houseid = houseid;
     }
 
     public boolean getIsadmin() {
@@ -32,14 +32,14 @@ public class House_UserDTO {
 
 
     public static final class Builder {
-        private long id;
+        private long houseid;
         private boolean isadmin;
 
         public Builder() {
         }
 
         public Builder id(long val) {
-            id = val;
+            houseid = val;
             return this;
         }
 

@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String LOGIN_FAILURE_URL = "/vaadin/login?error";
     private static final String LOGOUT_SUCCESS_URL = "/vaadin/login";
 
-    private static final String HOME_URL = "/vaadin/";
+    private static final String HOME_URL = "/vaadin/main";
     // pw encoder voor eventueel de in-memory Auth indien nodig
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserDetailService userDetailService;
@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and().authorizeRequests().antMatchers("/login").permitAll()
                 .and().logout().logoutUrl("/login/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID")
-                .and()
+                 .and()
                 .formLogin()
                 .loginPage(LOGIN_URL).permitAll()
                 .loginProcessingUrl(LOGIN_URL)
