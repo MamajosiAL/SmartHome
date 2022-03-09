@@ -267,7 +267,7 @@ class DeviceControllerTest extends AbstractIntegrationTest {
     @Test
     void deviceExists() {
         //TODO: Private?
-        throw new NotImplementedException("Still needs implementation");
+        throw new NotImplementedException("Still needs implementation - Private?");
     }
 
     @Test

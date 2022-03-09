@@ -3,8 +3,13 @@ package com.ucll.smarthome.controller;
 import com.ucll.smarthome.AbstractIntegrationTest;
 import com.ucll.smarthome.dto.HouseDTO;
 import com.ucll.smarthome.dto.UserDTO;
+import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.House;
+import com.ucll.smarthome.persistence.entities.House_User;
+import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
+import com.ucll.smarthome.persistence.repository.UserDAO;
+import com.vaadin.flow.router.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +30,15 @@ class HouseControllerTest extends AbstractIntegrationTest {
     @Autowired
     private HouseDAO houseDAO;
 
+    @Autowired
+    private House_UserController house_userController;
+
+    @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
+    private UserSecurityFunc userSecurityFunc;
+
     private UserDTO user1 = new UserDTO.Builder()
             .firstname("Testing")
             .name("User")
@@ -37,6 +51,8 @@ class HouseControllerTest extends AbstractIntegrationTest {
             .name("testHouse")
             .build();
 
+    House searchedHouse;
+
     @BeforeEach
     void setUp() {
         userController.createUser(user1);
@@ -44,6 +60,10 @@ class HouseControllerTest extends AbstractIntegrationTest {
 
     private void addHouse(){
         houseController.createHouse(testHouse1);
+
+        searchedHouse = houseDAO.findAll().stream()
+                .filter(p -> p.getName().equals(testHouse1.getName()))
+                .findFirst().get();
     }
 
     //Happy path create house
@@ -244,6 +264,7 @@ class HouseControllerTest extends AbstractIntegrationTest {
     void getHousesByUser() {
         addHouse();
 
+        testHouse1.setId(searchedHouse.getHouseId());
         assertTrue(houseController.getHousesByUser().contains(testHouse1));
     }
 
@@ -270,6 +291,8 @@ class HouseControllerTest extends AbstractIntegrationTest {
 
     @Test
     void deleteUserFromHouse() {
+        addHouse();
+
         UserDTO testUser2 = new UserDTO.Builder()
                 .firstname("Testing2")
                 .name("User2")
@@ -279,6 +302,16 @@ class HouseControllerTest extends AbstractIntegrationTest {
                 .build();
 
         userController.createUser(testUser2);
-        //TODO: Once addUserToHouse possible
+
+        User searchedUser = userDAO.findFirstByUsername(testUser2.getUsername()).get();
+        house_userController.createRegistratoinHouseUser(searchedHouse, searchedUser);
+
+        assertEquals(2, userController.getUsersByHouse(searchedHouse.getHouseId()).size());
+
+        House_User house_user = house_userController.getHouseUserByHouseAndUser(searchedHouse, searchedUser);
+        house_userController.deleteSingleHouseUser(house_user);
+
+        assertEquals(1, userController.getUsersByHouse(searchedHouse.getHouseId()).size());
     }
+
 }

@@ -107,7 +107,6 @@ public class ConsumptionDTO {
         return "ConsumptionDTO{" +
                 "consumptionId=" + consumptionId +
                 ", deviceId=" + deviceId +
-                ", startDatumEnTijd=" + startDatumEnTijd +
                 ", aantalMinuten=" + aantalMinuten +
                 ", unit='" + unit + '\'' +
                 ", consumptionPerHour=" + consumptionPerHour +
