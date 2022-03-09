@@ -28,13 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // authorization moet nog toegepast worden.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().and()
-                .cors()
-                .and().authorizeRequests().antMatchers("/login").permitAll()
-                .and().logout().logoutUrl("/login/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID")
+        http.httpBasic()
                 .and()
                 .csrf().disable();
     }
+
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

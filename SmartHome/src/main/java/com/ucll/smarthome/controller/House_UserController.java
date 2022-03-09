@@ -49,13 +49,12 @@ public class House_UserController {
         dao.save(hs);
     }
 
-    public void registerUserToHouseNotOwner(HouseDTO houseDTO) throws IllegalArgumentException{
+    public void registerUserToHouseNotOwner(HouseDTO houseDTO, String username) throws IllegalArgumentException{
         if (houseDTO == null ) throw new IllegalArgumentException("House is needed");
-        if (houseDTO.getId()<= 0L || houseDTO.getUserid() <= 0) throw new IllegalArgumentException("House id is missing");
 
         Optional<House> h = houseDAO.findById(houseDTO.getId());
         if (h.isEmpty()) throw new IllegalArgumentException("House couldn't be found");
-        Optional<User> u = userDAO.findById(houseDTO.getUserid());
+        Optional<User> u = userDAO.findUserByUsername(username);
         if (u.isEmpty())throw new IllegalArgumentException("User couldn't be found");
 
         House_User hs = new House_User.Builder().house(h.get()).user(u.get()).isAdmin(false).isOwner(false).build();
@@ -64,11 +63,12 @@ public class House_UserController {
 
 
 
-    public void updateRegistrationHouseUsser(House_UserDTO house_userDTO) throws IllegalArgumentException{
+    public void updateUserSetAdmin(House_UserDTO house_userDTO) throws IllegalArgumentException{
         if (house_userDTO.getId() <= 0) throw new  IllegalArgumentException("Invalid id");
-        House_User hs = houseUserExist(house_userDTO.getId());
+        House_User hs = houseUserExist(house_userDTO.getHouseid());
         if(userSecurityFunc.checkCurrentUserIsOwner(hs.getHouse().getHouseId())) throw new NotFoundException("logged in user is not owner of this house");
-        hs.setAdmin(house_userDTO.getIsadmin());
+        if(userDAO.findById(house_userDTO.getUserid()).isEmpty()) throw new org.webjars.NotFoundException("User you are trying to add not found.");
+        hs.setAdmin(house_userDTO.isIsadmin());
     }
 
     /**

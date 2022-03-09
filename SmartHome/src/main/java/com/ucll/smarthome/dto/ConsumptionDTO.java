@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 public class ConsumptionDTO {
     private Long consumptionId;
     private Long deviceId;
-    private LocalDateTime startDatumEnTijd;
     private int aantalMinuten;
     private String unit;
     private double consumptionPerHour;
@@ -16,7 +15,6 @@ public class ConsumptionDTO {
     public ConsumptionDTO(Builder builder) {
         setConsumptionId(builder.consumptionId);
         setDeviceId(builder.deviceId);
-        setStartDatumEnTijd(builder.startDatumEnTijd);
         setAantalMinuten(builder.aantalMinuten);
         setUnit(builder.unit);
         setConsumptionPerHour(builder.consumptionPerHour);
@@ -36,14 +34,6 @@ public class ConsumptionDTO {
 
     public void setDeviceId(long deviceId) {
         this.deviceId = deviceId;
-    }
-
-    public LocalDateTime getStartDatumEnTijd() {
-        return startDatumEnTijd;
-    }
-
-    public void setStartDatumEnTijd(LocalDateTime startDatumEnTijd) {
-        this.startDatumEnTijd = startDatumEnTijd;
     }
 
     public int getAantalMinuten() {
@@ -77,7 +67,6 @@ public class ConsumptionDTO {
     public static final class Builder {
         private Long consumptionId;
         private Long deviceId;
-        private LocalDateTime startDatumEnTijd;
         private int aantalMinuten;
         private String unit;
         private double consumptionPerHour;
@@ -91,11 +80,6 @@ public class ConsumptionDTO {
 
         public Builder device(Long val){
             deviceId = val;
-            return this;
-        }
-
-        public Builder startDatumEnTijd(LocalDateTime val){
-            startDatumEnTijd = val;
             return this;
         }
 
