@@ -51,7 +51,6 @@ public class House_UserController {
 
     public void registerUserToHouseNotOwner(HouseDTO houseDTO, String username) throws IllegalArgumentException{
         if (houseDTO == null ) throw new IllegalArgumentException("House is needed");
-        if (houseDTO.getId()<= 0L || houseDTO.getUserid() <= 0) throw new IllegalArgumentException("House id is missing");
 
         Optional<House> h = houseDAO.findById(houseDTO.getId());
         if (h.isEmpty()) throw new IllegalArgumentException("House couldn't be found");
