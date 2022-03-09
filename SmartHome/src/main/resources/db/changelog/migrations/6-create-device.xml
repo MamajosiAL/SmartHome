@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="6" author="Mathias Clement">
+        <createTable tableName="device" schemaName="smarthome">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+            <column name="room_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_id" type="bigint"/>
+            <column name="program_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="tempature" type="decimal">
+                <constraints nullable="true"/>
+            </column>
+            <column name="programme" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="timer" type="time">
+                <constraints nullable="true"/>
+            </column>
+            <column name="volume" type="integer">
+                <constraints nullable="true"/>
+            </column>
+            <column name="sensortype" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="sensordata" type="decimal">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+        <addForeignKeyConstraint baseTableName="device"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="category_id"
+                                 constraintName="fk_category"
+                                 referencedTableName="category"
+                                 referencedColumnNames="id"
+                                 referencedTableSchemaName="smarthome"
+        />
+        <addForeignKeyConstraint baseTableName="device"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="room_id"
+                                 constraintName="fk_room"
+                                 referencedTableName="room"
+                                 referencedColumnNames="roomid"
+                                 referencedTableSchemaName="smarthome"
+        />
+
+    </changeSet>
+</databaseChangeLog>

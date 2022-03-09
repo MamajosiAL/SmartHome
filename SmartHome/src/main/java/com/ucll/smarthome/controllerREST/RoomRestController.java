@@ -23,7 +23,7 @@ public class RoomRestController {
         this.roomController = roomController;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createRoom(@RequestBody RoomDTO roomDTO){
 
         try {
@@ -37,7 +37,8 @@ public class RoomRestController {
         }
 
     }
-    @PutMapping
+
+    @PutMapping("/update")
     public ResponseEntity updateRoom( @RequestBody RoomDTO roomDTO){
         try {
             roomController.updateRoom(roomDTO);
@@ -73,7 +74,7 @@ public class RoomRestController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity deleteRoom(@PathVariable("id") long id ){
 
         try {

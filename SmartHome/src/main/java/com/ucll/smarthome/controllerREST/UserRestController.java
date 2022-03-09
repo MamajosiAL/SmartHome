@@ -4,6 +4,7 @@ import com.ucll.smarthome.controller.House_UserController;
 import com.ucll.smarthome.controller.UserController;
 import com.ucll.smarthome.dto.UserDTO;
 import com.vaadin.flow.router.NotFoundException;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class UserRestController {
         this.house_userController = house_userController;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createUser(@RequestBody UserDTO userDTO){
         try {
             userController.createUser(userDTO);
@@ -37,7 +38,7 @@ public class UserRestController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity updateUser( @RequestBody UserDTO userDTO){
         try {
 
@@ -47,6 +48,17 @@ public class UserRestController {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }catch (NotFoundException ex ){
             return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("user")
+    public ResponseEntity getUser(){
+        try{
+            return new ResponseEntity(userController.getUser(), HttpStatus.OK);
+        }catch (IllegalArgumentException ex){
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException ex){
+            return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -76,7 +88,7 @@ public class UserRestController {
         }
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete")
     public ResponseEntity deleteUser(){
         try {
             userController.deleteUser();

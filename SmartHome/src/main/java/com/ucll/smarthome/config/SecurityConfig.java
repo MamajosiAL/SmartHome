@@ -34,7 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and()
-                .authorizeRequests()
+                .cors()
+                .and().authorizeRequests().antMatchers("/login").permitAll()
+                .and().logout().logoutUrl("/login/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID")
                 .and()
                 .formLogin()
                 .loginPage(LOGIN_URL).permitAll()

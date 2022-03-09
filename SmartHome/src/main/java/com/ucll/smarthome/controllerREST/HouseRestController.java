@@ -26,7 +26,7 @@ public class HouseRestController {
         this.house_userController = house_userController;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createHouse(@RequestBody HouseDTO houseDTO){
 
         try {
@@ -37,8 +37,17 @@ public class HouseRestController {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+    @PostMapping("/register")
+    public ResponseEntity registerUserToHouseNotOwner(@RequestBody HouseDTO houseDTO){
+        try{
+            house_userController.registerUserToHouseNotOwner(houseDTO);
+            return new ResponseEntity("User successfully added to your house", HttpStatus.OK);
+        }catch (IllegalArgumentException ex){
+            return new ResponseEntity(ex.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 
-    @PutMapping("/isadmin")
+    @PutMapping("/setadmin")
     public ResponseEntity updateUseIsAdmin(@RequestBody House_UserDTO house_userDTO){
         try {
             house_userController.updateRegistrationHouseUsser(house_userDTO);
@@ -50,8 +59,7 @@ public class HouseRestController {
         }
     }
 
-
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity updateHouse( @RequestBody HouseDTO houseDTO){
         try {
             houseController.updateHouse(houseDTO);
