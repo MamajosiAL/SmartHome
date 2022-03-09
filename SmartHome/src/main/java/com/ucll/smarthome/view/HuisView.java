@@ -80,7 +80,7 @@ public class HuisView extends VerticalLayout {
                  role.getElement().getStyle().set("color", "green");
             }else if (houseDTO.isAdmin()){
                  role.setText("Admin");
-                 role.getElement().getStyle().set("color", "green");
+                 role.getElement().getStyle().set("color", "Orange");
             }else{
                 role.setText("Gebruiker");
             }
@@ -129,10 +129,8 @@ public class HuisView extends VerticalLayout {
 
     private void handleClickCancel(ClickEvent<Button> e) {
         grid.asSingleSelect().clear();
-        hfrm.resetForm();
-        btnCreate.setVisible(true);
-        btnUpdate.setVisible(false);
-        btnDelete.setVisible(false);
+
+        setButtonsToDefault();
     }
 
     private void handleClickCreate(ClickEvent<Button> e) {
@@ -202,7 +200,14 @@ public class HuisView extends VerticalLayout {
 
     }
 
+    private void setButtonsToDefault(){
+        hfrm.resetForm();
+        btnCreate.setVisible(true);
+        btnUpdate.setVisible(false);
+        btnDelete.setVisible(false);
+    }
     private void populateHouseForm(HouseDTO houseDTO){
+        setButtonsToDefault();
         if (houseDTO != null){
             if(sec.checkCurrentUserIsAdmin(houseDTO.getId())){
                 btnCreate.setVisible(false);
@@ -210,9 +215,10 @@ public class HuisView extends VerticalLayout {
                 if (sec.checkCurrentUserIsOwner(houseDTO.getId())){
                     btnDelete.setVisible(true);
                 }
+                hfrm.lblId.setText("" + houseDTO.getId());
+                hfrm.txtnaamhuis.setValue(houseDTO.getName());
             }
-            hfrm.lblId.setText("" + houseDTO.getId());
-            hfrm.txtnaamhuis.setValue(houseDTO.getName());
+
         }
 
     }
