@@ -2,11 +2,9 @@ package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.AbstractIntegrationTest;
 import com.ucll.smarthome.dto.*;
-import com.ucll.smarthome.persistence.entities.Audio;
 import com.ucll.smarthome.persistence.entities.Device;
 import com.ucll.smarthome.persistence.entities.House;
 import com.ucll.smarthome.persistence.entities.Room;
-import com.ucll.smarthome.persistence.repository.AudioDAO;
 import com.ucll.smarthome.persistence.repository.DeviceDAO;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.RoomDAO;
@@ -123,32 +121,163 @@ class DeviceControllerTest extends AbstractIntegrationTest {
     }
 
     @Test
+    void createDeviceNameEmpty() {
+        addBeforeTest();
+
+        DeviceDTO createDeviceDTO = new DeviceDTO.Builder()
+                .name("")
+                .status(false)
+                .roomid(searchedRoom.getRoomID())
+                //.categoryid()
+                .build();
+
+        assertThrows(IllegalArgumentException.class, () -> deviceController.createDevice(createDeviceDTO));
+    }
+
+    @Test
+    void createDeviceNameNull() {
+        addBeforeTest();
+
+        DeviceDTO createDeviceDTO = new DeviceDTO.Builder()
+                .name("")
+                .status(false)
+                .roomid(searchedRoom.getRoomID())
+                //.categoryid()
+                .build();
+
+        assertThrows(IllegalArgumentException.class, () -> deviceController.createDevice(createDeviceDTO));
+    }
+    
+    @Test
+    void createDeviceNameSpace() {
+        addBeforeTest();
+
+        DeviceDTO createDeviceDTO = new DeviceDTO.Builder()
+                .name(" ")
+                .status(false)
+                .roomid(searchedRoom.getRoomID())
+                //.categoryid()
+                .build();
+
+        assertThrows(IllegalArgumentException.class, () -> deviceController.createDevice(createDeviceDTO));
+    }
+
+
+    @Test
     void updateDevice() {
-        throw new NotImplementedException("Still needs implementation");
+        addBeforeTest();
+
+        DeviceDTO updatedDevice = new DeviceDTO.Builder()
+                .id(searchedDevice.getId())
+                .name("UpdatedDevice")
+                .status(false)
+                .roomid(searchedRoom.getRoomID())
+                .build();
+
+        deviceController.updateDevice(updatedDevice);
+
+        Device updatedDeviceDao = deviceDAO.findAll().stream()
+                .filter(p -> p.getName().equals(updatedDevice.getName()))
+                .findFirst().get();
+
+        assertEquals(updatedDevice.getName(), updatedDeviceDao.getName());
+    }
+
+    @Test
+    void updateDeviceEmptyName() {
+        addBeforeTest();
+
+        DeviceDTO updatedDevice = new DeviceDTO.Builder()
+                .id(searchedDevice.getId())
+                .name("")
+                .status(false)
+                .roomid(searchedRoom.getRoomID())
+                .build();
+        
+        assertThrows(IllegalArgumentException.class, () -> deviceController.updateDevice(updatedDevice));
+    }
+
+    @Test
+    void updateDeviceNameSpace() {
+        addBeforeTest();
+
+        DeviceDTO updatedDevice = new DeviceDTO.Builder()
+                .id(searchedDevice.getId())
+                .name(" ")
+                .status(false)
+                .roomid(searchedRoom.getRoomID())
+                .build();
+
+        assertThrows(IllegalArgumentException.class, () -> deviceController.updateDevice(updatedDevice));
+    }
+
+    @Test
+    void updateDeviceNameNull() {
+        addBeforeTest();
+
+        DeviceDTO updatedDevice = new DeviceDTO.Builder()
+                .id(searchedDevice.getId())
+                .name(null)
+                .status(false)
+                .roomid(searchedRoom.getRoomID())
+                .build();
+
+        assertThrows(IllegalArgumentException.class, () -> deviceController.updateDevice(updatedDevice));
     }
 
     @Test
     void getDeviceById() {
-        throw new NotImplementedException("Still needs implementation");
+        addBeforeTest();
+        assertEquals(searchedDevice.getName(), deviceController.getDeviceById(searchedDevice.getId()).getName());
+    }
+
+    @Test
+    void getDeviceById0() {
+        addBeforeTest();
+        assertEquals(searchedDevice.getName(), deviceController.getDeviceById(searchedDevice.getId()).getName());
+
+        assertThrows(IllegalArgumentException.class, () -> deviceController.getDeviceById(0));
+    }
+
+    @Test
+    void getDeviceByIdNegative() {
+        addBeforeTest();
+
+        assertThrows(IllegalArgumentException.class, () -> deviceController.getDeviceById(-12));
     }
 
     @Test
     void getDevicdsByRoom() {
-        throw new NotImplementedException("Still needs implementation");
+        addBeforeTest();
+
+        assertEquals(1, deviceController.getDevicdsByRoom(searchedRoom.getRoomID()).size());
+        assertEquals(deviceController.getDevicdsByRoom(searchedRoom.getRoomID()).get(0).getName(), deviceDTO.getName());
+        assertEquals(deviceController.getDevicdsByRoom(searchedRoom.getRoomID()).get(0).getId(), searchedDevice.getId());
     }
 
     @Test
-    void deleteDeviceById() {
-        throw new NotImplementedException("Still needs implementation");
+    void deleteDevice() {
+        addBeforeTest();
+
+        deviceController.deleteDeviceById(searchedDevice.getId());
+
+        assertEquals(0, deviceController.getDevicdsByRoom(searchedRoom.getRoomID()).size());
     }
 
     @Test
     void deviceExists() {
+        //TODO: Private?
         throw new NotImplementedException("Still needs implementation");
     }
 
     @Test
     void changeStatus() {
-        throw new NotImplementedException("Still needs implementation");
+        addBeforeTest();
+
+        assertFalse(deviceController.getDeviceById(searchedDevice.getId()).isStatus());
+
+        deviceController.changeStatus(searchedDevice.getId());
+
+        assertTrue(deviceController.getDeviceById(searchedDevice.getId()).isStatus());
     }
 }

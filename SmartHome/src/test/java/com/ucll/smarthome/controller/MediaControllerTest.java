@@ -1,17 +1,16 @@
 package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.AbstractIntegrationTest;
-import com.ucll.smarthome.dto.AudioDTO;
 import com.ucll.smarthome.dto.HouseDTO;
+import com.ucll.smarthome.dto.MediaDTO;
 import com.ucll.smarthome.dto.RoomDTO;
 import com.ucll.smarthome.dto.UserDTO;
-import com.ucll.smarthome.persistence.entities.Audio;
 import com.ucll.smarthome.persistence.entities.House;
+import com.ucll.smarthome.persistence.entities.MediaDevice;
 import com.ucll.smarthome.persistence.entities.Room;
-import com.ucll.smarthome.persistence.repository.AudioDAO;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
+import com.ucll.smarthome.persistence.repository.MediaDAO;
 import com.ucll.smarthome.persistence.repository.RoomDAO;
-import com.ucll.smarthome.persistence.repository.TypeDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import static org.junit.jupiter.api.Assertions.*;
 
 @WithUserDetails(setupBefore = TestExecutionEvent.TEST_EXECUTION, value = "TestUser", userDetailsServiceBeanName = "UserDetailService")
-class AudioControllerTest extends AbstractIntegrationTest {
+class MediaControllerTest extends AbstractIntegrationTest {
     @Autowired
     private HouseController houseController;
 
@@ -32,7 +31,7 @@ class AudioControllerTest extends AbstractIntegrationTest {
     private RoomController roomController;
 
     @Autowired
-    private AudioController audioController;
+    private MediaController mediaController;
 
     @Autowired
     private HouseDAO houseDAO;
@@ -41,7 +40,7 @@ class AudioControllerTest extends AbstractIntegrationTest {
     private RoomDAO roomDAO;
 
     @Autowired
-    private AudioDAO audioDAO;
+    private MediaDAO mediaDAO;
 
     private UserDTO user1 = new UserDTO.Builder()
             .firstname("Testing")
@@ -59,7 +58,7 @@ class AudioControllerTest extends AbstractIntegrationTest {
             .name("testRoom")
             .build();
 
-    private AudioDTO audioDTO = new AudioDTO.Builder()
+    private MediaDTO mediaDTO = new MediaDTO.Builder()
             .name("SpeakersWoonkamer")
             .status(false)
             .volume(10)
@@ -67,7 +66,7 @@ class AudioControllerTest extends AbstractIntegrationTest {
 
     private House searchedHouse;
     private Room searchedRoom;
-    private Audio searchedAudio;
+    private MediaDevice mediaDevice;
 
     @BeforeEach
     void setUp() {
@@ -88,133 +87,133 @@ class AudioControllerTest extends AbstractIntegrationTest {
                 .filter(p -> p.getName().equals(testRoom.getName()))
                 .findFirst().get();
 
-        audioDTO.setRoomid(searchedRoom.getRoomID());
-        audioController.createAudioDevice(audioDTO);
+        mediaDTO.setRoomid(searchedRoom.getRoomID());
+        mediaController.createAudioDevice(mediaDTO);
 
-        searchedAudio = audioDAO.findAllByRoom(searchedRoom).stream().findFirst().get();
+        mediaDevice = mediaDAO.findAllByRoom(searchedRoom).stream().findFirst().get();
 
         System.out.println("House created name: " + searchedHouse.getName());
         System.out.println("Room created name: " + searchedRoom.getName());
-        System.out.println("Audio device created name: " + searchedAudio.getName());
+        System.out.println("Audio device created name: " + mediaDevice.getName());
     }
 
     @Test
     void createAudioDevice() {
         addBeforeTest();
 
-        AudioDTO createAudioDTO = new AudioDTO.Builder()
+        MediaDTO createMediaDTO = new MediaDTO.Builder()
                 .name("SpeakersWoonkamer")
                 .status(false)
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        audioController.createAudioDevice(createAudioDTO);
+        mediaController.createAudioDevice(createMediaDTO);
 
-        assertEquals(audioDAO.findAll().size(), 2);
+        assertEquals(mediaDAO.findAll().size(), 2);
     }
 
     @Test
     void createAudioDeviceNull() {
         addBeforeTest();
 
-        AudioDTO createAudioDTO = null;
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(createAudioDTO));
+        MediaDTO createMediaDTO = null;
+        assertThrows(IllegalArgumentException.class, () -> mediaController.createAudioDevice(createMediaDTO));
     }
 
     @Test
     void createAudioDeviceNameSpace() {
         addBeforeTest();
 
-        AudioDTO createAudioDTO = new AudioDTO.Builder()
+        MediaDTO createMediaDTO = new MediaDTO.Builder()
                 .name("")
                 .status(false)
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(createAudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.createAudioDevice(createMediaDTO));
     }
 
     @Test
     void createAudioDeviceNameEmpty() {
         addBeforeTest();
 
-        AudioDTO createAudioDTO = new AudioDTO.Builder()
+        MediaDTO createMediaDTO = new MediaDTO.Builder()
                 .name("")
                 .status(false)
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(createAudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.createAudioDevice(createMediaDTO));
     }
 
     @Test
     void createAudioDeviceNameNull() {
         addBeforeTest();
 
-        AudioDTO createAudioDTO = new AudioDTO.Builder()
+        MediaDTO createMediaDTO = new MediaDTO.Builder()
                 .name(null)
                 .status(false)
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(createAudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.createAudioDevice(createMediaDTO));
     }
 
     @Test
     void createAudioDeviceStatusEmpty() {
         addBeforeTest();
 
-        AudioDTO createAudioDTO = new AudioDTO.Builder()
+        MediaDTO createMediaDTO = new MediaDTO.Builder()
                 .name("SpeakerWoonKamer")
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(createAudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.createAudioDevice(createMediaDTO));
     }
 
     @Test
     void createAudioDeviceVolumeNegative() {
         addBeforeTest();
 
-        AudioDTO createAudioDTO = new AudioDTO.Builder()
+        MediaDTO createMediaDTO = new MediaDTO.Builder()
                 .name("SpeakerWoonKamer")
                 .status(false)
                 .volume(-10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(createAudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.createAudioDevice(createMediaDTO));
     }
 
     @Test
     void createAudioDeviceVolumeNull() {
         addBeforeTest();
 
-        AudioDTO createAudioDTO = new AudioDTO.Builder()
+        MediaDTO createMediaDTO = new MediaDTO.Builder()
                 .name("SpeakerWoonKamer")
                 .status(false)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(createAudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.createAudioDevice(createMediaDTO));
     }
 
     @Test
     void createAudioDeviceRoomIdNull() {
         addBeforeTest();
 
-        AudioDTO createAudioDTO = new AudioDTO.Builder()
+        MediaDTO createMediaDTO = new MediaDTO.Builder()
                 .name("SpeakerWoonKamer")
                 .status(false)
                 .volume(10)
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(createAudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.createAudioDevice(createMediaDTO));
     }
 
     @Test
@@ -223,63 +222,65 @@ class AudioControllerTest extends AbstractIntegrationTest {
 
         String alteredName = "AlteredSpeakerWoonKamer";
 
-        AudioDTO updateaudioDTO = new AudioDTO.Builder()
-                .id(searchedAudio.getId())
+        MediaDTO updateaudioDTO = new MediaDTO.Builder()
+                .id(mediaDevice.getId())
                 .name(alteredName)
                 .status(false)
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        searchedAudio = audioDAO.findAllByRoom(searchedRoom).stream().findFirst().get();
+        mediaController.updateAudioDevice(updateaudioDTO);
 
-        assertEquals(searchedAudio.getName(), updateaudioDTO.getName());
-        assertNotEquals(searchedAudio.getName(), audioDTO.getName());
+        mediaDevice = mediaDAO.findAllByRoom(searchedRoom).stream().findFirst().get();
+
+        assertEquals(mediaDevice.getName(), updateaudioDTO.getName());
+        assertNotEquals(mediaDevice.getName(), mediaDTO.getName());
     }
 
     @Test
     void updateAudioDeviceNameNull() {
         addBeforeTest();
 
-        AudioDTO updateaudioDTO = new AudioDTO.Builder()
-                .id(searchedAudio.getId())
+        MediaDTO updateaudioDTO = new MediaDTO.Builder()
+                .id(mediaDevice.getId())
                 .name(null)
                 .status(false)
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(updateaudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.updateAudioDevice(updateaudioDTO));
     }
 
     @Test
     void updateAudioDeviceNameSpace() {
         addBeforeTest();
 
-        AudioDTO updateaudioDTO = new AudioDTO.Builder()
-                .id(searchedAudio.getId())
+        MediaDTO updateaudioDTO = new MediaDTO.Builder()
+                .id(mediaDevice.getId())
                 .name(" ")
                 .status(false)
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(updateaudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.updateAudioDevice(updateaudioDTO));
     }
 
     @Test
     void updateAudioDeviceNameEmpty() {
         addBeforeTest();
 
-        AudioDTO updateaudioDTO = new AudioDTO.Builder()
-                .id(searchedAudio.getId())
+        MediaDTO updateaudioDTO = new MediaDTO.Builder()
+                .id(mediaDevice.getId())
                 .name("")
                 .status(false)
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(updateaudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.updateAudioDevice(updateaudioDTO));
     }
 
     @Test
@@ -288,14 +289,14 @@ class AudioControllerTest extends AbstractIntegrationTest {
 
         String alteredName = "AlteredSpeakerWoonKamer";
 
-        AudioDTO updateaudioDTO = new AudioDTO.Builder()
-                .id(searchedAudio.getId())
+        MediaDTO updateaudioDTO = new MediaDTO.Builder()
+                .id(mediaDevice.getId())
                 .name(alteredName)
                 .volume(10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(updateaudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.updateAudioDevice(updateaudioDTO));
     }
 
     @Test
@@ -304,14 +305,14 @@ class AudioControllerTest extends AbstractIntegrationTest {
 
         String alteredName = "AlteredSpeakerWoonKamer";
 
-        AudioDTO updateaudioDTO = new AudioDTO.Builder()
-                .id(searchedAudio.getId())
+        MediaDTO updateaudioDTO = new MediaDTO.Builder()
+                .id(mediaDevice.getId())
                 .name(alteredName)
                 .volume(-10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(updateaudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.updateAudioDevice(updateaudioDTO));
     }
 
     @Test
@@ -320,14 +321,14 @@ class AudioControllerTest extends AbstractIntegrationTest {
 
         String alteredName = "AlteredSpeakerWoonKamer";
 
-        AudioDTO updateaudioDTO = new AudioDTO.Builder()
+        MediaDTO updateaudioDTO = new MediaDTO.Builder()
                 .id(0)
                 .name(alteredName)
                 .volume(-10)
                 .roomid(searchedRoom.getRoomID())
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(updateaudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.updateAudioDevice(updateaudioDTO));
     }
 
     @Test
@@ -336,62 +337,63 @@ class AudioControllerTest extends AbstractIntegrationTest {
 
         String alteredName = "AlteredSpeakerWoonKamer";
 
-        AudioDTO updateaudioDTO = new AudioDTO.Builder()
-                .id(searchedAudio.getId())
+        MediaDTO updateaudioDTO = new MediaDTO.Builder()
+                .id(mediaDevice.getId())
                 .name(alteredName)
                 .volume(-10)
                 .roomid(0)
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.createAudioDevice(updateaudioDTO));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.updateAudioDevice(updateaudioDTO));
     }
 
     @Test
     void getAudioDeviceById() {
         addBeforeTest();
-        assertEquals(searchedAudio.getName(), audioController.getAudioDeviceById(searchedAudio.getId()).getName());
+        assertEquals(mediaDevice.getName(), mediaController.getAudioDeviceById(mediaDevice.getId()).getName());
     }
 
     @Test
     void getAudioDeviceById0() {
         addBeforeTest();
-        assertEquals(searchedAudio.getName(), audioController.getAudioDeviceById(searchedAudio.getId()).getName());
+        assertEquals(mediaDevice.getName(), mediaController.getAudioDeviceById(mediaDevice.getId()).getName());
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.getAudioDeviceById(0));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.getAudioDeviceById(0));
     }
 
     @Test
     void getAudioDeviceByIdNegative() {
         addBeforeTest();
 
-        assertThrows(IllegalArgumentException.class, () -> audioController.getAudioDeviceById(-12));
+        assertThrows(IllegalArgumentException.class, () -> mediaController.getAudioDeviceById(-12));
     }
 
     @Test
     void getAdioDevicesByRoom() {
         addBeforeTest();
 
-        assertEquals(1, audioController.getAdioDevicesByRoom(searchedRoom.getRoomID()).size());
-        assertTrue(audioController.getAdioDevicesByRoom(searchedRoom.getRoomID()).contains(audioDTO));
+        assertEquals(1, mediaController.getAdioDevicesByRoom(searchedRoom.getRoomID()).size());
+        assertEquals(mediaController.getAdioDevicesByRoom(mediaDevice.getRoom().getRoomID()).get(0).getName(), mediaDTO.getName());
+        assertEquals(mediaController.getAdioDevicesByRoom(mediaDevice.getRoom().getRoomID()).get(0).getId(), mediaDevice.getId());
     }
 
     @Test
     void deleteAudioDevice() {
         addBeforeTest();
 
-        audioController.deleteAudioDevice(searchedAudio.getId());
+        mediaController.deleteAudioDevice(mediaDevice.getId());
 
-        assertEquals(0, audioController.getAdioDevicesByRoom(searchedRoom.getRoomID()).size());
+        assertEquals(0, mediaController.getAdioDevicesByRoom(searchedRoom.getRoomID()).size());
     }
 
     @Test
     void changeStatus() {
         addBeforeTest();
 
-        assertFalse(audioController.getAudioDeviceById(searchedAudio.getId()).isStatus());
+        assertFalse(mediaController.getAudioDeviceById(mediaDevice.getId()).isStatus());
 
-        audioController.changeStatus(searchedAudio.getId());
+        mediaController.changeStatus(mediaDevice.getId());
 
-        assertTrue(audioController.getAudioDeviceById(searchedAudio.getId()).isStatus());
+        assertTrue(mediaController.getAudioDeviceById(mediaDevice.getId()).isStatus());
     }
 }
