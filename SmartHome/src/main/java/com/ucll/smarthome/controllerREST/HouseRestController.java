@@ -38,9 +38,9 @@ public class HouseRestController {
         }
     }
     @PostMapping("/register/{username}")
-    public ResponseEntity registerUserToHouseNotOwner(@RequestBody HouseDTO houseDTO, @PathVariable String username){
+    public ResponseEntity registerUserToHouseNotOwner(@RequestBody HouseDTO houseDTO){
         try{
-            house_userController.registerUserToHouseNotOwner(houseDTO,username);
+            house_userController.registerUserToHouseNotOwner(houseDTO);
             return new ResponseEntity("User successfully added to your house", HttpStatus.OK);
         }catch (IllegalArgumentException ex){
             return new ResponseEntity(ex.getMessage(),HttpStatus.BAD_REQUEST);

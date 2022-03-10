@@ -64,7 +64,7 @@ public class House_UserController {
 
 
 
-    public void updateRegistrationHouseUsser(House_UserDTO house_userDTO) throws IllegalArgumentException{
+    public void updateUserSetAdmin(House_UserDTO house_userDTO) throws IllegalArgumentException{
         if (house_userDTO.getHouseid() <= 0) throw new  IllegalArgumentException("Invalid id");
         Optional<House> house = houseDAO.findById(house_userDTO.getHouseid());
         Optional<User> user = userDAO.findById(userSecurityFunc.getLoggedInUserId());
