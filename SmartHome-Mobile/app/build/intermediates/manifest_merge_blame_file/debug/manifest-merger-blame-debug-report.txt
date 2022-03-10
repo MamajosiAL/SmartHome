@@ -1,0 +1,102 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="be.ucll.java.mobile.smarthome_mobile"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="30"
+8-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:5:5-67
+11-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:5:22-64
+12
+13    <application
+13-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:7:5-38:19
+14        android:allowBackup="true"
+14-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:8:9-35
+15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+15-->[androidx.core:core:1.5.0-rc01] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\b768552652cd4950cc23d133ad313992\core-1.5.0-rc01\AndroidManifest.xml:24:18-86
+16        android:debuggable="true"
+17        android:icon="@mipmap/ic_launcher"
+17-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:9:9-43
+18        android:label="@string/app_name"
+18-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:10:9-41
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:11:9-54
+20        android:supportsRtl="true"
+20-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:12:9-35
+21        android:testOnly="true"
+22        android:theme="@style/Theme.SmartHomeMobile"
+22-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:13:9-53
+23        android:usesCleartextTraffic="true" >
+23-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:14:9-44
+24        <activity android:name="be.ucll.java.mobile.smarthome_mobile.AddHouseActivity" />
+24-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:15:9-63
+24-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:15:19-51
+25        <activity
+25-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:16:9-19:72
+26            android:name="be.ucll.java.mobile.smarthome_mobile.LogOutActivity"
+26-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:17:13-43
+27            android:label="@string/title_activity_log_out"
+27-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:18:13-59
+28            android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />
+28-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:19:13-69
+29        <activity
+29-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:20:9-23:72
+30            android:name="be.ucll.java.mobile.smarthome_mobile.AccountActivity"
+30-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:21:13-44
+31            android:label="@string/title_activity_account"
+31-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:22:13-59
+32            android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />
+32-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:23:13-69
+33        <activity
+33-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:24:9-27:72
+34            android:name="be.ucll.java.mobile.smarthome_mobile.LoginActivity"
+34-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:25:13-42
+35            android:label="@string/title_activity_login"
+35-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:26:13-57
+36            android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />
+36-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:27:13-69
+37        <activity android:name="be.ucll.java.mobile.smarthome_mobile.ManageActivity" />
+37-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:28:9-52
+37-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:28:19-49
+38        <activity android:name="be.ucll.java.mobile.smarthome_mobile.ConsumptionActivity" />
+38-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:29:9-57
+38-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:29:19-54
+39        <activity android:name="be.ucll.java.mobile.smarthome_mobile.RegisterActivity" />
+39-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:30:9-54
+39-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:30:19-51
+40        <activity android:name="be.ucll.java.mobile.smarthome_mobile.MainActivity" >
+40-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:31:9-37:20
+40-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:31:19-47
+41            <intent-filter>
+41-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:32:13-36:29
+42                <action android:name="android.intent.action.MAIN" />
+42-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:33:17-69
+42-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:33:25-66
+43
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:35:17-77
+44-->D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:35:27-74
+45            </intent-filter>
+46        </activity>
+47
+48        <uses-library
+48-->[androidx.window:window:1.0.0] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\3237aa73c706094762f1bfd566ad1b67\window-1.0.0\AndroidManifest.xml:25:9-27:40
+49            android:name="androidx.window.extensions"
+49-->[androidx.window:window:1.0.0] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\3237aa73c706094762f1bfd566ad1b67\window-1.0.0\AndroidManifest.xml:26:13-54
+50            android:required="false" />
+50-->[androidx.window:window:1.0.0] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\3237aa73c706094762f1bfd566ad1b67\window-1.0.0\AndroidManifest.xml:27:13-37
+51        <uses-library
+51-->[androidx.window:window:1.0.0] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\3237aa73c706094762f1bfd566ad1b67\window-1.0.0\AndroidManifest.xml:28:9-30:40
+52            android:name="androidx.window.sidecar"
+52-->[androidx.window:window:1.0.0] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\3237aa73c706094762f1bfd566ad1b67\window-1.0.0\AndroidManifest.xml:29:13-51
+53            android:required="false" />
+53-->[androidx.window:window:1.0.0] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\3237aa73c706094762f1bfd566ad1b67\window-1.0.0\AndroidManifest.xml:30:13-37
+54    </application>
+55
+56</manifest>

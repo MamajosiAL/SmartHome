@@ -37,7 +37,7 @@ public class HouseRestController {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
-    @PostMapping("/register")
+    @PostMapping("/register/{username}")
     public ResponseEntity registerUserToHouseNotOwner(@RequestBody HouseDTO houseDTO){
         try{
             house_userController.registerUserToHouseNotOwner(houseDTO);
@@ -50,7 +50,7 @@ public class HouseRestController {
     @PutMapping("/setadmin")
     public ResponseEntity updateUseIsAdmin(@RequestBody House_UserDTO house_userDTO){
         try {
-            house_userController.updateRegistrationHouseUsser(house_userDTO);
+            house_userController.updateUserSetAdmin(house_userDTO);
             return new  ResponseEntity("Is updated",HttpStatus.ACCEPTED);
         }catch (IllegalArgumentException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -100,7 +100,7 @@ public class HouseRestController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity deleteHouse(@PathVariable("id") long id ){
 
         try {
