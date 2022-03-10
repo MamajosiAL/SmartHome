@@ -5,11 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -35,6 +38,7 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
     private final String TAG = this.getClass().getSimpleName();
     private RecyclerView recyclerViewRooms;
     private TextView title;
+    private ImageView editButton;
     private ProgressDialog progressDialog;
     List<Room> roomsFromHouse;
 
@@ -92,6 +96,20 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
             recyclerViewRooms = findViewById(R.id.recyclerViewHouses);
             title.setText(this.getIntent().getStringExtra("houseName"));
             try {
+                //fabAddRoom for adding a new room to house
+                FloatingActionButton fab = findViewById(R.id.fabAddRoomToHouse);
+                fab.setOnClickListener(view -> {
+                    Intent intent = new Intent(this, AddRoomActivity.class);
+                    intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                });
+                editButton.setOnClickListener(view ->{
+                    Intent intent = new Intent(this, AddRoomActivity.class);
+                    intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                });
                 getRoomsListData();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -118,6 +136,9 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
                 Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
                 progressDialog.dismiss();
             }
+        }else{
+            Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
+            progressDialog.dismiss();
         }
     }
 

@@ -1,27 +1,23 @@
 package be.ucll.java.mobile.smarthome_mobile;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.util.concurrent.TimeUnit;
-
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
-import be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface;
-import be.ucll.java.mobile.smarthome_mobile.pojo.House;
-import be.ucll.java.mobile.smarthome_mobile.pojo.Login;
+import be.ucll.java.mobile.smarthome_mobile.api.room.RoomsApiInterface;
+import be.ucll.java.mobile.smarthome_mobile.pojo.Room;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.NavigationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.TxtValidator;
@@ -34,7 +30,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @SuppressWarnings("deprecation")
-public class AddHouseActivity extends AppCompatActivity implements Callback<String> {
+public class AddRoomActivity extends AppCompatActivity implements Callback<String> {
     private final String TAG = this.getClass().getSimpleName();
     private EditText name;
     private ProgressDialog progressDialog;
@@ -67,18 +63,18 @@ public class AddHouseActivity extends AppCompatActivity implements Callback<Stri
         NavigationManager.initialise(this);
 
         // init the EditText and Button
-        name = findViewById(R.id.txtAddHouseName);
-        Button addHouse = findViewById(R.id.btnAddHouse);
+        name = findViewById(R.id.txtAddRoomName);
+        Button addRoom = findViewById(R.id.btnAddRoom);
 
-        // implement setOnClickListener event on addHouse Button
-        addHouse.setOnClickListener(view -> {
+        // implement setOnClickListener event on addRoom Button
+        addRoom.setOnClickListener(view -> {
             if(TxtValidator.validate(name) && authorizationManager.isSignedIn()){
-                addHouse();
+                addRoom();
             }
         });
     }
 
-    private void addHouse() {
+    private void addRoom() {
         // display a progress dialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false); // set cancelable to false
@@ -95,29 +91,23 @@ public class AddHouseActivity extends AppCompatActivity implements Callback<Stri
             Log.e(TAG,e.getMessage());
         }
 
-        HouseApiInterface houseApi = getClient().create(HouseApiInterface.class);
+        RoomsApiInterface roomsApiInterface = getClient().create(RoomsApiInterface.class);
 
-        House newHouse = new House();
-        newHouse.setName(nameString);
+        Room newRoom = new Room();
+        newRoom.setName(nameString);
+        newRoom.setHouseid(this.getIntent().getIntExtra("houseId",0));
 
-        Call<String> call = houseApi.addHouse(newHouse, AuthorizationManager.getInstance(this).getSessionId());
+        Call<String> call = roomsApiInterface.addRoomToHouse(newRoom, AuthorizationManager.getInstance(this).getSessionId());
         call.enqueue(this);
     }
 
-    /**
-     * Invoked for a received HTTP response.
-     * <p>
-     * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
-     * Call {@link Response#isSuccessful()} to determine if the response indicates success.
-     *
-     * @param call
-     * @param response
-     */
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
         if (response != null && response.body() != null) {
             if (response.isSuccessful()) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Intent intent = new Intent(this, HouseActivity.class);
+                intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));
+                startActivity(intent);
                 overridePendingTransition(0, 0);
             }else {
                 Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
@@ -126,13 +116,6 @@ public class AddHouseActivity extends AppCompatActivity implements Callback<Stri
         }
     }
 
-    /**
-     * Invoked when a network exception occurred talking to the server or when an unexpected
-     * exception occurred creating the request or processing the response.
-     *
-     * @param call
-     * @param t
-     */
     @Override
     public void onFailure(Call<String> call, Throwable t) {
         Toast.makeText(this, t.toString(), Toast.LENGTH_LONG).show();

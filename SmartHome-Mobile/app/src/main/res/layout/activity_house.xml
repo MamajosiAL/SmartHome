@@ -22,18 +22,15 @@
 
         <TextView
             android:id="@+id/titleHouse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_width="273dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="68dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
             android:fontFamily="sans-serif"
-            android:text=""
+            android:text="@string/title_houses"
             android:textAlignment="center"
             android:textColor="@color/textColorBlue"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,6 +58,17 @@
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleHouse" />
+
+        <ImageView
+            android:id="@+id/imgEditHouse"
+            android:layout_width="34dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/titleHouse"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/titleHouse"
+            app:layout_constraintTop_toTopOf="@+id/titleHouse"
+            app:srcCompat="@drawable/ic_edit_24" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

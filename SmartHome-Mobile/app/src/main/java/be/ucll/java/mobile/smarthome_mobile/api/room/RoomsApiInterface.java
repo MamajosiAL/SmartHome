@@ -27,8 +27,8 @@ public interface RoomsApiInterface {
     @GET("/rooms/house/{id}")
     Call<List<Room>> getRoomsFromHouseWithAccessForUserInSession(@Path("id") Integer houseid, @Header("Cookie") String authHeader);
 
-    @GET("/rooms/{id}")
-    Call<Room> getRoomById(@Path("id") Integer roomid, @Header("Cookie") String authHeader);
+    @GET("/rooms")
+    Call<Room> getRoomById(@Query("id") Integer roomid, @Header("Cookie") String authHeader);
 
     @DELETE("/rooms/{id}/delete")
     Call<String> deleteRoomById(@Path("id") Integer roomid, @Header("Cookie") String authHeader);
