@@ -49,12 +49,13 @@ public class House_UserController {
         dao.save(hs);
     }
 
-    public void registerUserToHouseNotOwner(HouseDTO houseDTO, String username) throws IllegalArgumentException{
+    public void registerUserToHouseNotOwner(HouseDTO houseDTO) throws IllegalArgumentException{
         if (houseDTO == null ) throw new IllegalArgumentException("House is needed");
+
 
         Optional<House> h = houseDAO.findById(houseDTO.getId());
         if (h.isEmpty()) throw new IllegalArgumentException("House couldn't be found");
-        Optional<User> u = userDAO.findUserByUsername(username);
+        Optional<User> u = userDAO.findFirstByUsername(houseDTO.getUsername());
         if (u.isEmpty())throw new IllegalArgumentException("User couldn't be found");
 
         House_User hs = new House_User.Builder().house(h.get()).user(u.get()).isAdmin(false).isOwner(false).build();
@@ -64,11 +65,14 @@ public class House_UserController {
 
 
     public void updateUserSetAdmin(House_UserDTO house_userDTO) throws IllegalArgumentException{
-        if (house_userDTO.getId() <= 0) throw new  IllegalArgumentException("Invalid id");
-        House_User hs = houseUserExist(house_userDTO.getHouseid());
+        if (house_userDTO.getHouseid() <= 0) throw new  IllegalArgumentException("Invalid id");
+        Optional<House> house = houseDAO.findById(house_userDTO.getHouseid());
+        Optional<User> user = userDAO.findById(userSecurityFunc.getLoggedInUserId());
+        if (house.isEmpty()|| user.isEmpty()) throw new  IllegalArgumentException("House or user not found");
+
+        House_User hs = getHouseUserByHouseAndUser(house.get(), user.get());
         if(userSecurityFunc.checkCurrentUserIsOwner(hs.getHouse().getHouseId())) throw new NotFoundException("logged in user is not owner of this house");
-        if(userDAO.findById(house_userDTO.getUserid()).isEmpty()) throw new org.webjars.NotFoundException("User you are trying to add not found.");
-        hs.setAdmin(house_userDTO.isIsadmin());
+        hs.setAdmin(house_userDTO.getIsadmin());
     }
 
     /**

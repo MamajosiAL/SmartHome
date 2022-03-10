@@ -15,6 +15,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -70,7 +71,7 @@ public class HouseController {
 
         long userId = userSecurityFunc.getLoggedInUserId();
 
-        Optional<House> h = dao.findById(userId);
+        Optional<House> h = dao.findById(houseDTO.getId());
 
         if (h.isPresent()) {
             if(userSecurityFunc.checkCurrentUserIsAdmin(h.get().getHouseId())){
@@ -117,10 +118,12 @@ public class HouseController {
                     .map(rec -> new HouseDTO.Builder()
                             .id(rec.getHouse().getHouseId())
                             .name(rec.getHouse().getName())
-                            .build());
+                            .isowner(rec.isOwner())
+                            .isAdmin(rec.isAdmin())
+                            .build())
+                    .sorted(Comparator.comparing(HouseDTO::isIsowner).thenComparing(HouseDTO::isAdmin).reversed());
             return stream.collect(Collectors.toList());
         }
-
     }
 
     /**
