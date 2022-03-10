@@ -33,8 +33,8 @@ public class BigElektroAdapter extends RecyclerView.Adapter<BigElektroViewHolder
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(DevicesViewHolder holder, final int position){
-        holder.name.setText(devices.get(position).getName());
+    public void onBindViewHolder(BigElektroViewHolder holder, final int position){
+        holder.name.setText(bigElectros.get(position).getName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +46,6 @@ public class BigElektroAdapter extends RecyclerView.Adapter<BigElektroViewHolder
 
     @Override
     public int getItemCount() {
-        return devices!=null?devices.size():0;
+        return bigElectros!=null?bigElectros.size():0;
     }
 }

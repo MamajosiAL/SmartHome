@@ -12,8 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHomeMobile"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddDeviceActivity"></activity>
-        <activity android:name=".AddRoomActivity" />
+        <activity android:name=".AddRoomActivity"></activity>
         <activity android:name=".DeviceActivity" />
         <activity android:name=".RoomActivity" />
         <activity android:name=".HouseActivity" />
