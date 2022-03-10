@@ -12,7 +12,7 @@
     android:padding="6dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/recyclerViewHouses">
+    app:layout_constraintTop_toTopOf="@+id/recyclerViewRooms">
 
     <TextView
         android:id="@+id/name"

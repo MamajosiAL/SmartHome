@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import be.ucll.java.mobile.smarthome_mobile.HouseActivity;
 import be.ucll.java.mobile.smarthome_mobile.R;
+import be.ucll.java.mobile.smarthome_mobile.RoomActivity;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Room;
 
 public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
@@ -40,7 +41,11 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
         // implement setONCLickListener on itemView
         holder.itemView.setOnClickListener(view -> {
             // display a toast with user name
-            Toast.makeText(context, roomsFromHouse.get(position).getName(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, RoomActivity.class);
+            intent.putExtra("roomId", roomsFromHouse.get(position).getId());
+            intent.putExtra("roomName", roomsFromHouse.get(position).getName());
+            context.startActivity(intent);
+            //Toast.makeText(context, roomsFromHouse.get(position).getName(), Toast.LENGTH_SHORT).show();
         });
     }
 

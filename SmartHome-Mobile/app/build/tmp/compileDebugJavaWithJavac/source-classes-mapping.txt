@@ -36,30 +36,8 @@ be/ucll/java/mobile/smarthome_mobile/R.java
  be.ucll.java.mobile.smarthome_mobile.R$style
  be.ucll.java.mobile.smarthome_mobile.R$styleable
  be.ucll.java.mobile.smarthome_mobile.R$xml
-androidx/activity/ktx/R.java
- androidx.activity.ktx.R
- androidx.activity.ktx.R$attr
- androidx.activity.ktx.R$color
- androidx.activity.ktx.R$dimen
- androidx.activity.ktx.R$drawable
- androidx.activity.ktx.R$id
- androidx.activity.ktx.R$integer
- androidx.activity.ktx.R$layout
- androidx.activity.ktx.R$string
- androidx.activity.ktx.R$style
- androidx.activity.ktx.R$styleable
-androidx/vectordrawable/R.java
- androidx.vectordrawable.R
- androidx.vectordrawable.R$attr
- androidx.vectordrawable.R$color
- androidx.vectordrawable.R$dimen
- androidx.vectordrawable.R$drawable
- androidx.vectordrawable.R$id
- androidx.vectordrawable.R$integer
- androidx.vectordrawable.R$layout
- androidx.vectordrawable.R$string
- androidx.vectordrawable.R$style
- androidx.vectordrawable.R$styleable
+be/ucll/java/mobile/smarthome_mobile/api/device/DeviceApiInterface.java
+ be.ucll.java.mobile.smarthome_mobile.api.device.DeviceApiInterface
 androidx/lifecycle/livedata/core/R.java
  androidx.lifecycle.livedata.core.R
 androidx/appcompat/resources/R.java
@@ -117,10 +95,8 @@ androidx/asynclayoutinflater/R.java
  androidx.asynclayoutinflater.R$styleable
 androidx/interpolator/R.java
  androidx.interpolator.R
-be/ucll/java/mobile/smarthome_mobile/api/house/HouseApiInterface.java
- be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface
-be/ucll/java/mobile/smarthome_mobile/LogOutActivity.java
- be.ucll.java.mobile.smarthome_mobile.LogOutActivity
+be/ucll/java/mobile/smarthome_mobile/api/room/RoomsAdapter.java
+ be.ucll.java.mobile.smarthome_mobile.api.room.RoomsAdapter
 androidx/core/R.java
  androidx.core.R
  androidx.core.R$attr
@@ -133,55 +109,18 @@ androidx/core/R.java
  androidx.core.R$string
  androidx.core.R$style
  androidx.core.R$styleable
+be/ucll/java/mobile/smarthome_mobile/pojo/House_User.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.House_User
 be/ucll/java/mobile/smarthome_mobile/util/ReceivedCookiesInterceptor.java
  be.ucll.java.mobile.smarthome_mobile.util.ReceivedCookiesInterceptor
-androidx/activity/R.java
- androidx.activity.R
- androidx.activity.R$attr
- androidx.activity.R$color
- androidx.activity.R$dimen
- androidx.activity.R$drawable
- androidx.activity.R$id
- androidx.activity.R$integer
- androidx.activity.R$layout
- androidx.activity.R$string
- androidx.activity.R$style
- androidx.activity.R$styleable
-androidx/recyclerview/R.java
- androidx.recyclerview.R
- androidx.recyclerview.R$attr
- androidx.recyclerview.R$color
- androidx.recyclerview.R$dimen
- androidx.recyclerview.R$drawable
- androidx.recyclerview.R$id
- androidx.recyclerview.R$integer
- androidx.recyclerview.R$layout
- androidx.recyclerview.R$string
- androidx.recyclerview.R$style
- androidx.recyclerview.R$styleable
 be/ucll/java/mobile/smarthome_mobile/AccountActivity.java
  be.ucll.java.mobile.smarthome_mobile.AccountActivity
  be.ucll.java.mobile.smarthome_mobile.AccountActivity$1
 be/ucll/java/mobile/smarthome_mobile/api/house/HousesAdapter.java
  be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter
  be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter$1
-androidx/drawerlayout/R.java
- androidx.drawerlayout.R
- androidx.drawerlayout.R$attr
- androidx.drawerlayout.R$color
- androidx.drawerlayout.R$dimen
- androidx.drawerlayout.R$drawable
- androidx.drawerlayout.R$id
- androidx.drawerlayout.R$integer
- androidx.drawerlayout.R$layout
- androidx.drawerlayout.R$string
- androidx.drawerlayout.R$style
- androidx.drawerlayout.R$styleable
-androidx/versionedparcelable/R.java
- androidx.versionedparcelable.R
-androidx/lifecycle/ktx/R.java
- androidx.lifecycle.ktx.R
- androidx.lifecycle.ktx.R$id
+be/ucll/java/mobile/smarthome_mobile/DeviceActivity.java
+ be.ucll.java.mobile.smarthome_mobile.DeviceActivity
 androidx/dynamicanimation/R.java
  androidx.dynamicanimation.R
  androidx.dynamicanimation.R$attr
@@ -229,54 +168,12 @@ androidx/lifecycle/livedata/core/ktx/R.java
  androidx.lifecycle.livedata.core.ktx.R
 be/ucll/java/mobile/smarthome_mobile/api/user/UsersViewHolder.java
  be.ucll.java.mobile.smarthome_mobile.api.user.UsersViewHolder
-androidx/lifecycle/viewmodel/R.java
- androidx.lifecycle.viewmodel.R
- androidx.lifecycle.viewmodel.R$id
-be/ucll/java/mobile/smarthome_mobile/ManageLoggedOutFragment.java
- be.ucll.java.mobile.smarthome_mobile.ManageLoggedOutFragment
-androidx/legacy/v4/R.java
- androidx.legacy.v4.R
- androidx.legacy.v4.R$attr
- androidx.legacy.v4.R$color
- androidx.legacy.v4.R$dimen
- androidx.legacy.v4.R$drawable
- androidx.legacy.v4.R$id
- androidx.legacy.v4.R$integer
- androidx.legacy.v4.R$layout
- androidx.legacy.v4.R$string
- androidx.legacy.v4.R$style
- androidx.legacy.v4.R$styleable
 be/ucll/java/mobile/smarthome_mobile/util/TxtValidator.java
  be.ucll.java.mobile.smarthome_mobile.util.TxtValidator
-androidx/navigation/common/R.java
- androidx.navigation.common.R
- androidx.navigation.common.R$attr
- androidx.navigation.common.R$styleable
+be/ucll/java/mobile/smarthome_mobile/api/device/DevicesViewHolder.java
+ be.ucll.java.mobile.smarthome_mobile.api.device.DevicesViewHolder
 be/ucll/java/mobile/smarthome_mobile/util/NavigationManager.java
  be.ucll.java.mobile.smarthome_mobile.util.NavigationManager
-androidx/cursoradapter/R.java
- androidx.cursoradapter.R
-be/ucll/java/mobile/smarthome_mobile/api/Connection.java
- be.ucll.java.mobile.smarthome_mobile.api.Connection
-androidx/cardview/R.java
- androidx.cardview.R
- androidx.cardview.R$attr
- androidx.cardview.R$color
- androidx.cardview.R$dimen
- androidx.cardview.R$style
- androidx.cardview.R$styleable
-androidx/coordinatorlayout/R.java
- androidx.coordinatorlayout.R
- androidx.coordinatorlayout.R$attr
- androidx.coordinatorlayout.R$color
- androidx.coordinatorlayout.R$dimen
- androidx.coordinatorlayout.R$drawable
- androidx.coordinatorlayout.R$id
- androidx.coordinatorlayout.R$integer
- androidx.coordinatorlayout.R$layout
- androidx.coordinatorlayout.R$string
- androidx.coordinatorlayout.R$style
- androidx.coordinatorlayout.R$styleable
 androidx/swiperefreshlayout/R.java
  androidx.swiperefreshlayout.R
  androidx.swiperefreshlayout.R$attr
@@ -304,8 +201,6 @@ androidx/appcompat/R.java
  androidx.appcompat.R$string
  androidx.appcompat.R$style
  androidx.appcompat.R$styleable
-androidx/lifecycle/livedata/R.java
- androidx.lifecycle.livedata.R
 be/ucll/java/mobile/smarthome_mobile/api/house/HousesViewHolder.java
  be.ucll.java.mobile.smarthome_mobile.api.house.HousesViewHolder
 be/ucll/java/mobile/smarthome_mobile/BuildConfig.java
@@ -324,10 +219,8 @@ androidx/legacy/coreui/R.java
  androidx.legacy.coreui.R$styleable
 be/ucll/java/mobile/smarthome_mobile/exception/SignupException.java
  be.ucll.java.mobile.smarthome_mobile.exception.SignupException
-androidx/documentfile/R.java
- androidx.documentfile.R
-be/ucll/java/mobile/smarthome_mobile/pojo/Login.java
- be.ucll.java.mobile.smarthome_mobile.pojo.Login
+be/ucll/java/mobile/smarthome_mobile/pojo/Media.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.Media
 androidx/customview/R.java
  androidx.customview.R
  androidx.customview.R$attr
@@ -342,24 +235,6 @@ androidx/customview/R.java
  androidx.customview.R$styleable
 be/ucll/java/mobile/smarthome_mobile/pojo/User.java
  be.ucll.java.mobile.smarthome_mobile.pojo.User
-androidx/lifecycle/viewmodel/ktx/R.java
- androidx.lifecycle.viewmodel.ktx.R
- androidx.lifecycle.viewmodel.ktx.R$id
-be/ucll/java/mobile/smarthome_mobile/RegisterActivity.java
- be.ucll.java.mobile.smarthome_mobile.RegisterActivity
- be.ucll.java.mobile.smarthome_mobile.RegisterActivity$1
-androidx/loader/R.java
- androidx.loader.R
- androidx.loader.R$attr
- androidx.loader.R$color
- androidx.loader.R$dimen
- androidx.loader.R$drawable
- androidx.loader.R$id
- androidx.loader.R$integer
- androidx.loader.R$layout
- androidx.loader.R$string
- androidx.loader.R$style
- androidx.loader.R$styleable
 be/ucll/java/mobile/smarthome_mobile/ManageActivity.java
  be.ucll.java.mobile.smarthome_mobile.ManageActivity
 androidx/legacy/coreutils/R.java
@@ -374,93 +249,26 @@ androidx/legacy/coreutils/R.java
  androidx.legacy.coreutils.R$string
  androidx.legacy.coreutils.R$style
  androidx.legacy.coreutils.R$styleable
-com/google/android/material/R.java
- com.google.android.material.R
- com.google.android.material.R$anim
- com.google.android.material.R$animator
- com.google.android.material.R$attr
- com.google.android.material.R$bool
- com.google.android.material.R$color
- com.google.android.material.R$dimen
- com.google.android.material.R$drawable
- com.google.android.material.R$id
- com.google.android.material.R$integer
- com.google.android.material.R$interpolator
- com.google.android.material.R$layout
- com.google.android.material.R$plurals
- com.google.android.material.R$string
- com.google.android.material.R$style
- com.google.android.material.R$styleable
- com.google.android.material.R$xml
-androidx/annotation/experimental/R.java
- androidx.annotation.experimental.R
 androidx/lifecycle/runtime/R.java
  androidx.lifecycle.runtime.R
  androidx.lifecycle.runtime.R$id
 androidx/tracing/R.java
  androidx.tracing.R
-androidx/constraintlayout/widget/R.java
- androidx.constraintlayout.widget.R
- androidx.constraintlayout.widget.R$anim
- androidx.constraintlayout.widget.R$attr
- androidx.constraintlayout.widget.R$bool
- androidx.constraintlayout.widget.R$color
- androidx.constraintlayout.widget.R$dimen
- androidx.constraintlayout.widget.R$drawable
- androidx.constraintlayout.widget.R$id
- androidx.constraintlayout.widget.R$integer
- androidx.constraintlayout.widget.R$interpolator
- androidx.constraintlayout.widget.R$layout
- androidx.constraintlayout.widget.R$string
- androidx.constraintlayout.widget.R$style
- androidx.constraintlayout.widget.R$styleable
-be/ucll/java/mobile/smarthome_mobile/ManageLoggedInFragment.java
- be.ucll.java.mobile.smarthome_mobile.ManageLoggedInFragment
 androidx/window/R.java
  androidx.window.R
  androidx.window.R$attr
  androidx.window.R$id
  androidx.window.R$styleable
-androidx/slidingpanelayout/R.java
- androidx.slidingpanelayout.R
-androidx/navigation/fragment/R.java
- androidx.navigation.fragment.R
- androidx.navigation.fragment.R$attr
- androidx.navigation.fragment.R$dimen
- androidx.navigation.fragment.R$id
- androidx.navigation.fragment.R$styleable
-androidx/navigation/ui/R.java
- androidx.navigation.ui.R
- androidx.navigation.ui.R$anim
- androidx.navigation.ui.R$animator
- androidx.navigation.ui.R$integer
- androidx.navigation.ui.R$string
-androidx/viewpager/R.java
- androidx.viewpager.R
- androidx.viewpager.R$attr
- androidx.viewpager.R$color
- androidx.viewpager.R$dimen
- androidx.viewpager.R$drawable
- androidx.viewpager.R$id
- androidx.viewpager.R$integer
- androidx.viewpager.R$layout
- androidx.viewpager.R$string
- androidx.viewpager.R$style
- androidx.viewpager.R$styleable
 androidx/localbroadcastmanager/R.java
  androidx.localbroadcastmanager.R
-androidx/fragment/ktx/R.java
- androidx.fragment.ktx.R
 be/ucll/java/mobile/smarthome_mobile/ConsumptionActivity.java
  be.ucll.java.mobile.smarthome_mobile.ConsumptionActivity
-be/ucll/java/mobile/smarthome_mobile/util/AuthorizationManager.java
- be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager
 be/ucll/java/mobile/smarthome_mobile/api/ViewLinker.java
  be.ucll.java.mobile.smarthome_mobile.api.ViewLinker
+be/ucll/java/mobile/smarthome_mobile/pojo/Room.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.Room
 be/ucll/java/mobile/smarthome_mobile/api/user/UserApiInterface.java
  be.ucll.java.mobile.smarthome_mobile.api.user.UserApiInterface
-be/ucll/java/mobile/smarthome_mobile/LoginActivity.java
- be.ucll.java.mobile.smarthome_mobile.LoginActivity
 androidx/lifecycle/viewmodel/savedstate/R.java
  androidx.lifecycle.viewmodel.savedstate.R
  androidx.lifecycle.viewmodel.savedstate.R$id
@@ -488,3 +296,226 @@ androidx/viewpager2/R.java
  androidx.viewpager2.R$string
  androidx.viewpager2.R$style
  androidx.viewpager2.R$styleable
+androidx/activity/ktx/R.java
+ androidx.activity.ktx.R
+ androidx.activity.ktx.R$attr
+ androidx.activity.ktx.R$color
+ androidx.activity.ktx.R$dimen
+ androidx.activity.ktx.R$drawable
+ androidx.activity.ktx.R$id
+ androidx.activity.ktx.R$integer
+ androidx.activity.ktx.R$layout
+ androidx.activity.ktx.R$string
+ androidx.activity.ktx.R$style
+ androidx.activity.ktx.R$styleable
+androidx/vectordrawable/R.java
+ androidx.vectordrawable.R
+ androidx.vectordrawable.R$attr
+ androidx.vectordrawable.R$color
+ androidx.vectordrawable.R$dimen
+ androidx.vectordrawable.R$drawable
+ androidx.vectordrawable.R$id
+ androidx.vectordrawable.R$integer
+ androidx.vectordrawable.R$layout
+ androidx.vectordrawable.R$string
+ androidx.vectordrawable.R$style
+ androidx.vectordrawable.R$styleable
+be/ucll/java/mobile/smarthome_mobile/pojo/Device.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.Device
+be/ucll/java/mobile/smarthome_mobile/RoomActivity.java
+ be.ucll.java.mobile.smarthome_mobile.RoomActivity
+be/ucll/java/mobile/smarthome_mobile/pojo/Sensor.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.Sensor
+be/ucll/java/mobile/smarthome_mobile/api/house/HouseApiInterface.java
+ be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface
+be/ucll/java/mobile/smarthome_mobile/LogOutActivity.java
+ be.ucll.java.mobile.smarthome_mobile.LogOutActivity
+androidx/activity/R.java
+ androidx.activity.R
+ androidx.activity.R$attr
+ androidx.activity.R$color
+ androidx.activity.R$dimen
+ androidx.activity.R$drawable
+ androidx.activity.R$id
+ androidx.activity.R$integer
+ androidx.activity.R$layout
+ androidx.activity.R$string
+ androidx.activity.R$style
+ androidx.activity.R$styleable
+androidx/recyclerview/R.java
+ androidx.recyclerview.R
+ androidx.recyclerview.R$attr
+ androidx.recyclerview.R$color
+ androidx.recyclerview.R$dimen
+ androidx.recyclerview.R$drawable
+ androidx.recyclerview.R$id
+ androidx.recyclerview.R$integer
+ androidx.recyclerview.R$layout
+ androidx.recyclerview.R$string
+ androidx.recyclerview.R$style
+ androidx.recyclerview.R$styleable
+androidx/drawerlayout/R.java
+ androidx.drawerlayout.R
+ androidx.drawerlayout.R$attr
+ androidx.drawerlayout.R$color
+ androidx.drawerlayout.R$dimen
+ androidx.drawerlayout.R$drawable
+ androidx.drawerlayout.R$id
+ androidx.drawerlayout.R$integer
+ androidx.drawerlayout.R$layout
+ androidx.drawerlayout.R$string
+ androidx.drawerlayout.R$style
+ androidx.drawerlayout.R$styleable
+androidx/versionedparcelable/R.java
+ androidx.versionedparcelable.R
+androidx/lifecycle/ktx/R.java
+ androidx.lifecycle.ktx.R
+ androidx.lifecycle.ktx.R$id
+androidx/lifecycle/viewmodel/R.java
+ androidx.lifecycle.viewmodel.R
+ androidx.lifecycle.viewmodel.R$id
+be/ucll/java/mobile/smarthome_mobile/ManageLoggedOutFragment.java
+ be.ucll.java.mobile.smarthome_mobile.ManageLoggedOutFragment
+androidx/legacy/v4/R.java
+ androidx.legacy.v4.R
+ androidx.legacy.v4.R$attr
+ androidx.legacy.v4.R$color
+ androidx.legacy.v4.R$dimen
+ androidx.legacy.v4.R$drawable
+ androidx.legacy.v4.R$id
+ androidx.legacy.v4.R$integer
+ androidx.legacy.v4.R$layout
+ androidx.legacy.v4.R$string
+ androidx.legacy.v4.R$style
+ androidx.legacy.v4.R$styleable
+androidx/navigation/common/R.java
+ androidx.navigation.common.R
+ androidx.navigation.common.R$attr
+ androidx.navigation.common.R$styleable
+be/ucll/java/mobile/smarthome_mobile/api/device/DevicesAdapter.java
+ be.ucll.java.mobile.smarthome_mobile.api.device.DevicesAdapter
+ be.ucll.java.mobile.smarthome_mobile.api.device.DevicesAdapter$1
+androidx/cursoradapter/R.java
+ androidx.cursoradapter.R
+be/ucll/java/mobile/smarthome_mobile/api/Connection.java
+ be.ucll.java.mobile.smarthome_mobile.api.Connection
+androidx/cardview/R.java
+ androidx.cardview.R
+ androidx.cardview.R$attr
+ androidx.cardview.R$color
+ androidx.cardview.R$dimen
+ androidx.cardview.R$style
+ androidx.cardview.R$styleable
+be/ucll/java/mobile/smarthome_mobile/api/room/RoomsViewHolder.java
+ be.ucll.java.mobile.smarthome_mobile.api.room.RoomsViewHolder
+androidx/coordinatorlayout/R.java
+ androidx.coordinatorlayout.R
+ androidx.coordinatorlayout.R$attr
+ androidx.coordinatorlayout.R$color
+ androidx.coordinatorlayout.R$dimen
+ androidx.coordinatorlayout.R$drawable
+ androidx.coordinatorlayout.R$id
+ androidx.coordinatorlayout.R$integer
+ androidx.coordinatorlayout.R$layout
+ androidx.coordinatorlayout.R$string
+ androidx.coordinatorlayout.R$style
+ androidx.coordinatorlayout.R$styleable
+androidx/lifecycle/livedata/R.java
+ androidx.lifecycle.livedata.R
+androidx/documentfile/R.java
+ androidx.documentfile.R
+be/ucll/java/mobile/smarthome_mobile/pojo/Login.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.Login
+androidx/lifecycle/viewmodel/ktx/R.java
+ androidx.lifecycle.viewmodel.ktx.R
+ androidx.lifecycle.viewmodel.ktx.R$id
+be/ucll/java/mobile/smarthome_mobile/RegisterActivity.java
+ be.ucll.java.mobile.smarthome_mobile.RegisterActivity
+ be.ucll.java.mobile.smarthome_mobile.RegisterActivity$1
+be/ucll/java/mobile/smarthome_mobile/util/AuthorizationManager.java
+ be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager
+androidx/loader/R.java
+ androidx.loader.R
+ androidx.loader.R$attr
+ androidx.loader.R$color
+ androidx.loader.R$dimen
+ androidx.loader.R$drawable
+ androidx.loader.R$id
+ androidx.loader.R$integer
+ androidx.loader.R$layout
+ androidx.loader.R$string
+ androidx.loader.R$style
+ androidx.loader.R$styleable
+com/google/android/material/R.java
+ com.google.android.material.R
+ com.google.android.material.R$anim
+ com.google.android.material.R$animator
+ com.google.android.material.R$attr
+ com.google.android.material.R$bool
+ com.google.android.material.R$color
+ com.google.android.material.R$dimen
+ com.google.android.material.R$drawable
+ com.google.android.material.R$id
+ com.google.android.material.R$integer
+ com.google.android.material.R$interpolator
+ com.google.android.material.R$layout
+ com.google.android.material.R$plurals
+ com.google.android.material.R$string
+ com.google.android.material.R$style
+ com.google.android.material.R$styleable
+ com.google.android.material.R$xml
+androidx/annotation/experimental/R.java
+ androidx.annotation.experimental.R
+androidx/constraintlayout/widget/R.java
+ androidx.constraintlayout.widget.R
+ androidx.constraintlayout.widget.R$anim
+ androidx.constraintlayout.widget.R$attr
+ androidx.constraintlayout.widget.R$bool
+ androidx.constraintlayout.widget.R$color
+ androidx.constraintlayout.widget.R$dimen
+ androidx.constraintlayout.widget.R$drawable
+ androidx.constraintlayout.widget.R$id
+ androidx.constraintlayout.widget.R$integer
+ androidx.constraintlayout.widget.R$interpolator
+ androidx.constraintlayout.widget.R$layout
+ androidx.constraintlayout.widget.R$string
+ androidx.constraintlayout.widget.R$style
+ androidx.constraintlayout.widget.R$styleable
+be/ucll/java/mobile/smarthome_mobile/ManageLoggedInFragment.java
+ be.ucll.java.mobile.smarthome_mobile.ManageLoggedInFragment
+androidx/slidingpanelayout/R.java
+ androidx.slidingpanelayout.R
+androidx/navigation/fragment/R.java
+ androidx.navigation.fragment.R
+ androidx.navigation.fragment.R$attr
+ androidx.navigation.fragment.R$dimen
+ androidx.navigation.fragment.R$id
+ androidx.navigation.fragment.R$styleable
+androidx/navigation/ui/R.java
+ androidx.navigation.ui.R
+ androidx.navigation.ui.R$anim
+ androidx.navigation.ui.R$animator
+ androidx.navigation.ui.R$integer
+ androidx.navigation.ui.R$string
+androidx/viewpager/R.java
+ androidx.viewpager.R
+ androidx.viewpager.R$attr
+ androidx.viewpager.R$color
+ androidx.viewpager.R$dimen
+ androidx.viewpager.R$drawable
+ androidx.viewpager.R$id
+ androidx.viewpager.R$integer
+ androidx.viewpager.R$layout
+ androidx.viewpager.R$string
+ androidx.viewpager.R$style
+ androidx.viewpager.R$styleable
+androidx/fragment/ktx/R.java
+ androidx.fragment.ktx.R
+be/ucll/java/mobile/smarthome_mobile/LoginActivity.java
+ be.ucll.java.mobile.smarthome_mobile.LoginActivity
+be/ucll/java/mobile/smarthome_mobile/AddRoomActivity.java
+ be.ucll.java.mobile.smarthome_mobile.AddRoomActivity
+be/ucll/java/mobile/smarthome_mobile/api/room/RoomsApiInterface.java
+ be.ucll.java.mobile.smarthome_mobile.api.room.RoomsApiInterface
+be/ucll/java/mobile/smarthome_mobile/HouseActivity.java
+ be.ucll.java.mobile.smarthome_mobile.HouseActivity
