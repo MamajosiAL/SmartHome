@@ -16,9 +16,9 @@ public class RoomForm extends FormLayout {
         txtNameRoom = new TextField();
         txtNameRoom.setRequired(true);
         txtNameRoom.setMaxLength(128);
-        txtNameRoom.setErrorMessage("Mandatory field!");
+        txtNameRoom.setErrorMessage("rview.errormessage");
 
-        addFormItem(txtNameRoom, "Name room");
+        addFormItem(txtNameRoom, "rform.roomname");
     }
 
     public void resetForm(){
