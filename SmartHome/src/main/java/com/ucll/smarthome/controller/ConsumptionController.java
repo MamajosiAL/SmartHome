@@ -87,7 +87,6 @@ public class ConsumptionController {
         Optional<Device> device = deviceDAO.findById(deviceid);
         if(device.isEmpty()) throw new IllegalArgumentException("No device found");
         Optional<List<Consumption>> consumptionList = consumptionDAO.findAllByDevice(device.get());
-        if(consumptionList.isEmpty()) throw new IllegalArgumentException("This device has no consumption");
 
         if(userSecurityFunc.getHouseUser(device.get().getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of this house");
 
@@ -139,7 +138,6 @@ public class ConsumptionController {
                 .consumptionId(consumption.getConsumptionId())
                 .aantalMinuten(consumption.getAantalMinuten())
                 .device(consumption.getDevice().getId())
-                .startDatumEnTijd(consumption.getStartDatumEnTijd())
                 .unit(consumption.getUnit())
                 .build();
     }
@@ -150,7 +148,6 @@ public class ConsumptionController {
                         .consumptionId(rec.getConsumptionId())
                         .aantalMinuten(rec.getAantalMinuten())
                         .device(rec.getDevice().getId())
-                        .startDatumEnTijd(rec.getStartDatumEnTijd())
                         .unit(rec.getUnit())
                         .build());
 

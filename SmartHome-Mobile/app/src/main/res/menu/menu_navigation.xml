@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navHouses"
+        android:title="@string/title_houses"
+        android:icon="@drawable/ic__house_24"/>
+    <item
+        android:id="@+id/navConsumption"
+        android:title="@string/title_consumption"
+        android:icon="@drawable/ic_consumption_24"/>
+    <item
+        android:id="@+id/navManage"
+        android:title="@string/title_manage"
+        android:icon="@drawable/ic_settings_24"/>
+
+</menu>
