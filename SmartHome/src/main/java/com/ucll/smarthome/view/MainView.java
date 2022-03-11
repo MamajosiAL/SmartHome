@@ -54,7 +54,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         loc = VaadinSession.getCurrent().getLocale();
 
         //misschien nog een + met de naam van de user
-        H3 header = new H3("SmartHome van" );
+        H3 header = new H3("SmartHome" );
         header.setId("header-layout");
 
         //hier nog misschien een image
@@ -62,7 +62,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         img.setHeight("30px");
         img.setId("aligneer-rechts");
 
-        logoutButton = new Button("log out");
+        logoutButton = new Button("mview.logout");
         logoutButton.addClickListener(buttonClickEvent -> handleclickEvent(buttonClickEvent));
         logoutButton.setHeight("30px");
         logoutButton.setId("aligneer-rechts");

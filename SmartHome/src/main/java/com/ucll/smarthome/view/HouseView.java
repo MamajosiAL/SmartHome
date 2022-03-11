@@ -81,17 +81,17 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         grid = new Grid<>();
         grid.setItems(new ArrayList<HouseDTO>(0));
-        grid.addColumn(HouseDTO::getName).setHeader("Naam Huis");
+        grid.addColumn(HouseDTO::getName).setHeader("hform.housename");
         grid.addColumn(new ComponentRenderer<>(houseDTO -> {
             role = new Span();
             if (houseDTO.isIsowner()){
-                 role.setText("Eigenaar");
+                 role.setText("hview.roleO");
                  role.getElement().getStyle().set("color", "green");
             }else if (houseDTO.isAdmin()){
                  role.setText("Admin");
                  role.getElement().getStyle().set("color", "Orange");
             }else{
-                role.setText("Gebruiker");
+                role.setText("hview.roleU");
             }
             return role;
         })).setHeader("Rol");
@@ -105,6 +105,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
             return new Span();
         })).setHeader("Beheer gebruikers").setTextAlign(ColumnTextAlign.CENTER);
         grid.setHeightFull();
+
         grid.asSingleSelect().addValueChangeListener(event -> populateHouseForm(event.getValue()));
         verticalLayoutlf.add(lphLayout);
         verticalLayoutlf.add(grid);
@@ -124,16 +125,24 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         btnCancel = new Button("Annuleren");
         btnCancel.addClickListener(this::handleClickCancel);
+        btnCancel = new Button("rview.buttonCa");
+        btnCancel.addClickListener(e -> handleClickCancel(e));
 
         btnCreate = new Button("Toevoegen");
         btnCreate.addClickListener(this::handleClickCreate);
+        btnCreate = new Button("rview.buttonCr");
+        btnCreate.addClickListener(e -> handleClickCreate(e));
 
         btnUpdate = new Button("Opslaan");
         btnUpdate.addClickListener(this::handleClickUpdate);
+        btnUpdate = new Button("hview.save");
+        btnUpdate.addClickListener(e -> handleClickUpdate(e));
         btnUpdate.setVisible(false);
 
         btnDelete = new Button("Verwijderen");
         btnDelete.addClickListener(this::handleClickDelete);
+        btnDelete = new Button("hview.delete");
+        btnDelete.addClickListener(e -> handleClickDelete(e));
         btnDelete.setVisible(false);
         
         horizontalLayoutrh.add(btnCancel,btnCreate,btnUpdate,btnDelete);
@@ -158,13 +167,13 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
     private void handleClickCreate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show("Validatie fout", 3000, Notification.Position.MIDDLE);
+            Notification.show("hview.validationerror", 3000, Notification.Position.MIDDLE);
             return;
         }
         try {
             HouseDTO houseDTO = new HouseDTO.Builder().name(hfrm.txtnaamhuis.getValue()).build();
             hc.createHouse(houseDTO);
-            Notification.show("huis aangemaakt",3000,Notification.Position.TOP_CENTER);
+            Notification.show("hview.createhouse",3000,Notification.Position.TOP_CENTER);
             hfrm.resetForm();
             loadData();
         } catch (IllegalArgumentException event){
@@ -175,12 +184,12 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
     }
     private void handleClickUpdate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show("Validatie fout", 3000, Notification.Position.MIDDLE);
+            Notification.show("hview.validationerror", 3000, Notification.Position.MIDDLE);
         }
         try{
             HouseDTO houseDTO = new HouseDTO.Builder().id(Integer.parseInt(hfrm.lblId.getText())).name(hfrm.txtnaamhuis.getValue()).build();
             hc.updateHouse(houseDTO);
-            Notification.show("huis aangepast",3000,Notification.Position.TOP_CENTER);
+            Notification.show("hview.houseadjusted",3000,Notification.Position.TOP_CENTER);
             hfrm.resetForm();
             loadData();
             btnCreate.setVisible(true);
@@ -192,7 +201,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
     }
 
     private void handleClickDelete(ClickEvent<Button> e) {
-        WarningDialog w = new WarningDialog("Weet u zeker dat u dit huis wilt verwijderen?");
+        WarningDialog w = new WarningDialog("hview.error");
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {
@@ -242,6 +251,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
                 hfrm.lblId.setText("" + houseDTO.getId());
                 hfrm.txtnaamhuis.setValue(houseDTO.getName());
             }
+
         }
     }
 

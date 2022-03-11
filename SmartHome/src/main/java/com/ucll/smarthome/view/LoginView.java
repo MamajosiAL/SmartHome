@@ -35,7 +35,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 
     private VerticalLayout vrl;
-    private Button buttonRegister = new Button("Register");
+    private Button buttonRegister = new Button("lview.regbutton");
     private LoginI18n i18n;
     private LoginForm frmLogin;
 
@@ -47,10 +47,10 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
         i18n = LoginI18n.createDefault();
         i18n.getForm().setTitle("Smarthome Login");
-        i18n.getForm().setUsername("Gebruikersnaam");
-        i18n.getForm().setPassword("Wachtwoord");
-        i18n.getErrorMessage().setTitle("Login niet gelukt");
-        i18n.getErrorMessage().setMessage("Controlleer of u het juiste Gebruikersnaam en wachtwoord hebt ingevuld en probeer opnieuw");
+        i18n.getForm().setUsername("lview.username");
+        i18n.getForm().setPassword("lview.password");
+        i18n.getErrorMessage().setTitle("lview.loginfail");
+        i18n.getErrorMessage().setMessage("lview.loginfailmessage");
 
 
         frmLogin = new LoginForm(i18n);

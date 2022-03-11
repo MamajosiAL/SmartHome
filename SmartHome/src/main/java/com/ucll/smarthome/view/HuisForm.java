@@ -15,9 +15,9 @@ public class HuisForm  extends FormLayout {
         txtnaamhuis = new TextField();
         txtnaamhuis.setRequired(true);
         txtnaamhuis.setMaxLength(128);
-        txtnaamhuis.setErrorMessage("Verplicht veld");
+        txtnaamhuis.setErrorMessage("rview.errormessage");
 
-        addFormItem(txtnaamhuis, "Naam huis");
+        addFormItem(txtnaamhuis, "hform.housename");
     }
 
     public void resetForm(){
