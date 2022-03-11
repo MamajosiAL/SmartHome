@@ -28,6 +28,7 @@ import java.util.Locale;
 @Route("")
 @PageTitle("Home")
 @CssImport("styles/main-view.css")
+@CssImport("styles/custom.css")
 public class MainView extends AppLayout  implements BeforeEnterObserver{
     @Autowired
     private MessageSource msgSrc;

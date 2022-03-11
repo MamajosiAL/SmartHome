@@ -27,6 +27,7 @@ import java.util.Locale;
 @Route("login")
 @PageTitle("login")
 @CssImport("styles/main-view.css")
+@CssImport("styles/custom.css")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
     @Autowired
