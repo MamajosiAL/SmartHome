@@ -1,17 +1,20 @@
 package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.BigElectronicDTO;
+import com.ucll.smarthome.functions.BeanUtil;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.*;
 import com.ucll.smarthome.persistence.repository.BigElectronicDAO;
 import com.ucll.smarthome.persistence.repository.ProgrammeDAO;
 import com.ucll.smarthome.persistence.repository.TypeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.webjars.NotFoundException;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,6 +22,9 @@ import java.util.stream.Stream;
 @Controller
 @Transactional
 public class BigElectronicController {
+
+    @Autowired
+    private MessageSource msgSrc;
 
     private final BigElectronicDAO beDao;
     private final TypeDAO typeDAO;
@@ -38,11 +44,12 @@ public class BigElectronicController {
     }
 
     public void createApplianceDevice(BigElectronicDTO beDTO) throws IllegalArgumentException{
-        if (beDTO == null ) throw new IllegalArgumentException("Input data missing");
-        if (beDTO.getName() == null || beDTO.getName().length() == 0) throw new IllegalArgumentException("Name of device is not filled in");
+
+        if (beDTO == null ) throw new IllegalArgumentException(msgSrc.getMessage("ccontroller.datamis",null,Locale.getDefault()));
+        if (beDTO.getName() == null || beDTO.getName().length() == 0) throw new IllegalArgumentException(msgSrc.getMessage("ccontroller.ndevice",null,Locale.getDefault()));
 
         Room room = roomController.roomExists(beDTO.getRoomid());
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
+        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException(msgSrc.getMessage("ccontroller.adminofhouse",null,Locale.getDefault()));
 
         BigElectronicDevice appliances = new BigElectronicDevice.Builder()
                 .name(beDTO.getName())
@@ -56,7 +63,7 @@ public class BigElectronicController {
     private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO , Programme programme) throws IllegalArgumentException{
 
         Room room = roomController.roomExists(beDTO.getRoomid());
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
+        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException(msgSrc.getMessage("ccontroller.adminofhouse",null,Locale.getDefault()));
 
         BigElectronicDevice apl = appliancesExists(beDTO.getId());
             apl.setName(beDTO.getName());
@@ -68,12 +75,12 @@ public class BigElectronicController {
 
     }
     public void updateApplianceDevice(BigElectronicDTO beDTO) throws IllegalArgumentException{
-        if (beDTO == null ) throw new IllegalArgumentException("Input data missing");
-        if (beDTO.getName() == null || beDTO.getName().trim().equals("")) throw new IllegalArgumentException("Name of device is not filled in");
+        if (beDTO == null ) throw new IllegalArgumentException(msgSrc.getMessage("ccontroller.datamis",null,Locale.getDefault()));
+        if (beDTO.getName() == null || beDTO.getName().trim().equals("")) throw new IllegalArgumentException(msgSrc.getMessage("ccontroller.ndevice",null,Locale.getDefault()));
         Optional<Programme> programme = programmeDAO.findById(beDTO.getProgramid());
 
         Room room = roomController.roomExists(beDTO.getRoomid());
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
+        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException(msgSrc.getMessage("ccontroller.adminofhouse",null,Locale.getDefault()));
 
         if (programme.isPresent()){
             updateBeDeviceWithProgramme(beDTO,programme.get());
@@ -93,7 +100,7 @@ public class BigElectronicController {
     public BigElectronicDTO getDeviceByid(long deviceid) throws IllegalArgumentException{
         BigElectronicDevice apl = appliancesExists(deviceid);
 
-        if(userSecurityFunc.getHouseUser(apl.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
+        if(userSecurityFunc.getHouseUser(apl.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException(msgSrc.getMessage("ccontroller.userpartof",null,Locale.getDefault()));
 
         return new BigElectronicDTO.Builder().id(apl.getId()).name(apl.getName()).status(apl.isStatus())
                 .type(apl.getType()).tempature(apl.getTempature()).timer(apl.getTimer()).build();
@@ -102,7 +109,7 @@ public class BigElectronicController {
     public List<BigElectronicDTO> getApplianceDevicesByRoom(long roomid) throws IllegalArgumentException{
         if (roomid <= 0L) throw new IllegalArgumentException("Invalid id");
         Room room = roomController.roomExists(roomid);
-        if(userSecurityFunc.getHouseUser(room.getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
+        if(userSecurityFunc.getHouseUser(room.getHouse().getHouseId()).isEmpty()) throw new NotFoundException(msgSrc.getMessage("ccontroller.userpartof",null,Locale.getDefault()));
         Stream<BigElectronicDTO> steam = beDao.findAllByRoom(room).stream()
                 .map(rec-> new BigElectronicDTO.Builder().id(rec.getId()).name(rec.getName()).status(rec.isStatus()).tempature(rec.getTempature()).timer(rec.getTimer()).type(rec.getType()).build());
         return steam.collect(Collectors.toList());
@@ -110,7 +117,7 @@ public class BigElectronicController {
     public void deleteApplianceDeviceById(long deviceid) throws IllegalArgumentException{
         if (deviceid <= 0L) throw new IllegalArgumentException("Invalid id");
         BigElectronicDevice apl = appliancesExists(deviceid);
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(apl.getRoom().getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
+        if(!userSecurityFunc.checkCurrentUserIsAdmin(apl.getRoom().getHouse().getHouseId())) throw new NotFoundException(msgSrc.getMessage("ccontroller.adminofhouse",null,Locale.getDefault()));
         beDao.delete(apl);
     }
     private Optional<Type> getType(Type type){
@@ -118,7 +125,7 @@ public class BigElectronicController {
     }
     private BigElectronicDevice appliancesExists(long deviceid) throws IllegalArgumentException{
         Optional<BigElectronicDevice> device = beDao.findById(deviceid);
-        if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");
+        if (device.isEmpty()) throw new IllegalArgumentException(msgSrc.getMessage("ccontroller.devicedsnte",null,Locale.getDefault()));
         return device.get();
     }
 

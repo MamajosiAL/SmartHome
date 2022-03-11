@@ -19,6 +19,7 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.MessageSource;
 import org.springframework.security.access.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ import java.util.List;
 public class HuisView extends VerticalLayout {
 
         @Autowired
+        private MessageSource msgSrc;
         private final HouseController hc;
 
 
@@ -49,6 +51,8 @@ public class HuisView extends VerticalLayout {
     public HuisView(UserSecurityFunc sec){
         super();
         this.sec = sec;
+        msgSrc = BeanUtil.getBean(MessageSource.class);
+
 
         hc = BeanUtil.getBean(HouseController.class);
 
@@ -72,17 +76,17 @@ public class HuisView extends VerticalLayout {
 
         grid = new Grid<>();
         grid.setItems(new ArrayList<HouseDTO>(0));
-        grid.addColumn(HouseDTO::getName).setHeader("hform.housename");
+        grid.addColumn(HouseDTO::getName).setHeader(msgSrc.getMessage("hform.housename",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(houseDTO -> {
             role = new Span();
             if (houseDTO.isIsowner()){
-                 role.setText("hview.roleO");
+                 role.setText(msgSrc.getMessage("hview.roleO",null,getLocale()));
                  role.getElement().getStyle().set("color", "green");
             }else if (houseDTO.isAdmin()){
                  role.setText("Admin");
                  role.getElement().getStyle().set("color", "Orange");
             }else{
-                role.setText("hview.roleU");
+                role.setText(msgSrc.getMessage("hview.roleU",null,getLocale()));
             }
             return role;
         })).setHeader("Rol");
@@ -105,17 +109,17 @@ public class HuisView extends VerticalLayout {
 
 
 
-        btnCancel = new Button("rview.buttonCa");
+        btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(e -> handleClickCancel(e));
 
-        btnCreate = new Button("rview.buttonCr");
+        btnCreate = new Button(msgSrc.getMessage("rview.buttonCr",null,getLocale()));
         btnCreate.addClickListener(e -> handleClickCreate(e));
 
-        btnUpdate = new Button("hview.save");
+        btnUpdate = new Button(msgSrc.getMessage("hview.save",null,getLocale()));
         btnUpdate.addClickListener(e -> handleClickUpdate(e));
         btnUpdate.setVisible(false);
 
-        btnDelete = new Button("hview.delete");
+        btnDelete = new Button(msgSrc.getMessage("hview.delete",null,getLocale()));
         btnDelete.addClickListener(e -> handleClickDelete(e));
         btnDelete.setVisible(false);
         
@@ -135,13 +139,13 @@ public class HuisView extends VerticalLayout {
 
     private void handleClickCreate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show("hview.validationerror", 3000, Notification.Position.MIDDLE);
+            Notification.show(msgSrc.getMessage("hview.validationerror",null,getLocale()), 3000, Notification.Position.MIDDLE);
             return;
         }
         try {
             HouseDTO houseDTO = new HouseDTO.Builder().name(hfrm.txtnaamhuis.getValue()).build();
             hc.createHouse(houseDTO);
-            Notification.show("hview.createhouse",3000,Notification.Position.TOP_CENTER);
+            Notification.show(msgSrc.getMessage("hview.createhouse",null,getLocale()),3000,Notification.Position.TOP_CENTER);
             hfrm.resetForm();
             loadData();
         } catch (IllegalArgumentException event){
@@ -152,12 +156,12 @@ public class HuisView extends VerticalLayout {
     }
     private void handleClickUpdate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show("hview.validationerror", 3000, Notification.Position.MIDDLE);
+            Notification.show(msgSrc.getMessage("hview.validationerror",null,getLocale()), 3000, Notification.Position.MIDDLE);
         }
         try{
             HouseDTO houseDTO = new HouseDTO.Builder().id(Integer.parseInt(hfrm.lblId.getText())).name(hfrm.txtnaamhuis.getValue()).build();
             hc.updateHouse(houseDTO);
-            Notification.show("hview.houseadjusted",3000,Notification.Position.TOP_CENTER);
+            Notification.show(msgSrc.getMessage("hview.houseadjusted",null,getLocale()),3000,Notification.Position.TOP_CENTER);
             hfrm.resetForm();
             loadData();
             btnCreate.setVisible(true);
@@ -169,7 +173,7 @@ public class HuisView extends VerticalLayout {
     }
 
     private void handleClickDelete(ClickEvent<Button> e) {
-        WarningDialog w = new WarningDialog("hview.error");
+        WarningDialog w = new WarningDialog(msgSrc.getMessage("hview.error",null,getLocale()));
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {

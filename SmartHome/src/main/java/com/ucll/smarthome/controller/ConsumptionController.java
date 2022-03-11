@@ -7,6 +7,7 @@ import com.ucll.smarthome.persistence.entities.Device;
 import com.ucll.smarthome.persistence.repository.ConsumptionDAO;
 import com.ucll.smarthome.persistence.repository.DeviceDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.webjars.NotFoundException;
 
@@ -14,6 +15,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,6 +23,9 @@ import java.util.stream.Stream;
 @Controller
 @Transactional
 public class ConsumptionController {
+
+    @Autowired
+    private MessageSource msgSrc;
 
     private final ConsumptionDAO consumptionDAO;
     private final DeviceDAO deviceDAO;
@@ -34,14 +39,14 @@ public class ConsumptionController {
     }
 
     public void createConsumption(ConsumptionDTO consumptionDTO){
-        if(consumptionDTO == null) throw new IllegalArgumentException("Consumption object is empty");
-        if(consumptionDTO.getDeviceId() <= 0) throw new IllegalArgumentException("Creating consumption failed. Device missing");
+        if(consumptionDTO == null) throw new IllegalArgumentException(msgSrc.getMessage("ccontroler.consumption",null, Locale.getDefault()));
+        if(consumptionDTO.getDeviceId() <= 0) throw new IllegalArgumentException(msgSrc.getMessage("ccontroler.exception.1",null,Locale.getDefault()));
         if(consumptionDTO.getUnit() == null || consumptionDTO.getUnit().isEmpty()) throw new IllegalArgumentException("Creating consumption failed. Unit is empty");
 
         Optional<Device> device = deviceDAO.findById(consumptionDTO.getDeviceId());
 
         if(device.isEmpty()) throw new IllegalArgumentException("Device does not exist");
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(device.get().getRoom().getHouse().getHouseId())) throw new NotFoundException("User is not admin of this house");
+        if(!userSecurityFunc.checkCurrentUserIsAdmin(device.get().getRoom().getHouse().getHouseId())) throw new NotFoundException("ccontroller.adminofhouse");
         Consumption consumption = new Consumption.Builder()
                 .device(deviceDAO.getById(consumptionDTO.getDeviceId()))
                 .aantalMinuten(0)
@@ -61,7 +66,7 @@ public class ConsumptionController {
     public void deviceChangeStatus(Device device){
         List<Consumption> consumptionList = getConsumptionsByDevice(device);
 
-        if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
+        if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("ccontroller.userpartof");
         // status wordt aangezet
         if(!device.isStatus()){
                 for(Consumption c : consumptionList){
@@ -88,7 +93,7 @@ public class ConsumptionController {
         if(device.isEmpty()) throw new IllegalArgumentException("No device found");
         Optional<List<Consumption>> consumptionList = consumptionDAO.findAllByDevice(device.get());
 
-        if(userSecurityFunc.getHouseUser(device.get().getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of this house");
+        if(userSecurityFunc.getHouseUser(device.get().getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("ccontroller.userpartof");
 
         if(device.get().isStatus()){
             // if device is on : reset startdatumentijd & calculate minutes of consumption per day
@@ -113,7 +118,7 @@ public class ConsumptionController {
 
     public List<Consumption> getConsumptionsByDevice(Device device){
         Optional<List<Consumption>> consumptionList = consumptionDAO.findAllByDevice(device);
-        if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of this house");
+        if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("ccontroller.userpartof");
 
         if(consumptionList.isEmpty()) throw new IllegalArgumentException("This device has no consumption");
         return consumptionList.get();
@@ -122,7 +127,7 @@ public class ConsumptionController {
     public Consumption consumptionExists(long consumptionid){
         Optional<Consumption> consumption = consumptionDAO.findById(consumptionid);
         if(consumption.isEmpty()) throw new IllegalArgumentException("Consumption doesn't exist");
-        if(userSecurityFunc.getHouseUser(consumption.get().getDevice().getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of this house");
+        if(userSecurityFunc.getHouseUser(consumption.get().getDevice().getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("ccontroller.userpartof");
         return consumption.get();
     }
 

@@ -63,7 +63,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         img.setHeight("30px");
         img.setId("aligneer-rechts");
 
-        logoutButton = new Button("mview.logout");
+        logoutButton = new Button(msgSrc.getMessage("mview.logout",null,getLocale()));
         logoutButton.addClickListener(buttonClickEvent -> handleclickEvent(buttonClickEvent));
         logoutButton.setHeight("30px");
         logoutButton.setId("aligneer-rechts");

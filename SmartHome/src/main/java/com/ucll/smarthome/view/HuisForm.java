@@ -1,23 +1,30 @@
 package com.ucll.smarthome.view;
 
 
+import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.textfield.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
 public class HuisForm  extends FormLayout {
+
+    @Autowired
+    private MessageSource msgSrc;
     public Label lblId;
     public TextField txtnaamhuis;
 
     public HuisForm(){
         super();
+        msgSrc = BeanUtil.getBean(MessageSource.class);
         lblId = new Label("");
         txtnaamhuis = new TextField();
         txtnaamhuis.setRequired(true);
         txtnaamhuis.setMaxLength(128);
-        txtnaamhuis.setErrorMessage("rview.errormessage");
+        txtnaamhuis.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
 
-        addFormItem(txtnaamhuis, "hform.housename");
+        addFormItem(txtnaamhuis, msgSrc.getMessage("hform.housename",null,getLocale()));
     }
 
     public void resetForm(){
