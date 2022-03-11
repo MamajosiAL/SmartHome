@@ -26,6 +26,7 @@ import com.vaadin.flow.router.NotFoundException;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.MessageSource;
 import org.springframework.security.access.AccessDeniedException;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import java.util.List;
 public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         @Autowired
+        private MessageSource msgSrc;
         private final HouseController hc;
         private ManageUsersView mvw;
 

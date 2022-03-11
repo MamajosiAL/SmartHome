@@ -89,7 +89,7 @@ public class RegisterView extends VerticalLayout {
         emailField = new EmailField("Email");
         emailField.setRequiredIndicatorVisible(true);
         emailField.setPattern("[^@\\s]+@[^@\\s]+\\.[^@\\s]+");
-        emailField.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()),"Foutieve email");
+        emailField.setErrorMessage(msgSrc.getMessage("rview.errormessagemail",null,getLocale()));
         password = new PasswordField(msgSrc.getMessage("lview.password",null,getLocale()));
         password.setRequired(true);
         password.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
