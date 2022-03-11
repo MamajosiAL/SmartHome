@@ -50,4 +50,6 @@
     <string name="rooms">Rooms</string>
     <string name="addRoomToHouse">Add room to house</string>
     <string name="roomDefaultTitle">room title</string>
+    <string name="deviceTypes">Device type</string>
+    <string name="devices">Devices</string>
 </resources>

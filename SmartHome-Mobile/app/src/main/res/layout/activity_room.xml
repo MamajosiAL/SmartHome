@@ -26,39 +26,59 @@
         <TextView
             android:id="@+id/titleRoom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
             android:fontFamily="sans-serif"
             android:text="@string/roomDefaultTitle"
             android:textAlignment="center"
             android:textColor="@color/textColorBlue"
             android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtDeviceCategories"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtDeviceCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/deviceTypes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleRoom" />
 
         <Spinner
             android:id="@+id/spinDeviceCategory"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="80dp" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDeviceCategories" />
+
+        <TextView
+            android:id="@+id/txtDevices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/devices"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinDeviceCategory" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDevices"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="64dp"
             android:background="@color/white"
@@ -66,15 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinDeviceCategory" />
-
-        <TextView
-            android:id="@+id/txtDeviceCategories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/spinDeviceCategory"
-            tools:layout_editor_absoluteX="16dp" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDevices" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
