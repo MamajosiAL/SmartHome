@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,11 +22,8 @@ import java.util.List;
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DevicesAdapter;
-import be.ucll.java.mobile.smarthome_mobile.api.room.RoomsAdapter;
-import be.ucll.java.mobile.smarthome_mobile.api.room.RoomsApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
-import be.ucll.java.mobile.smarthome_mobile.pojo.Room;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.NavigationManager;
 import retrofit2.Call;
@@ -37,9 +35,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @SuppressWarnings("ALL")
 public class RoomActivity extends AppCompatActivity implements Callback<List<Device>> {
     private final String TAG = this.getClass().getSimpleName();
-    private RecyclerView recyclerViewRooms;
+    private RecyclerView recyclerViewDevices;
     private TextView title;
     private ImageView editButton;
+    private Spinner dropdownList;
     private ProgressDialog progressDialog;
     List<Device> devicesInRoomFromHouse;
 
@@ -65,7 +64,9 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
             if(houseId==0){
                 throw new NullPointerException("The id of the selected house is 0");
             }
+            switch (dropdownList.getSelectedItem()){
 
+            }
             //TODO
             Call<List<Device>> call = deviceApiInterface.(houseId, AuthorizationManager.getInstance(this).getSessionId());
             call.enqueue(this);
@@ -79,10 +80,10 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
     private void setDataInRecyclerView() {
         // set a LinearLayoutManager with default vertical orientation
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerViewRooms.setLayoutManager(linearLayoutManager);
+        recyclerViewDevices.setLayoutManager(linearLayoutManager);
         // call the constructor of housesAdapter to send the reference and data to Adapter
         DevicesAdapter roomsAdapter = new DevicesAdapter(this, devicesInRoomFromHouse);
-        recyclerViewRooms.setAdapter(roomsAdapter); // set the Adapter to RecyclerView
+        recyclerViewDevices.setAdapter(roomsAdapter); // set the Adapter to RecyclerView
     }
 
     @Override
@@ -95,8 +96,11 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
         title = findViewById(R.id.titleHouse);
 
         if (AuthorizationManager.getInstance(this).isSignedIn()) {
-            recyclerViewRooms = findViewById(R.id.recyclerViewHouses);
-            title.setText(this.getIntent().getStringExtra("houseName"));
+            dropdownList = findViewById(R.id.spinDeviceCategory);
+            dropdownList.setAdapter();
+
+            recyclerViewDevices = findViewById(R.id.recyclerViewDevices);
+            title.setText(this.getIntent().getStringExtra("roomName"));
             try {
                 //fabAddRoom for adding a new room to house
                 FloatingActionButton fab = findViewById(R.id.fabAddRoomToHouse);
