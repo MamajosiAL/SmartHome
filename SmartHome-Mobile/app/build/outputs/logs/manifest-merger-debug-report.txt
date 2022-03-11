@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-40:12
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-44:12
+INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-44:12
+INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-44:12
+INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-44:12
 MERGED from [androidx.navigation:navigation-ui:2.4.1] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\96f5262390394908c6848e1e610a8f9d\navigation-ui-2.4.1\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.material:material:1.4.0-beta01] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\9f605f0d3e58e8e7f501a34492cb83dc\material-1.4.0-beta01\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\f4fe4af47519b2cdd660568790d1ca72\constraintlayout-2.0.4\AndroidManifest.xml:2:1-11:12
@@ -57,20 +57,20 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.1] C:\Users\math
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\a462ede07cd7d1eb5da28269f03daca9\lifecycle-livedata-core-2.3.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\f76f4ae5dad9716757d09202b02085f6\core-runtime-2.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\05eb433465cf6097d858961ee187255b\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
-INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-44:12
+INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-44:12
+INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-44:12
 	package
 		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:3:5-51
 		INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml
 		INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-40:12
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-44:12
 		INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-40:12
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:1-44:12
 		INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:2:11-69
@@ -79,7 +79,7 @@ ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\An
 	android:name
 		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:7:5-38:19
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:7:5-42:19
 MERGED from [com.google.android.material:material:1.4.0-beta01] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\9f605f0d3e58e8e7f501a34492cb83dc\material-1.4.0-beta01\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.4.0-beta01] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\9f605f0d3e58e8e7f501a34492cb83dc\material-1.4.0-beta01\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\mathi\.gradle\caches\transforms-2\files-2.1\f4fe4af47519b2cdd660568790d1ca72\constraintlayout-2.0.4\AndroidManifest.xml:9:5-20
@@ -106,60 +106,76 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\ma
 		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:13:9-53
 	android:usesCleartextTraffic
 		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:14:9-44
+activity#be.ucll.java.mobile.smarthome_mobile.AddRoomActivity
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:15:9-62
+	android:name
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:15:19-50
+activity#be.ucll.java.mobile.smarthome_mobile.DeviceActivity
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:16:9-52
+	android:name
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:16:19-49
+activity#be.ucll.java.mobile.smarthome_mobile.RoomActivity
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:17:9-50
+	android:name
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:17:19-47
+activity#be.ucll.java.mobile.smarthome_mobile.HouseActivity
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:18:9-51
+	android:name
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:18:19-48
 activity#be.ucll.java.mobile.smarthome_mobile.AddHouseActivity
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:15:9-63
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:19:9-54
 	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:15:19-51
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:19:19-51
 activity#be.ucll.java.mobile.smarthome_mobile.LogOutActivity
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:16:9-19:72
-	android:label
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:18:13-59
-	android:theme
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:19:13-69
-	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:17:13-43
-activity#be.ucll.java.mobile.smarthome_mobile.AccountActivity
 ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:20:9-23:72
 	android:label
 		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:22:13-59
 	android:theme
 		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:23:13-69
 	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:21:13-44
-activity#be.ucll.java.mobile.smarthome_mobile.LoginActivity
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:21:13-43
+activity#be.ucll.java.mobile.smarthome_mobile.AccountActivity
 ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:24:9-27:72
 	android:label
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:26:13-57
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:26:13-59
 	android:theme
 		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:27:13-69
 	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:25:13-42
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:25:13-44
+activity#be.ucll.java.mobile.smarthome_mobile.LoginActivity
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:28:9-31:72
+	android:label
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:30:13-57
+	android:theme
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:31:13-69
+	android:name
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:29:13-42
 activity#be.ucll.java.mobile.smarthome_mobile.ManageActivity
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:28:9-52
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:32:9-52
 	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:28:19-49
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:32:19-49
 activity#be.ucll.java.mobile.smarthome_mobile.ConsumptionActivity
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:29:9-57
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:33:9-57
 	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:29:19-54
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:33:19-54
 activity#be.ucll.java.mobile.smarthome_mobile.RegisterActivity
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:30:9-54
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:34:9-54
 	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:30:19-51
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:34:19-51
 activity#be.ucll.java.mobile.smarthome_mobile.MainActivity
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:31:9-37:20
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:35:9-41:20
 	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:31:19-47
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:35:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:32:13-36:29
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:36:13-40:29
 action#android.intent.action.MAIN
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:33:17-69
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:37:17-69
 	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:33:25-66
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:37:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:35:17-77
+ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:39:17-77
 	android:name
-		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:35:27-74
+		ADDED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml:39:27-74
 uses-sdk
 INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\AndroidManifest.xml
