@@ -60,6 +60,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
     public HouseView(UserSecurityFunc sec){
         super();
         this.sec = sec;
+        msgSrc = BeanUtil.getBean(MessageSource.class);
 
         hc = BeanUtil.getBean(HouseController.class);
 
@@ -83,17 +84,17 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         grid = new Grid<>();
         grid.setItems(new ArrayList<HouseDTO>(0));
-        grid.addColumn(HouseDTO::getName).setHeader("hform.housename");
+        grid.addColumn(HouseDTO::getName).setHeader(msgSrc.getMessage("hform.housename",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(houseDTO -> {
             role = new Span();
             if (houseDTO.isIsowner()){
-                 role.setText("hview.roleO");
+                 role.setText(msgSrc.getMessage("hview.roleO",null,getLocale()));
                  role.getElement().getStyle().set("color", "green");
             }else if (houseDTO.isAdmin()){
                  role.setText("Admin");
                  role.getElement().getStyle().set("color", "Orange");
             }else{
-                role.setText("hview.roleU");
+                role.setText(msgSrc.getMessage("hview.roleU",null,getLocale()));
             }
             return role;
         })).setHeader("Rol");
@@ -105,7 +106,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
             return btnManageUsers;
             }
             return new Span();
-        })).setHeader("Beheer gebruikers").setTextAlign(ColumnTextAlign.CENTER);
+        })).setHeader(msgSrc.getMessage("hview.beheer",null,getLocale())).setTextAlign(ColumnTextAlign.CENTER);
         grid.setHeightFull();
 
         grid.asSingleSelect().addValueChangeListener(event -> populateHouseForm(event.getValue()));
