@@ -3,6 +3,7 @@ package com.ucll.smarthome.dto;
 public class House_UserDTO {
 
     private long houseid;
+    private long userid;
     private boolean isadmin;
 
     public House_UserDTO() {
@@ -10,9 +11,18 @@ public class House_UserDTO {
 
     private House_UserDTO(Builder builder) {
         setHouseid(builder.houseid);
+        setUserid(builder.userid);
         setIsadmin(builder.isadmin);
     }
 
+
+    public long getUserid() {
+        return userid;
+    }
+
+    public void setUserid(long userid) {
+        this.userid = userid;
+    }
 
     public long getHouseid() {
         return houseid;
@@ -33,13 +43,19 @@ public class House_UserDTO {
 
     public static final class Builder {
         private long houseid;
+        private long userid;
         private boolean isadmin;
 
         public Builder() {
         }
 
-        public Builder id(long val) {
+        public Builder houseid(long val) {
             houseid = val;
+            return this;
+        }
+
+        public Builder userid(long val) {
+            userid = val;
             return this;
         }
 

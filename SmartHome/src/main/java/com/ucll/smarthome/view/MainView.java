@@ -14,10 +14,8 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.dom.DomEvent;
+import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import javax.annotation.PostConstruct;
 import java.util.Locale;
 
-@Route("main")
+@Route("")
 @PageTitle("Home")
 @CssImport("styles/main-view.css")
 public class MainView extends AppLayout  implements BeforeEnterObserver{
@@ -36,7 +34,8 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
     private Locale loc;
     private final UserSecurityFunc sec;
 
-    private HuisView hview;
+    private HouseView hview;
+    private ManageUsersView muView;
     private ConsumptieView cView;
     private BeheerView bView;
 
@@ -74,11 +73,13 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
                 new Html("<span>&nbsp;&nbsp;</span>"),
                 new Icon(VaadinIcon.HOME),/*img,*/ logoutButton);
         tab1 = new Tab(tabname1);
-
         tab2 = new Tab(tabname2);
         //hier misschien nog dat ge tab 3 alleen ziet als admin?
         tab3 = new Tab(tabname3);
         tabs = new Tabs(tab1,tab2,tab3);
+        tab1.getElement().addEventListener("click", event ->{
+            handleclickHouses(event);
+        });
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         tabs.addSelectedChangeListener(event ->{
             handleTabClicked(event);
@@ -86,11 +87,18 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         addToDrawer(tabs);
     }
 
+    private void handleclickHouses(DomEvent event) {
+
+        setContent(hview);
+        getUI().ifPresent(ui -> ui.navigate("houses"));
+    }
+
     private void handleTabClicked(Tabs.SelectedChangeEvent event) {
         Tab selTab = tabs.getSelectedTab();
         if(selTab.getLabel() != null){
             if(selTab.getLabel().equals(tabname1)){
                 setContent(hview);
+                getUI().ifPresent(ui-> ui.navigate("houses"));
             }else if(selTab.getLabel().equals(tabname2)){
                 setContent(cView);
             }else{
@@ -99,10 +107,9 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         }
     }
 
-
     @PostConstruct
     private void setMainViewContent() {
-        hview = new HuisView(sec);
+        hview = new HouseView(sec);
         hview.loadData();
 
         cView = new ConsumptieView();
@@ -124,7 +131,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
 
     @Override
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent){
-
+         hview.loadData();
         //if(){
            // BeforeEnterEvent.rerouteTo("login");
         //}

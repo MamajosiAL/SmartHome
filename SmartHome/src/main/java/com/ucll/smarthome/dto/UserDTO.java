@@ -7,6 +7,7 @@ public class UserDTO {
     private String firstname;
     private String email;
     private String password;
+    private boolean isadmin;
 
 
     public UserDTO() {
@@ -19,8 +20,17 @@ public class UserDTO {
         setFirstname(builder.firstname);
         setEmail(builder.email);
         setPassword(builder.password);
+        setIsadmin(builder.isadmin);
     }
 
+
+    public boolean isIsadmin() {
+        return isadmin;
+    }
+
+    public void setIsadmin(boolean isadmin) {
+        this.isadmin = isadmin;
+    }
 
     public long getId() {
         return id;
@@ -70,6 +80,7 @@ public class UserDTO {
         this.password = password;
     }
 
+
     public static final class Builder {
         private long id;
         private String username;
@@ -77,6 +88,7 @@ public class UserDTO {
         private String firstname;
         private String email;
         private String password;
+        private boolean isadmin;
 
         public Builder() {
         }
@@ -108,6 +120,11 @@ public class UserDTO {
 
         public Builder password(String val) {
             password = val;
+            return this;
+        }
+
+        public Builder isadmin(boolean val) {
+            isadmin = val;
             return this;
         }
 

@@ -130,20 +130,23 @@ public class UserController {
      * @throws IllegalArgumentException if something goes wrong with the info what went wrong
      */
     public List<UserDTO> getUsersByHouse(long houseid) throws IllegalArgumentException{
-        if (houseid <= 0L) throw new IllegalArgumentException("Invalid id");
+        if (houseid <= 0L) throw new IllegalArgumentException("Invalid id " + houseid );
         if(userSecurityFunc.getHouseUser(houseid).isEmpty()) throw new NotFoundException("User is not part of this house") ;
 
+        long userid = userSecurityFunc.getLoggedInUserId();
         Optional<House> h = houseDAO.findById(houseid) ;
         if (h.isEmpty()){
             throw new IllegalArgumentException("House not found to get users");
         }else{
               Stream<UserDTO>  stream =  house_userController.getByHouse(h.get()).stream()
+                      .filter(rec -> rec.getUser().getId() != userid)
                       .map(rec -> new UserDTO.Builder()
                               .id(rec.getUser().getId())
                               .name(rec.getUser().getName())
                               .firstname(rec.getUser().getFirstname())
                               .username(rec.getUser().getUsername())
                               .email(rec.getUser().getEmail())
+                              .isadmin(rec.isAdmin())
                               .build());
               return stream.collect(Collectors.toList());
         }

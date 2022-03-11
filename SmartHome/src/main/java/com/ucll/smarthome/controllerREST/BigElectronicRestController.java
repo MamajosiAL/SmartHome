@@ -33,7 +33,7 @@ public class BigElectronicRestController {
     @PutMapping("/update")
     public ResponseEntity updateApplianceDevice(@RequestBody BigElectronicDTO beDTO){
         try {
-            beController.updateApplianceDevice(beDTO);
+            beController.updateBeDeviceDevice(beDTO);
             return new ResponseEntity("Appliance device successfully updated",HttpStatus.OK);
 
         }catch (IllegalArgumentException ex){

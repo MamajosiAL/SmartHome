@@ -44,8 +44,7 @@ public class RegisterView extends VerticalLayout {
     private TextField txtFirstname;
     private TextField txtLasname;
     private TextField txtUsername;
-    private TextField txtEmail;
-    private EmailField email;
+    private EmailField emailField;
     private PasswordField password;
     private PasswordField confirmPassword;
     private Button buttonCreate;
@@ -87,10 +86,10 @@ public class RegisterView extends VerticalLayout {
         txtUsername = new TextField(msgSrc.getMessage("lview.username",null,getLocale()));
         txtUsername.setRequired(true);
         txtUsername.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
-
-        txtEmail = new TextField("Email");
-        txtEmail.setRequired(true);
-        txtEmail.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
+        emailField = new EmailField("Email");
+        emailField.setRequiredIndicatorVisible(true);
+        emailField.setPattern("[^@\\s]+@[^@\\s]+\\.[^@\\s]+");
+        emailField.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()),"Foutieve email");
         password = new PasswordField(msgSrc.getMessage("lview.password",null,getLocale()));
         password.setRequired(true);
         password.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
@@ -103,7 +102,7 @@ public class RegisterView extends VerticalLayout {
         buttonCreate.addClickListener(this::handelclickEventCreate);
 
         registerForm.add(
-             txtFirstname, txtLasname, txtUsername, email,password,confirmPassword,buttonCancel,buttonCreate
+             txtFirstname, txtLasname, txtUsername, emailField,password,confirmPassword,buttonCancel,buttonCreate
         );
         registerForm.setResponsiveSteps(new FormLayout.ResponsiveStep("0",2));
 
@@ -116,12 +115,11 @@ public class RegisterView extends VerticalLayout {
         try{
             if (!password.getValue().equals(confirmPassword.getValue())) throw new IllegalArgumentException(msgSrc.getMessage("rview.exception",null,getLocale()));
                 UserDTO userDTO = new UserDTO.Builder().username(txtUsername.getValue()).firstname(txtFirstname.getValue()).name(txtLasname.getValue())
-                    .email(txtEmail.getValue()).password(password.getValue()).build();
+                    .email(emailField.getValue()).password(password.getValue()).build();
 
             userController.createUser(userDTO);
             getUI().ifPresent(ui -> ui.navigate("login"));
         }catch (IllegalArgumentException ex){
-            Notification.show(ex.getMessage(), 5000, Notification.Position.MIDDLE).addThemeVariants(NotificationVariant.LUMO_ERROR);
             txtErrorMessage.setVisible(true);
             txtErrorMessage.setText(ex.getMessage());
 
@@ -132,8 +130,6 @@ public class RegisterView extends VerticalLayout {
     private void handelclickEventCancel(ClickEvent<Button> buttonClickEvent) {
         getUI().ifPresent(ui -> ui.navigate("login"));
     }
-
-
 }
 
 
