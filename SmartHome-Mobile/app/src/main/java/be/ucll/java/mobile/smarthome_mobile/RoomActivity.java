@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,8 +24,10 @@ import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DevicesAdapter;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
+import be.ucll.java.mobile.smarthome_mobile.pojo.BigElectro;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
+import be.ucll.java.mobile.smarthome_mobile.util.DeviceCategory;
 import be.ucll.java.mobile.smarthome_mobile.util.NavigationManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,21 +60,39 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
 
             DeviceApiInterface deviceApiInterface = retrofit.create(DeviceApiInterface.class);
 
-            //fetch houseId
-            int houseId = this.getIntent().getIntExtra("houseId",0);
-
-            //check if houseId is not null
-            if(houseId==0){
-                throw new NullPointerException("The id of the selected house is 0");
+            //fetch roomId
+            int roomId = this.getIntent().getIntExtra("roomChineesId",0);
+            //check if roomId is not null
+            if(roomId==0){
+                throw new NullPointerException("The id of the selected room is not found");
             }
-            switch (dropdownList.getSelectedItem()){
+            String deviceType = DeviceCategory.BIG_ELECTRO.getName();
+            String selectedItem = "";
+            Call<List<Device>> call = null;
+            try {
 
+                selectedItem = (String) dropdownList.getSelectedItem();
+                if (DeviceCategory.BIG_ELECTRO.getName().equals(selectedItem)) {
+                    DeviceCategory.BIG_ELECTRO.getName();
+                    call = deviceApiInterface.getBigElektroInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
+                } else if (DeviceCategory.GENERIC.getName().equals(selectedItem)) {
+                    DeviceCategory.GENERIC.getName();
+                    call = deviceApiInterface.getDevicesInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
+                } else if (DeviceCategory.MEDIA.getName().equals(selectedItem)) {
+                    DeviceCategory.MEDIA.getName();
+                    call = deviceApiInterface.getBigElektroInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
+                } else if (DeviceCategory.SENSOR.getName().equals(selectedItem)) {
+                    DeviceCategory.SENSOR.getName();
+                    call = deviceApiInterface.getBigElektroInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
+                }else {
+                    throw new DataNotFoundException("selected ielected item is not valid or empty");
+                }
+            }catch (Exception e){
+                Log.e(TAG,e.getMessage());
             }
-            //TODO
-            Call<List<Device>> call = deviceApiInterface.(houseId, AuthorizationManager.getInstance(this).getSessionId());
             call.enqueue(this);
         }catch (Exception e){
-            throw new DataNotFoundException(e.getCause());
+            throw new DataNotFoundException(e.getMessage());
         }
 
 
@@ -89,21 +110,22 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_house);
+        setContentView(R.layout.activity_room);
 
         NavigationManager.initialise(this);
 
-        title = findViewById(R.id.titleHouse);
+        title = findViewById(R.id.titleRoom);
 
         if (AuthorizationManager.getInstance(this).isSignedIn()) {
             dropdownList = findViewById(R.id.spinDeviceCategory);
-            dropdownList.setAdapter();
+            ArrayAdapter spinnerAdapter = new ArrayAdapter(getApplicationContext(),R.layout.spinner_item, DeviceCategory.values());
+            dropdownList.setAdapter(spinnerAdapter);
 
             recyclerViewDevices = findViewById(R.id.recyclerViewDevices);
             title.setText(this.getIntent().getStringExtra("roomName"));
             try {
                 //fabAddRoom for adding a new room to house
-                FloatingActionButton fab = findViewById(R.id.fabAddRoomToHouse);
+                FloatingActionButton fab = findViewById(R.id.fabAddDevice);
                 fab.setOnClickListener(view -> {
                     Intent intent = new Intent(this, AddDeviceActivity.class);
                     intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));

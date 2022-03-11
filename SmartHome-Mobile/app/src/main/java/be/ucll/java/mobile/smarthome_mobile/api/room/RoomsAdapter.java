@@ -40,18 +40,18 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
         holder.name.setText(roomsFromHouse.get(position).getName());
         // implement setONCLickListener on itemView
         holder.itemView.setOnClickListener(view -> {
-            // display a toast with user name
             Intent intent = new Intent(context, RoomActivity.class);
-            intent.putExtra("roomId", roomsFromHouse.get(position).getId());
+            intent.putExtra("roomChineesId", roomsFromHouse.get(position).getId());
             intent.putExtra("roomName", roomsFromHouse.get(position).getName());
             context.startActivity(intent);
+            // display a toast with user name
             //Toast.makeText(context, roomsFromHouse.get(position).getName(), Toast.LENGTH_SHORT).show();
         });
     }
 
     @Override
     public int getItemCount() {
-        return roomsFromHouse !=null? roomsFromHouse.size():0; // size of the list items
+        return roomsFromHouse !=null ? roomsFromHouse.size():0; // size of the list items
     }
 
 

@@ -26,6 +26,18 @@ public class Device {
     @Expose
     private Boolean status;
 
+    public Device(){
+
+    }
+
+    public Device(Long categoryid, Long id, String name, Long roomid, Boolean status) {
+        this.categoryid = categoryid;
+        this.id = id;
+        this.name = name;
+        this.roomid = roomid;
+        this.status = status;
+    }
+
     public Long getCategoryid() {
         return categoryid;
     }

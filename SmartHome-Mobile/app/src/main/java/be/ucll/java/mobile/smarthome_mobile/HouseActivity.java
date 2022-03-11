@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
@@ -23,6 +24,7 @@ import be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter;
 import be.ucll.java.mobile.smarthome_mobile.api.room.RoomsAdapter;
 import be.ucll.java.mobile.smarthome_mobile.api.room.RoomsApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
+import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
 import be.ucll.java.mobile.smarthome_mobile.pojo.House;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Room;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
@@ -70,8 +72,6 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
         }catch (Exception e){
             throw new DataNotFoundException(e.getCause());
         }
-
-
     }
 
     private void setDataInRecyclerView() {
@@ -91,9 +91,10 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
         NavigationManager.initialise(this);
 
         title = findViewById(R.id.titleHouse);
+        roomsFromHouse = new ArrayList<>();
 
         if (AuthorizationManager.getInstance(this).isSignedIn()) {
-            recyclerViewRooms = findViewById(R.id.recyclerViewHouses);
+            recyclerViewRooms = findViewById(R.id.recyclerViewRooms);
             title.setText(this.getIntent().getStringExtra("houseName"));
             try {
                 //fabAddRoom for adding a new room to house
@@ -104,12 +105,12 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                 });
-                editButton.setOnClickListener(view ->{
+                /*editButton.setOnClickListener(view ->{
                     Intent intent = new Intent(this, AddRoomActivity.class);
                     intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));
                     startActivity(intent);
                     overridePendingTransition(0, 0);
-                });
+                });*/
                 getRoomsListData();
             } catch (Exception e) {
                 e.printStackTrace();

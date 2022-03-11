@@ -1,3 +1,5 @@
+be/ucll/java/mobile/smarthome_mobile/util/DeviceCategory.java
+ be.ucll.java.mobile.smarthome_mobile.util.DeviceCategory
 androidx/transition/R.java
  androidx.transition.R
  androidx.transition.R$anim
@@ -95,8 +97,10 @@ androidx/asynclayoutinflater/R.java
  androidx.asynclayoutinflater.R$styleable
 androidx/interpolator/R.java
  androidx.interpolator.R
-be/ucll/java/mobile/smarthome_mobile/api/room/RoomsAdapter.java
- be.ucll.java.mobile.smarthome_mobile.api.room.RoomsAdapter
+be/ucll/java/mobile/smarthome_mobile/api/consumption/ConsumptionApiInterface.java
+ be.ucll.java.mobile.smarthome_mobile.api.consumption.ConsumptionApiInterface
+be/ucll/java/mobile/smarthome_mobile/LoginActivity.java
+ be.ucll.java.mobile.smarthome_mobile.LoginActivity
 androidx/core/R.java
  androidx.core.R
  androidx.core.R$attr
@@ -119,6 +123,8 @@ be/ucll/java/mobile/smarthome_mobile/AccountActivity.java
 be/ucll/java/mobile/smarthome_mobile/api/house/HousesAdapter.java
  be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter
  be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter$1
+be/ucll/java/mobile/smarthome_mobile/AddDeviceActivity.java
+ be.ucll.java.mobile.smarthome_mobile.AddDeviceActivity
 be/ucll/java/mobile/smarthome_mobile/DeviceActivity.java
  be.ucll.java.mobile.smarthome_mobile.DeviceActivity
 androidx/dynamicanimation/R.java
@@ -174,6 +180,8 @@ be/ucll/java/mobile/smarthome_mobile/api/device/DevicesViewHolder.java
  be.ucll.java.mobile.smarthome_mobile.api.device.DevicesViewHolder
 be/ucll/java/mobile/smarthome_mobile/util/NavigationManager.java
  be.ucll.java.mobile.smarthome_mobile.util.NavigationManager
+be/ucll/java/mobile/smarthome_mobile/api/consumption/ConsumptionViewHolder.java
+ be.ucll.java.mobile.smarthome_mobile.api.consumption.ConsumptionViewHolder
 androidx/swiperefreshlayout/R.java
  androidx.swiperefreshlayout.R
  androidx.swiperefreshlayout.R$attr
@@ -205,6 +213,11 @@ be/ucll/java/mobile/smarthome_mobile/api/house/HousesViewHolder.java
  be.ucll.java.mobile.smarthome_mobile.api.house.HousesViewHolder
 be/ucll/java/mobile/smarthome_mobile/BuildConfig.java
  be.ucll.java.mobile.smarthome_mobile.BuildConfig
+be/ucll/java/mobile/smarthome_mobile/api/Media/MediaViewHolder.java
+ be.ucll.java.mobile.smarthome_mobile.api.media.MediaViewHolder
+be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorAdapter.java
+ be.ucll.java.mobile.smarthome_mobile.api.sensor.SensorAdapter
+ be.ucll.java.mobile.smarthome_mobile.api.sensor.SensorAdapter$1
 androidx/legacy/coreui/R.java
  androidx.legacy.coreui.R
  androidx.legacy.coreui.R$attr
@@ -219,8 +232,8 @@ androidx/legacy/coreui/R.java
  androidx.legacy.coreui.R$styleable
 be/ucll/java/mobile/smarthome_mobile/exception/SignupException.java
  be.ucll.java.mobile.smarthome_mobile.exception.SignupException
-be/ucll/java/mobile/smarthome_mobile/pojo/Media.java
- be.ucll.java.mobile.smarthome_mobile.pojo.Media
+be/ucll/java/mobile/smarthome_mobile/AddRoomActivity.java
+ be.ucll.java.mobile.smarthome_mobile.AddRoomActivity
 androidx/customview/R.java
  androidx.customview.R
  androidx.customview.R$attr
@@ -261,6 +274,9 @@ androidx/window/R.java
  androidx.window.R$styleable
 androidx/localbroadcastmanager/R.java
  androidx.localbroadcastmanager.R
+be/ucll/java/mobile/smarthome_mobile/api/Media/MediaAdapter.java
+ be.ucll.java.mobile.smarthome_mobile.api.media.MediaAdapter
+ be.ucll.java.mobile.smarthome_mobile.api.media.MediaAdapter$1
 be/ucll/java/mobile/smarthome_mobile/ConsumptionActivity.java
  be.ucll.java.mobile.smarthome_mobile.ConsumptionActivity
 be/ucll/java/mobile/smarthome_mobile/api/ViewLinker.java
@@ -322,14 +338,19 @@ androidx/vectordrawable/R.java
  androidx.vectordrawable.R$styleable
 be/ucll/java/mobile/smarthome_mobile/pojo/Device.java
  be.ucll.java.mobile.smarthome_mobile.pojo.Device
-be/ucll/java/mobile/smarthome_mobile/RoomActivity.java
- be.ucll.java.mobile.smarthome_mobile.RoomActivity
+be/ucll/java/mobile/smarthome_mobile/pojo/Media.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.Media
 be/ucll/java/mobile/smarthome_mobile/pojo/Sensor.java
  be.ucll.java.mobile.smarthome_mobile.pojo.Sensor
 be/ucll/java/mobile/smarthome_mobile/api/house/HouseApiInterface.java
  be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface
 be/ucll/java/mobile/smarthome_mobile/LogOutActivity.java
  be.ucll.java.mobile.smarthome_mobile.LogOutActivity
+be/ucll/java/mobile/smarthome_mobile/api/BigElectro/BigElektroAdapter.java
+ be.ucll.java.mobile.smarthome_mobile.api.bigelectro.BigElektroAdapter
+ be.ucll.java.mobile.smarthome_mobile.api.bigelectro.BigElektroAdapter$1
+be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorViewHolder.java
+ be.ucll.java.mobile.smarthome_mobile.api.sensor.SensorViewHolder
 androidx/activity/R.java
  androidx.activity.R
  androidx.activity.R$attr
@@ -371,6 +392,8 @@ androidx/versionedparcelable/R.java
 androidx/lifecycle/ktx/R.java
  androidx.lifecycle.ktx.R
  androidx.lifecycle.ktx.R$id
+be/ucll/java/mobile/smarthome_mobile/api/BigElectro/BigElektroViewHolder.java
+ be.ucll.java.mobile.smarthome_mobile.api.bigelectro.BigElektroViewHolder
 androidx/lifecycle/viewmodel/R.java
  androidx.lifecycle.viewmodel.R
  androidx.lifecycle.viewmodel.R$id
@@ -394,7 +417,6 @@ androidx/navigation/common/R.java
  androidx.navigation.common.R$styleable
 be/ucll/java/mobile/smarthome_mobile/api/device/DevicesAdapter.java
  be.ucll.java.mobile.smarthome_mobile.api.device.DevicesAdapter
- be.ucll.java.mobile.smarthome_mobile.api.device.DevicesAdapter$1
 androidx/cursoradapter/R.java
  androidx.cursoradapter.R
 be/ucll/java/mobile/smarthome_mobile/api/Connection.java
@@ -426,14 +448,17 @@ androidx/documentfile/R.java
  androidx.documentfile.R
 be/ucll/java/mobile/smarthome_mobile/pojo/Login.java
  be.ucll.java.mobile.smarthome_mobile.pojo.Login
+be/ucll/java/mobile/smarthome_mobile/pojo/Consumption.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.Consumption
 androidx/lifecycle/viewmodel/ktx/R.java
  androidx.lifecycle.viewmodel.ktx.R
  androidx.lifecycle.viewmodel.ktx.R$id
 be/ucll/java/mobile/smarthome_mobile/RegisterActivity.java
  be.ucll.java.mobile.smarthome_mobile.RegisterActivity
  be.ucll.java.mobile.smarthome_mobile.RegisterActivity$1
-be/ucll/java/mobile/smarthome_mobile/util/AuthorizationManager.java
- be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager
+be/ucll/java/mobile/smarthome_mobile/api/consumption/ConsumptionAdapter.java
+ be.ucll.java.mobile.smarthome_mobile.api.consumption.ConsumptionAdapter
+ be.ucll.java.mobile.smarthome_mobile.api.consumption.ConsumptionAdapter$1
 androidx/loader/R.java
  androidx.loader.R
  androidx.loader.R$attr
@@ -466,6 +491,8 @@ com/google/android/material/R.java
  com.google.android.material.R$xml
 androidx/annotation/experimental/R.java
  androidx.annotation.experimental.R
+be/ucll/java/mobile/smarthome_mobile/pojo/BigElectro.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.BigElectro
 androidx/constraintlayout/widget/R.java
  androidx.constraintlayout.widget.R
  androidx.constraintlayout.widget.R$anim
@@ -511,11 +538,13 @@ androidx/viewpager/R.java
  androidx.viewpager.R$styleable
 androidx/fragment/ktx/R.java
  androidx.fragment.ktx.R
-be/ucll/java/mobile/smarthome_mobile/LoginActivity.java
- be.ucll.java.mobile.smarthome_mobile.LoginActivity
-be/ucll/java/mobile/smarthome_mobile/AddRoomActivity.java
- be.ucll.java.mobile.smarthome_mobile.AddRoomActivity
 be/ucll/java/mobile/smarthome_mobile/api/room/RoomsApiInterface.java
  be.ucll.java.mobile.smarthome_mobile.api.room.RoomsApiInterface
+be/ucll/java/mobile/smarthome_mobile/util/AuthorizationManager.java
+ be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager
 be/ucll/java/mobile/smarthome_mobile/HouseActivity.java
  be.ucll.java.mobile.smarthome_mobile.HouseActivity
+be/ucll/java/mobile/smarthome_mobile/RoomActivity.java
+ be.ucll.java.mobile.smarthome_mobile.RoomActivity
+be/ucll/java/mobile/smarthome_mobile/api/room/RoomsAdapter.java
+ be.ucll.java.mobile.smarthome_mobile.api.room.RoomsAdapter

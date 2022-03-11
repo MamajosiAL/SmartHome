@@ -26,6 +26,7 @@ public class BigElectro extends Device{
      *
      */
     public BigElectro() {
+        super();
     }
 
     /**
@@ -35,8 +36,8 @@ public class BigElectro extends Device{
      * @param tempature
      * @param programid
      */
-    public BigElectro(DeviceCategory type, long programid, long tempature, Timer timer) {
-        super();
+    public BigElectro(Long categoryid, Long id, String name, Long roomid, Boolean status, DeviceCategory type, long programid, long tempature, Timer timer) {
+        super(categoryid, id, name, roomid, status);
         this.type = type;
         this.programid = programid;
         this.tempature = tempature;
