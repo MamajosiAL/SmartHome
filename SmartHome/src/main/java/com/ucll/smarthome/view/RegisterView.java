@@ -9,11 +9,9 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H5;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
@@ -43,7 +41,7 @@ public class RegisterView extends VerticalLayout {
     private TextField txtFirstname;
     private TextField txtLasname;
     private TextField txtUsername;
-    private TextField txtEmail;
+    private EmailField emailField;
     private PasswordField password;
     private PasswordField confirmPassword;
     private Button buttonCreate;
@@ -66,7 +64,6 @@ public class RegisterView extends VerticalLayout {
         vrl.add(hTitel,txtErrorMessage,createRegisterForm());
         setHorizontalComponentAlignment(Alignment.CENTER,vrl);
         add(vrl);
-
     }
 
 
@@ -85,9 +82,10 @@ public class RegisterView extends VerticalLayout {
         txtUsername = new TextField("Username");
         txtUsername.setRequired(true);
         txtUsername.setErrorMessage("Verplicht veld");
-        txtEmail = new TextField("Email");
-        txtEmail.setRequired(true);
-        txtEmail.setErrorMessage("Verplicht veld");
+        emailField = new EmailField("Email");
+        emailField.setRequiredIndicatorVisible(true);
+        emailField.setPattern("[^@\\s]+@[^@\\s]+\\.[^@\\s]+");
+        emailField.setErrorMessage("Foutieve email");
         password = new PasswordField("Password");
         password.setRequired(true);
         password.setErrorMessage("Verplicht veld");
@@ -100,7 +98,7 @@ public class RegisterView extends VerticalLayout {
         buttonCreate.addClickListener(this::handelclickEventCreate);
 
         registerForm.add(
-             txtFirstname, txtLasname, txtUsername, txtEmail,password,confirmPassword,buttonCancel,buttonCreate
+             txtFirstname, txtLasname, txtUsername, emailField,password,confirmPassword,buttonCancel,buttonCreate
         );
         registerForm.setResponsiveSteps(new FormLayout.ResponsiveStep("0",2));
 
@@ -113,12 +111,11 @@ public class RegisterView extends VerticalLayout {
         try{
             if (!password.getValue().equals(confirmPassword.getValue())) throw new IllegalArgumentException("Wachtwoorden zijn niet het zelfde");
                 UserDTO userDTO = new UserDTO.Builder().username(txtUsername.getValue()).firstname(txtFirstname.getValue()).name(txtLasname.getValue())
-                    .email(txtEmail.getValue()).password(password.getValue()).build();
+                    .email(emailField.getValue()).password(password.getValue()).build();
 
             userController.createUser(userDTO);
             getUI().ifPresent(ui -> ui.navigate("login"));
         }catch (IllegalArgumentException ex){
-            Notification.show(ex.getMessage(), 5000, Notification.Position.MIDDLE).addThemeVariants(NotificationVariant.LUMO_ERROR);
             txtErrorMessage.setVisible(true);
             txtErrorMessage.setText(ex.getMessage());
 
@@ -129,8 +126,6 @@ public class RegisterView extends VerticalLayout {
     private void handelclickEventCancel(ClickEvent<Button> buttonClickEvent) {
         getUI().ifPresent(ui -> ui.navigate("login"));
     }
-
-
 }
 
 

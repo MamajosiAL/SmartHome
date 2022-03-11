@@ -53,7 +53,7 @@ public class BigElectronicController {
                 .room(roomController.roomExists(beDTO.getRoomid())).build();
         beDao.save(appliances);
     }
-    private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO , Programme programme) throws IllegalArgumentException{
+    private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO, Programme programme) throws IllegalArgumentException{
 
         Room room = roomController.roomExists(beDTO.getRoomid());
         if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
@@ -65,9 +65,17 @@ public class BigElectronicController {
             apl.setType(getType(programme.getType()).orElse(null));
             apl.setTempature(programme.getTempature());
             apl.setTimer(programme.getTimer());
+    }
+
+    public BigElectronicDTO getProgramValues(long programid){
+
+        Optional<Programme> programme = programmeDAO.findById(programid);
+        if (programme.isEmpty()) throw new IllegalArgumentException("Program not found");
+        return new BigElectronicDTO.Builder().tempature(programme.get().getTempature()).timer(programme.get().getTimer()).build();
 
     }
-    public void updateApplianceDevice(BigElectronicDTO beDTO) throws IllegalArgumentException{
+
+    public void updateBeDeviceDevice(BigElectronicDTO beDTO) throws IllegalArgumentException{
         if (beDTO == null ) throw new IllegalArgumentException("Input data missing");
         if (beDTO.getName() == null || beDTO.getName().trim().equals("")) throw new IllegalArgumentException("Name of device is not filled in");
         Optional<Programme> programme = programmeDAO.findById(beDTO.getProgramid());
