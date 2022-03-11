@@ -129,7 +129,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(this:: handleClickCancel);
 
-        btnCreate = new Button(msgSrc.getMessage("rview.buttonCr",null,getLocale()));
+        btnCreate = new Button(msgSrc.getMessage("hview.buttonCr",null,getLocale()));
         btnCreate.addClickListener(this:: handleClickCreate);
 
         btnUpdate = new Button(msgSrc.getMessage("hview.save",null,getLocale()));
