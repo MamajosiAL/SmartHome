@@ -1,5 +1,9 @@
 package be.ucll.java.mobile.smarthome_mobile.util;
 
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public enum DeviceCategory {
@@ -27,11 +31,17 @@ public enum DeviceCategory {
         this.nameBE = nameBE;
     }
 
-    //TODO
-//    public List<String> getNames(){
-//        for (DeviceCategory dc :this.) {
-//
-//        }
-//        return new Strea
-//    }
+    @NonNull
+    public static List<String> getNames(){
+        List<String> names = new ArrayList<>();
+        Arrays.stream(DeviceCategory.values()).forEach(deviceCategory -> names.add(deviceCategory.name));
+        return names;
+    }
+
+    @NonNull
+    public static List<String> getNamesBE(){
+        List<String> names = new ArrayList<>();
+        Arrays.stream(DeviceCategory.values()).forEach(deviceCategory -> names.add(deviceCategory.nameBE));
+        return names;
+    }
 }

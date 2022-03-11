@@ -29,7 +29,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
     @Override
     public RoomsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(context).inflate(R.layout.houses_list_item, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.rooms_list_item, null);
         return new RoomsViewHolder(view);
     }
 
@@ -41,7 +41,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
         // implement setONCLickListener on itemView
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, RoomActivity.class);
-            intent.putExtra("roomChineesId", roomsFromHouse.get(position).getId());
+            intent.putExtra("roomId", roomsFromHouse.get(position).getId());
             intent.putExtra("roomName", roomsFromHouse.get(position).getName());
             context.startActivity(intent);
             // display a toast with user name
