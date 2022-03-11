@@ -46,7 +46,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         addClassName("login-view");
 
         i18n = LoginI18n.createDefault();
-        i18n.getForm().setTitle("Smarthome Login");
+        i18n.getForm().setTitle("Smarthome Login Alterd");
         i18n.getForm().setUsername("Gebruikersnaam");
         i18n.getForm().setPassword("Wachtwoord");
         i18n.getErrorMessage().setTitle("Login niet gelukt");

@@ -14,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @WithUserDetails(setupBefore = TestExecutionEvent.TEST_EXECUTION, value = "TestUser", userDetailsServiceBeanName = "UserDetailService")
@@ -125,6 +129,11 @@ class RoomControllerTest extends AbstractIntegrationTest {
     //Happy Path Update Room
     @Test
     void updateRoom() {
+        addBeforeTest();
+
+        testRoom.setHouseid(searechHouse.getHouseId());
+        roomController.createRoom(testRoom);
+
         Room room = roomDAO.findAll().stream()
                 .filter(p -> p.getName().equals(testRoom.getName()))
                 .findFirst()
@@ -140,7 +149,6 @@ class RoomControllerTest extends AbstractIntegrationTest {
         RoomDTO checkRoom = roomController.getRoomById(room.getRoomID());
         assertEquals(checkRoom.getName(), testRoomUpdate.getName());
         assertNotEquals(checkRoom.getName(), testRoom.getName());
-
     }
 
     @Test
@@ -185,6 +193,12 @@ class RoomControllerTest extends AbstractIntegrationTest {
 
     @Test
     void getRoomById() {
+        addBeforeTest();
+
+        testRoom.setHouseid(searechHouse.getHouseId());
+
+        roomController.createRoom(testRoom);
+
         Room room = roomDAO.findAll().stream()
                 .filter(p -> p.getName().equals(testRoom.getName()))
                 .findFirst()
@@ -196,11 +210,31 @@ class RoomControllerTest extends AbstractIntegrationTest {
 
     @Test
     void getRoomsByHouse() {
-        assertTrue(roomController.getRoomsByHouse(searechHouse.getHouseId()).contains(testRoom));
+        addBeforeTest();
+
+        testRoom.setHouseid(searechHouse.getHouseId());
+        roomController.createRoom(testRoom);
+
+        Room daoRoom = roomDAO.findAll().stream()
+                .filter(p -> p.getName().equals(testRoom.getName()))
+                .findFirst().get();
+
+        testRoom.setId(daoRoom.getRoomID());
+        List<String> nameFromRooms = roomController.getRoomsByHouse(searechHouse.getHouseId()).stream()
+                .map(RoomDTO::getName)
+                .collect(Collectors.toList());
+
+        assertTrue(nameFromRooms.contains(testRoom.getName()));
     }
 
     @Test
     void deleteRoom() {
+        addBeforeTest();
+
+        testRoom.setHouseid(searechHouse.getHouseId());
+
+        roomController.createRoom(testRoom);
+
         Room room = roomDAO.findAll().stream()
                 .filter(p -> p.getName().equals(testRoom.getName()))
                 .findFirst()

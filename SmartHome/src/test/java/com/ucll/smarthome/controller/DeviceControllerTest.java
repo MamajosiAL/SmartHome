@@ -2,9 +2,8 @@ package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.AbstractIntegrationTest;
 import com.ucll.smarthome.dto.*;
-import com.ucll.smarthome.persistence.entities.Device;
-import com.ucll.smarthome.persistence.entities.House;
-import com.ucll.smarthome.persistence.entities.Room;
+import com.ucll.smarthome.persistence.entities.*;
+import com.ucll.smarthome.persistence.repository.CategoryDAO;
 import com.ucll.smarthome.persistence.repository.DeviceDAO;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.RoomDAO;
@@ -14,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.testcontainers.shaded.org.apache.commons.lang.NotImplementedException;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -279,5 +280,13 @@ class DeviceControllerTest extends AbstractIntegrationTest {
         deviceController.changeStatus(searchedDevice.getId());
 
         assertTrue(deviceController.getDeviceById(searchedDevice.getId()).isStatus());
+    }
+
+    @Test
+    void addDeviceWithCategory(){
+        addBeforeTest();
+
+        assertEquals(4, searchedDevice.getCategoryid());
+        throw new NotImplementedException("Wrong categroy ID");
     }
 }

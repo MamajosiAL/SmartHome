@@ -348,4 +348,12 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         //TODO: Implement
         throw new NotImplementedException("TODO");
     }
+
+    @Test
+    void addDeviceWithCategory(){
+        addBeforeTest();
+
+        assertEquals(1, searchedBigElectronic.getCategoryid());
+        //throw new NotImplementedException("Wrong categroy ID");
+    }
 }

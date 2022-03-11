@@ -6,8 +6,10 @@ import com.ucll.smarthome.dto.UserDTO;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.House;
 import com.ucll.smarthome.persistence.entities.House_User;
+import com.ucll.smarthome.persistence.entities.Room;
 import com.ucll.smarthome.persistence.entities.User;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
+import com.ucll.smarthome.persistence.repository.RoomDAO;
 import com.ucll.smarthome.persistence.repository.UserDAO;
 import com.vaadin.flow.router.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +17,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,6 +40,9 @@ class HouseControllerTest extends AbstractIntegrationTest {
 
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private RoomDAO roomDAO;
 
     @Autowired
     private UserSecurityFunc userSecurityFunc;
@@ -75,7 +83,11 @@ class HouseControllerTest extends AbstractIntegrationTest {
 
         houseController.createHouse(newHouse);
 
-        assertTrue(houseController.getHousesByUser().contains(newHouse));
+        List<String> namesFromHouses = houseController.getHousesByUser().stream()
+                .map(HouseDTO::getName)
+                        .collect(Collectors.toList());
+
+        assertTrue(namesFromHouses.contains(newHouse.getName()));
     }
 
     @Test
@@ -115,18 +127,6 @@ class HouseControllerTest extends AbstractIntegrationTest {
 
         HouseDTO dto = new HouseDTO.Builder().name(houseName)
                 .id(searchedHouse.getId())
-                .build();
-
-        assertThrows(IllegalArgumentException.class, () -> houseController.createHouse(dto));
-    }
-
-    @Test
-    void createHouseuserIDEmtpy() {
-        addHouse();
-        String houseName = "MyCrib";
-
-        HouseDTO dto = new HouseDTO.Builder().name(houseName)
-                .id(0)
                 .build();
 
         assertThrows(IllegalArgumentException.class, () -> houseController.createHouse(dto));
@@ -256,8 +256,7 @@ class HouseControllerTest extends AbstractIntegrationTest {
 
         HouseDTO dto = houseController.getHouseById(searechHouse.getHouseId());
 
-        assertEquals(dto.getName(), testHouse1.getName());
-        assertEquals(dto.getId(), testHouse1.getId());
+        assertEquals(dto.getName(), searechHouse.getName());
     }
 
     @Test
@@ -265,7 +264,12 @@ class HouseControllerTest extends AbstractIntegrationTest {
         addHouse();
 
         testHouse1.setId(searchedHouse.getHouseId());
-        assertTrue(houseController.getHousesByUser().contains(testHouse1));
+
+        List<String> houseNames = houseController.getHousesByUser().stream()
+                .map(HouseDTO::getName)
+                .collect(Collectors.toList());
+
+        assertTrue(houseNames.contains(testHouse1.getName()));
     }
 
     @Test
