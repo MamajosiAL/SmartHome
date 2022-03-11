@@ -1,4 +1,4 @@
-package be.ucll.java.mobile.smarthome_mobile.api.Media;
+package be.ucll.java.mobile.smarthome_mobile.api.media;
 
 import android.view.View;
 import android.widget.TextView;

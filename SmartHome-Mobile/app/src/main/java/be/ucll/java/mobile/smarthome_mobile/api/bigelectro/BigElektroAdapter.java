@@ -1,4 +1,4 @@
-package be.ucll.java.mobile.smarthome_mobile.api.BigElectro;
+package be.ucll.java.mobile.smarthome_mobile.api.bigelectro;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import be.ucll.java.mobile.smarthome_mobile.R;
-import be.ucll.java.mobile.smarthome_mobile.api.device.DevicesViewHolder;
 import be.ucll.java.mobile.smarthome_mobile.pojo.BigElectro;
-import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
 
 public class BigElektroAdapter extends RecyclerView.Adapter<BigElektroViewHolder> {
     Context context;

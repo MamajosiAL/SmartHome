@@ -1,4 +1,4 @@
-package be.ucll.java.mobile.smarthome_mobile.api.Sensor;
+package be.ucll.java.mobile.smarthome_mobile.api.sensor;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import be.ucll.java.mobile.smarthome_mobile.R;
-import be.ucll.java.mobile.smarthome_mobile.api.Media.MediaViewHolder;
-import be.ucll.java.mobile.smarthome_mobile.pojo.Media;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Sensor;
 
 public class SensorAdapter extends RecyclerView.Adapter<SensorViewHolder> {

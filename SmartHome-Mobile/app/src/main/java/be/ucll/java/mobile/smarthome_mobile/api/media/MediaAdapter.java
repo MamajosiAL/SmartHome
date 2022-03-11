@@ -1,4 +1,4 @@
-package be.ucll.java.mobile.smarthome_mobile.api.Media;
+package be.ucll.java.mobile.smarthome_mobile.api.media;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import be.ucll.java.mobile.smarthome_mobile.R;
-import be.ucll.java.mobile.smarthome_mobile.api.BigElectro.BigElektroViewHolder;
-import be.ucll.java.mobile.smarthome_mobile.pojo.BigElectro;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Media;
 
 public class MediaAdapter extends RecyclerView.Adapter<MediaViewHolder>  {
