@@ -403,8 +403,18 @@ class UserControllerTest extends AbstractIntegrationTest {
     }
 
     @Test
-    void getUsersByHouse() {
-        //TODO: Implementen test getUsersByHouse
+    void getUserTest(){
+        UserDTO dto = userController.getUser();
+
+        assertEquals(dto.getName(), user1.getName());
+        assertEquals(dto.getUsername(), user1.getUsername());
+        assertEquals(dto.getFirstname(), user1.getFirstname());
+        assertEquals(dto.getEmail(), user1.getEmail());
+    }
+
+    @Test
+    void getUserByIdNonExistingUser(){
+        assertThrows(IllegalArgumentException.class, () -> userController.getUserById(45649849));
     }
 
     //Delete Mehodes

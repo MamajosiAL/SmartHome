@@ -281,6 +281,11 @@ class HouseControllerTest extends AbstractIntegrationTest {
     }
 
     @Test
+    void getUserByHouseNonExistingHouse(){
+        assertThrows(IllegalArgumentException.class, () -> userController.getUsersByHouse(459789451));
+    }
+
+    @Test
     void deleteHouse() {
         addHouse();
 
@@ -314,6 +319,30 @@ class HouseControllerTest extends AbstractIntegrationTest {
 
         House_User house_user = house_userController.getHouseUserByHouseAndUser(searchedHouse, searchedUser);
         house_userController.deleteSingleHouseUser(house_user);
+
+        assertEquals(1, userController.getUsersByHouse(searchedHouse.getHouseId()).size());
+    }
+
+    @Test
+    void deleteUserFromHouseAsOwner() {
+        addHouse();
+
+        UserDTO testUser2 = new UserDTO.Builder()
+                .firstname("Testing2")
+                .name("User2")
+                .username("TestingUser2")
+                .email("TestingUser@glock.com2")
+                .password("TUROX2")
+                .build();
+
+        userController.createUser(testUser2);
+
+        User searchedUser = userDAO.findFirstByUsername(testUser2.getUsername()).get();
+        house_userController.createRegistratoinHouseUser(searchedHouse, searchedUser);
+
+        assertEquals(2, userController.getUsersByHouse(searchedHouse.getHouseId()).size());
+
+        houseController.deleteUserFromHouse(searchedHouse.getHouseId(), searchedUser.getId());
 
         assertEquals(1, userController.getUsersByHouse(searchedHouse.getHouseId()).size());
     }

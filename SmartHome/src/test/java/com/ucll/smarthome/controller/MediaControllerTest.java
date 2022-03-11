@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 
+import javax.persistence.DiscriminatorValue;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @WithUserDetails(setupBefore = TestExecutionEvent.TEST_EXECUTION, value = "TestUser", userDetailsServiceBeanName = "UserDetailService")
@@ -395,5 +397,13 @@ class MediaControllerTest extends AbstractIntegrationTest {
         mediaController.changeStatus(mediaDevice.getId());
 
         assertTrue(mediaController.getAudioDeviceById(mediaDevice.getId()).isStatus());
+    }
+
+    @Test
+    void addDeviceWithCategory(){
+        addBeforeTest();
+
+        int categoryid = Integer.parseInt(mediaDevice.getClass().getAnnotation(DiscriminatorValue.class).value());
+        assertEquals(2, categoryid);
     }
 }

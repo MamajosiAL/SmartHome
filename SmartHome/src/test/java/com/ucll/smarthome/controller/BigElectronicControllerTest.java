@@ -11,6 +11,8 @@ import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.testcontainers.shaded.org.apache.commons.lang.NotImplementedException;
 
+import javax.persistence.DiscriminatorValue;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @WithUserDetails(setupBefore = TestExecutionEvent.TEST_EXECUTION, value = "TestUser", userDetailsServiceBeanName = "UserDetailService")
@@ -345,15 +347,16 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
 
     @Test
     void updateDeviceWithProgramme(){
-        //TODO: Implement
-        throw new NotImplementedException("TODO");
+        throw new NotImplementedException("Alteration incoming");
     }
 
     @Test
     void addDeviceWithCategory(){
         addBeforeTest();
 
-        assertEquals(1, searchedBigElectronic.getCategoryid());
-        //throw new NotImplementedException("Wrong categroy ID");
+        int categoryid = Integer.parseInt(searchedBigElectronic.getClass().getAnnotation(DiscriminatorValue.class).value());
+        assertEquals(1, categoryid);
     }
+
+
 }

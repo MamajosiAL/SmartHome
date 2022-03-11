@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 
+import javax.persistence.DiscriminatorValue;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -298,5 +300,13 @@ class SensorControllerTest extends AbstractIntegrationTest {
         sensorController.changeStatus(sensorDevice.getId());
 
         assertTrue(sensorController.getSensorDeviceById(sensorDevice.getId()).isStatus());
+    }
+
+    @Test
+    void addDeviceWithCategory(){
+        addBeforeTest();
+
+        int categoryid = Integer.parseInt(sensorDevice.getClass().getAnnotation(DiscriminatorValue.class).value());
+        assertEquals(3, categoryid);
     }
 }

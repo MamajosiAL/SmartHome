@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
+import org.testcontainers.shaded.org.apache.commons.lang.NotImplementedException;
 
 import java.util.Objects;
 
@@ -85,63 +86,53 @@ class House_UserControllerTest extends AbstractIntegrationTest {
         System.out.println("User 2 id: " + user2info.getId());
     }
 
-    /*@Test
+    @Test
     void registerUserToHouseNotOwner() {
         addBeforeTest();
 
         HouseDTO registerUser = new HouseDTO.Builder()
                 .id(searchedHouse.getHouseId())
-                        .userid(user2info.getId())
-                                .build();
+                .username(user2info.getUsername())
+                .build();
 
         house_userController.registerUserToHouseNotOwner(registerUser);
 
-        //assertTrue(userCheck());
         assertEquals(2, userController.getUsersByHouse(searchedHouse.getHouseId()).size());
-    }*/
+    }
 
-    /*@Test
+    @Test
     void updateRegistrationHouseUsser() {
         addBeforeTest();
 
         HouseDTO registerUser = new HouseDTO.Builder()
                 .id(searchedHouse.getHouseId())
-                .userid(user2info.getId())
+                .username(user2info.getUsername())
                 .build();
 
         house_userController.registerUserToHouseNotOwner(registerUser);
 
-        House_User hs = house_userController.getByUser(user2info).stream()
-                .filter(p -> Objects.equals(p.getHouse().getHouseId(), searchedHouse.getHouseId()))
-                .findFirst()
-                .get();
+        House_User hs = house_userController.getHouseUserByHouseAndUser(searchedHouse, user2info);
 
         House_UserDTO house_userDTO = new House_UserDTO.Builder()
                 .id(hs.getId())
-                .isadmin(false)
+                .isadmin(true)
                 .build();
 
-        System.out.println(userSecurityFunc.getLoggedInUserId());
-        house_userController.updateRegistrationHouseUsser(house_userDTO);
-    }*/
-
-    @Test
-    void deleteRegistratieHouseUser() {
-
-    }
-
-    @Test
-    void deleteSingleHouseUser() {
-
-    }
-
-    @Test
-    void getHouseUserByHouseAndUser() {
-
+        assertDoesNotThrow(() -> house_userController.updateUserSetAdmin(house_userDTO));
+        throw new NotImplementedException("Method updates logged in user");
     }
 
     @Test
     void getHouseUserByHouseIdAndUserId() {
+        addBeforeTest();
 
+        HouseDTO registerUser = new HouseDTO.Builder()
+                .id(searchedHouse.getHouseId())
+                .username(user2info.getUsername())
+                .build();
+
+        house_userController.registerUserToHouseNotOwner(registerUser);
+
+        assertDoesNotThrow(() -> house_userController.getHouseUserByHouseIdAndUserId(searchedHouse.getHouseId(), user2info.getId()));
     }
 }

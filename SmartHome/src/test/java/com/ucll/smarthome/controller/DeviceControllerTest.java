@@ -14,6 +14,7 @@ import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.testcontainers.shaded.org.apache.commons.lang.NotImplementedException;
 
+import javax.persistence.DiscriminatorValue;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,7 +61,6 @@ class DeviceControllerTest extends AbstractIntegrationTest {
     private DeviceDTO deviceDTO = new DeviceDTO.Builder()
             .name("testDevice")
             .status(false)
-            //.categoryid()
             .build();
 
     private House searchedHouse;
@@ -92,7 +92,6 @@ class DeviceControllerTest extends AbstractIntegrationTest {
         searchedDevice = deviceDAO.findAll().stream()
                 .filter(p -> p.getName().equals(deviceDTO.getName()))
                 .findFirst().get();
-
 
         System.out.println("House created name: " + searchedHouse.getName());
         System.out.println("Room created name: " + searchedRoom.getName());
@@ -285,8 +284,7 @@ class DeviceControllerTest extends AbstractIntegrationTest {
     @Test
     void addDeviceWithCategory(){
         addBeforeTest();
-
-        assertEquals(4, searchedDevice.getCategoryid());
-        throw new NotImplementedException("Wrong categroy ID");
+        int categoryid = Integer.parseInt(searchedDevice.getClass().getAnnotation(DiscriminatorValue.class).value());
+        assertEquals(4, categoryid);
     }
 }
