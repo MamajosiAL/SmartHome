@@ -19,8 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String LOGIN_URL = "/vaadin/login";
     private static final String LOGIN_FAILURE_URL = "/vaadin/login?error";
     private static final String LOGOUT_SUCCESS_URL = "/vaadin/login";
-    private static final String LOGIN_URL_SWAGGER = "/swagger-ui/**";
-
 
     private static final String HOME_URL = "/vaadin/houses";
     // pw encoder voor eventueel de in-memory Auth indien nodig
@@ -63,7 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().and()
                 .cors()
                 .and().authorizeRequests().antMatchers("/login").permitAll()
-                .and().authorizeRequests().antMatchers(LOGIN_URL_SWAGGER).permitAll().anyRequest().authenticated()
                 .and().logout().logoutUrl("/login/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID")
                 .and()
                 .formLogin()
