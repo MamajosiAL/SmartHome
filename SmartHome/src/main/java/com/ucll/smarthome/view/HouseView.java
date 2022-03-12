@@ -26,7 +26,6 @@ import com.vaadin.flow.router.NotFoundException;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.context.MessageSource;
 import org.springframework.security.access.AccessDeniedException;
 
 import java.util.ArrayList;
@@ -47,11 +46,12 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         private HorizontalLayout lphLayout;
         private VerticalLayout verticalLayoutrh;
         private HorizontalLayout horizontalLayoutrh;
-        private HuisForm hfrm;
+        private HouseForm hfrm;
 
         private Grid<HouseDTO> grid;
         private Span role;
         private Button btnManageUsers;
+        private Button btnRooms;
         private Button btnCancel;
         private Button btnCreate;
         private Button btnUpdate;
@@ -107,6 +107,12 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
             }
             return new Span();
         })).setHeader(msgSrc.getMessage("hview.beheer",null,getLocale())).setTextAlign(ColumnTextAlign.CENTER);
+        grid.addColumn(new ComponentRenderer<>(houseDTO -> {
+            btnRooms = new Button(new Icon(VaadinIcon.ANGLE_RIGHT));
+            btnRooms.addClickListener(e -> handleClicToRooms(e,houseDTO));
+            return btnRooms;
+
+        })).setHeader("Kamers").setTextAlign(ColumnTextAlign.CENTER);
         grid.setHeightFull();
 
         grid.asSingleSelect().addValueChangeListener(event -> populateHouseForm(event.getValue()));
@@ -115,10 +121,11 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         verticalLayoutlf.setWidth("80%");
         return  verticalLayoutlf;
     }
+
     private Component CreateEditorLayout() {
 
         verticalLayoutrh = new VerticalLayout();
-        hfrm = new HuisForm();
+        hfrm = new HouseForm();
 
         horizontalLayoutrh = new HorizontalLayout();
         horizontalLayoutrh.setWidthFull();
@@ -128,6 +135,9 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(this:: handleClickCancel);
+
+        btnCreate = new Button("Toevoegen");
+        btnCreate.addClickListener(this::handleClickCreate);
 
         btnCreate = new Button(msgSrc.getMessage("hview.buttonCr",null,getLocale()));
         btnCreate.addClickListener(this:: handleClickCreate);
@@ -152,6 +162,9 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
        getUI().ifPresent(ui -> ui.navigate("users/" + houseDTO.getId()));
 
+    }
+    private void handleClicToRooms(ClickEvent<Button> e, HouseDTO houseDTO) {
+        getUI().ifPresent(ui -> ui.navigate("rooms/" + houseDTO.getId()));
     }
 
     private void handleClickCancel(ClickEvent<Button> e) {

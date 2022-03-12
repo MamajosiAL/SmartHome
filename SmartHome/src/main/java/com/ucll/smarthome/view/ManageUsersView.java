@@ -1,6 +1,7 @@
 package com.ucll.smarthome.view;
 
 
+import com.ucll.smarthome.controller.HouseController;
 import com.ucll.smarthome.controller.House_UserController;
 import com.ucll.smarthome.controller.UserController;
 import com.ucll.smarthome.dto.HouseDTO;
@@ -14,8 +15,10 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -37,6 +40,8 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     private long houseid;
     @Autowired
     private  UserController usc;
+    @Autowired
+    private HouseController hsc;
 
     @Autowired
     private House_UserController huC;
@@ -47,10 +52,8 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     private VerticalLayout verticalLayoutrh;
     private HorizontalLayout horizontalLayoutrh;
     private Checkbox checkbox;
-
-
-
-    private TextField txtUsername;
+    private H3 houseTitle;
+    private ComboBox<UserDTO> users;
     private Button btnDelete;
     private Button btnAdd;
     private Grid<UserDTO> grid;
@@ -62,6 +65,7 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
 
 
         usc = BeanUtil.getBean(UserController.class);
+        hsc = BeanUtil.getBean(HouseController.class);
 
         setSizeFull();
         splitLayout = new SplitLayout();
@@ -95,6 +99,7 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
         grid.addColumn(new ComponentRenderer<>( userDTO -> {
                 btnDelete = new Button(new Icon(VaadinIcon.TRASH));
                 btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
+                btnDelete.addClickListener(e-> handleClickDelete(e,userDTO.getId()));
                 return btnDelete;
         }));
 
@@ -108,22 +113,32 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
         return verticalLayoutlf;
     }
 
+    private void handleClickDelete(ClickEvent<Button> e, long userid) {
+        try {
+            huC.deleteSingleHouseUser(huC.getHouseUserByHouseIdAndUserId(houseid,userid));
+            loadData();
+        }catch(IllegalArgumentException ex){
+            Notification.show(ex.getMessage() ,3000, Notification.Position.TOP_CENTER);
+        }
+    }
+
     private Component createAddUserToHouseLayout(){
         verticalLayoutrh = new VerticalLayout();
         horizontalLayoutrh = new HorizontalLayout();
         horizontalLayoutrh.setWidthFull();
         horizontalLayoutrh.setSpacing(true);
 
-        txtUsername = new TextField();
-        txtUsername.setPlaceholder("Gebruikersnaam");
-        txtUsername.setPrefixComponent(VaadinIcon.SEARCH.create());
-        txtUsername.setClearButtonVisible(true);
+        houseTitle = new H3();
+        users = new ComboBox<>("Zoek naar gebruiker");
+        List<UserDTO> lstUsers = usc.getAllUsers();
+        users.setItems(lstUsers);
+        users.setItemLabelGenerator(UserDTO::getUsername);
 
         btnAdd = new Button("Toevoegen");
         btnAdd.addClickListener(this::handleClickAdd);
 
         horizontalLayoutrh.add(btnAdd);
-        verticalLayoutrh.add(txtUsername);
+        verticalLayoutrh.add(houseTitle,users);
         verticalLayoutrh.add(horizontalLayoutrh);
         verticalLayoutrh.setWidth("20%");
         return verticalLayoutrh;
@@ -131,8 +146,9 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
 
     private void handleClickAdd(ClickEvent<Button> buttonClickEvent) {
         try {
-            huC.registerUserToHouseNotOwner(new HouseDTO.Builder().id(houseid).username(txtUsername.getValue()).build());
-            txtUsername.clear();
+            UserDTO userDTO =  users.getValue();
+            huC.registerUserToHouseNotOwner(new HouseDTO.Builder().id(houseid).username(userDTO.getUsername()).build());
+            users.clear();
             loadData();
         }catch (IllegalArgumentException ex){
             Notification.show(ex.getMessage() ,3000, Notification.Position.TOP_CENTER);
@@ -149,6 +165,10 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
         }
     }
 
+    private HouseDTO getHouse(){
+       return  hsc.getHouseById(houseid);
+    }
+
     public void loadData(){
         try {
             List<UserDTO> users = usc.getUsersByHouse(houseid);
@@ -163,6 +183,7 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     public void setParameter(BeforeEvent beforeEvent, Long id) {
         try {
             houseid = id;
+            houseTitle.setText(getHouse().getName());
             List<UserDTO> users = usc.getUsersByHouse(id);
             grid.setItems(users);
         } catch (IllegalArgumentException e) {

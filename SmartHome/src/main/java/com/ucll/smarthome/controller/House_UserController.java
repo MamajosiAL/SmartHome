@@ -142,12 +142,11 @@ public class House_UserController {
         return getHouseUserByHouseAndUser(house.get(),user.get());
     }
 
-    private Optional<House_User> houseUserExist(House h, User u){
+    public Optional<House_User> houseUserExist(House h, User u){
 
        Optional<House_User> hs = dao.findByHouseAndUser(h,u);
 
        return hs;
-
     }
 
 }

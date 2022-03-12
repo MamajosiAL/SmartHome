@@ -1,4 +1,4 @@
-package com.ucll.smarthome.view;
+package com.ucll.smarthome.view.forms;
 
 import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.formlayout.FormLayout;

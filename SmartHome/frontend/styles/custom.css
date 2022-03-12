@@ -1,0 +1,16 @@
+html {
+    --lumo-font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    --lumo-primary-text-color: rgb(0, 141, 147);
+    --lumo-primary-color-50pct: rgba(0, 141, 147, 0.5);
+    --lumo-primary-color-10pct: rgba(0, 141, 147, 0.1);
+    --lumo-primary-color: #008D93;
+    --lumo-success-text-color: rgb(0, 0, 0);
+    --lumo-success-color-50pct: rgba(255, 145, 77, 0.5);
+    --lumo-success-color-10pct: rgba(255, 145, 77, 0.1);
+    --lumo-success-color: #ff914d;
+    --lumo-header-text-color: #FF914D;
+    --lumo-body-text-color: #000000;
+}
+
+[theme~="dark"] {
+}

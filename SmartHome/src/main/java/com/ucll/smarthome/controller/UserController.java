@@ -73,7 +73,6 @@ public class UserController {
      */
     public void updateUser(UserDTO userDTO) throws IllegalArgumentException{
         if (userDTO == null) throw  new IllegalArgumentException("Updating user failed. Inputdata missing");
-        if (userDTO.getId() <= 0L ) throw new IllegalArgumentException("User id is wrong, the user won't be found");
         if (userDTO.getUsername() == null || userDTO.getUsername().trim().equals("")) throw new IllegalArgumentException("Updating user failed. Username not filled in.");
         if (userDTO.getName() == null || userDTO.getName().trim().equals("")) throw new IllegalArgumentException("Updating user failed. Name not filled in.");
         if (userDTO.getFirstname() == null || userDTO.getFirstname().trim().equals("")) throw new IllegalArgumentException("Updating user failed. Firstname not filled in.");
@@ -82,6 +81,7 @@ public class UserController {
 
         long userId = userSecurityFunc.getLoggedInUserId();
         Optional<User> user = dao.findById(userId);
+        if(dao.findUserByUsername(userDTO.getUsername()).isPresent() && user.get().getUsername().equals(dao.findUserByUsername(userDTO.getUsername()))) throw new IllegalArgumentException("This username is already taken.");
         if (user.isPresent()){
             user.get().setUsername(userDTO.getUsername());
             user.get().setName(userDTO.getName());
