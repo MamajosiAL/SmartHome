@@ -47,9 +47,9 @@ public class BigElectronicController {
         BigElectronicDevice appliances = new BigElectronicDevice.Builder()
                 .name(beDTO.getName())
                 .status(beDTO.isStatus())
-                .type(getType(beDTO.getType()).orElse(null))
+                .type(getTypeByName(beDTO.getType().getName()).orElse(null))
                 .tempature(beDTO.getTempature())
-                .timer(beDTO.getTimer())
+                .timer(null)
                 .room(roomController.roomExists(beDTO.getRoomid())).build();
         beDao.save(appliances);
     }
@@ -124,6 +124,10 @@ public class BigElectronicController {
     private Optional<Type> getType(Type type){
         return typeDAO.findById(type.getTypeid());
     }
+    private Optional<Type> getTypeByName(String typeName){
+        return typeDAO.findByName(typeName);
+    }
+
     private BigElectronicDevice appliancesExists(long deviceid) throws IllegalArgumentException{
         Optional<BigElectronicDevice> device = beDao.findById(deviceid);
         if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");

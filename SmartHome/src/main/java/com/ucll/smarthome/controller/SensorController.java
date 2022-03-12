@@ -65,7 +65,7 @@ public class SensorController {
     public SensorDTO getSensorDeviceById(long deviceid) throws IllegalArgumentException{
         SensorDevice sensorDevice = sensorExists(deviceid);
         if(userSecurityFunc.getHouseUser(sensorDevice.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
-        return new SensorDTO.Builder().id(sensorDevice.getId()).name(sensorDevice.getName()).status(sensorDevice.isStatus()).build();
+        return new SensorDTO.Builder().id(sensorDevice.getId()).name(sensorDevice.getName()).status(sensorDevice.isStatus()).sensordata(sensorDevice.getSensordata()).sensorType(sensorDevice.getSensorType()).build();
     }
 
     public List<SensorDTO> getSonsorDevicesByRoom(long roomid) throws IllegalArgumentException{
