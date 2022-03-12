@@ -21,8 +21,8 @@ public interface HouseApiInterface {
     Call<String> addHouse(@Body House house, @Header("Cookie") String authHeader);
 
     // POST register a user to a house
-    @POST("/register")
-    Call<String> addUserToHouseByUsername(@Body House house, @Query("username") String username, @Header("Cookie") String authHeader);
+    @POST("/register/{username}")
+    Call<String> addUserToHouseByUsername(@Body House house, @Path("username") String username, @Header("Cookie") String authHeader);
 
     // set a user as admin of house
     @PUT("/houses/setadmin")
@@ -37,8 +37,8 @@ public interface HouseApiInterface {
     Call<List<House>> getHousesWithAccessForUserInSession(@Header("Cookie") String authHeader);
 
     // GET house by id
-    @GET("/houses")
-    Call<House> getHouseById(@Query("id") Integer houseid,@Header("Cookie") String authHeader);
+    @GET("/houses/{id}")
+    Call<House> getHouseById(@Path("id") Integer houseid,@Header("Cookie") String authHeader);
 
     // DELETE house
     @DELETE("/houses/{id}/delete")

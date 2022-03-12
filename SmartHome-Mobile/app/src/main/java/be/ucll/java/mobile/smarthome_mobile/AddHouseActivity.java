@@ -63,14 +63,14 @@ public class AddHouseActivity extends AppCompatActivity implements Callback<Stri
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_house);
+        setContentView(R.layout.activity_add_room);
         NavigationManager.initialise(this);
 
         // init the EditText and Button
         name = findViewById(R.id.txtAddHouseName);
         Button addHouse = findViewById(R.id.btnAddHouse);
 
-        // implement setOnClickListener event on register Button
+        // implement setOnClickListener event on addHouse Button
         addHouse.setOnClickListener(view -> {
             if(TxtValidator.validate(name) && authorizationManager.isSignedIn()){
                 addHouse();

@@ -48,4 +48,13 @@
     <string name="add">Add</string>
     <string name="responseErrorCode"><![CDATA[\"Error! --> Responsecode: \"]]></string>
     <string name="rooms">Rooms</string>
+    <string name="addRoomToHouse">Add room to house</string>
+    <string name="roomDefaultTitle">room title</string>
+    <string name="deviceCategory">Device category</string>
+    <string name="devices">Devices</string>
+    <string name="addNewDevice">Add new device</string>
+    <string name="bigElectroType">Type</string>
+    <string name="deviceCategories" />
+    <string name="sensorType">Sensor type</string>
+    <string name="deviceType">Device type</string>
 </resources>
