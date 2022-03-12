@@ -3,7 +3,6 @@ package be.ucll.java.mobile.smarthome_mobile;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.pojo.House;
-import be.ucll.java.mobile.smarthome_mobile.pojo.Login;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.NavigationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.TxtValidator;
@@ -63,7 +61,7 @@ public class AddHouseActivity extends AppCompatActivity implements Callback<Stri
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_room);
+        setContentView(R.layout.activity_add_house);
         NavigationManager.initialise(this);
 
         // init the EditText and Button

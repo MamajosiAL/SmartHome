@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +39,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
         // implement setONCLickListener on itemView
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, RoomActivity.class);
-            intent.putExtra("roomChineesId", roomsFromHouse.get(position).getId());
+            intent.putExtra("roomId", roomsFromHouse.get(position).getId());
             intent.putExtra("roomName", roomsFromHouse.get(position).getName());
             context.startActivity(intent);
             // display a toast with user name
