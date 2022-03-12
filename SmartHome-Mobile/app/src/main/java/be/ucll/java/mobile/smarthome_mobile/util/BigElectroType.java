@@ -8,11 +8,11 @@ import java.util.List;
 
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
 
-public enum DeviceCategory {
-    BIG_ELECTRO("Big electronic","Groot elektro"),MEDIA("Mediaplayer","Mediaspeler"),SENSOR("Sensor","Sensor"),GENERIC("Generic","Generiek");
+public enum BigElectroType {
+    OVEN("Oven","Oven"),COOLING_DEVICE("Cooling Device","Cooling apparaat"),DISHWASHER("Dishwasher","Vaatwasser"),DRYER("Dryer","Droogkast"),COOLING("Cooling Device","Koeling");
     private String name, nameBE;
 
-    DeviceCategory(String name, String nameBE) {
+    BigElectroType(String name, String nameBE) {
         this.name = name;
         this.nameBE = nameBE;
     }
@@ -36,27 +36,27 @@ public enum DeviceCategory {
     @NonNull
     public static List<String> getNames(){
         List<String> names = new ArrayList<>();
-        Arrays.stream(DeviceCategory.values()).forEach(deviceCategory -> names.add(deviceCategory.name));
+        Arrays.stream(BigElectroType.values()).forEach(bigElectroType -> names.add(bigElectroType.name));
         return names;
     }
 
     @NonNull
     public static List<String> getNamesBE(){
         List<String> names = new ArrayList<>();
-        Arrays.stream(DeviceCategory.values()).forEach(deviceCategory -> names.add(deviceCategory.nameBE));
+        Arrays.stream(BigElectroType.values()).forEach(bigElectroType -> names.add(bigElectroType.nameBE));
         return names;
     }
 
-    public static boolean nameEqualToCategory(DeviceCategory expected, String name){
+    public static boolean nameEqualToType(BigElectroType expected, String name){
         return (expected.name.equals(name)||expected.nameBE.equals(name));
     }
 
-    public static DeviceCategory getCategoryFromName(String name){
-        DeviceCategory result = null;
+    public static BigElectroType getTypeFromName(String name){
+        BigElectroType result = null;
 
-        for (DeviceCategory category: values()) {
-            if(nameEqualToCategory(category,name)){
-                result = category;
+        for (BigElectroType type: values()) {
+            if(nameEqualToType(type,name)){
+                result = type;
                 break;
             }
         }

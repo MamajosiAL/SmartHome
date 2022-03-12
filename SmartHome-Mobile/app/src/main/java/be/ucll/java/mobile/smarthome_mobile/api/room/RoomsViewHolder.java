@@ -19,7 +19,7 @@ public class RoomsViewHolder extends RecyclerView.ViewHolder implements ViewLink
     }
 
     public void linkView(View itemView) {
-        name = itemView.findViewById(R.id.name);
+        name = itemView.findViewById(R.id.txtRoomName);
     }
 
 

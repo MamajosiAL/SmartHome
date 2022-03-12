@@ -19,7 +19,7 @@ public class HousesViewHolder extends RecyclerView.ViewHolder implements ViewLin
     }
 
     public void linkView(View itemView) {
-        name = itemView.findViewById(R.id.name);
+        name = itemView.findViewById(R.id.txtHouseName);
     }
 
 }

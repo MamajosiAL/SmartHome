@@ -6,19 +6,19 @@ import com.google.gson.annotations.SerializedName;
 public class Consumption {
     @SerializedName("consumptionId")
     @Expose
-    private long consumptionId;
+    private Integer consumptionId;
     @SerializedName("deviceId")
     @Expose
-    private long deviceId;
+    private Integer deviceId;
     @SerializedName("aantalMinuten")
     @Expose
-    private long aantalMinuten;
+    private Integer aantalMinuten;
     @SerializedName("unit")
     @Expose
     private String unit;
     @SerializedName("consumptionPerHour")
     @Expose
-    private long consumptionPerHour;
+    private Integer consumptionPerHour;
 
     /**
      * No args constructor for use in serialization
@@ -35,7 +35,7 @@ public class Consumption {
      * @param consumptionPerHour
      * @param deviceId
      */
-    public Consumption(long consumptionId, long deviceId, long aantalMinuten, String unit, long consumptionPerHour) {
+    public Consumption(Integer consumptionId, Integer deviceId, Integer aantalMinuten, String unit, Integer consumptionPerHour) {
         super();
         this.consumptionId = consumptionId;
         this.deviceId = deviceId;
@@ -44,41 +44,41 @@ public class Consumption {
         this.consumptionPerHour = consumptionPerHour;
     }
 
-    public long getConsumptionId() {
+    public Integer getConsumptionId() {
         return consumptionId;
     }
 
-    public void setConsumptionId(long consumptionId) {
+    public void setConsumptionId(Integer consumptionId) {
         this.consumptionId = consumptionId;
     }
 
-    public Consumption withConsumptionId(long consumptionId) {
+    public Consumption withConsumptionId(Integer consumptionId) {
         this.consumptionId = consumptionId;
         return this;
     }
 
-    public long getDeviceId() {
+    public Integer getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(long deviceId) {
+    public void setDeviceId(Integer deviceId) {
         this.deviceId = deviceId;
     }
 
-    public Consumption withDeviceId(long deviceId) {
+    public Consumption withDeviceId(Integer deviceId) {
         this.deviceId = deviceId;
         return this;
     }
 
-    public long getAantalMinuten() {
+    public Integer getAantalMinuten() {
         return aantalMinuten;
     }
 
-    public void setAantalMinuten(long aantalMinuten) {
+    public void setAantalMinuten(Integer aantalMinuten) {
         this.aantalMinuten = aantalMinuten;
     }
 
-    public Consumption withAantalMinuten(long aantalMinuten) {
+    public Consumption withAantalMinuten(Integer aantalMinuten) {
         this.aantalMinuten = aantalMinuten;
         return this;
     }
@@ -96,15 +96,15 @@ public class Consumption {
         return this;
     }
 
-    public long getConsumptionPerHour() {
+    public Integer getConsumptionPerHour() {
         return consumptionPerHour;
     }
 
-    public void setConsumptionPerHour(long consumptionPerHour) {
+    public void setConsumptionPerHour(Integer consumptionPerHour) {
         this.consumptionPerHour = consumptionPerHour;
     }
 
-    public Consumption withConsumptionPerHour(long consumptionPerHour) {
+    public Consumption withConsumptionPerHour(Integer consumptionPerHour) {
         this.consumptionPerHour = consumptionPerHour;
         return this;
     }

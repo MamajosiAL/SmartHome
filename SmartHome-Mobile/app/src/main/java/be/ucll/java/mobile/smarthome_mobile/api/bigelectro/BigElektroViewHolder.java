@@ -18,7 +18,7 @@ public class BigElektroViewHolder extends RecyclerView.ViewHolder implements Vie
     }
 
     public void linkView(View itemView) {
-        name = itemView.findViewById(R.id.name);
+        name = itemView.findViewById(R.id.txtDeviceName);
     }
 
 }

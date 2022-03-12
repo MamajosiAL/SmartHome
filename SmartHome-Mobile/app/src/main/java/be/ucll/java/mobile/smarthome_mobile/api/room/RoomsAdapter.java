@@ -29,7 +29,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
     @Override
     public RoomsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(context).inflate(R.layout.houses_list_item, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.rooms_list_item, null);
         return new RoomsViewHolder(view);
     }
 

@@ -8,6 +8,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -19,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
+import java.util.Locale;
 
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceApiInterface;
@@ -43,6 +46,7 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
     private ImageView editButton;
     private Spinner dropdownList;
     private ProgressDialog progressDialog;
+    private String selectedItem;
     List<Device> devicesInRoomFromHouse;
 
     public void getRoomsListData() {
@@ -61,35 +65,35 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
             DeviceApiInterface deviceApiInterface = retrofit.create(DeviceApiInterface.class);
 
             //fetch roomId
-            int roomId = this.getIntent().getIntExtra("roomChineesId",0);
+            int roomId = this.getIntent().getIntExtra("roomId",0);
             //check if roomId is not null
+
             if(roomId==0){
                 throw new NullPointerException("The id of the selected room is not found");
             }
-            String deviceType = DeviceCategory.BIG_ELECTRO.getName();
-            String selectedItem = "";
-            Call<List<Device>> call = null;
-            try {
+            Call<List<Device>> call;
+            selectedItem  = (String) dropdownList.getSelectedItem();
 
-                selectedItem = (String) dropdownList.getSelectedItem();
-                if (DeviceCategory.BIG_ELECTRO.getName().equals(selectedItem)) {
-                    DeviceCategory.BIG_ELECTRO.getName();
-                    call = deviceApiInterface.getBigElektroInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
-                } else if (DeviceCategory.GENERIC.getName().equals(selectedItem)) {
-                    DeviceCategory.GENERIC.getName();
-                    call = deviceApiInterface.getDevicesInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
-                } else if (DeviceCategory.MEDIA.getName().equals(selectedItem)) {
-                    DeviceCategory.MEDIA.getName();
-                    call = deviceApiInterface.getBigElektroInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
-                } else if (DeviceCategory.SENSOR.getName().equals(selectedItem)) {
-                    DeviceCategory.SENSOR.getName();
-                    call = deviceApiInterface.getBigElektroInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
-                }else {
-                    throw new DataNotFoundException("selected ielected item is not valid or empty");
-                }
-            }catch (Exception e){
-                Log.e(TAG,e.getMessage());
+            if(selectedItem==null||selectedItem.isEmpty()){
+                selectedItem = DeviceCategory.GENERIC.getName();
+           } 
+
+            // define call depending on selectedItem
+                  if (DeviceCategory.nameEqualToCategory(DeviceCategory.BIG_ELECTRO,selectedItem)) {
+                call = deviceApiInterface.getBigElektroInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
+            } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.GENERIC,selectedItem)) {
+
+                call = deviceApiInterface.getDevicesInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
+            } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.MEDIA,selectedItem)) {
+
+                call = deviceApiInterface.getMediaInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
+            } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.SENSOR,selectedItem)) {
+
+                call = deviceApiInterface.getSensorInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
+            }else {
+                throw new DataNotFoundException("selected item is not valid or empty");
             }
+
             call.enqueue(this);
         }catch (Exception e){
             throw new DataNotFoundException(e.getMessage());
@@ -103,7 +107,8 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewDevices.setLayoutManager(linearLayoutManager);
         // call the constructor of housesAdapter to send the reference and data to Adapter
-        DevicesAdapter roomsAdapter = new DevicesAdapter(this, devicesInRoomFromHouse);
+
+        DevicesAdapter roomsAdapter = new DevicesAdapter(this, devicesInRoomFromHouse, selectedItem.toString(), this.getIntent().getStringExtra("roomName"));
         recyclerViewDevices.setAdapter(roomsAdapter); // set the Adapter to RecyclerView
     }
 
@@ -118,8 +123,28 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
 
         if (AuthorizationManager.getInstance(this).isSignedIn()) {
             dropdownList = findViewById(R.id.spinDeviceCategory);
-            ArrayAdapter spinnerAdapter = new ArrayAdapter(getApplicationContext(),R.layout.spinner_item, DeviceCategory.values());
+            ArrayAdapter spinnerAdapter = null;
+
+            //set dropdownList depending on language
+            if(Locale.getDefault().getLanguage().equals("BE")){
+                spinnerAdapter = new ArrayAdapter(getApplicationContext(),R.layout.spinner_item, R.id.txtSpinnerItem, DeviceCategory.getNamesBE());
+            }else{
+                spinnerAdapter = new ArrayAdapter(getApplicationContext(),R.layout.spinner_item, R.id.txtSpinnerItem, DeviceCategory.getNames());
+            }
+            spinnerAdapter.setDropDownViewResource(R.layout.spinner_item);
             dropdownList.setAdapter(spinnerAdapter);
+
+            dropdownList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    getRoomsListData();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
 
             recyclerViewDevices = findViewById(R.id.recyclerViewDevices);
             title.setText(this.getIntent().getStringExtra("roomName"));
@@ -143,6 +168,7 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
     @Override
     public void onResponse(Call<List<Device>> call, Response<List<Device>> response) {
         if (response != null && response.body() != null) {
+            Log.d(TAG, "onResponse: code: " + response.code());
             if (response.isSuccessful()) {
                 devicesInRoomFromHouse = response.body();
                 setDataInRecyclerView();

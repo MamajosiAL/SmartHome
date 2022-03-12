@@ -8,11 +8,11 @@ public class Device {
 
     @SerializedName("categoryid")
     @Expose
-    private Long categoryid;
+    private Integer categoryid;
 
     @SerializedName("id")
     @Expose
-    private Long id;
+    private Integer id;
 
     @SerializedName("name")
     @Expose
@@ -20,7 +20,7 @@ public class Device {
 
     @SerializedName("roomid")
     @Expose
-    private Long roomid;
+    private Integer roomid;
 
     @SerializedName("status")
     @Expose
@@ -30,7 +30,7 @@ public class Device {
 
     }
 
-    public Device(Long categoryid, Long id, String name, Long roomid, Boolean status) {
+    public Device(Integer categoryid, Integer id, String name, Integer roomid, Boolean status) {
         this.categoryid = categoryid;
         this.id = id;
         this.name = name;
@@ -38,19 +38,19 @@ public class Device {
         this.status = status;
     }
 
-    public Long getCategoryid() {
+    public Integer getCategoryid() {
         return categoryid;
     }
 
-    public void setCategoryid(Long categoryid) {
+    public void setCategoryid(Integer categoryid) {
         this.categoryid = categoryid;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -62,11 +62,11 @@ public class Device {
         this.name = name;
     }
 
-    public Long getRoomid() {
+    public Integer getRoomid() {
         return roomid;
     }
 
-    public void setRoomid(Long roomid) {
+    public void setRoomid(Integer roomid) {
         this.roomid = roomid;
     }
 

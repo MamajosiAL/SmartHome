@@ -2,6 +2,7 @@ package be.ucll.java.mobile.smarthome_mobile.api.device;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import be.ucll.java.mobile.smarthome_mobile.DeviceActivity;
 import be.ucll.java.mobile.smarthome_mobile.R;
+import be.ucll.java.mobile.smarthome_mobile.RoomActivity;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
 
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesViewHolder> {
     Context context;
     List<Device> devices;
+    String deviceCategory;
+    String roomName;
 
-    public DevicesAdapter(Context context, List<Device> devices){
+    public DevicesAdapter(Context context, List<Device> devices, String deviceCategory, String roomName){
         this.context = context;
         this.devices = devices;
+        this.deviceCategory = deviceCategory;
+        this.roomName = roomName;
     }
 
     @Override
@@ -34,8 +41,15 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesViewHolder> {
     public void onBindViewHolder(DevicesViewHolder holder, final int position){
         holder.name.setText(devices.get(position).getName());
 
-        holder.itemView.setOnClickListener(v -> {
 
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DeviceActivity.class);
+            intent.putExtra("deviceId", devices.get(position).getId());
+            intent.putExtra("deviceName", devices.get(position).getName());
+            intent.putExtra("roomId", devices.get(position).getRoomid());
+            intent.putExtra("deviceCategory", deviceCategory);
+            intent.putExtra("roomName", roomName);
+            context.startActivity(intent);
         });
     }
 

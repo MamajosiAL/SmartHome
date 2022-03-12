@@ -7,16 +7,16 @@ import java.util.Timer;
 
 import be.ucll.java.mobile.smarthome_mobile.util.DeviceCategory;
 
-public class BigElectro extends Device{
+public class BigElectro extends Device {
     @SerializedName("type")
     @Expose
-    private DeviceCategory type;
+    private Type type;
     @SerializedName("programid")
     @Expose
-    private long programid;
+    private Integer programid;
     @SerializedName("tempature")
     @Expose
-    private long tempature;
+    private Integer tempature;
     @SerializedName("timer")
     @Expose
     private Timer timer;
@@ -36,7 +36,7 @@ public class BigElectro extends Device{
      * @param tempature
      * @param programid
      */
-    public BigElectro(Long categoryid, Long id, String name, Long roomid, Boolean status, DeviceCategory type, long programid, long tempature, Timer timer) {
+    public BigElectro(Integer categoryid, Integer id, String name, Integer roomid, Boolean status, Type type, Integer programid, Integer tempature, Timer timer) {
         super(categoryid, id, name, roomid, status);
         this.type = type;
         this.programid = programid;
@@ -44,41 +44,41 @@ public class BigElectro extends Device{
         this.timer = timer;
     }
 
-    public DeviceCategory getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(DeviceCategory type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public BigElectro withType(DeviceCategory type) {
+    public BigElectro withType(Type type) {
         this.type = type;
         return this;
     }
 
-    public long getProgramid() {
+    public Integer getProgramid() {
         return programid;
     }
 
-    public void setProgramid(long programid) {
+    public void setProgramid(Integer programid) {
         this.programid = programid;
     }
 
-    public BigElectro withProgramid(long programid) {
+    public BigElectro withProgramid(Integer programid) {
         this.programid = programid;
         return this;
     }
 
-    public long getTempature() {
+    public Integer getTempature() {
         return tempature;
     }
 
-    public void setTempature(long tempature) {
+    public void setTempature(Integer tempature) {
         this.tempature = tempature;
     }
 
-    public BigElectro withTempature(long tempature) {
+    public BigElectro withTempature(Integer tempature) {
         this.tempature = tempature;
         return this;
     }

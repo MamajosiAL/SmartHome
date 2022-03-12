@@ -5,6 +5,7 @@ import java.util.List;
 import be.ucll.java.mobile.smarthome_mobile.pojo.BigElectro;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
 
+import be.ucll.java.mobile.smarthome_mobile.pojo.DeviceAllParams;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Media;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Sensor;
 import retrofit2.Call;
@@ -30,7 +31,7 @@ public interface DeviceApiInterface {
     Call<String> updateDeviceInRoom(@Body Device device, @Header("Cookie") String authHeader);
 
     @GET("/devices/{id}")
-    Call<Device> getDeviceById(@Path("id") Integer deviceid, @Header("Cookie") String authHeader);
+    Call<DeviceAllParams> getDeviceById(@Path("id") Integer deviceid, @Header("Cookie") String authHeader);
 
     @DELETE("/devices/{id}/deleteDevice")
     Call<String> deleteDeviceFromHouse(@Path("id") Integer deviceid, @Header("Cookie") String authHeader);
@@ -47,10 +48,10 @@ public interface DeviceApiInterface {
     Call<String> createBigElektroInRoom(@Body BigElectro bigElectro, @Header("Cookie") String authHeader);
 
     @PUT("/appliances/update")
-    Call<String> updateBigElektroInRoom(@Body BigElectro bigElectro, @Header("Cookie") String authHeader);
+    Call<String> updateBigElektroInRoom(@Body Device bigElectro, @Header("Cookie") String authHeader);
 
     @GET("/appliances/{id}")
-    Call<BigElectro> getBigElektroById(@Path("id") Integer bigElectroid, @Header("Cookie") String authHeader);
+    Call<DeviceAllParams> getBigElektroById(@Path("id") Integer bigElectroid, @Header("Cookie") String authHeader);
 
     @DELETE("/appliances/{id}/delete")
     Call<String> deleteBigElektroFromHouse(@Path("id") Integer bigElectroid, @Header("Cookie") String authHeader);
@@ -67,10 +68,10 @@ public interface DeviceApiInterface {
     Call<String> createMediaInRoom(@Body Media media, @Header("Cookie") String authHeader);
 
     @PUT("/audios/update")
-    Call<String> updateMediaInRoom(@Body Media media, @Header("Cookie") String authHeader);
+    Call<String> updateMediaInRoom(@Body Device media, @Header("Cookie") String authHeader);
 
     @GET("/audios/{id}")
-    Call<Media> getMediaById(@Path("id") Integer mediaid, @Header("Cookie") String authHeader);
+    Call<DeviceAllParams> getMediaById(@Path("id") Integer mediaid, @Header("Cookie") String authHeader);
 
     @DELETE("/audios/{id}/delete")
     Call<String> deleteMediaFromHouse(@Path("id") Integer mediaid, @Header("Cookie") String authHeader);
@@ -87,10 +88,10 @@ public interface DeviceApiInterface {
     Call<String> createSensorInRoom(@Body Sensor sensor, @Header("Cookie") String authHeader);
 
     @PUT("/sensors/update")
-    Call<String> updateSensorInRoom(@Body Sensor sensor, @Header("Cookie") String authHeader);
+    Call<String> updateSensorInRoom(@Body Device sensor, @Header("Cookie") String authHeader);
 
     @GET("/sensors/{id}")
-    Call<Sensor> getSensorById(@Path("id") Integer sensorid, @Header("Cookie") String authHeader);
+    Call<DeviceAllParams> getSensorById(@Path("id") Integer sensorid, @Header("Cookie") String authHeader);
 
     @DELETE("/sensors/{id}/delete")
     Call<String> deleteSensorFromHouse(@Path("id") Integer sensorid, @Header("Cookie") String authHeader);

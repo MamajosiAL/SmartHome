@@ -8,13 +8,19 @@ import java.util.List;
 
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
 
-public enum DeviceCategory {
-    BIG_ELECTRO("Big electronic","Groot elektro"),MEDIA("Mediaplayer","Mediaspeler"),SENSOR("Sensor","Sensor"),GENERIC("Generic","Generiek");
-    private String name, nameBE;
+public enum SensorType {
+        MOTION("Motionsensor","Bewegingssensor", ""),TEMPERATURE("Temperaturesensor","Temperatuursensor", "°C")
+        ,DAYLIGHT("Lightsensor","Lichtsensor", ""),PRESSURE("Pressuresensor","Druksensor", "psi")
+        ,INFRARED("Infraredsensor","Infraroodsensor", ""),MIC("Microphone","Microfoon", "")
+        ,GENERIC("Sensor","Sensor", "") ,WEIGHT("Loadsensor","Gewichtsenseor","kg")
+        ,MOISTURE("Humiditysensor","Vochtigheidsensor", "%"), TOUCH("Touchsensor","Aanraaksensor","");
 
-    DeviceCategory(String name, String nameBE) {
+    private String name, nameBE, unit;
+
+    SensorType(String name, String nameBE, String unit) {
         this.name = name;
         this.nameBE = nameBE;
+        this.unit = unit;
     }
 
     public String getName() {
@@ -36,27 +42,27 @@ public enum DeviceCategory {
     @NonNull
     public static List<String> getNames(){
         List<String> names = new ArrayList<>();
-        Arrays.stream(DeviceCategory.values()).forEach(deviceCategory -> names.add(deviceCategory.name));
+        Arrays.stream(SensorType.values()).forEach(bigElectroType -> names.add(bigElectroType.name));
         return names;
     }
 
     @NonNull
     public static List<String> getNamesBE(){
         List<String> names = new ArrayList<>();
-        Arrays.stream(DeviceCategory.values()).forEach(deviceCategory -> names.add(deviceCategory.nameBE));
+        Arrays.stream(SensorType.values()).forEach(bigElectroType -> names.add(bigElectroType.nameBE));
         return names;
     }
 
-    public static boolean nameEqualToCategory(DeviceCategory expected, String name){
+    public static boolean nameEqualToType(SensorType expected, String name){
         return (expected.name.equals(name)||expected.nameBE.equals(name));
     }
 
-    public static DeviceCategory getCategoryFromName(String name){
-        DeviceCategory result = null;
+    public static SensorType getTypeFromName(String name){
+        SensorType result = null;
 
-        for (DeviceCategory category: values()) {
-            if(nameEqualToCategory(category,name)){
-                result = category;
+        for (SensorType type: values()) {
+            if(nameEqualToType(type,name)){
+                result = type;
                 break;
             }
         }

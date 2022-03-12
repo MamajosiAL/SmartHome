@@ -21,4 +21,6 @@
     <string name="ownedDevices">Eigen apparaten</string>
     <string name="createAccount">Maak account aan</string>
     <string name="password">Wachtwoord</string>
+    <string name="sensorType">Sensor type</string>
+    <string name="deviceType">Device type</string>
 </resources>
