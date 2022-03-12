@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String LOGIN_FAILURE_URL = "/vaadin/login?error";
     private static final String LOGOUT_SUCCESS_URL = "/vaadin/login";
 
-    private static final String HOME_URL = "/vaadin/";
+    private static final String HOME_URL = "/vaadin/houses";
     // pw encoder voor eventueel de in-memory Auth indien nodig
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserDetailService userDetailService;

@@ -36,7 +36,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
     private final UserSecurityFunc sec;
 
     private HouseView hview;
-    private ManageUsersView muView;
+    private PersenalInformationView pView;
     private ConsumptieView cView;
     private BeheerView bView;
 
@@ -44,7 +44,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
     private Tab tab1;
     private static final String tabname1 = "huizen";
     private Tab tab2;
-    private static final String tabname2 = "consumptie";
+    private static final String tabname2 = "Acount";
     private Tab tab3;
     private static final String tabname3 = "beheer";
     private Tabs tabs;
@@ -81,11 +81,18 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         tab1.getElement().addEventListener("click", event ->{
             handleclickHouses(event);
         });
+        tab2.getElement().addEventListener("click", event ->{
+            handleClickAcoutn(event);
+        });
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         tabs.addSelectedChangeListener(event ->{
             handleTabClicked(event);
         });
         addToDrawer(tabs);
+    }
+
+    private void handleClickAcoutn(DomEvent event) {
+        getUI().ifPresent(ui -> ui.navigate("me"));
     }
 
     private void handleclickHouses(DomEvent event) {

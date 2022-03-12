@@ -3,9 +3,9 @@ package com.ucll.smarthome.view;
 import com.ucll.smarthome.controller.HouseController;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.view.dialogs.WarningDialog;
+import com.ucll.smarthome.view.forms.HouseForm;
 import com.vaadin.flow.component.ClickEvent;
 import com.ucll.smarthome.dto.HouseDTO;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.Component;
@@ -45,11 +45,12 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         private HorizontalLayout lphLayout;
         private VerticalLayout verticalLayoutrh;
         private HorizontalLayout horizontalLayoutrh;
-        private HuisForm hfrm;
+        private HouseForm hfrm;
 
         private Grid<HouseDTO> grid;
         private Span role;
         private Button btnManageUsers;
+        private Button btnRooms;
         private Button btnCancel;
         private Button btnCreate;
         private Button btnUpdate;
@@ -104,6 +105,12 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
             }
             return new Span();
         })).setHeader("Beheer gebruikers").setTextAlign(ColumnTextAlign.CENTER);
+        grid.addColumn(new ComponentRenderer<>(houseDTO -> {
+            btnRooms = new Button(new Icon(VaadinIcon.ANGLE_RIGHT));
+            btnRooms.addClickListener(e -> handleClicToRooms(e,houseDTO));
+            return btnRooms;
+
+        })).setHeader("Kamers").setTextAlign(ColumnTextAlign.CENTER);
         grid.setHeightFull();
 
         grid.asSingleSelect().addValueChangeListener(event -> populateHouseForm(event.getValue()));
@@ -112,10 +119,11 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         verticalLayoutlf.setWidth("80%");
         return  verticalLayoutlf;
     }
+
     private Component CreateEditorLayout() {
 
         verticalLayoutrh = new VerticalLayout();
-        hfrm = new HuisForm();
+        hfrm = new HouseForm();
 
         horizontalLayoutrh = new HorizontalLayout();
         horizontalLayoutrh.setWidthFull();
@@ -125,24 +133,17 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         btnCancel = new Button("Annuleren");
         btnCancel.addClickListener(this::handleClickCancel);
-        btnCancel = new Button("rview.buttonCa");
-        btnCancel.addClickListener(e -> handleClickCancel(e));
 
         btnCreate = new Button("Toevoegen");
         btnCreate.addClickListener(this::handleClickCreate);
-        btnCreate = new Button("rview.buttonCr");
-        btnCreate.addClickListener(e -> handleClickCreate(e));
+
 
         btnUpdate = new Button("Opslaan");
         btnUpdate.addClickListener(this::handleClickUpdate);
-        btnUpdate = new Button("hview.save");
-        btnUpdate.addClickListener(e -> handleClickUpdate(e));
         btnUpdate.setVisible(false);
 
         btnDelete = new Button("Verwijderen");
         btnDelete.addClickListener(this::handleClickDelete);
-        btnDelete = new Button("hview.delete");
-        btnDelete.addClickListener(e -> handleClickDelete(e));
         btnDelete.setVisible(false);
         
         horizontalLayoutrh.add(btnCancel,btnCreate,btnUpdate,btnDelete);
@@ -157,6 +158,9 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
        getUI().ifPresent(ui -> ui.navigate("users/" + houseDTO.getId()));
 
+    }
+    private void handleClicToRooms(ClickEvent<Button> e, HouseDTO houseDTO) {
+        getUI().ifPresent(ui -> ui.navigate("rooms/" + houseDTO.getId()));
     }
 
     private void handleClickCancel(ClickEvent<Button> e) {
