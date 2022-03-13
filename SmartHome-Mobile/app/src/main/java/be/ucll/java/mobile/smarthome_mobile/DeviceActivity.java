@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,13 +39,13 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
     private String deviceCategory;
     private DeviceAllParams device;
     private int roomId;
-
+    private boolean edit = false;
 
     private Switch toggleStatusSwitch;
     private ImageView editDeviceButton, deleteDeviceButton;
     private TextView name,room,category,type,program,temperature,timer,volume
             ,sensortype,sensordata,lbltype,lblprogram,lbltemperature,lbltimer,lblvolume
-            ,lblsensordata;
+            ,lblsensordata,lblsensortype;
 
     public void getDeviceData(){
         progressDialog = new ProgressDialog(DeviceActivity.this);
@@ -95,7 +98,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         name = findViewById(R.id.txtTitleDevice);
         room = findViewById(R.id.txtDeviceRoom);
         category = findViewById(R.id.txtDeviceCategory);
-        // BIG ELEK
+        // BIG ELECTRO
         type = findViewById(R.id.txtBigElekType);
         program = findViewById(R.id.txtBigElekProgram);
         temperature = findViewById(R.id.txtBigElekTemperature);
@@ -111,6 +114,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         sensortype = findViewById(R.id.txtSensorType);
         sensordata = findViewById(R.id.txtSensorData);
         lblsensordata = findViewById(R.id.lblSensorData);
+        lblsensortype = findViewById(R.id.lblSensorType);
 
         //BUTTONS
         deleteDeviceButton = findViewById(R.id.imgDeleteDevice);
@@ -123,8 +127,9 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         room.setText(roomName);
         category.setText(String.valueOf(deviceCategory));
 
-        // category.setText(deviceCategory);
+        //visibility of textviews by device category
         if (DeviceCategory.nameEqualToCategory(DeviceCategory.BIG_ELECTRO, deviceCategory)) {
+
             type.setVisibility(View.VISIBLE);
             program.setVisibility(View.VISIBLE);
             temperature.setVisibility(View.VISIBLE);
@@ -138,7 +143,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             lbltemperature.setVisibility(View.VISIBLE);
             lbltimer.setVisibility(View.VISIBLE);
             lblvolume.setVisibility(View.GONE);
-            lblsensordata.setVisibility(View.GONE);
+            lblsensortype.setVisibility(View.GONE);
             lblsensordata.setVisibility(View.GONE);
         } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.MEDIA,deviceCategory)) {
             type.setVisibility(View.GONE);
@@ -154,7 +159,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             lbltemperature.setVisibility(View.GONE);
             lbltimer.setVisibility(View.GONE);
             lblvolume.setVisibility(View.VISIBLE);
-            lblsensordata.setVisibility(View.GONE);
+            lblsensortype.setVisibility(View.GONE);
             lblsensordata.setVisibility(View.GONE);
         } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.SENSOR,deviceCategory)) {
             type.setVisibility(View.GONE);
@@ -170,7 +175,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             lbltemperature.setVisibility(View.GONE);
             lbltimer.setVisibility(View.GONE);
             lblvolume.setVisibility(View.GONE);
-            lblsensordata.setVisibility(View.VISIBLE);
+            lblsensortype.setVisibility(View.VISIBLE);
             lblsensordata.setVisibility(View.VISIBLE);
         }else if(DeviceCategory.nameEqualToCategory(DeviceCategory.GENERIC,deviceCategory)){
             type.setVisibility(View.GONE);
@@ -186,14 +191,15 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             lbltemperature.setVisibility(View.GONE);
             lbltimer.setVisibility(View.GONE);
             lblvolume.setVisibility(View.GONE);
-            lblsensordata.setVisibility(View.GONE);
+            lblsensortype.setVisibility(View.GONE);
             lblsensordata.setVisibility(View.GONE);
         }else{
             throw new DataNotFoundException("selected item is not valid or empty2");
         }
-        getDeviceData();
-        //initialise delete button
 
+        getDeviceData();
+
+        //initialise delete button
         deleteDeviceButton.setOnClickListener(v -> {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.deleteConfirmation)
@@ -201,6 +207,10 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setPositiveButton(R.string.yes, (dialog, whichButton) -> deleteDevice())
                     .setNegativeButton(R.string.no, null).show();
+        });
+
+        editDeviceButton.setOnClickListener(v -> {
+            editVisibility();
         });
 
         toggleStatusSwitch.setOnClickListener(v -> {
@@ -272,5 +282,39 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         Toast.makeText(this, t.toString(), Toast.LENGTH_LONG).show();
         Log.e(TAG,t.getMessage());
         progressDialog.dismiss();
+    }
+
+
+    public void editVisibility(){
+        toggleTextViewEditable(name);
+    }
+
+    public void toggleTextViewEditable(TextView textView){
+        if(edit){
+            // remove editable
+            textView.setCursorVisible(false);
+            textView.setFocusableInTouchMode(false);
+            textView.setEnabled(false);
+            textView.requestFocus();
+
+            // remove underline
+            textView.setText(device.getName());
+
+            // edit off
+            edit = false;
+        }else{
+            // editable
+            textView.setCursorVisible(true);
+            textView.setFocusableInTouchMode(true);
+            textView.setEnabled(true);
+            textView.requestFocus();
+
+            // underline
+            SpannableString content = new SpannableString(textView.getText());
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            textView.setText(content);
+
+            edit = true;
+        }
     }
 }

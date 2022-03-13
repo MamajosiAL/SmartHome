@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,8 +42,10 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
     private RecyclerView recyclerViewRooms;
     private TextView title;
     private ImageView editButton;
+    private Button userToHouseButton;
     private ProgressDialog progressDialog;
     List<Room> roomsFromHouse;
+
 
     public void getRoomsListData() {
         progressDialog = new ProgressDialog(HouseActivity.this);
@@ -92,6 +95,7 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
 
         title = findViewById(R.id.titleHouse);
         roomsFromHouse = new ArrayList<>();
+        userToHouseButton = findViewById(R.id.button);
 
         if (AuthorizationManager.getInstance(this).isSignedIn()) {
             recyclerViewRooms = findViewById(R.id.recyclerViewRooms);
@@ -111,6 +115,15 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                 });*/
+                userToHouseButton.setOnClickListener(v -> {
+                    Intent intent = new Intent (this, UserInHouseActivity.class);
+                    intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));
+                    intent.putExtra("houseName", this.getIntent().getStringExtra("houseName"));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                });
+
+
                 getRoomsListData();
             } catch (Exception e) {
                 e.printStackTrace();

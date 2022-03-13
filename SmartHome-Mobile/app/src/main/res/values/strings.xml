@@ -67,12 +67,15 @@
     <string name="deviceVolumeLabel">"Volume: "</string>
     <string name="deviceSensorTypeLabel">"Sensor type: "</string>
     <string name="deviceSensorDataLabel">Sensor data:</string>
-    <string name="deleteConfirmation">Delete comfirmation</string>
-    <string name="deleteConfMessage">Are you sure you want to delete this device?</string>
-    <string name="yes">yes</string>
-    <string name="no">no</string>
-    <string name="onOff">on/off</string>
-    <string name="on">On</string>
-    <string name="off">Off</string>
-    <string name="deviceStatusChangeSucces">device\'s status changed succesfully</string>
+    <string name="onOff">On/Off</string>
+    <string name="addUsers">Add users</string>
+    <string name="users">Users</string>
+    <string name="title_rooms">Rooms</string>
+    <string name="role">Role</string>
+    <string name="addUserToHouse">Add user to house</string>
+    <string name="deviceStatusChangeSucces">Device status changed succesfully</string>
+    <string name="deleteConfirmation">Confirm delete</string>
+    <string name="deleteConfMessage">Are you sure you want to delete</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

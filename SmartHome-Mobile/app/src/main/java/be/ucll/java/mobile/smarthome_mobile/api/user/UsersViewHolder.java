@@ -10,7 +10,7 @@ import be.ucll.java.mobile.smarthome_mobile.api.ViewLinker;
 
 public class UsersViewHolder extends RecyclerView.ViewHolder implements ViewLinker {
         // init the item view's
-        TextView name, firstName, email, username, id;
+        TextView name, firstName, email, username, id, isAdmin;
 
         public UsersViewHolder(View itemView) {
             super(itemView);
@@ -19,8 +19,9 @@ public class UsersViewHolder extends RecyclerView.ViewHolder implements ViewLink
         }
 
     public void linkView(View itemView) {
-       /* id = itemView.findViewById(R.id.user_id);
-        username = itemView.findViewById(R.id.user_username);
+        username = itemView.findViewById(R.id.txtUsername);
+        isAdmin = itemView.findViewById(R.id.txtIsAdmin);
+        /* id = itemView.findViewById(R.id.user_id);
         firstName = itemView.findViewById(R.id.user_firstName);
         name = itemView.findViewById(R.id.user_name);
         email = itemView.findViewById(R.id.user_email);
