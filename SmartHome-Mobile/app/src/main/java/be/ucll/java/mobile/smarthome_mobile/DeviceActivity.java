@@ -7,12 +7,10 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,11 +38,11 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
     private int roomId;
 
 
-    private Switch toggleStatus;
+    private Switch toggleStatusSwitch;
     private ImageView editDeviceButton, deleteDeviceButton;
-    private TextView name,status,room,category,type,program,temperature,timer,volume
+    private TextView name,room,category,type,program,temperature,timer,volume
             ,sensortype,sensordata,lbltype,lblprogram,lbltemperature,lbltimer,lblvolume
-            ,lblsensortype,lblsensordata;
+            ,lblsensordata;
 
     public void getDeviceData(){
         progressDialog = new ProgressDialog(DeviceActivity.this);
@@ -95,7 +93,6 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
 
         //GENERIC
         name = findViewById(R.id.txtTitleDevice);
-        status = findViewById(R.id.txtDeviceStatus);
         room = findViewById(R.id.txtDeviceRoom);
         category = findViewById(R.id.txtDeviceCategory);
         // BIG ELEK
@@ -113,13 +110,12 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         // SENSOR
         sensortype = findViewById(R.id.txtSensorType);
         sensordata = findViewById(R.id.txtSensorData);
-        lblsensortype = findViewById(R.id.lblSensorType);
         lblsensordata = findViewById(R.id.lblSensorData);
 
         //BUTTONS
         deleteDeviceButton = findViewById(R.id.imgDeleteDevice);
         editDeviceButton = findViewById(R.id.imgEditDevice);
-        toggleStatus = findViewById(R.id.swtchToggleStatusDevice);
+        toggleStatusSwitch = findViewById(R.id.swtchToggleStatusDevice);
 
         //DATA WE ALREADY HAVE
         String roomName = getIntent().getStringExtra("roomName");
@@ -207,7 +203,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
                     .setNegativeButton(R.string.no, null).show();
         });
 
-        toggleStatus.setOnClickListener(v -> {
+        toggleStatusSwitch.setOnClickListener(v -> {
             try{
                 new DeviceStatusToggler(this).toggleStatus(device.getId());
 
@@ -234,11 +230,8 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
 
         // GENERIC
         name.setText(device.getName());
-        if(device.getStatus()){
-            status.setText("Aan");
-        }else{
-            status.setText("Uit");
-        }
+        toggleStatusSwitch.setChecked(device.getStatus());
+
 
         // BIG ELECTRO
         if (device.getType() != null ) {

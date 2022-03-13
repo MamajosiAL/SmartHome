@@ -28,27 +28,6 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/lblDeviceStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/deviceStatusLabel"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txtDeviceStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="status"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <TextView
                 android:id="@+id/lblDeviceRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

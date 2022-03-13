@@ -27,46 +27,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d936c4c8-e92c-43b6-add8-b5b31189f0f8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DeviceDeleter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DeviceStatusToggler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_delete_24.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_23__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_23__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_24__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_24__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_houses_list_item.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_houses_list_item.xml.flat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-nl-rBE_values-nl-rBE.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-nl-rBE_values-nl-rBE.arsc.flat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/AddDeviceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/AddDeviceActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/AddGenericFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/AddGenericFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/DeviceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/DeviceActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/RoomActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/RoomActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DeviceApiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DeviceApiInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DevicesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DevicesAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/pojo/BigElectro.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/pojo/BigElectro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_device.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_device.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Media/MediaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Media/MediaAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Media/MediaViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Media/MediaViewHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorViewHolder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,6 +185,14 @@
       <option name="presentableId" value="Default" />
       <updated>1646327599913</updated>
     </task>
+    <task id="LOCAL-00001" summary="Delete device and device toggle status">
+      <created>1647178150703</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647178150703</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -234,6 +207,10 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Delete device and device toggle status" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete device and device toggle status" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="718" y="148" key="#com.intellij.ide.util.MemberChooser" timestamp="1647171714449">
       <screen x="0" y="0" width="1920" height="1032" />
@@ -243,42 +220,50 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="774" y="245" key="AndroidCreateXmlResourceDialog/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647177960771" />
+    <state x="433" y="0" key="CommitChangelistDialog2" timestamp="1647178148986">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="433" y="0" key="CommitChangelistDialog2/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178148986" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1647174172469">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647174172469" />
-    <state width="1863" height="356" key="GridCell.Tab.0.bottom" timestamp="1647176581933">
+    <state width="1863" height="73" key="GridCell.Tab.0.bottom" timestamp="1647178021416">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1863" height="356" key="GridCell.Tab.0.bottom/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647176581933" />
-    <state width="1863" height="356" key="GridCell.Tab.0.center" timestamp="1647176581932">
+    <state width="1863" height="73" key="GridCell.Tab.0.bottom/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
+    <state width="1863" height="73" key="GridCell.Tab.0.center" timestamp="1647178021416">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1863" height="356" key="GridCell.Tab.0.center/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647176581932" />
-    <state width="1863" height="356" key="GridCell.Tab.0.left" timestamp="1647176581932">
+    <state width="1863" height="73" key="GridCell.Tab.0.center/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
+    <state width="1863" height="73" key="GridCell.Tab.0.left" timestamp="1647178021416">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1863" height="356" key="GridCell.Tab.0.left/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647176581932" />
-    <state width="1863" height="356" key="GridCell.Tab.0.right" timestamp="1647176581933">
+    <state width="1863" height="73" key="GridCell.Tab.0.left/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
+    <state width="1863" height="73" key="GridCell.Tab.0.right" timestamp="1647178021416">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1863" height="356" key="GridCell.Tab.0.right/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647176581933" />
-    <state width="1863" height="356" key="GridCell.Tab.1.bottom" timestamp="1647176581934">
+    <state width="1863" height="73" key="GridCell.Tab.0.right/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
+    <state width="1863" height="73" key="GridCell.Tab.1.bottom" timestamp="1647178021417">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1863" height="356" key="GridCell.Tab.1.bottom/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647176581934" />
-    <state width="1863" height="356" key="GridCell.Tab.1.center" timestamp="1647176581933">
+    <state width="1863" height="73" key="GridCell.Tab.1.bottom/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
+    <state width="1863" height="73" key="GridCell.Tab.1.center" timestamp="1647178021417">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1863" height="356" key="GridCell.Tab.1.center/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647176581933" />
-    <state width="1863" height="356" key="GridCell.Tab.1.left" timestamp="1647176581933">
+    <state width="1863" height="73" key="GridCell.Tab.1.center/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
+    <state width="1863" height="73" key="GridCell.Tab.1.left" timestamp="1647178021417">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1863" height="356" key="GridCell.Tab.1.left/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647176581933" />
-    <state width="1863" height="356" key="GridCell.Tab.1.right" timestamp="1647176581934">
+    <state width="1863" height="73" key="GridCell.Tab.1.left/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
+    <state width="1863" height="73" key="GridCell.Tab.1.right" timestamp="1647178021417">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1863" height="356" key="GridCell.Tab.1.right/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647176581934" />
+    <state width="1863" height="73" key="GridCell.Tab.1.right/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
+    <state x="452" y="179" key="Vcs.Push.Dialog.v2" timestamp="1647178222429">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="452" y="179" key="Vcs.Push.Dialog.v2/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178222429" />
     <state x="736" y="409" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1647168262688">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
