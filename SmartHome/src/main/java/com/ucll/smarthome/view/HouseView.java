@@ -148,7 +148,8 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         btnUpdate.addClickListener(this::handleClickUpdate);
         btnUpdate.setVisible(false);
 
-        btnDelete = new Button(msgSrc.getMessage("hview.delete",null,getLocale()));
+        btnDelete = new Button(new Icon(VaadinIcon.TRASH));
+        btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR);
         btnDelete.addClickListener(this::handleClickDelete);
         btnDelete.setVisible(false);
         
