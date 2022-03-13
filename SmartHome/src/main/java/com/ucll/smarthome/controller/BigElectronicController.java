@@ -115,12 +115,7 @@ public class BigElectronicController {
                 .map(rec-> new BigElectronicDTO.Builder().id(rec.getId()).name(rec.getName()).status(rec.isStatus()).tempature(rec.getTempature()).timer(rec.getTimer()).type(rec.getType()).build());
         return steam.collect(Collectors.toList());
     }
-    public void deleteApplianceDeviceById(long deviceid) throws IllegalArgumentException{
-        if (deviceid <= 0L) throw new IllegalArgumentException("Invalid id");
-        BigElectronicDevice apl = appliancesExists(deviceid);
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(apl.getRoom().getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
-        beDao.delete(apl);
-    }
+
     private Optional<Type> getType(Type type){
         return typeDAO.findById(type.getTypeid());
     }
@@ -134,9 +129,5 @@ public class BigElectronicController {
         return device.get();
     }
 
-    public void changeStatus(long deviceid){
-        Device device = appliancesExists(deviceid);
-        consumptionController.deviceChangeStatus(device);
-    }
 
 }

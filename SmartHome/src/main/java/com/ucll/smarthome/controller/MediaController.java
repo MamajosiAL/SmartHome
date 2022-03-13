@@ -80,22 +80,11 @@ public class MediaController {
         return stream.collect(Collectors.toList());
 
     }
-    public void deleteAudioDevice(long deviceid) throws IllegalArgumentException{
-        if (deviceid <= 0L) throw new IllegalArgumentException("Invalid id");
-        MediaDevice mediaDevice = audioExists(deviceid);
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(mediaDevice.getRoom().getHouse().getHouseId())) throw new NotFoundException("User is not admin of this house");
-        mediaDAO.delete(mediaDevice);
-
-    }
     private MediaDevice audioExists(long deviceid) throws IllegalArgumentException{
         Optional<MediaDevice> device = mediaDAO.findById(deviceid);
         if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");
         return device.get();
     }
 
-    public void changeStatus(long deviceid){
-        Device device = audioExists(deviceid);
-        consumptionController.deviceChangeStatus(device);
-    }
 
 }

@@ -58,24 +58,5 @@ public class MediaRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping("{id}/delete")
-    public ResponseEntity deletAudioDevice(@PathVariable("id") long deviceid){
-        try{
-            mediaController.deleteAudioDevice(deviceid);
-            return new ResponseEntity("Audio device successfully deleted",HttpStatus.OK);
 
-        }catch (IllegalArgumentException ex){
-            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PutMapping("{id}/changestatus")
-    public ResponseEntity changeStatus(@PathVariable("id") long audioid){
-        try{
-            mediaController.changeStatus(audioid);
-            return new ResponseEntity("audio status changed",HttpStatus.OK);
-        }catch (IllegalArgumentException ex){
-            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
 }

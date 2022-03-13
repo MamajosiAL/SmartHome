@@ -79,22 +79,12 @@ public class SensorController {
         return stream.collect(Collectors.toList());
     }
 
-    public void deleteSensorDeviceById(long deviceid) throws IllegalArgumentException{
-        if (deviceid <= 0L) throw new IllegalArgumentException("Invalid id");
-        SensorDevice sensorDevice = sensorExists(deviceid);
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(sensorDevice.getRoom().getHouse().getHouseId())) throw new NotFoundException("User is not admin of this house");
-        sensorDAO.delete(sensorDevice);
-
-    }
     private SensorDevice sensorExists(long deviceid) throws IllegalArgumentException{
         Optional<SensorDevice> device = sensorDAO.findById(deviceid);
         if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");
         return device.get();
     }
 
-    public void changeStatus(long deviceid){
-        Device device = sensorExists(deviceid);
-        consumptionController.deviceChangeStatus(device);
-    }
+
 
 }

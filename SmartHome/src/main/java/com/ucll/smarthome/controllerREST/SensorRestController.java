@@ -58,24 +58,5 @@ public class SensorRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping("/{id}/delete")
-    public ResponseEntity deleteSensorDevice(@PathVariable("id") long deviceid){
-        try{
-            sensorController.deleteSensorDeviceById(deviceid);
-            return new ResponseEntity("Sensor device successfully deleted",HttpStatus.OK);
 
-        }catch (IllegalArgumentException ex){
-            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PutMapping("/{id}/changestatus")
-    public ResponseEntity changeStatus(@PathVariable("id") long sensorid){
-        try{
-            sensorController.changeStatus(sensorid);
-            return new ResponseEntity("sensor status changed",HttpStatus.OK);
-        }catch (IllegalArgumentException ex){
-            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
 }
