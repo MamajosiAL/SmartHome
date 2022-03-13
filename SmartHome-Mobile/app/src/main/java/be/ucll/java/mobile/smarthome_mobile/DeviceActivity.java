@@ -43,6 +43,13 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
     private TextView volume;
     private TextView sensortype;
     private TextView sensordata;
+    private TextView lbltype;
+    private TextView lblprogram;
+    private TextView lbltemperature;
+    private TextView lbltimer;
+    private TextView lblvolume;
+    private TextView lblsensortype;
+    private TextView lblsensordata;
 
     public void getDeviceData(){
         progressDialog = new ProgressDialog(DeviceActivity.this);
@@ -101,11 +108,18 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         program = findViewById(R.id.txtBigElekProgram);
         temperature = findViewById(R.id.txtBigElekTemperature);
         timer = findViewById(R.id.txtBigElekTimer);
+        lbltype = findViewById(R.id.lblBigElekType);
+        lblprogram = findViewById(R.id.lblBigElekProgram);
+        lbltemperature = findViewById(R.id.lblBigElekTemperature);
+        lbltimer = findViewById(R.id.lblBigElekTimer);
         // MEDIA
         volume = findViewById(R.id.txtMediaVolume);
+        lblvolume = findViewById(R.id.lblMediaVolume);
         // SENSOR
         sensortype = findViewById(R.id.txtSensorType);
         sensordata = findViewById(R.id.txtSensorData);
+        lblsensortype = findViewById(R.id.lblSensorType);
+        lblsensordata = findViewById(R.id.lblSensorData);
 
         //DATA WE ALREADY HAVE
         String roomName = getIntent().getStringExtra("roomName");
@@ -122,6 +136,14 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             volume.setVisibility(View.GONE);
             sensortype.setVisibility(View.GONE);
             sensordata.setVisibility(View.GONE);
+
+            lbltype.setVisibility(View.VISIBLE);
+            lblprogram.setVisibility(View.VISIBLE);
+            lbltemperature.setVisibility(View.VISIBLE);
+            lbltimer.setVisibility(View.VISIBLE);
+            lblvolume.setVisibility(View.GONE);
+            lblsensordata.setVisibility(View.GONE);
+            lblsensordata.setVisibility(View.GONE);
         } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.MEDIA,deviceCategory)) {
             type.setVisibility(View.GONE);
             program.setVisibility(View.GONE);
@@ -130,6 +152,14 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             volume.setVisibility(View.VISIBLE);
             sensortype.setVisibility(View.GONE);
             sensordata.setVisibility(View.GONE);
+
+            lbltype.setVisibility(View.GONE);
+            lblprogram.setVisibility(View.GONE);
+            lbltemperature.setVisibility(View.GONE);
+            lbltimer.setVisibility(View.GONE);
+            lblvolume.setVisibility(View.VISIBLE);
+            lblsensordata.setVisibility(View.GONE);
+            lblsensordata.setVisibility(View.GONE);
         } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.SENSOR,deviceCategory)) {
             type.setVisibility(View.GONE);
             program.setVisibility(View.GONE);
@@ -138,6 +168,14 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             volume.setVisibility(View.GONE);
             sensortype.setVisibility(View.VISIBLE);
             sensordata.setVisibility(View.VISIBLE);
+
+            lbltype.setVisibility(View.GONE);
+            lblprogram.setVisibility(View.GONE);
+            lbltemperature.setVisibility(View.GONE);
+            lbltimer.setVisibility(View.GONE);
+            lblvolume.setVisibility(View.GONE);
+            lblsensordata.setVisibility(View.VISIBLE);
+            lblsensordata.setVisibility(View.VISIBLE);
         }else if(DeviceCategory.nameEqualToCategory(DeviceCategory.GENERIC,deviceCategory)){
             type.setVisibility(View.GONE);
             program.setVisibility(View.GONE);
@@ -146,10 +184,17 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             volume.setVisibility(View.GONE);
             sensortype.setVisibility(View.GONE);
             sensordata.setVisibility(View.GONE);
+
+            lbltype.setVisibility(View.GONE);
+            lblprogram.setVisibility(View.GONE);
+            lbltemperature.setVisibility(View.GONE);
+            lbltimer.setVisibility(View.GONE);
+            lblvolume.setVisibility(View.GONE);
+            lblsensordata.setVisibility(View.GONE);
+            lblsensordata.setVisibility(View.GONE);
         }else{
             throw new DataNotFoundException("selected item is not valid or empty2");
         }
-
         getDeviceData();
     }
 
