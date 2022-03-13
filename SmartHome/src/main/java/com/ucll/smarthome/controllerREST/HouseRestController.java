@@ -37,7 +37,7 @@ public class HouseRestController {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
-    @PostMapping("/register/{username}")
+    @PostMapping("/register")
     public ResponseEntity registerUserToHouseNotOwner(@RequestBody HouseDTO houseDTO){
         try{
             house_userController.registerUserToHouseNotOwner(houseDTO);
