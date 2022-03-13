@@ -5,27 +5,26 @@ import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.textfield.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
-public class HouseForm extends FormLayout {
+public class HouseForm  extends FormLayout {
 
-    private MessageSource msg;
+    @Autowired
+    private MessageSource msgSrc;
     public Label lblId;
     public TextField txtnaamhuis;
 
     public HouseForm(){
         super();
-
-        msg = BeanUtil.getBean(MessageSource.class);
-
-
+        msgSrc = BeanUtil.getBean(MessageSource.class);
         lblId = new Label("");
         txtnaamhuis = new TextField();
         txtnaamhuis.setRequired(true);
         txtnaamhuis.setMaxLength(128);
-        txtnaamhuis.setErrorMessage( msg.getMessage("rview.errormessage",null,getLocale()));
+        txtnaamhuis.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
 
-        addFormItem(txtnaamhuis, "hform.housename");
+        addFormItem(txtnaamhuis, msgSrc.getMessage("hform.housename",null,getLocale()));
     }
 
     public void resetForm(){

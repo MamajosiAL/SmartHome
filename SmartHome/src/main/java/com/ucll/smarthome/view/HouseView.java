@@ -6,6 +6,7 @@ import com.ucll.smarthome.view.dialogs.WarningDialog;
 import com.ucll.smarthome.view.forms.HouseForm;
 import com.vaadin.flow.component.ClickEvent;
 import com.ucll.smarthome.dto.HouseDTO;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.Component;
@@ -26,6 +27,8 @@ import com.vaadin.flow.router.NotFoundException;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.AccessDeniedException;
 
 import java.util.ArrayList;
@@ -35,9 +38,9 @@ import java.util.List;
 public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         @Autowired
+        private MessageSource msgSrc;
         private final HouseController hc;
         private ManageUsersView mvw;
-
         private final UserSecurityFunc sec;
 
         private SplitLayout splitLayout;
@@ -56,9 +59,10 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         private Button btnUpdate;
         private Button btnDelete;
 
-    public HouseView(UserSecurityFunc sec){
+    public HouseView(){
         super();
-        this.sec = sec;
+        sec = BeanUtil.getBean(UserSecurityFunc.class);
+        msgSrc = BeanUtil.getBean(MessageSource.class);
 
         hc = BeanUtil.getBean(HouseController.class);
 
@@ -67,32 +71,32 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
-        splitLayout.addToPrimary(CreateGridLayout());
-        splitLayout.addToSecondary(CreateEditorLayout());
+        splitLayout.addToPrimary(createGridLayout());
+        splitLayout.addToSecondary(createEditorLayout());
         add(splitLayout);
 
     }
 
 
 
-    private Component CreateGridLayout() {
+    private Component createGridLayout() {
         verticalLayoutlf = new VerticalLayout();
         verticalLayoutlf.setWidthFull();
         lphLayout = new HorizontalLayout();
 
         grid = new Grid<>();
         grid.setItems(new ArrayList<HouseDTO>(0));
-        grid.addColumn(HouseDTO::getName).setHeader("hform.housename");
+        grid.addColumn(HouseDTO::getName).setHeader(msgSrc.getMessage("hform.housename",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(houseDTO -> {
             role = new Span();
             if (houseDTO.isIsowner()){
-                 role.setText("hview.roleO");
+                 role.setText(msgSrc.getMessage("hview.roleO",null,getLocale()));
                  role.getElement().getStyle().set("color", "green");
             }else if (houseDTO.isAdmin()){
                  role.setText("Admin");
                  role.getElement().getStyle().set("color", "Orange");
             }else{
-                role.setText("hview.roleU");
+                role.setText(msgSrc.getMessage("hview.roleU",null,getLocale()));
             }
             return role;
         })).setHeader("Rol");
@@ -104,7 +108,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
             return btnManageUsers;
             }
             return new Span();
-        })).setHeader("Beheer gebruikers").setTextAlign(ColumnTextAlign.CENTER);
+        })).setHeader(msgSrc.getMessage("hview.beheer",null,getLocale())).setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(houseDTO -> {
             btnRooms = new Button(new Icon(VaadinIcon.ANGLE_RIGHT));
             btnRooms.addClickListener(e -> handleClicToRooms(e,houseDTO));
@@ -120,7 +124,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         return  verticalLayoutlf;
     }
 
-    private Component CreateEditorLayout() {
+    private Component createEditorLayout() {
 
         verticalLayoutrh = new VerticalLayout();
         hfrm = new HouseForm();
@@ -131,18 +135,20 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
 
 
-        btnCancel = new Button("Annuleren");
-        btnCancel.addClickListener(this::handleClickCancel);
+        btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
+        btnCancel.addClickListener(this:: handleClickCancel);
 
         btnCreate = new Button("Toevoegen");
         btnCreate.addClickListener(this::handleClickCreate);
 
+        btnCreate = new Button(msgSrc.getMessage("hview.buttonCr",null,getLocale()));
+        btnCreate.addClickListener(this:: handleClickCreate);
 
-        btnUpdate = new Button("Opslaan");
+        btnUpdate = new Button(msgSrc.getMessage("hview.save",null,getLocale()));
         btnUpdate.addClickListener(this::handleClickUpdate);
         btnUpdate.setVisible(false);
 
-        btnDelete = new Button("Verwijderen");
+        btnDelete = new Button(msgSrc.getMessage("hview.delete",null,getLocale()));
         btnDelete.addClickListener(this::handleClickDelete);
         btnDelete.setVisible(false);
         
@@ -171,13 +177,13 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
     private void handleClickCreate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show("hview.validationerror", 3000, Notification.Position.MIDDLE);
+            Notification.show(msgSrc.getMessage("hview.validationerror",null,getLocale()), 3000, Notification.Position.MIDDLE);
             return;
         }
         try {
             HouseDTO houseDTO = new HouseDTO.Builder().name(hfrm.txtnaamhuis.getValue()).build();
             hc.createHouse(houseDTO);
-            Notification.show("hview.createhouse",3000,Notification.Position.TOP_CENTER);
+            Notification.show(msgSrc.getMessage("hview.createhouse",null,getLocale()),3000,Notification.Position.TOP_CENTER);
             hfrm.resetForm();
             loadData();
         } catch (IllegalArgumentException event){
@@ -188,24 +194,21 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
     }
     private void handleClickUpdate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show("hview.validationerror", 3000, Notification.Position.MIDDLE);
+            Notification.show(msgSrc.getMessage("hview.validationerror",null,getLocale()), 3000, Notification.Position.MIDDLE);
         }
         try{
             HouseDTO houseDTO = new HouseDTO.Builder().id(Integer.parseInt(hfrm.lblId.getText())).name(hfrm.txtnaamhuis.getValue()).build();
             hc.updateHouse(houseDTO);
-            Notification.show("hview.houseadjusted",3000,Notification.Position.TOP_CENTER);
-            hfrm.resetForm();
+            Notification.show(msgSrc.getMessage("hview.houseadjusted",null,getLocale()),3000,Notification.Position.TOP_CENTER);
             loadData();
-            btnCreate.setVisible(true);
-            btnUpdate.setVisible(false);
-            btnDelete.setVisible(false);
+            setButtonsToDefault();
         } catch (IllegalArgumentException | NotFoundException event){
             Notification.show(event.getMessage(), 3000, Notification.Position.TOP_CENTER);
         }
     }
 
     private void handleClickDelete(ClickEvent<Button> e) {
-        WarningDialog w = new WarningDialog("hview.error");
+        WarningDialog w = new WarningDialog(msgSrc.getMessage("hview.error",null,getLocale()));
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {
@@ -216,10 +219,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
                     Notification.show(ex.getMessage(), 3000, Notification.Position.TOP_CENTER);
                 }
                 grid.asSingleSelect().clear();
-                hfrm.resetForm();
-                btnCreate.setVisible(true);
-                btnUpdate.setVisible(false);
-                btnDelete.setVisible(false);
+                setButtonsToDefault();
                 loadData();
             }
         });

@@ -9,6 +9,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
@@ -60,7 +61,7 @@ public class RegisterView extends VerticalLayout {
         addClassName("Register-view");
 
         vrl.setMaxWidth("40em");
-        hTitel = new H1("rview.titel");
+        hTitel = new H1(msgSrc.getMessage("rview.titel",null,getLocale()));
         txtErrorMessage = new H5();
         txtErrorMessage.setVisible(false);
         vrl.add(hTitel,txtErrorMessage,createRegisterForm());
@@ -74,29 +75,29 @@ public class RegisterView extends VerticalLayout {
         registerForm = new FormLayout();
 
 
-        txtFirstname = new TextField("rview.firstname");
+        txtFirstname = new TextField(msgSrc.getMessage("rview.firstname",null,getLocale()));
         txtFirstname.setRequired(true);
-        txtFirstname.setErrorMessage("rview.errormessage");
+        txtFirstname.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
 
-        txtLasname = new TextField("rview.lastname");
+        txtLasname = new TextField(msgSrc.getMessage("rview.lastname",null,getLocale()));
         txtLasname.setRequired(true);
-        txtLasname.setErrorMessage("rview.errormessage");
+        txtLasname.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
 
-        txtUsername = new TextField("lview.username");
+        txtUsername = new TextField(msgSrc.getMessage("lview.username",null,getLocale()));
         txtUsername.setRequired(true);
-        txtUsername.setErrorMessage("Verplicht veld");
+        txtUsername.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
         emailField = new EmailField("Email");
         emailField.setRequiredIndicatorVisible(true);
         emailField.setPattern("[^@\\s]+@[^@\\s]+\\.[^@\\s]+");
-        emailField.setErrorMessage("Foutieve email");
-        password = new PasswordField("Password");
+        emailField.setErrorMessage(msgSrc.getMessage("rview.errormessagemail",null,getLocale()));
+        password = new PasswordField(msgSrc.getMessage("lview.password",null,getLocale()));
         password.setRequired(true);
-        password.setErrorMessage("rview.errormessage");
-        confirmPassword = new PasswordField("rview.confirmpassword");
+        password.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
+        confirmPassword = new PasswordField(msgSrc.getMessage("rview.confirmpassword",null,getLocale()));
         confirmPassword.setRequired(true);
-        confirmPassword.setErrorMessage("rview.errormessage");
-        buttonCreate = new Button("rview.buttonCr");
-        buttonCancel = new Button("rview.buttonCa");
+        confirmPassword.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
+        buttonCreate = new Button(msgSrc.getMessage("rview.buttonCr",null,getLocale()));
+        buttonCancel = new Button(msgSrc.getMessage("rview.buttonCa", null,getLocale()));
         buttonCancel.addClickListener(this::handelclickEventCancel);
         buttonCreate.addClickListener(this::handelclickEventCreate);
 
@@ -112,7 +113,7 @@ public class RegisterView extends VerticalLayout {
     private void handelclickEventCreate(ClickEvent<Button> buttonClickEvent) {
 
         try{
-            if (!password.getValue().equals(confirmPassword.getValue())) throw new IllegalArgumentException("rview.exception");
+            if (!password.getValue().equals(confirmPassword.getValue())) throw new IllegalArgumentException(msgSrc.getMessage("rview.exception",null,getLocale()));
                 UserDTO userDTO = new UserDTO.Builder().username(txtUsername.getValue()).firstname(txtFirstname.getValue()).name(txtLasname.getValue())
                     .email(emailField.getValue()).password(password.getValue()).build();
 

@@ -49,8 +49,8 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
     private static final String tabname3 = "beheer";
     private Tabs tabs;
 
-    public MainView(UserSecurityFunc sec) {
-        this.sec = sec;
+    public MainView() {
+        sec = BeanUtil.getBean(UserSecurityFunc.class);
         msgSrc = BeanUtil.getBean(MessageSource.class);
         loc = VaadinSession.getCurrent().getLocale();
 
@@ -63,7 +63,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         img.setHeight("30px");
         img.setId("aligneer-rechts");
 
-        logoutButton = new Button("mview.logout");
+        logoutButton = new Button(msgSrc.getMessage("mview.logout",null,getLocale()));
         logoutButton.addClickListener(buttonClickEvent -> handleclickEvent(buttonClickEvent));
         logoutButton.setHeight("30px");
         logoutButton.setId("aligneer-rechts");
@@ -117,7 +117,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
 
     @PostConstruct
     private void setMainViewContent() {
-        hview = new HouseView(sec);
+        hview = new HouseView();
         hview.loadData();
 
         cView = new ConsumptieView();

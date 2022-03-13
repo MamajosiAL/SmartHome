@@ -55,7 +55,7 @@ public class PersenalInformationView extends VerticalLayout {
         txtErrorMessage.setVisible(false);
 
         vrl.add(hTitel,txtErrorMessage ,createRegisterForm());
-        populateHouseForm();
+        populateForm();
         setHorizontalComponentAlignment(Alignment.CENTER,vrl);
         add(vrl);
     }
@@ -109,7 +109,7 @@ public class PersenalInformationView extends VerticalLayout {
                     .email(emailField.getValue()).build();
             userController.updateUser(userDTO);
             resetReadOnly();
-            populateHouseForm();
+            populateForm();
 
         } catch (IllegalArgumentException ex) {
            txtErrorMessage.setVisible(true);
@@ -130,7 +130,7 @@ public class PersenalInformationView extends VerticalLayout {
     }
     private void handleCancelClick(ClickEvent<Button> e) {
         resetReadOnly();
-        populateHouseForm();
+        populateForm();
 
     }
 
@@ -144,7 +144,7 @@ public class PersenalInformationView extends VerticalLayout {
         emailField.setReadOnly(false);
     }
 
-    private void populateHouseForm( ){
+    private void populateForm( ){
         UserDTO userDTO = userController.getUser();
 
         txtFirstname.setValue(userDTO.getFirstname());
