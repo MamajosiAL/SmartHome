@@ -2,20 +2,26 @@ package be.ucll.java.mobile.smarthome_mobile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceApiInterface;
+import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceDeleter;
+import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceStatusToggler;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
-import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
 import be.ucll.java.mobile.smarthome_mobile.pojo.DeviceAllParams;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.DeviceCategory;
@@ -31,25 +37,14 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
     private ProgressDialog progressDialog;
     private String deviceCategory;
     private DeviceAllParams device;
+    private int roomId;
 
-    private TextView name;
-    private TextView status;
-    private TextView room;
-    private TextView category;
-    private TextView type;
-    private TextView program;
-    private TextView temperature;
-    private TextView timer;
-    private TextView volume;
-    private TextView sensortype;
-    private TextView sensordata;
-    private TextView lbltype;
-    private TextView lblprogram;
-    private TextView lbltemperature;
-    private TextView lbltimer;
-    private TextView lblvolume;
-    private TextView lblsensortype;
-    private TextView lblsensordata;
+
+    private Switch toggleStatus;
+    private ImageView editDeviceButton, deleteDeviceButton;
+    private TextView name,status,room,category,type,program,temperature,timer,volume
+            ,sensortype,sensordata,lbltype,lblprogram,lbltemperature,lbltimer,lblvolume
+            ,lblsensortype,lblsensordata;
 
     public void getDeviceData(){
         progressDialog = new ProgressDialog(DeviceActivity.this);
@@ -68,7 +63,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             DeviceApiInterface deviceApi = retrofit.create(DeviceApiInterface.class);
 
             int deviceId = this.getIntent().getIntExtra("deviceId", 0);
-
+            roomId = this.getIntent().getIntExtra("roomId",0);
 
             Call<DeviceAllParams> call;
 
@@ -120,6 +115,11 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         sensordata = findViewById(R.id.txtSensorData);
         lblsensortype = findViewById(R.id.lblSensorType);
         lblsensordata = findViewById(R.id.lblSensorData);
+
+        //BUTTONS
+        deleteDeviceButton = findViewById(R.id.imgDeleteDevice);
+        editDeviceButton = findViewById(R.id.imgEditDevice);
+        toggleStatus = findViewById(R.id.swtchToggleStatusDevice);
 
         //DATA WE ALREADY HAVE
         String roomName = getIntent().getStringExtra("roomName");
@@ -196,6 +196,38 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             throw new DataNotFoundException("selected item is not valid or empty2");
         }
         getDeviceData();
+        //initialise delete button
+
+        deleteDeviceButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.deleteConfirmation)
+                    .setMessage(R.string.deleteConfMessage)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(R.string.yes, (dialog, whichButton) -> deleteDevice())
+                    .setNegativeButton(R.string.no, null).show();
+        });
+
+        toggleStatus.setOnClickListener(v -> {
+            try{
+                new DeviceStatusToggler(this).toggleStatus(device.getId());
+
+            } catch (Exception e){
+                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+                Log.e(TAG,e.getMessage());
+            }
+        });
+
+
+
+    }
+
+    private void deleteDevice() {
+        try{
+            new DeviceDeleter(this).delete(device.getId(),roomId);
+        } catch (Exception e){
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            Log.e(TAG,e.getMessage());
+        }
     }
 
     public void setDevice(DeviceAllParams device){

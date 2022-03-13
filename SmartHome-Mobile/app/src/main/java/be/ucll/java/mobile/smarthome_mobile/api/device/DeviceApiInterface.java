@@ -33,7 +33,7 @@ public interface DeviceApiInterface {
     @GET("/devices/{id}")
     Call<DeviceAllParams> getDeviceById(@Path("id") Integer deviceid, @Header("Cookie") String authHeader);
 
-    @DELETE("/devices/{id}/deleteDevice")
+    @DELETE("/devices/{id}/delete")
     Call<String> deleteDeviceFromHouse(@Path("id") Integer deviceid, @Header("Cookie") String authHeader);
 
     @PUT("/devices/{id}/changestatus")
@@ -53,12 +53,6 @@ public interface DeviceApiInterface {
     @GET("/appliances/{id}")
     Call<DeviceAllParams> getBigElektroById(@Path("id") Integer bigElectroid, @Header("Cookie") String authHeader);
 
-    @DELETE("/appliances/{id}/delete")
-    Call<String> deleteBigElektroFromHouse(@Path("id") Integer bigElectroid, @Header("Cookie") String authHeader);
-
-    @PUT("/appliances/{id}/changestatus")
-    Call<String> changeBigElektroStatus(@Path("id") Integer bigElectroid, @Header("Cookie") String authHeader);
-
     // MEDIA
 
     @GET("/audios/room/{id}")
@@ -73,12 +67,6 @@ public interface DeviceApiInterface {
     @GET("/audios/{id}")
     Call<DeviceAllParams> getMediaById(@Path("id") Integer mediaid, @Header("Cookie") String authHeader);
 
-    @DELETE("/audios/{id}/delete")
-    Call<String> deleteMediaFromHouse(@Path("id") Integer mediaid, @Header("Cookie") String authHeader);
-
-    @PUT("/audios/{id}/changestatus")
-    Call<String> changeMediaStatus(@Path("id") Integer mediaid, @Header("Cookie") String authHeader);
-
     // SENSOR
 
     @GET("/sensors/room/{id}")
@@ -92,11 +80,5 @@ public interface DeviceApiInterface {
 
     @GET("/sensors/{id}")
     Call<DeviceAllParams> getSensorById(@Path("id") Integer sensorid, @Header("Cookie") String authHeader);
-
-    @DELETE("/sensors/{id}/delete")
-    Call<String> deleteSensorFromHouse(@Path("id") Integer sensorid, @Header("Cookie") String authHeader);
-
-    @PUT("/sensors/{id}/changestatus")
-    Call<String> changeSensorStatus(@Path("id") Integer sensorid, @Header("Cookie") String authHeader);
 
 }

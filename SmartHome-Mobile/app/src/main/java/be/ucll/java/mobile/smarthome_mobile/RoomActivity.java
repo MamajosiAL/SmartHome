@@ -48,6 +48,7 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
     private ProgressDialog progressDialog;
     private String selectedItem;
     List<Device> devicesInRoomFromHouse;
+    private int roomId;
 
     public void getRoomsListData() {
         progressDialog = new ProgressDialog(this);
@@ -65,7 +66,7 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
             DeviceApiInterface deviceApiInterface = retrofit.create(DeviceApiInterface.class);
 
             //fetch roomId
-            int roomId = this.getIntent().getIntExtra("roomId",0);
+            roomId = this.getIntent().getIntExtra("roomId",0);
             //check if roomId is not null
 
             if(roomId==0){
@@ -108,7 +109,7 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
         recyclerViewDevices.setLayoutManager(linearLayoutManager);
         // call the constructor of housesAdapter to send the reference and data to Adapter
 
-        DevicesAdapter roomsAdapter = new DevicesAdapter(this, devicesInRoomFromHouse, selectedItem.toString(), this.getIntent().getStringExtra("roomName"));
+        DevicesAdapter roomsAdapter = new DevicesAdapter(this, devicesInRoomFromHouse, selectedItem.toString(), this.getIntent().getStringExtra("roomName"), roomId);
         recyclerViewDevices.setAdapter(roomsAdapter); // set the Adapter to RecyclerView
     }
 
