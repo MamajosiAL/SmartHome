@@ -57,4 +57,14 @@
     <string name="deviceCategories" />
     <string name="sensorType">Sensor type</string>
     <string name="deviceType">Device type</string>
+    <string name="deviceRoomLabel">Room:</string>
+    <string name="deviceStatusLabel">status:</string>
+    <string name="deviceCategoryLabel">Category:</string>
+    <string name="deviceTypeLabel">"Type: "</string>
+    <string name="deviceProgramLabel">"Program: "</string>
+    <string name="deviceTempLabel">Temperature:</string>
+    <string name="deviceTimerLabel">Timer:</string>
+    <string name="deviceVolumeLabel">"Volume: "</string>
+    <string name="deviceSensorTypeLabel">"Sensor type: "</string>
+    <string name="deviceSensorDataLabel">Sensor data:</string>
 </resources>

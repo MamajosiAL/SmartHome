@@ -21,85 +21,214 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleDevice">
 
-        <TextView
-            android:id="@+id/txtDeviceStatus"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="status"
-            android:textSize="18sp" />
+            android:gravity="center">
+            <TextView
+                android:id="@+id/lblDeviceStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceStatusLabel"
+                android:textSize="18sp"/>
 
-        <TextView
-            android:id="@+id/txtDeviceRoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="room"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/txtDeviceStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="status"
+                android:textSize="18sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtDeviceCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="category"
-            android:textSize="18sp" />
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+            <TextView
+                android:id="@+id/lblDeviceRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceRoomLabel"
+                android:textSize="18sp"/>
 
-        <TextView
-            android:id="@+id/txtBigElekType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="type (bigelek)"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/txtDeviceRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="room"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txtBigElekProgram"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="program (bigelek)"
-            android:textSize="18sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtBigElekTemperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="temperature (bigelek)"
-            android:textSize="18sp" />
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+            <TextView
+                android:id="@+id/lblDeviceCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceCategoryLabel"
+                android:textSize="18sp"/>
 
-        <TextView
-            android:id="@+id/txtBigElekTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="timer (bigelek)"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/txtDeviceCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="category"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txtMediaVolume"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="volume (media)"
-            android:textSize="18sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtSensorType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="sensortype (sensor)"
-            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txtSensorData"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="sensordata (sensor)"
-            android:textSize="18sp" />
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/lblBigElekType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceTypeLabel"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/txtBigElekType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="type (bigelek)"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/lblBigElekProgram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceProgramLabel"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/txtBigElekProgram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="program (bigelek)"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/lblBigElekTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceTempLabel"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/txtBigElekTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="temperature (bigelek)"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/lblBigElekTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceTimerLabel"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/txtBigElekTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="timer (bigelek)"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/lblMediaVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceVolumeLabel"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/txtMediaVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="volume (media)"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/lblSensorType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceSensorTypeLabel"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/txtSensorType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="sensortype (sensor)"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/lblSensorData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deviceSensorDataLabel"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/txtSensorData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="sensordata (sensor)"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
@@ -121,10 +250,10 @@
         android:layout_width="34dp"
         android:layout_height="32dp"
         android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/titleDevice"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTitleDevice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/titleDevice"
-        app:layout_constraintTop_toTopOf="@+id/titleDevice"
+        app:layout_constraintStart_toEndOf="@+id/txtTitleDevice"
+        app:layout_constraintTop_toTopOf="@+id/txtTitleDevice"
         app:srcCompat="@drawable/ic_edit_24" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
