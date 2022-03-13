@@ -20,10 +20,14 @@ import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesViewHolder> {
     Context context;
     List<Device> devices;
+    String deviceCategory;
+    String roomName;
 
-    public DevicesAdapter(Context context, List<Device> devices){
+    public DevicesAdapter(Context context, List<Device> devices, String deviceCategory, String roomName){
         this.context = context;
         this.devices = devices;
+        this.deviceCategory = deviceCategory;
+        this.roomName = roomName;
     }
 
     @Override
@@ -42,6 +46,9 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesViewHolder> {
             Intent intent = new Intent(context, DeviceActivity.class);
             intent.putExtra("deviceId", devices.get(position).getId());
             intent.putExtra("deviceName", devices.get(position).getName());
+            intent.putExtra("roomId", devices.get(position).getRoomid());
+            intent.putExtra("deviceCategory", deviceCategory);
+            intent.putExtra("roomName", roomName);
             context.startActivity(intent);
         });
     }

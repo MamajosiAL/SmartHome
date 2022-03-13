@@ -51,12 +51,13 @@ public class House_UserController {
 
     public void registerUserToHouseNotOwner(HouseDTO houseDTO) throws IllegalArgumentException{
         if (houseDTO == null ) throw new IllegalArgumentException("House is needed");
-
+        if (!userSecurityFunc.checkCurrentUserIsOwner(houseDTO.getId())) throw  new IllegalArgumentException("Can't register user because you're not owner of this house.");
 
         Optional<House> h = houseDAO.findById(houseDTO.getId());
         if (h.isEmpty()) throw new IllegalArgumentException("House couldn't be found");
         Optional<User> u = userDAO.findFirstByUsername(houseDTO.getUsername());
         if (u.isEmpty())throw new IllegalArgumentException("User couldn't be found");
+        if (houseUserExist(h.get(),u.get()).isPresent()) throw new IllegalArgumentException("User is already registered to this house");
 
         House_User hs = new House_User.Builder().house(h.get()).user(u.get()).isAdmin(false).isOwner(false).build();
         dao.save(hs);
@@ -67,11 +68,12 @@ public class House_UserController {
     public void updateUserSetAdmin(House_UserDTO house_userDTO) throws IllegalArgumentException{
         if (house_userDTO.getHouseid() <= 0) throw new  IllegalArgumentException("Invalid id");
         Optional<House> house = houseDAO.findById(house_userDTO.getHouseid());
-        Optional<User> user = userDAO.findById(userSecurityFunc.getLoggedInUserId());
+        Optional<User> user = userDAO.findById(house_userDTO.getUserid());
         if (house.isEmpty()|| user.isEmpty()) throw new  IllegalArgumentException("House or user not found");
 
         House_User hs = getHouseUserByHouseAndUser(house.get(), user.get());
-        if(userSecurityFunc.checkCurrentUserIsOwner(hs.getHouse().getHouseId())) throw new NotFoundException("logged in user is not owner of this house");
+        if (hs == null) throw new  IllegalArgumentException("Registration could not be found");
+        if(!userSecurityFunc.checkCurrentUserIsOwner(hs.getHouse().getHouseId())) throw new IllegalArgumentException("logged in user is not owner of this house");
         hs.setAdmin(house_userDTO.getIsadmin());
     }
 
@@ -140,15 +142,11 @@ public class House_UserController {
         return getHouseUserByHouseAndUser(house.get(),user.get());
     }
 
-    private House_User houseUserExist(long id) throws IllegalArgumentException{
+    public Optional<House_User> houseUserExist(House h, User u){
 
-       Optional<House_User> hs = dao.findById(id);
-       if (hs.isPresent()){
-           return hs.get();
-       }else{
-           throw new IllegalArgumentException("Registration not found");
-       }
+       Optional<House_User> hs = dao.findByHouseAndUser(h,u);
 
+       return hs;
     }
 
 }

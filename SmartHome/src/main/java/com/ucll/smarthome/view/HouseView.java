@@ -3,31 +3,40 @@ package com.ucll.smarthome.view;
 import com.ucll.smarthome.controller.HouseController;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.view.dialogs.WarningDialog;
+import com.ucll.smarthome.view.forms.HouseForm;
 import com.vaadin.flow.component.ClickEvent;
 import com.ucll.smarthome.dto.HouseDTO;
 import com.vaadin.flow.component.button.Button;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.NotFoundException;
+import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.access.AccessDeniedException;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class HuisView extends VerticalLayout {
+@Route(value = "houses" , layout = MainView.class)
+public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         @Autowired
         private final HouseController hc;
-
+        private ManageUsersView mvw;
 
         private final UserSecurityFunc sec;
 
@@ -36,17 +45,18 @@ public class HuisView extends VerticalLayout {
         private HorizontalLayout lphLayout;
         private VerticalLayout verticalLayoutrh;
         private HorizontalLayout horizontalLayoutrh;
-        private HuisForm hfrm;
+        private HouseForm hfrm;
 
         private Grid<HouseDTO> grid;
         private Span role;
-
+        private Button btnManageUsers;
+        private Button btnRooms;
         private Button btnCancel;
         private Button btnCreate;
         private Button btnUpdate;
         private Button btnDelete;
 
-    public HuisView(UserSecurityFunc sec){
+    public HouseView(UserSecurityFunc sec){
         super();
         this.sec = sec;
 
@@ -72,32 +82,48 @@ public class HuisView extends VerticalLayout {
 
         grid = new Grid<>();
         grid.setItems(new ArrayList<HouseDTO>(0));
-        grid.addColumn(HouseDTO::getName).setHeader("Naam Huis");
+        grid.addColumn(HouseDTO::getName).setHeader("hform.housename");
         grid.addColumn(new ComponentRenderer<>(houseDTO -> {
             role = new Span();
             if (houseDTO.isIsowner()){
-                 role.setText("Eigenaar");
+                 role.setText("hview.roleO");
                  role.getElement().getStyle().set("color", "green");
             }else if (houseDTO.isAdmin()){
                  role.setText("Admin");
                  role.getElement().getStyle().set("color", "Orange");
             }else{
-                role.setText("Gebruiker");
+                role.setText("hview.roleU");
             }
             return role;
         })).setHeader("Rol");
+        grid.addColumn(new ComponentRenderer<>(houseDTO -> {
+            if (houseDTO.isIsowner()){
+            btnManageUsers = new Button(new Icon(VaadinIcon.FOLDER));
+            btnManageUsers.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+            btnManageUsers.addClickListener(e -> handleClicManageUsersHouse(e,houseDTO));
+            return btnManageUsers;
+            }
+            return new Span();
+        })).setHeader("Beheer gebruikers").setTextAlign(ColumnTextAlign.CENTER);
+        grid.addColumn(new ComponentRenderer<>(houseDTO -> {
+            btnRooms = new Button(new Icon(VaadinIcon.ANGLE_RIGHT));
+            btnRooms.addClickListener(e -> handleClicToRooms(e,houseDTO));
+            return btnRooms;
+
+        })).setHeader("Kamers").setTextAlign(ColumnTextAlign.CENTER);
         grid.setHeightFull();
 
         grid.asSingleSelect().addValueChangeListener(event -> populateHouseForm(event.getValue()));
         verticalLayoutlf.add(lphLayout);
         verticalLayoutlf.add(grid);
-        verticalLayoutlf.setWidth("70%");
+        verticalLayoutlf.setWidth("80%");
         return  verticalLayoutlf;
     }
+
     private Component CreateEditorLayout() {
 
         verticalLayoutrh = new VerticalLayout();
-        hfrm = new HuisForm();
+        hfrm = new HouseForm();
 
         horizontalLayoutrh = new HorizontalLayout();
         horizontalLayoutrh.setWidthFull();
@@ -106,25 +132,35 @@ public class HuisView extends VerticalLayout {
 
 
         btnCancel = new Button("Annuleren");
-        btnCancel.addClickListener(e -> handleClickCancel(e));
+        btnCancel.addClickListener(this::handleClickCancel);
 
         btnCreate = new Button("Toevoegen");
-        btnCreate.addClickListener(e -> handleClickCreate(e));
+        btnCreate.addClickListener(this::handleClickCreate);
+
 
         btnUpdate = new Button("Opslaan");
-        btnUpdate.addClickListener(e -> handleClickUpdate(e));
+        btnUpdate.addClickListener(this::handleClickUpdate);
         btnUpdate.setVisible(false);
 
         btnDelete = new Button("Verwijderen");
-        btnDelete.addClickListener(e -> handleClickDelete(e));
+        btnDelete.addClickListener(this::handleClickDelete);
         btnDelete.setVisible(false);
         
         horizontalLayoutrh.add(btnCancel,btnCreate,btnUpdate,btnDelete);
 
         verticalLayoutrh.add(hfrm);
         verticalLayoutrh.add(horizontalLayoutrh);
-        verticalLayoutrh.setWidth("30%");
+        verticalLayoutrh.setWidth("20%");
         return verticalLayoutrh;
+    }
+
+    private void handleClicManageUsersHouse(ClickEvent<Button> e,HouseDTO houseDTO){
+
+       getUI().ifPresent(ui -> ui.navigate("users/" + houseDTO.getId()));
+
+    }
+    private void handleClicToRooms(ClickEvent<Button> e, HouseDTO houseDTO) {
+        getUI().ifPresent(ui -> ui.navigate("rooms/" + houseDTO.getId()));
     }
 
     private void handleClickCancel(ClickEvent<Button> e) {
@@ -135,13 +171,13 @@ public class HuisView extends VerticalLayout {
 
     private void handleClickCreate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show("Validatie fout", 3000, Notification.Position.MIDDLE);
+            Notification.show("hview.validationerror", 3000, Notification.Position.MIDDLE);
             return;
         }
         try {
             HouseDTO houseDTO = new HouseDTO.Builder().name(hfrm.txtnaamhuis.getValue()).build();
             hc.createHouse(houseDTO);
-            Notification.show("huis aangemaakt",3000,Notification.Position.TOP_CENTER);
+            Notification.show("hview.createhouse",3000,Notification.Position.TOP_CENTER);
             hfrm.resetForm();
             loadData();
         } catch (IllegalArgumentException event){
@@ -152,12 +188,12 @@ public class HuisView extends VerticalLayout {
     }
     private void handleClickUpdate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show("Validatie fout", 3000, Notification.Position.MIDDLE);
+            Notification.show("hview.validationerror", 3000, Notification.Position.MIDDLE);
         }
         try{
             HouseDTO houseDTO = new HouseDTO.Builder().id(Integer.parseInt(hfrm.lblId.getText())).name(hfrm.txtnaamhuis.getValue()).build();
             hc.updateHouse(houseDTO);
-            Notification.show("huis aangepast",3000,Notification.Position.TOP_CENTER);
+            Notification.show("hview.houseadjusted",3000,Notification.Position.TOP_CENTER);
             hfrm.resetForm();
             loadData();
             btnCreate.setVisible(true);
@@ -169,7 +205,7 @@ public class HuisView extends VerticalLayout {
     }
 
     private void handleClickDelete(ClickEvent<Button> e) {
-        WarningDialog w = new WarningDialog("Weet u zeker dat u dit huis wilt verwijderen?");
+        WarningDialog w = new WarningDialog("hview.error");
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {
@@ -200,6 +236,7 @@ public class HuisView extends VerticalLayout {
 
     }
 
+
     private void setButtonsToDefault(){
         hfrm.resetForm();
         btnCreate.setVisible(true);
@@ -220,6 +257,10 @@ public class HuisView extends VerticalLayout {
             }
 
         }
+    }
 
+    @Override
+    public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
+        loadData();
     }
 }

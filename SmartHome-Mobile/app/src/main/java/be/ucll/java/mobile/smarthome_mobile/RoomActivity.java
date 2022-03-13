@@ -46,6 +46,7 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
     private ImageView editButton;
     private Spinner dropdownList;
     private ProgressDialog progressDialog;
+    private String selectedItem;
     List<Device> devicesInRoomFromHouse;
 
     public void getRoomsListData() {
@@ -71,22 +72,22 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
                 throw new NullPointerException("The id of the selected room is not found");
             }
             Call<List<Device>> call;
-            String selectedItem  = (String) dropdownList.getSelectedItem();
+            selectedItem  = (String) dropdownList.getSelectedItem();
 
             if(selectedItem==null||selectedItem.isEmpty()){
                 selectedItem = DeviceCategory.GENERIC.getName();
            } 
 
             // define call depending on selectedItem
-                  if (DeviceCategory.BIG_ELECTRO.getName().equals(selectedItem)||DeviceCategory.BIG_ELECTRO.getNameBE().equals(selectedItem)) {
+                  if (DeviceCategory.nameEqualToCategory(DeviceCategory.BIG_ELECTRO,selectedItem)) {
                 call = deviceApiInterface.getBigElektroInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
-            } else if (DeviceCategory.GENERIC.getName().equals(selectedItem)||DeviceCategory.GENERIC.getNameBE().equals(selectedItem)) {
+            } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.GENERIC,selectedItem)) {
 
                 call = deviceApiInterface.getDevicesInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
-            } else if (DeviceCategory.MEDIA.getName().equals(selectedItem)||DeviceCategory.MEDIA.getNameBE().equals(selectedItem)) {
+            } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.MEDIA,selectedItem)) {
 
                 call = deviceApiInterface.getMediaInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
-            } else if (DeviceCategory.SENSOR.getName().equals(selectedItem)||DeviceCategory.SENSOR.getNameBE().equals(selectedItem)) {
+            } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.SENSOR,selectedItem)) {
 
                 call = deviceApiInterface.getSensorInRoomFromHouseWithAccessForUserInSession(roomId, AuthorizationManager.getInstance(this).getSessionId());
             }else {
@@ -106,7 +107,8 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewDevices.setLayoutManager(linearLayoutManager);
         // call the constructor of housesAdapter to send the reference and data to Adapter
-        DevicesAdapter roomsAdapter = new DevicesAdapter(this, devicesInRoomFromHouse);
+
+        DevicesAdapter roomsAdapter = new DevicesAdapter(this, devicesInRoomFromHouse, selectedItem.toString(), this.getIntent().getStringExtra("roomName"));
         recyclerViewDevices.setAdapter(roomsAdapter); // set the Adapter to RecyclerView
     }
 

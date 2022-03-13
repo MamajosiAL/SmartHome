@@ -47,13 +47,13 @@ public class BigElectronicController {
         BigElectronicDevice appliances = new BigElectronicDevice.Builder()
                 .name(beDTO.getName())
                 .status(beDTO.isStatus())
-                .type(getType(beDTO.getType()).orElse(null))
+                .type(getTypeByName(beDTO.getType().getName()).orElse(null))
                 .tempature(beDTO.getTempature())
-                .timer(beDTO.getTimer())
+                .timer(null)
                 .room(roomController.roomExists(beDTO.getRoomid())).build();
         beDao.save(appliances);
     }
-    private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO , Programme programme) throws IllegalArgumentException{
+    private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO, Programme programme) throws IllegalArgumentException{
 
         Room room = roomController.roomExists(beDTO.getRoomid());
         if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
@@ -65,9 +65,17 @@ public class BigElectronicController {
             apl.setType(getType(programme.getType()).orElse(null));
             apl.setTempature(programme.getTempature());
             apl.setTimer(programme.getTimer());
+    }
+
+    public BigElectronicDTO getProgramValues(long programid){
+
+        Optional<Programme> programme = programmeDAO.findById(programid);
+        if (programme.isEmpty()) throw new IllegalArgumentException("Program not found");
+        return new BigElectronicDTO.Builder().tempature(programme.get().getTempature()).timer(programme.get().getTimer()).build();
 
     }
-    public void updateApplianceDevice(BigElectronicDTO beDTO) throws IllegalArgumentException{
+
+    public void updateBeDeviceDevice(BigElectronicDTO beDTO) throws IllegalArgumentException{
         if (beDTO == null ) throw new IllegalArgumentException("Input data missing");
         if (beDTO.getName() == null || beDTO.getName().trim().equals("")) throw new IllegalArgumentException("Name of device is not filled in");
         Optional<Programme> programme = programmeDAO.findById(beDTO.getProgramid());
@@ -116,6 +124,10 @@ public class BigElectronicController {
     private Optional<Type> getType(Type type){
         return typeDAO.findById(type.getTypeid());
     }
+    private Optional<Type> getTypeByName(String typeName){
+        return typeDAO.findByName(typeName);
+    }
+
     private BigElectronicDevice appliancesExists(long deviceid) throws IllegalArgumentException{
         Optional<BigElectronicDevice> device = beDao.findById(deviceid);
         if (device.isEmpty()) throw new IllegalArgumentException("Device doesn't exist ");

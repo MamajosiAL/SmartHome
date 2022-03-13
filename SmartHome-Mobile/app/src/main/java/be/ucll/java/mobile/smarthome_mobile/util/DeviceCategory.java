@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
+
 public enum DeviceCategory {
     BIG_ELECTRO("Big electronic","Groot elektro"),MEDIA("Mediaplayer","Mediaspeler"),SENSOR("Sensor","Sensor"),GENERIC("Generic","Generiek");
     private String name, nameBE;
@@ -43,5 +45,24 @@ public enum DeviceCategory {
         List<String> names = new ArrayList<>();
         Arrays.stream(DeviceCategory.values()).forEach(deviceCategory -> names.add(deviceCategory.nameBE));
         return names;
+    }
+
+    public static boolean nameEqualToCategory(DeviceCategory expected, String name){
+        return (expected.name.equals(name)||expected.nameBE.equals(name));
+    }
+
+    public static DeviceCategory getCategoryFromName(String name){
+        DeviceCategory result = null;
+
+        for (DeviceCategory category: values()) {
+            if(nameEqualToCategory(category,name)){
+                result = category;
+                break;
+            }
+        }
+        if(result == null){
+            throw new DataNotFoundException("No devicecategory found with name: "+name);
+        }
+        return result;
     }
 }

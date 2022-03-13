@@ -7,10 +7,10 @@ import java.util.Timer;
 
 import be.ucll.java.mobile.smarthome_mobile.util.DeviceCategory;
 
-public class BigElectro extends Device{
+public class BigElectro extends Device {
     @SerializedName("type")
     @Expose
-    private DeviceCategory type;
+    private Type type;
     @SerializedName("programid")
     @Expose
     private Integer programid;
@@ -36,7 +36,7 @@ public class BigElectro extends Device{
      * @param tempature
      * @param programid
      */
-    public BigElectro(Integer categoryid, Integer id, String name, Integer roomid, Boolean status, DeviceCategory type, Integer programid, Integer tempature, Timer timer) {
+    public BigElectro(Long categoryid, Long id, String name, Long roomid, Boolean status, DeviceCategory type, long programid, long tempature, Timer timer) {
         super(categoryid, id, name, roomid, status);
         this.type = type;
         this.programid = programid;
@@ -57,28 +57,28 @@ public class BigElectro extends Device{
         return this;
     }
 
-    public Integer getProgramid() {
+    public long getProgramid() {
         return programid;
     }
 
-    public void setProgramid(Integer programid) {
+    public void setProgramid(long programid) {
         this.programid = programid;
     }
 
-    public BigElectro withProgramid(Integer programid) {
+    public BigElectro withProgramid(long programid) {
         this.programid = programid;
         return this;
     }
 
-    public Integer getTempature() {
+    public long getTempature() {
         return tempature;
     }
 
-    public void setTempature(Integer tempature) {
+    public void setTempature(long tempature) {
         this.tempature = tempature;
     }
 
-    public BigElectro withTempature(Integer tempature) {
+    public BigElectro withTempature(long tempature) {
         this.tempature = tempature;
         return this;
     }
