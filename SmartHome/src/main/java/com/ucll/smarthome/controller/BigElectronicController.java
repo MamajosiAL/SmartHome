@@ -56,7 +56,6 @@ public class BigElectronicController {
     private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO, Programme programme) throws IllegalArgumentException{
 
         Room room = roomController.roomExists(beDTO.getRoomid());
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
 
         BigElectronicDevice apl = appliancesExists(beDTO.getId());
             apl.setName(beDTO.getName());
@@ -81,7 +80,6 @@ public class BigElectronicController {
         Optional<Programme> programme = programmeDAO.findById(beDTO.getProgramid());
 
         Room room = roomController.roomExists(beDTO.getRoomid());
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
 
         if (programme.isPresent()){
             updateBeDeviceWithProgramme(beDTO,programme.get());

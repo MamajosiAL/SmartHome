@@ -99,6 +99,7 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         })).setHeader("Groot electro").setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnMedia = new Button(new Icon(VaadinIcon.CAMERA));
+            btnMedia.addClickListener(e->handleClickMedia(e,roomDTO.getId()));
             return btnMedia;
         })).setHeader("Media").setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
@@ -122,6 +123,10 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         verticalLayoutlf.add(grid);
         verticalLayoutlf.setWidth("80%");
         return  verticalLayoutlf;
+    }
+
+    private void handleClickMedia(ClickEvent<Button> e, long roomid) {
+        getUI().ifPresent(ui->ui.navigate("media's/" + roomid));
     }
 
     private void handleClickDevice(ClickEvent<Button> e,long roomid) {

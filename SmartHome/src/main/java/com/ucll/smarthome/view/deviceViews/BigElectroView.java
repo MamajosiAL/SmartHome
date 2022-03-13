@@ -3,7 +3,6 @@ package com.ucll.smarthome.view.deviceViews;
 import com.ucll.smarthome.controller.ConsumptionController;
 import com.ucll.smarthome.controller.DeviceController;
 import com.ucll.smarthome.controller.RoomController;
-import com.ucll.smarthome.dto.ConsumptionDTO;
 import com.ucll.smarthome.dto.DeviceDTO;
 import com.ucll.smarthome.dto.RoomDTO;
 import com.ucll.smarthome.functions.BeanUtil;
@@ -18,7 +17,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
-
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -34,12 +32,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.AccessDeniedException;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Route(value = "devices",layout = MainView.class)
-public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> {
+@Route(value = "big_electronic's",layout = MainView.class)
+public class BigElectroView extends VerticalLayout implements HasUrlParameter<Long> {
 
     @Autowired
     private DeviceController deviceController;
@@ -70,7 +67,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
     private Button btnCreate;
     private Button btnUpdate;
 
-    public DeviceView() {
+    public BigElectroView() {
         deviceController = BeanUtil.getBean(DeviceController.class);
         consumptionController = BeanUtil.getBean(ConsumptionController.class);
         sec = BeanUtil.getBean(UserSecurityFunc.class);
@@ -130,10 +127,10 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
             aSwitch.addClickListener(e-> handleClickOnOf(e,deviceDTO));
             return aSwitch;
         })).setHeader("I/O").setTextAlign(ColumnTextAlign.CENTER);
-        grid.addColumn(new ComponentRenderer<>(deviceDTO -> {
+        grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnDelete = new Button(new Icon(VaadinIcon.TRASH));
             btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
-            btnDelete.addClickListener(e-> handleClickDelete(e,deviceDTO.getId()));
+            btnDelete.addClickListener(e-> handleClickDelete(e,roomDTO.getId()));
             return btnDelete;
         })).setKey("delete");
         grid.setHeightFull();
@@ -146,6 +143,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
 
     private void handleClickOnOf(ClickEvent<ToggleButton> e,DeviceDTO deviceDTO) {
         try {
+
             deviceController.changeStatus(deviceDTO.getId());
             setButtonsToDefault();
             loadData();

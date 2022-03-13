@@ -150,6 +150,7 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     private void handleClickAdd(ClickEvent<Button> buttonClickEvent) {
         try {
             UserDTO userDTO =  users.getValue();
+            if (userDTO == null) throw new IllegalArgumentException("Geen gebruiker geselecteerd");
             huC.registerUserToHouseNotOwner(new HouseDTO.Builder().id(houseid).username(userDTO.getUsername()).build());
             users.clear();
             loadData();

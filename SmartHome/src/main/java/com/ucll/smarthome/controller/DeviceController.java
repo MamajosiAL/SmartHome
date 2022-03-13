@@ -51,7 +51,6 @@ public class DeviceController {
         if (deviceDTO.getName() == null || deviceDTO.getName().trim() .equals("")) throw new IllegalArgumentException("Name of device is not filled in");
 
         Room room = roomController.roomExists(deviceDTO.getRoomid());
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
 
         Device device =  deviceExists(deviceDTO.getId());
 

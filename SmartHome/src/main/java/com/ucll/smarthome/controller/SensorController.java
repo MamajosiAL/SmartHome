@@ -54,7 +54,7 @@ public class SensorController {
         if (sensorDTO.getName() == null || sensorDTO.getName().trim().equals("")) throw new IllegalArgumentException("Name of device is not filled in");
 
         Room room = roomController.roomExists(sensorDTO.getRoomid());
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
+
 
         SensorDevice sensorDevice = sensorExists(sensorDTO.getId());
         sensorDevice.setName(sensorDTO.getName());
