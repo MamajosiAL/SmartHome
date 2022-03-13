@@ -3,6 +3,7 @@ package com.ucll.smarthome.view;
 import com.ucll.smarthome.controller.HouseController;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.view.dialogs.WarningDialog;
+import com.ucll.smarthome.view.forms.HouseForm;
 import com.vaadin.flow.component.ClickEvent;
 import com.ucll.smarthome.dto.HouseDTO;
 import com.vaadin.flow.component.UI;
@@ -26,6 +27,8 @@ import com.vaadin.flow.router.NotFoundException;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.AccessDeniedException;
 
 import java.util.ArrayList;
@@ -38,7 +41,6 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         private MessageSource msgSrc;
         private final HouseController hc;
         private ManageUsersView mvw;
-
         private final UserSecurityFunc sec;
 
         private SplitLayout splitLayout;
@@ -57,9 +59,9 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         private Button btnUpdate;
         private Button btnDelete;
 
-    public HouseView(UserSecurityFunc sec){
+    public HouseView(){
         super();
-        this.sec = sec;
+        sec = BeanUtil.getBean(UserSecurityFunc.class);
         msgSrc = BeanUtil.getBean(MessageSource.class);
 
         hc = BeanUtil.getBean(HouseController.class);
@@ -69,15 +71,15 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
         splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
-        splitLayout.addToPrimary(CreateGridLayout());
-        splitLayout.addToSecondary(CreateEditorLayout());
+        splitLayout.addToPrimary(createGridLayout());
+        splitLayout.addToSecondary(createEditorLayout());
         add(splitLayout);
 
     }
 
 
 
-    private Component CreateGridLayout() {
+    private Component createGridLayout() {
         verticalLayoutlf = new VerticalLayout();
         verticalLayoutlf.setWidthFull();
         lphLayout = new HorizontalLayout();
@@ -122,7 +124,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         return  verticalLayoutlf;
     }
 
-    private Component CreateEditorLayout() {
+    private Component createEditorLayout() {
 
         verticalLayoutrh = new VerticalLayout();
         hfrm = new HouseForm();
@@ -198,11 +200,8 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
             HouseDTO houseDTO = new HouseDTO.Builder().id(Integer.parseInt(hfrm.lblId.getText())).name(hfrm.txtnaamhuis.getValue()).build();
             hc.updateHouse(houseDTO);
             Notification.show(msgSrc.getMessage("hview.houseadjusted",null,getLocale()),3000,Notification.Position.TOP_CENTER);
-            hfrm.resetForm();
             loadData();
-            btnCreate.setVisible(true);
-            btnUpdate.setVisible(false);
-            btnDelete.setVisible(false);
+            setButtonsToDefault();
         } catch (IllegalArgumentException | NotFoundException event){
             Notification.show(event.getMessage(), 3000, Notification.Position.TOP_CENTER);
         }
@@ -220,10 +219,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
                     Notification.show(ex.getMessage(), 3000, Notification.Position.TOP_CENTER);
                 }
                 grid.asSingleSelect().clear();
-                hfrm.resetForm();
-                btnCreate.setVisible(true);
-                btnUpdate.setVisible(false);
-                btnDelete.setVisible(false);
+                setButtonsToDefault();
                 loadData();
             }
         });

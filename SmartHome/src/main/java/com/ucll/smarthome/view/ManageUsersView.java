@@ -30,6 +30,7 @@ import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.*;
+import liquibase.pro.packaged.A;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -45,6 +46,8 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
 
     @Autowired
     private House_UserController huC;
+    @Autowired
+    private final UserSecurityFunc sec;
 
     private SplitLayout splitLayout;
     private VerticalLayout verticalLayoutlf;
@@ -58,10 +61,10 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     private Button btnAdd;
     private Grid<UserDTO> grid;
 
-    private final UserSecurityFunc sec;
-    public ManageUsersView(UserSecurityFunc sec) {
+
+    public ManageUsersView() {
         super();
-        this.sec = sec;
+        sec = BeanUtil.getBean(UserSecurityFunc.class);
 
 
         usc = BeanUtil.getBean(UserController.class);

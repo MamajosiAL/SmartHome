@@ -41,7 +41,7 @@ public class ConsumptionController {
     public void createConsumption(ConsumptionDTO consumptionDTO){
         if(consumptionDTO == null) throw new IllegalArgumentException(msgSrc.getMessage("ccontroler.consumption",null, Locale.getDefault()));
         if(consumptionDTO.getDeviceId() <= 0) throw new IllegalArgumentException(msgSrc.getMessage("ccontroler.exception.1",null,Locale.getDefault()));
-        if(consumptionDTO.getUnit() == null || consumptionDTO.getUnit().isEmpty()) throw new IllegalArgumentException("Creating consumption failed. Unit is empty");
+        //if(consumptionDTO.getUnit() == null || consumptionDTO.getUnit().isEmpty()) throw new IllegalArgumentException("Creating consumption failed. Unit is empty");
 
         Optional<Device> device = deviceDAO.findById(consumptionDTO.getDeviceId());
 
@@ -51,7 +51,7 @@ public class ConsumptionController {
                 .device(deviceDAO.getById(consumptionDTO.getDeviceId()))
                 .aantalMinuten(0)
                 .startDatumEnTijd(null)
-                .unit(consumptionDTO.getUnit())
+                .unit("kWh")
                 .consumptionPerHour(rngDeviceConsumption())
                 .build();
 
@@ -66,7 +66,7 @@ public class ConsumptionController {
     public void deviceChangeStatus(Device device){
         List<Consumption> consumptionList = getConsumptionsByDevice(device);
 
-        if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("ccontroller.userpartof");
+        if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
         // status wordt aangezet
         if(!device.isStatus()){
                 for(Consumption c : consumptionList){
