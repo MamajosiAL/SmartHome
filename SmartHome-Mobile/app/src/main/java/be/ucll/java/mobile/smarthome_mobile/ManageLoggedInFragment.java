@@ -55,8 +55,8 @@ public class ManageLoggedInFragment extends Fragment {
         //set onclicklisteners
         try {
             Log.d(TAG, "initiating buttons");
-            logOut = getView().findViewById(R.id.btnLogOut);
-            myAccount = getView().findViewById(R.id.btnAccountDetails);
+            logOut = root.findViewById(R.id.btnLogOut);
+            myAccount = root.findViewById(R.id.btnAccountDetails);
             Log.d(TAG, "buttons initiated, started adding listeners");
             logOut.setOnClickListener(v -> {
                 Log.d(TAG, "Button " + logOut.getClass().getSimpleName()+" pressed");

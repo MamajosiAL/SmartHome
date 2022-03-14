@@ -25,22 +25,19 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder>{
 
     @Override
     public UsersViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(context).inflate(R.layout.houses_list_item, null);
-        UsersViewHolder usersViewHolder = new UsersViewHolder(view);
-        return usersViewHolder;
+        View view = LayoutInflater.from(context).inflate(R.layout.users_list_item, null);
+        return new UsersViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(UsersViewHolder holder, final int position) {
         // set the data
-        holder.id.setText(context.getText(R.string.userId) + ": " + users.get(position).getId());
-        holder.username.setText(context.getText(R.string.username) + ": " + users.get(position).getUsername());
-        holder.firstName.setText(context.getText(R.string.firstName) + ": " + users.get(position).getFirstname());
-        holder.name.setText(context.getText(R.string.name) + ": " + users.get(position).getName());
-        holder.email.setText(context.getText(R.string.email) + ": " + users.get(position).getEmail());
+        holder.username.setText(users.get(position).getUsername());
+        if (users.get(position).isIsadmin()) {
+            holder.isAdmin.setText("Admin") ;
+        }
 
-        // implement setONCLickListener on itemView
+       // implement setONCLickListener on itemView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

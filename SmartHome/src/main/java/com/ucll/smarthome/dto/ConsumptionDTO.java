@@ -8,6 +8,8 @@ public class ConsumptionDTO {
     private int aantalMinuten;
     private String unit;
     private double consumptionPerHour;
+    private Long houseId;
+    private Long roomId;
 
     public ConsumptionDTO() {
     }
@@ -18,6 +20,8 @@ public class ConsumptionDTO {
         setAantalMinuten(builder.aantalMinuten);
         setUnit(builder.unit);
         setConsumptionPerHour(builder.consumptionPerHour);
+        setHouseId(builder.houseId);
+        setRoomId(builder.roomId);
     }
 
     public Long getConsumptionId() {
@@ -63,6 +67,21 @@ public class ConsumptionDTO {
     public void setConsumptionPerHour(double consumptionPerHour) {
         this.consumptionPerHour = consumptionPerHour;
     }
+    public Long getHouseId() {
+        return houseId;
+    }
+
+    public void setHouseId(Long houseId) {
+        this.houseId = houseId;
+    }
+
+    public Long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
+    }
 
     public static final class Builder {
         private Long consumptionId;
@@ -70,6 +89,8 @@ public class ConsumptionDTO {
         private int aantalMinuten;
         private String unit;
         private double consumptionPerHour;
+        private Long houseId;
+        private Long roomId;
 
         public Builder(){}
 
@@ -93,8 +114,18 @@ public class ConsumptionDTO {
             return this;
         }
 
-        private Builder consumptionPerHour(double val){
+        public Builder consumptionPerHour(double val){
             consumptionPerHour = val;
+            return this;
+        }
+
+        public Builder houseId(Long val){
+            houseId = val;
+            return this;
+        }
+
+        public Builder roomId(Long val){
+            roomId = val;
             return this;
         }
 

@@ -23,4 +23,12 @@
     <string name="password">Wachtwoord</string>
     <string name="sensorType">Sensor type</string>
     <string name="deviceType">Device type</string>
+    <string name="role">Rol</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="addRoomToHouse">Kamer toevoegen aan huis</string>
+    <string name="rooms">Kamers</string>
+    <string name="addUsers">Gebruiker toevoegen</string>
+    <string name="users">Gebruikers</string>
+    <string name="title_rooms">Kamers</string>
+    <string name="addUserToHouse">Gebruiker toevoegen aan huis</string>
 </resources>

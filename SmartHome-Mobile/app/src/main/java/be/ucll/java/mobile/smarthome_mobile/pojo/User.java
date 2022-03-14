@@ -23,6 +23,9 @@ public class User {
     @SerializedName("password")
     @Expose
     private String password;
+    @SerializedName("isadmin")
+    @Expose
+    private boolean isadmin;
 
     /**
      * No args constructor for use in serialization
@@ -123,10 +126,11 @@ public class User {
         this.password = password;
     }
 
-    public User withPassword(String password) {
-        this.password = password;
-        return this;
+    public boolean isIsadmin() {
+        return isadmin;
     }
 
-
+    public void setIsadmin(boolean isadmin) {
+        this.isadmin = isadmin;
+    }
 }

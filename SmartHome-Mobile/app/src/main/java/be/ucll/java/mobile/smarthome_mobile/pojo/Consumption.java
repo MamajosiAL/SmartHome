@@ -18,7 +18,7 @@ public class Consumption {
     private String unit;
     @SerializedName("consumptionPerHour")
     @Expose
-    private Integer consumptionPerHour;
+    private double consumptionPerHour;
 
     /**
      * No args constructor for use in serialization
@@ -35,7 +35,7 @@ public class Consumption {
      * @param consumptionPerHour
      * @param deviceId
      */
-    public Consumption(Integer consumptionId, Integer deviceId, Integer aantalMinuten, String unit, Integer consumptionPerHour) {
+    public Consumption(Integer consumptionId, Integer deviceId, Integer aantalMinuten, String unit, double consumptionPerHour) {
         super();
         this.consumptionId = consumptionId;
         this.deviceId = deviceId;
@@ -96,15 +96,15 @@ public class Consumption {
         return this;
     }
 
-    public Integer getConsumptionPerHour() {
+    public double getConsumptionPerHour() {
         return consumptionPerHour;
     }
 
-    public void setConsumptionPerHour(Integer consumptionPerHour) {
+    public void setConsumptionPerHour(double consumptionPerHour) {
         this.consumptionPerHour = consumptionPerHour;
     }
 
-    public Consumption withConsumptionPerHour(Integer consumptionPerHour) {
+    public Consumption withConsumptionPerHour(double consumptionPerHour) {
         this.consumptionPerHour = consumptionPerHour;
         return this;
     }

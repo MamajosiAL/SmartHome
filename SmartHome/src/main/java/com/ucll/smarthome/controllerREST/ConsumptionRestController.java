@@ -38,4 +38,31 @@ public class ConsumptionRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/room/{id}")
+    public ResponseEntity getConsumptionsByRoom(@PathVariable("id") long roomid){
+        try{
+            return new ResponseEntity(consumptionController.getConsumptionsByRoom(roomid), HttpStatus.OK);
+        }catch (IllegalArgumentException ex) {
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/house/{id}")
+    public ResponseEntity getConsumptionsByHouse(@PathVariable("id") long houseid){
+        try{
+            return new ResponseEntity(consumptionController.getConsumptionsByHouse(houseid), HttpStatus.OK);
+        }catch (IllegalArgumentException ex) {
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity getConsumptionsByUser(){
+        try{
+            return new ResponseEntity(consumptionController.getConsumptionsByUser(), HttpStatus.OK);
+        }catch (IllegalArgumentException ex) {
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

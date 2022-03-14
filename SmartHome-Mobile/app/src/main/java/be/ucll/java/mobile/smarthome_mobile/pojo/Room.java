@@ -62,7 +62,7 @@ public class Room {
         return this;
     }
 
-    public long getHouseid() {
+    public Integer getHouseid() {
         return houseid;
     }
 
