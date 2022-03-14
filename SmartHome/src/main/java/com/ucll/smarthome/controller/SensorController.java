@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.webjars.NotFoundException;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,7 +42,11 @@ public class SensorController {
 
         Room room = roomController.roomExists(sensorDTO.getRoomid());
         if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
-
+        if (sensorDTO.getSensorType()!=null){
+            if (!sensorDTO.getSensorType().equals("Thermostat")){
+                sensorDTO.setSensordata(0.0);
+            }
+        }
         SensorDevice sensorDevice = new SensorDevice.Builder()
                 .name(sensorDTO.getName())
                 .status(sensorDTO.isStatus())
@@ -56,7 +61,11 @@ public class SensorController {
         if (sensorDTO == null ) throw new IllegalArgumentException("Input data missing");
         if (sensorDTO.getName() == null || sensorDTO.getName().trim().equals("")) throw new IllegalArgumentException("Name of device is not filled in");
         Room room = roomController.roomExists(sensorDTO.getRoomid());
-
+        if (sensorDTO.getSensorType()!=null){
+            if (!sensorDTO.getSensorType().equals("Thermostat")){
+                sensorDTO.setSensordata(0.0);
+            }
+        }
         SensorDevice sensorDevice = sensorExists(sensorDTO.getId());
         sensorDevice.setName(sensorDTO.getName());
         sensorDevice.setStatus(sensorDTO.isStatus());
@@ -75,6 +84,7 @@ public class SensorController {
         if(userSecurityFunc.getHouseUser(room.getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
 
         Stream<SensorDTO> stream = sensorDAO.findAllByRoom(room).stream()
+                .sorted(Comparator.comparing(SensorDevice::getId))
                 .map(rec-> new SensorDTO.Builder().id(rec.getId()).name(rec.getName()).status(rec.isStatus()).sensorType(sensorTypeConverter.convertToDatabaseColumn(rec.getSensorType())).sensordata(rec.getSensordata()).build());
         return stream.collect(Collectors.toList());
     }
