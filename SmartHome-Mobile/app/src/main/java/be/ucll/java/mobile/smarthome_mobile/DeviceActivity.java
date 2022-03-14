@@ -229,7 +229,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
 
     private void deleteDevice() {
         try{
-            new DeviceDeleter(this).delete(device.getId(),roomId);
+            new DeviceDeleter(this).delete(device.getId(), roomId);
         } catch (Exception e){
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
             Log.e(TAG,e.getMessage());

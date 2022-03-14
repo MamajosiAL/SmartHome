@@ -116,7 +116,6 @@ public class UserInHouseActivity extends AppCompatActivity implements Callback<L
     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
         if (response != null && response.body() != null) {
             if (response.isSuccessful()) {
-                Log.e(TAG, "onResponse: " + response.body().get(0).getName());
                 usersFromHouse = response.body();
                 setDataInRecyclerView();
             }else {
