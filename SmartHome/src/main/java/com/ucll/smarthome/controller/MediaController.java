@@ -1,5 +1,6 @@
 package com.ucll.smarthome.controller;
 
+import com.ucll.smarthome.dto.ConsumptionDTO;
 import com.ucll.smarthome.dto.MediaDTO;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.MediaDevice;
@@ -44,9 +45,11 @@ public class MediaController {
                 .name(mediaDTO.getName())
                 .status(mediaDTO.isStatus())
                 .volume(mediaDTO.getVolume())
+                .zender(mediaDTO.getZender())
                 .room(roomController.roomExists(mediaDTO.getRoomid()))
                 .build();
         mediaDAO.save(mediaDevice);
+        consumptionController.createConsumption(new ConsumptionDTO.Builder().device(mediaDevice.getId()).build());
     }
 
     public void updateAudioDevice(MediaDTO mediaDTO) throws IllegalArgumentException{
@@ -54,19 +57,19 @@ public class MediaController {
         if (mediaDTO.getName() == null || mediaDTO.getName().trim().equals("")) throw new IllegalArgumentException("Name of device is not filled in");
 
         Room room = roomController.roomExists(mediaDTO.getRoomid());
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
 
         MediaDevice mediaDevice = audioExists(mediaDTO.getId());
         mediaDevice.setName(mediaDTO.getName());
         mediaDevice.setStatus(mediaDTO.isStatus());
         mediaDevice.setVolume(mediaDTO.getVolume());
+        mediaDevice.setZender(mediaDTO.getZender());
 
     }
 
     public MediaDTO getAudioDeviceById(long deviceid) throws IllegalArgumentException{
         MediaDevice mediaDevice = audioExists(deviceid);
         if(userSecurityFunc.getHouseUser(mediaDevice.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
-        return new MediaDTO.Builder().id(mediaDevice.getId()).name(mediaDevice.getName()).status(mediaDevice.isStatus()).volume(mediaDevice.getVolume()).build();
+        return new MediaDTO.Builder().id(mediaDevice.getId()).name(mediaDevice.getName()).status(mediaDevice.isStatus()).volume(mediaDevice.getVolume()).zender(mediaDevice.getZender()).build();
     }
 
     public List<MediaDTO> getAdioDevicesByRoom(long roomid) throws IllegalArgumentException{
@@ -76,7 +79,7 @@ public class MediaController {
         if(userSecurityFunc.getHouseUser(room.getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
 
         Stream<MediaDTO> stream = mediaDAO.findAllByRoom(room).stream()
-                .map(rec -> new MediaDTO.Builder().id(rec.getId()).name(rec.getName()).status(rec.isStatus()).volume(rec.getVolume()).build());
+                .map(rec -> new MediaDTO.Builder().id(rec.getId()).name(rec.getName()).status(rec.isStatus()).volume(rec.getVolume()).zender(rec.getZender()).build());
         return stream.collect(Collectors.toList());
 
     }

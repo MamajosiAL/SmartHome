@@ -1,15 +1,17 @@
 package com.ucll.smarthome.persistence.entities;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import com.ucll.smarthome.persistence.entities.enums.SensorType;
+
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("3")
 public class SensorDevice extends Device {
 
+
     @Column(name = "sensortype")
-    private String sensorType;
+    private SensorType sensorType;
+
     @Column(name = "sensordata")
     private double sensordata;
 
@@ -27,11 +29,11 @@ public class SensorDevice extends Device {
     }
 
 
-    public String getSensorType() {
+    public SensorType getSensorType() {
         return sensorType;
     }
 
-    public void setSensorType(String sensorType) {
+    public void setSensorType(SensorType sensorType) {
         this.sensorType = sensorType;
     }
 
@@ -50,7 +52,7 @@ public class SensorDevice extends Device {
         private String name;
         private boolean status;
         private Room room;
-        private String sensorType;
+        private SensorType sensorType;
         private double sensordata;
 
         public Builder() {
@@ -81,7 +83,7 @@ public class SensorDevice extends Device {
             return this;
         }
 
-        public Builder sensorType(String val) {
+        public Builder sensorType(SensorType val) {
             sensorType = val;
             return this;
         }

@@ -9,19 +9,30 @@ import javax.persistence.Entity;
 public class MediaDevice extends Device {
     @Column(name = "volume")
     private int volume;
+    @Column(name = "zender")
+    private int zender;
 
     public MediaDevice() {
     }
 
     private MediaDevice(Builder builder) {
-        setVolume(builder.volume);
         setId(builder.id);
         setCategoryid(builder.categoryid);
         setName(builder.name);
         setStatus(builder.status);
         setRoom(builder.room);
+        setVolume(builder.volume);
+        setZender(builder.zender);
     }
 
+
+    public int getZender() {
+        return zender;
+    }
+
+    public void setZender(int zender) {
+        this.zender = zender;
+    }
 
     public int getVolume() {
         return volume;
@@ -33,19 +44,15 @@ public class MediaDevice extends Device {
 
 
     public static final class Builder {
-        private int volume;
         private Long id;
         private int categoryid;
         private String name;
         private boolean status;
         private Room room;
+        private int volume;
+        private int zender;
 
         public Builder() {
-        }
-
-        public Builder volume(int val) {
-            volume = val;
-            return this;
         }
 
         public Builder id(Long val) {
@@ -70,6 +77,16 @@ public class MediaDevice extends Device {
 
         public Builder room(Room val) {
             room = val;
+            return this;
+        }
+
+        public Builder volume(int val) {
+            volume = val;
+            return this;
+        }
+
+        public Builder zender(int val) {
+            zender = val;
             return this;
         }
 

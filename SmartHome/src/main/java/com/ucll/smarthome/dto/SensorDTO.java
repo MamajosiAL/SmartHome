@@ -1,5 +1,7 @@
 package com.ucll.smarthome.dto;
 
+import com.ucll.smarthome.persistence.entities.enums.SensorType;
+
 public class SensorDTO extends DeviceDTO{
 
     private String sensorType;
@@ -34,6 +36,7 @@ public class SensorDTO extends DeviceDTO{
     public void setSensordata(double sensordata) {
         this.sensordata = sensordata;
     }
+
 
     public static final class Builder {
         private long id;

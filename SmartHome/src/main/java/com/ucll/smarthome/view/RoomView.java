@@ -99,10 +99,12 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         })).setHeader("Groot electro").setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnMedia = new Button(new Icon(VaadinIcon.CAMERA));
+            btnMedia.addClickListener(e->handleClickMedia(e,roomDTO.getId()));
             return btnMedia;
         })).setHeader("Media").setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnSensor = new Button(new Icon(VaadinIcon.FLASH));
+            btnSensor.addClickListener(e -> handleClickSensor(e,roomDTO.getId()));
             return btnSensor;
         })).setHeader("Sensor").setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
@@ -122,6 +124,14 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         verticalLayoutlf.add(grid);
         verticalLayoutlf.setWidth("80%");
         return  verticalLayoutlf;
+    }
+
+    private void handleClickSensor(ClickEvent<Button> e, long roomid) {
+        getUI().ifPresent(ui->ui.navigate("sensors/" + roomid));
+    }
+
+    private void handleClickMedia(ClickEvent<Button> e, long roomid) {
+        getUI().ifPresent(ui->ui.navigate("media's/" + roomid));
     }
 
     private void handleClickDevice(ClickEvent<Button> e,long roomid) {

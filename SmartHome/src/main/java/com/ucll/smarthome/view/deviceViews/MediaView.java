@@ -2,24 +2,27 @@ package com.ucll.smarthome.view.deviceViews;
 
 import com.ucll.smarthome.controller.ConsumptionController;
 import com.ucll.smarthome.controller.DeviceController;
+import com.ucll.smarthome.controller.MediaController;
 import com.ucll.smarthome.controller.RoomController;
-import com.ucll.smarthome.dto.ConsumptionDTO;
 import com.ucll.smarthome.dto.DeviceDTO;
+import com.ucll.smarthome.dto.MediaDTO;
 import com.ucll.smarthome.dto.RoomDTO;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.ucll.smarthome.functions.UserSecurityFunc;
+import com.ucll.smarthome.persistence.entities.MediaDevice;
 import com.ucll.smarthome.view.MainView;
+import com.ucll.smarthome.view.customComponent.PaperSlider;
 import com.ucll.smarthome.view.dialogs.WarningDialog;
 import com.ucll.smarthome.view.forms.DeviceForm;
 import com.ucll.smarthome.view.forms.MediaForm;
 import com.vaadin.componentfactory.ToggleButton;
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
-
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -27,7 +30,9 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
@@ -35,15 +40,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.AccessDeniedException;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Route(value = "devices",layout = MainView.class)
-public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> {
+@Route(value = "media's",layout = MainView.class)
+public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
 
     @Autowired
     private DeviceController deviceController;
+    @Autowired
+    private MediaController mediaController;
     @Autowired
     private ConsumptionController consumptionController;
 
@@ -56,14 +62,14 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
     @Autowired
     private MessageSource msgSrc;
 
-    private Grid<DeviceDTO> grid;
+    private Grid<MediaDTO> grid;
     private long roomid;
     private VerticalLayout vrlDeviceGrid;
     private VerticalLayout verticalLayoutrh;
     private HorizontalLayout horizontalLayoutrh;
     private HorizontalLayout hrlDeviceGrid;
     private SplitLayout splitLayout;
-    private DeviceForm deviceForm;
+    private MediaForm mediaForm;
     private ToggleButton aSwitch;
     private H5 txtErrorMessage;
     private Button btnDelete;
@@ -71,8 +77,12 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
     private Button btnCreate;
     private Button btnUpdate;
 
-    public DeviceView() {
+    public PaperSlider paperSlider;
+    public IntegerField integerField;
+
+    public MediaView() {
         deviceController = BeanUtil.getBean(DeviceController.class);
+        mediaController = BeanUtil.getBean(MediaController.class);
         consumptionController = BeanUtil.getBean(ConsumptionController.class);
         sec = BeanUtil.getBean(UserSecurityFunc.class);
         roomController = BeanUtil.getBean(RoomController.class);
@@ -95,7 +105,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         horizontalLayoutrh.setWidthFull();
         horizontalLayoutrh.setSpacing(true);
 
-        deviceForm = new DeviceForm();
+        mediaForm = new MediaForm();
         txtErrorMessage = new H5();
         txtErrorMessage.setVisible(false);
 
@@ -111,7 +121,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         btnUpdate.setVisible(false);
 
         horizontalLayoutrh.add(btnCancel,btnCreate,btnUpdate);
-        verticalLayoutrh.add(txtErrorMessage,deviceForm);
+        verticalLayoutrh.add(txtErrorMessage,mediaForm);
         verticalLayoutrh.add(horizontalLayoutrh);
         verticalLayoutrh.setWidth("20%");
         return verticalLayoutrh;
@@ -123,18 +133,41 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         vrlDeviceGrid.setSizeFull();
         hrlDeviceGrid = new HorizontalLayout();
         grid = new Grid<>();
-        grid.setItems(new ArrayList<DeviceDTO>(0));
-        grid.addColumn(DeviceDTO::getName).setHeader("Naam");
-        grid.addColumn(new ComponentRenderer<>(deviceDTO -> {
+        grid.setItems(new ArrayList<MediaDTO>(0));
+        grid.addColumn(MediaDTO::getName).setHeader("Naam");
+        grid.addColumn(new ComponentRenderer<>(mediaDTO -> {
             aSwitch = new ToggleButton();
-            aSwitch.setValue(deviceDTO.isStatus());
-            aSwitch.addClickListener(e-> handleClickOnOf(e,deviceDTO));
+            aSwitch.setValue(mediaDTO.isStatus());
+            aSwitch.addClickListener(e-> handleClickOnOf(e,mediaDTO));
             return aSwitch;
         })).setHeader("I/O").setTextAlign(ColumnTextAlign.CENTER);
-        grid.addColumn(new ComponentRenderer<>(deviceDTO -> {
+        grid.addColumn(new ComponentRenderer<>(mediaDTO -> {
+            paperSlider = new PaperSlider();
+            paperSlider.setMax(100);
+            paperSlider.setMin(0);
+            paperSlider.setValue(mediaDTO.getVolume());
+            if (!mediaDTO.isStatus()){
+                paperSlider.setReadOnly(true);
+            }
+            paperSlider.addValueChangeListener(e->handleChangeVolume(e,mediaDTO));
+            return paperSlider;
+        })).setHeader("Volume");
+        grid.addColumn(new ComponentRenderer<>(mediaDTO -> {
+            integerField = new IntegerField();
+            integerField.setHasControls(true);
+            integerField.setMin(1);
+            integerField.setMax(999);
+            integerField.setValue(mediaDTO.getZender());
+            if (!mediaDTO.isStatus()){
+                integerField.setReadOnly(true);
+            }
+            integerField.addValueChangeListener(e->handleChangeZender(e,mediaDTO));
+            return integerField;
+        })).setHeader("Zender");
+        grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnDelete = new Button(new Icon(VaadinIcon.TRASH));
             btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
-            btnDelete.addClickListener(e-> handleClickDelete(e,deviceDTO.getId()));
+            btnDelete.addClickListener(e-> handleClickDelete(e,roomDTO.getId()));
             return btnDelete;
         })).setKey("delete");
         grid.setHeightFull();
@@ -145,9 +178,34 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         return vrlDeviceGrid;
     }
 
-    private void handleClickOnOf(ClickEvent<ToggleButton> e,DeviceDTO deviceDTO) {
+    private void handleChangeZender(AbstractField.ComponentValueChangeEvent<IntegerField, Integer> e, MediaDTO mediaDTO) {
         try {
-            deviceController.changeStatus(deviceDTO.getId());
+            mediaController.updateAudioDevice(new MediaDTO.Builder().id(mediaDTO.getId()).name(mediaDTO.getName())
+                    .status(true).volume(mediaDTO.getVolume()).zender(e.getValue()).roomid(roomid).build());
+            setButtonsToDefault();
+            loadData();
+        }catch (IllegalArgumentException ex){
+            txtErrorMessage.setText(ex.getMessage());
+            txtErrorMessage.setVisible(true);
+        }
+    }
+
+    private void handleChangeVolume(AbstractField.ComponentValueChangeEvent<PaperSlider, Integer> e, MediaDTO mediaDTO) {
+        try {
+            mediaController.updateAudioDevice(new MediaDTO.Builder().id(mediaDTO.getId()).name(mediaDTO.getName())
+                    .status(true).volume(e.getValue()).zender(mediaDTO.getZender()).roomid(roomid).build());
+            setButtonsToDefault();
+            loadData();
+        }catch (IllegalArgumentException ex){
+            txtErrorMessage.setText(ex.getMessage());
+            txtErrorMessage.setVisible(true);
+        }
+    }
+
+
+    private void handleClickOnOf(ClickEvent<ToggleButton> e,MediaDTO mediaDTO) {
+        try {
+            deviceController.changeStatus(mediaDTO.getId());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException ex){
@@ -163,7 +221,8 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         w.addOpenedChangeListener(event -> {
             if (!event.isOpened() && w.wasOkButtonClicked()) {
                 try {
-                     deviceController.deleteDeviceById(id);
+                    deviceController.deleteDeviceById(id);
+
                 }catch (IllegalArgumentException | AccessDeniedException ex){
                     txtErrorMessage.setText(ex.getMessage());
                     txtErrorMessage.setVisible(true);
@@ -178,8 +237,8 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
     }
     private void handleClickCreate(ClickEvent<Button> buttonClickEvent) {
         try {
-            deviceController.createDevice(new DeviceDTO.Builder().name(deviceForm.txtNaamDevice.getValue())
-                    .status(false).roomid(roomid).build());
+            mediaController.createAudioDevice(new MediaDTO.Builder().name(mediaForm.deviceForm.txtNaamDevice.getValue()).status(false)
+                    .volume(0).zender(1).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException e){
@@ -190,8 +249,8 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
 
     private void handleClickUpdate(ClickEvent<Button> buttonClickEvent) {
         try {
-            deviceController.updateDevice(new DeviceDTO.Builder().id(Integer.parseInt(deviceForm.lblid.getText()))
-                    .status(false).name(deviceForm.txtNaamDevice.getValue()).roomid(roomid).build());
+            mediaController.updateAudioDevice(new MediaDTO.Builder().id(Integer.parseInt(mediaForm.deviceForm.lblid.getText())).name(mediaForm.deviceForm.txtNaamDevice.getValue())
+                    .status(false).volume(mediaForm.volume.getValue()).zender(mediaForm.zender.getValue()).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException e){
@@ -209,24 +268,26 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         return roomController.getRoomById(roomid);
     }
     private void loadData(){
-        List<DeviceDTO> devices = deviceController.getDevicdsByRoom(roomid);
+        List<MediaDTO> devices = mediaController.getAdioDevicesByRoom(roomid);
         grid.setItems(devices);
     }
     private void setButtonsToDefault(){
-        deviceForm.resetForm();
+        mediaForm.resetForm();
         txtErrorMessage.setVisible(false);
         if (sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
             btnCreate.setVisible(true);
         }
         btnUpdate.setVisible(false);
     }
-    private void populateRoomForm(DeviceDTO deviceDTO) {
+    private void populateRoomForm(MediaDTO mediaDTO) {
         setButtonsToDefault();
-        if (deviceDTO != null) {
+        if (mediaDTO != null) {
             btnCreate.setVisible(false);
             btnUpdate.setVisible(true);
-            deviceForm.lblid.setText("" + deviceDTO.getId());
-            deviceForm.txtNaamDevice.setValue(deviceDTO.getName());
+            mediaForm.deviceForm.lblid.setText("" + mediaDTO.getId());
+            mediaForm.deviceForm.txtNaamDevice.setValue(mediaDTO.getName());
+            mediaForm.volume.setValue(mediaDTO.getVolume());
+            mediaForm.zender.setValue(mediaDTO.getZender());
         }
     }
     @Override
@@ -237,6 +298,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
             if (!sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
                 grid.removeColumnByKey("delete");
                 btnCreate.setVisible(false);
+                mediaForm.setVisible(false);
             }
         } catch (IllegalArgumentException e) {
             Notification.show(e.getMessage() ,3000, Notification.Position.TOP_CENTER);

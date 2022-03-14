@@ -5,11 +5,11 @@ import javax.persistence.Converter;
 import java.util.stream.Stream;
 
 @Converter(autoApply = true)
-public class TypeConverter implements AttributeConverter<Type, String> {
+public class SensorTypeConverter implements AttributeConverter<SensorType, String> {
 
 
     @Override
-    public String convertToDatabaseColumn(Type type) {
+    public String convertToDatabaseColumn(SensorType type) {
         if (type == null){
             return null;
         }
@@ -18,11 +18,11 @@ public class TypeConverter implements AttributeConverter<Type, String> {
     }
 
     @Override
-    public Type convertToEntityAttribute(String title) {
+    public SensorType convertToEntityAttribute(String title) {
         if (title == null) {
             return null;
         }
-        return Stream.of(Type.values())
+        return Stream.of(SensorType.values())
                 .filter(t -> t.getTitle().equals(title))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);

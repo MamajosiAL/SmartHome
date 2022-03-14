@@ -20,7 +20,7 @@ public class DeviceForm extends FormLayout {
         txtNaamDevice = new TextField();
         txtNaamDevice.setRequired(true);
         txtNaamDevice.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
-        addFormItem(txtNaamDevice, msgSrc.getMessage("rform.roomname",null,getLocale()));
+        addFormItem(txtNaamDevice, "Device naam");
     }
 
     public void resetForm(){
