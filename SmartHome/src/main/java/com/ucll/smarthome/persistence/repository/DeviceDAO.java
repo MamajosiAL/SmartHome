@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface DeviceDAO extends JpaRepository<Device,Long> {
     List<Device> findAllByRoomAndCategoryid(Room room,int categoryid);
+    List<Device> findAllByRoom(Room room);
 }

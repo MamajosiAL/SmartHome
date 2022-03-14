@@ -1,8 +1,12 @@
 package com.ucll.smarthome.dto;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class ConsumptionDTO {
+import java.time.LocalDate;
+import java.util.Date;
+
+public class ConsumptionLogDTO {
+    private Long consumptionLogId;
     private Long consumptionId;
     private Long deviceId;
     private int aantalMinuten;
@@ -10,11 +14,14 @@ public class ConsumptionDTO {
     private double consumptionPerHour;
     private Long houseId;
     private Long roomId;
+    @JsonFormat(pattern = "dd/MM/YYYY")
+    private LocalDate date;
 
-    public ConsumptionDTO() {
+    public ConsumptionLogDTO() {
     }
 
-    public ConsumptionDTO(Builder builder) {
+    public ConsumptionLogDTO(Builder builder) {
+        setConsumptionLogId(builder.consumptionLogId);
         setConsumptionId(builder.consumptionId);
         setDeviceId(builder.deviceId);
         setAantalMinuten(builder.aantalMinuten);
@@ -22,6 +29,7 @@ public class ConsumptionDTO {
         setConsumptionPerHour(builder.consumptionPerHour);
         setHouseId(builder.houseId);
         setRoomId(builder.roomId);
+        setDate(builder.date);
     }
 
     public Long getConsumptionId() {
@@ -83,7 +91,24 @@ public class ConsumptionDTO {
         this.roomId = roomId;
     }
 
+    public Long getConsumptionLogId() {
+        return consumptionLogId;
+    }
+
+    public void setConsumptionLogId(Long consumptionLogId) {
+        this.consumptionLogId = consumptionLogId;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public static final class Builder {
+        private Long consumptionLogId;
         private Long consumptionId;
         private Long deviceId;
         private int aantalMinuten;
@@ -91,15 +116,21 @@ public class ConsumptionDTO {
         private double consumptionPerHour;
         private Long houseId;
         private Long roomId;
+        private LocalDate date;
 
         public Builder(){}
+
+        public Builder consumptionLogId(Long val){
+            consumptionLogId = val;
+            return this;
+        }
 
         public Builder consumptionId(Long val){
             consumptionId = val;
             return this;
         }
 
-        public Builder device(Long val){
+        public Builder deviceId(Long val){
             deviceId = val;
             return this;
         }
@@ -129,6 +160,11 @@ public class ConsumptionDTO {
             return this;
         }
 
-        public ConsumptionDTO build() { return new ConsumptionDTO(this); }
+        public Builder date(LocalDate val){
+            date = val;
+            return this;
+        }
+
+        public ConsumptionLogDTO build() { return new ConsumptionLogDTO(this); }
     }
 }
