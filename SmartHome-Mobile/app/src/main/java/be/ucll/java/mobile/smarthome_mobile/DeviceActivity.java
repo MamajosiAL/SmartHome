@@ -1,5 +1,6 @@
 package be.ucll.java.mobile.smarthome_mobile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -15,6 +16,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.slider.RangeSlider;
+import com.google.android.material.slider.Slider;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -22,8 +25,11 @@ import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceDeleter;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceStatusToggler;
+import be.ucll.java.mobile.smarthome_mobile.api.media.VolumeChangeAdapter;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
 import be.ucll.java.mobile.smarthome_mobile.pojo.DeviceAllParams;
+import be.ucll.java.mobile.smarthome_mobile.pojo.Media;
+import be.ucll.java.mobile.smarthome_mobile.pojo.Sensor;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.DeviceCategory;
 import be.ucll.java.mobile.smarthome_mobile.util.NavigationManager;
@@ -40,10 +46,12 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
     private DeviceAllParams device;
     private int roomId;
     private boolean edit = false;
+    private boolean hasResponded;
 
+    private RangeSlider volumeSlider;
     private Switch toggleStatusSwitch;
     private ImageView editDeviceButton, deleteDeviceButton;
-    private TextView name,room,category,type,program,temperature,timer,volume
+    private TextView name,room,category,type,program,temperature,timer
             ,sensortype,sensordata,lbltype,lblprogram,lbltemperature,lbltimer,lblvolume
             ,lblsensordata,lblsensortype;
 
@@ -80,6 +88,9 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
                 throw new DataNotFoundException("selected item is not valid or empty");
             }
 
+            // volumeslider updated by db volume, now we can update the volume again. check the volumeSlider.addOnChangeListener
+            hasResponded = true;
+
             call.enqueue(this);
         }catch (Exception e){
             throw new DataNotFoundException(e.getMessage());
@@ -108,7 +119,10 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         lbltemperature = findViewById(R.id.lblBigElekTemperature);
         lbltimer = findViewById(R.id.lblBigElekTimer);
         // MEDIA
-        volume = findViewById(R.id.txtMediaVolume);
+        volumeSlider = findViewById(R.id.sliderVolume);
+        volumeSlider.setValueFrom(0f);
+        volumeSlider.setValueTo(100f);
+        volumeSlider.setStepSize(1f);
         lblvolume = findViewById(R.id.lblMediaVolume);
         // SENSOR
         sensortype = findViewById(R.id.txtSensorType);
@@ -134,7 +148,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             program.setVisibility(View.VISIBLE);
             temperature.setVisibility(View.VISIBLE);
             timer.setVisibility(View.VISIBLE);
-            volume.setVisibility(View.GONE);
+            volumeSlider.setVisibility(View.GONE);
             sensortype.setVisibility(View.GONE);
             sensordata.setVisibility(View.GONE);
 
@@ -150,7 +164,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             program.setVisibility(View.GONE);
             temperature.setVisibility(View.GONE);
             timer.setVisibility(View.GONE);
-            volume.setVisibility(View.VISIBLE);
+            volumeSlider.setVisibility(View.VISIBLE);
             sensortype.setVisibility(View.GONE);
             sensordata.setVisibility(View.GONE);
 
@@ -161,12 +175,14 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             lblvolume.setVisibility(View.VISIBLE);
             lblsensortype.setVisibility(View.GONE);
             lblsensordata.setVisibility(View.GONE);
+
+
         } else if (DeviceCategory.nameEqualToCategory(DeviceCategory.SENSOR,deviceCategory)) {
             type.setVisibility(View.GONE);
             program.setVisibility(View.GONE);
             temperature.setVisibility(View.GONE);
             timer.setVisibility(View.GONE);
-            volume.setVisibility(View.GONE);
+            volumeSlider.setVisibility(View.GONE);
             sensortype.setVisibility(View.VISIBLE);
             sensordata.setVisibility(View.VISIBLE);
 
@@ -182,7 +198,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             program.setVisibility(View.GONE);
             temperature.setVisibility(View.GONE);
             timer.setVisibility(View.GONE);
-            volume.setVisibility(View.GONE);
+            volumeSlider.setVisibility(View.GONE);
             sensortype.setVisibility(View.GONE);
             sensordata.setVisibility(View.GONE);
 
@@ -223,8 +239,41 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             }
         });
 
+        volumeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+                // check if the editvolume has called getdevicedata if not, it doesn't update the volume
+                // otherwise the volumeslider will break.
+                if(hasResponded){
+                    device.setVolume(Math.round(slider.getValues().get(0)));
+                    editVolume();
+                    Log.e(TAG, "onValueChange: " + slider.getValues().get(0));
+                }
+                hasResponded = false;
+            }
+        });
 
+    }
 
+    private void editVolume() {
+        try{
+            Media media = deviceAllParamsToMedia(device);
+            new VolumeChangeAdapter(this).changeVolume(media);
+        } catch (Exception e){
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            Log.e(TAG,e.getMessage());
+        }
+    }
+
+    private Media deviceAllParamsToMedia(DeviceAllParams device){
+        Media media = new Media();
+        media.setId(device.getId());
+        media.setName(device.getName());
+        media.setRoomid(device.getRoomid());
+        media.setVolume(device.getVolume());
+        media.setStatus(device.getStatus());
+        media.setCategoryid(device.getCategoryid());
+        return media;
     }
 
     private void deleteDevice() {
@@ -242,7 +291,6 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         name.setText(device.getName());
         toggleStatusSwitch.setChecked(device.getStatus());
 
-
         // BIG ELECTRO
         if (device.getType() != null ) {
             type.setText(device.getType().getName());
@@ -253,19 +301,23 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         program.setText(String.valueOf(device.getProgramid()));
 
         // MEDIA
-        volume.setText(String.valueOf(device.getVolume()));
+        if (DeviceCategory.nameEqualToCategory(DeviceCategory.MEDIA,deviceCategory)) {
+            volumeSlider.setValues((float)device.getVolume());
+        }
+
 
         // SENSOR
         sensortype.setText(device.getSensorType());
         sensordata.setText(String.valueOf(device.getSensordata()));
+
     }
 
     @Override
     public void onResponse(Call<DeviceAllParams> call, Response<DeviceAllParams> response) {
         if (response != null && response.body() != null) {
             if (response.isSuccessful()) {
-                Log.d(TAG, "onResponse: code: " + response.code());
                 device = response.body();
+                device.setRoomid(this.getIntent().getIntExtra("roomId",0));
                 setDevice(device);
             }else {
                 Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
