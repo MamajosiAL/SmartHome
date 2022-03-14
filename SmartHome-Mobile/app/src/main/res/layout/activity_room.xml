@@ -25,18 +25,16 @@
 
         <TextView
             android:id="@+id/titleRoom"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="329dp"
+            android:layout_height="38dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif"
             android:text="@string/roomDefaultTitle"
             android:textAlignment="center"
             android:textColor="@color/textColorBlue"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,6 +70,16 @@
             android:text="@string/devices"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinDeviceCategory" />
+
+        <ImageView
+            android:id="@+id/imgDeleteRoom"
+            android:layout_width="34dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/titleRoom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/titleRoom"
+            app:srcCompat="@drawable/ic_delete_24" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDevices"
