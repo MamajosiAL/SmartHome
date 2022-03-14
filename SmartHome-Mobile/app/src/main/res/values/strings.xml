@@ -78,4 +78,5 @@
     <string name="deleteConfMessage">Are you sure you want to delete</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="consumption">Consumption</string>
 </resources>

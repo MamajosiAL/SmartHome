@@ -289,6 +289,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
         toggleTextViewEditable(name);
     }
 
+    // TODO : edit device
     public void toggleTextViewEditable(TextView textView){
         if(edit){
             // remove editable
