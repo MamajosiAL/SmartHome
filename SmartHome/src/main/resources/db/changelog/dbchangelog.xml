@@ -16,4 +16,5 @@
     <include file="db/changelog/migrations/11-insert-progamme-values.xml"/>
     <include file="db/changelog/migrations/12-alter-cascades.xml"/>
     <include file="db/changelog/migrations/13-alter-media.xml"/>
+    <include file="db/changelog/migrations/14-create-new-column-sensor.xml"/>
 </databaseChangeLog>

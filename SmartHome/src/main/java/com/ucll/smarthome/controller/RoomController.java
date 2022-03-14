@@ -74,9 +74,7 @@ public class RoomController {
         Stream<RoomDTO> stream = dao.findAllByHouseHouseId(houseid).stream()
                 .sorted(Comparator.comparing(Room::getRoomID))
                 .map(rec -> new RoomDTO.Builder().id(rec.getRoomID()).name(rec.getName()).build());
-
         return stream.collect(Collectors.toList());
-
     }
 
     public void deleteRoom(long roomId) throws IllegalArgumentException {

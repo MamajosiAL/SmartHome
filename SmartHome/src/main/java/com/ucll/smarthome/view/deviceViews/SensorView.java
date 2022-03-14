@@ -9,12 +9,15 @@ import com.ucll.smarthome.dto.RoomDTO;
 import com.ucll.smarthome.dto.SensorDTO;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.ucll.smarthome.functions.UserSecurityFunc;
+import com.ucll.smarthome.persistence.entities.enums.SensorType;
+import com.ucll.smarthome.persistence.entities.enums.SensorTypeConverter;
 import com.ucll.smarthome.view.MainView;
 import com.ucll.smarthome.view.dialogs.WarningDialog;
 import com.ucll.smarthome.view.forms.DeviceForm;
 import com.ucll.smarthome.view.forms.MediaForm;
 import com.ucll.smarthome.view.forms.SensorForm;
 import com.vaadin.componentfactory.ToggleButton;
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -27,6 +30,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.BeforeEvent;
@@ -102,6 +106,8 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
         txtErrorMessage = new H5();
         txtErrorMessage.setVisible(false);
 
+        sensorForm.sensorType.addValueChangeListener(e -> handleChangeType(e));
+
         btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(this:: handleClickCancel);
 
@@ -119,6 +125,8 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
         verticalLayoutrh.setWidth("20%");
         return verticalLayoutrh;
     }
+
+
 
 
     private Component createGridLayout(){
@@ -150,6 +158,13 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
         return vrlDeviceGrid;
     }
 
+    private void handleChangeType(AbstractField.ComponentValueChangeEvent<Select<String>, String> e) {
+        if (e.getValue()!=null){
+            sensorForm.sensorData.setVisible(e.getValue().equals("Thermostat"));
+        }
+
+
+    }
     private void handleClickOnOf(ClickEvent<ToggleButton> e,SensorDTO sensorDTO) {
         try {
             deviceController.changeStatus(sensorDTO.getId());
@@ -183,6 +198,9 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
     }
     private void handleClickCreate(ClickEvent<Button> buttonClickEvent) {
         try {
+            if (sensorForm.sensorData.getValue() == null){
+                sensorForm.sensorData.setValue(0.00);
+            }
             sensorController.createSensorDevice(new SensorDTO.Builder().name(sensorForm.deviceForm.txtNaamDevice.getValue())
                     .status(false).sensorType(sensorForm.sensorType.getValue()).sensordata(sensorForm.sensorData.getValue()).roomid(roomid).build());
             setButtonsToDefault();
@@ -195,8 +213,11 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
 
     private void handleClickUpdate(ClickEvent<Button> buttonClickEvent) {
         try {
+            if (sensorForm.sensorData.getValue() == null){
+                sensorForm.sensorData.setValue(0.00);
+            }
             sensorController.updateSensorDevice(new SensorDTO.Builder().id(Integer.parseInt(sensorForm.deviceForm.lblid.getText()))
-                    .status(false).name(sensorForm.deviceForm.txtNaamDevice.getValue()).sensorType(sensorForm.sensorType.getValue())
+                    .status(false).name(sensorForm.deviceForm.txtNaamDevice.getValue())
                     .sensordata(sensorForm.sensorData.getValue()).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
@@ -220,6 +241,8 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
     }
     private void setButtonsToDefault(){
         sensorForm.resetForm();
+        sensorForm.sensorType.setVisible(true);
+        sensorForm.sensorData.setVisible(true);
         txtErrorMessage.setVisible(false);
         if (sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
             btnCreate.setVisible(true);
@@ -234,7 +257,18 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
             sensorForm.deviceForm.lblid.setText("" + sensorDTO.getId());
             sensorForm.deviceForm.txtNaamDevice.setValue(sensorDTO.getName());
             sensorForm.sensorType.setValue(sensorDTO.getSensorType());
-            sensorForm.sensorData.setValue(sensorDTO.getSensordata());
+            sensorForm.sensorType.setVisible(false);
+            sensorForm.sensorType.setLabel("");
+            if (sensorDTO.getSensorType() == null || sensorDTO.getSensorType().equals("Thermostat") ){
+                sensorForm.sensorData.setVisible(true);
+                sensorForm.sensorData.setValue(sensorDTO.getSensordata());
+            }
+            if (sensorDTO.getSensorType() != null ){
+                if (!sensorDTO.getSensorType().equals("Thermostat")){
+                sensorForm.sensorData.setVisible(false);}
+            }
+
+
         }
     }
     @Override
