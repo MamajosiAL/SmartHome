@@ -237,7 +237,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
     }
     private void handleClickCreate(ClickEvent<Button> buttonClickEvent) {
         try {
-            mediaController.createAudioDevice(new MediaDTO.Builder().name(mediaForm.txtNaamDevice.getValue()).status(false)
+            mediaController.createAudioDevice(new MediaDTO.Builder().name(mediaForm.deviceForm.txtNaamDevice.getValue()).status(false)
                     .volume(0).zender(1).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
@@ -249,8 +249,8 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
 
     private void handleClickUpdate(ClickEvent<Button> buttonClickEvent) {
         try {
-            mediaController.updateAudioDevice(new MediaDTO.Builder().id(Integer.parseInt(mediaForm.lblid.getText())).name(mediaForm.txtNaamDevice.getValue())
-                    .status(false).volume(mediaForm.paperSlider.getValue()).zender(mediaForm.integerField.getValue()).roomid(roomid).build());
+            mediaController.updateAudioDevice(new MediaDTO.Builder().id(Integer.parseInt(mediaForm.deviceForm.lblid.getText())).name(mediaForm.deviceForm.txtNaamDevice.getValue())
+                    .status(false).volume(mediaForm.volume.getValue()).zender(mediaForm.zender.getValue()).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException e){
@@ -284,10 +284,10 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
         if (mediaDTO != null) {
             btnCreate.setVisible(false);
             btnUpdate.setVisible(true);
-            mediaForm.lblid.setText("" + mediaDTO.getId());
-            mediaForm.txtNaamDevice.setValue(mediaDTO.getName());
-            mediaForm.paperSlider.setValue(mediaDTO.getVolume());
-            mediaForm.integerField.setValue(mediaDTO.getZender());
+            mediaForm.deviceForm.lblid.setText("" + mediaDTO.getId());
+            mediaForm.deviceForm.txtNaamDevice.setValue(mediaDTO.getName());
+            mediaForm.volume.setValue(mediaDTO.getVolume());
+            mediaForm.zender.setValue(mediaDTO.getZender());
         }
     }
     @Override

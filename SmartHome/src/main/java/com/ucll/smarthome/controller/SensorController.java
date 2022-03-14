@@ -59,7 +59,7 @@ public class SensorController {
         SensorDevice sensorDevice = sensorExists(sensorDTO.getId());
         sensorDevice.setName(sensorDTO.getName());
         sensorDevice.setStatus(sensorDTO.isStatus());
-        sensorDevice.setSensorType(sensorDTO.getName());
+        sensorDevice.setSensorType(sensorDTO.getSensorType());
         sensorDevice.setSensordata(sensorDTO.getSensordata());
     }
     public SensorDTO getSensorDeviceById(long deviceid) throws IllegalArgumentException{

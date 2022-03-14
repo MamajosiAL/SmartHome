@@ -92,6 +92,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
     }
 
     private void handleClickAcoutn(DomEvent event) {
+        setContent(pView);
         getUI().ifPresent(ui -> ui.navigate("me"));
     }
 
@@ -119,6 +120,8 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
     private void setMainViewContent() {
         hview = new HouseView();
         hview.loadData();
+
+        pView = new PersenalInformationView();
 
         cView = new ConsumptieView();
         cView.loadData();

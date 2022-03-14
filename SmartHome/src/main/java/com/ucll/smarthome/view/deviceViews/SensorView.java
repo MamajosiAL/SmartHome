@@ -3,13 +3,17 @@ package com.ucll.smarthome.view.deviceViews;
 import com.ucll.smarthome.controller.ConsumptionController;
 import com.ucll.smarthome.controller.DeviceController;
 import com.ucll.smarthome.controller.RoomController;
+import com.ucll.smarthome.controller.SensorController;
 import com.ucll.smarthome.dto.DeviceDTO;
 import com.ucll.smarthome.dto.RoomDTO;
+import com.ucll.smarthome.dto.SensorDTO;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.view.MainView;
 import com.ucll.smarthome.view.dialogs.WarningDialog;
 import com.ucll.smarthome.view.forms.DeviceForm;
+import com.ucll.smarthome.view.forms.MediaForm;
+import com.ucll.smarthome.view.forms.SensorForm;
 import com.vaadin.componentfactory.ToggleButton;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
@@ -42,6 +46,8 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
     private DeviceController deviceController;
     @Autowired
     private ConsumptionController consumptionController;
+    @Autowired
+    private SensorController sensorController;
 
 
     @Autowired
@@ -52,14 +58,14 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
     @Autowired
     private MessageSource msgSrc;
 
-    private Grid<DeviceDTO> grid;
+    private Grid<SensorDTO> grid;
     private long roomid;
     private VerticalLayout vrlDeviceGrid;
     private VerticalLayout verticalLayoutrh;
     private HorizontalLayout horizontalLayoutrh;
     private HorizontalLayout hrlDeviceGrid;
     private SplitLayout splitLayout;
-    private DeviceForm deviceForm;
+    private SensorForm sensorForm;
     private ToggleButton aSwitch;
     private H5 txtErrorMessage;
     private Button btnDelete;
@@ -69,6 +75,7 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
 
     public SensorView() {
         deviceController = BeanUtil.getBean(DeviceController.class);
+        sensorController = BeanUtil.getBean(SensorController.class);
         consumptionController = BeanUtil.getBean(ConsumptionController.class);
         sec = BeanUtil.getBean(UserSecurityFunc.class);
         roomController = BeanUtil.getBean(RoomController.class);
@@ -91,7 +98,7 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
         horizontalLayoutrh.setWidthFull();
         horizontalLayoutrh.setSpacing(true);
 
-        deviceForm = new DeviceForm();
+        sensorForm = new SensorForm();
         txtErrorMessage = new H5();
         txtErrorMessage.setVisible(false);
 
@@ -107,7 +114,7 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
         btnUpdate.setVisible(false);
 
         horizontalLayoutrh.add(btnCancel,btnCreate,btnUpdate);
-        verticalLayoutrh.add(txtErrorMessage,deviceForm);
+        verticalLayoutrh.add(txtErrorMessage,sensorForm);
         verticalLayoutrh.add(horizontalLayoutrh);
         verticalLayoutrh.setWidth("20%");
         return verticalLayoutrh;
@@ -119,14 +126,16 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
         vrlDeviceGrid.setSizeFull();
         hrlDeviceGrid = new HorizontalLayout();
         grid = new Grid<>();
-        grid.setItems(new ArrayList<DeviceDTO>(0));
-        grid.addColumn(DeviceDTO::getName).setHeader("Naam");
+        grid.setItems(new ArrayList<SensorDTO>(0));
+        grid.addColumn(SensorDTO::getName).setHeader("Naam");
         grid.addColumn(new ComponentRenderer<>(deviceDTO -> {
             aSwitch = new ToggleButton();
             aSwitch.setValue(deviceDTO.isStatus());
             aSwitch.addClickListener(e-> handleClickOnOf(e,deviceDTO));
             return aSwitch;
         })).setHeader("I/O").setTextAlign(ColumnTextAlign.CENTER);
+        grid.addColumn(SensorDTO::getSensorType).setHeader("Sensor Type");
+        grid.addColumn(SensorDTO::getSensordata).setHeader("Sensor Data");
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnDelete = new Button(new Icon(VaadinIcon.TRASH));
             btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
@@ -141,10 +150,9 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
         return vrlDeviceGrid;
     }
 
-    private void handleClickOnOf(ClickEvent<ToggleButton> e,DeviceDTO deviceDTO) {
+    private void handleClickOnOf(ClickEvent<ToggleButton> e,SensorDTO sensorDTO) {
         try {
-
-            deviceController.changeStatus(deviceDTO.getId());
+            deviceController.changeStatus(sensorDTO.getId());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException ex){
@@ -175,8 +183,8 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
     }
     private void handleClickCreate(ClickEvent<Button> buttonClickEvent) {
         try {
-            deviceController.createDevice(new DeviceDTO.Builder().name(deviceForm.txtNaamDevice.getValue())
-                    .status(false).roomid(roomid).build());
+            sensorController.createSensorDevice(new SensorDTO.Builder().name(sensorForm.deviceForm.txtNaamDevice.getValue())
+                    .status(false).sensorType(sensorForm.sensorType.getValue()).sensordata(sensorForm.sensorData.getValue()).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException e){
@@ -187,8 +195,9 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
 
     private void handleClickUpdate(ClickEvent<Button> buttonClickEvent) {
         try {
-            deviceController.updateDevice(new DeviceDTO.Builder().id(Integer.parseInt(deviceForm.lblid.getText()))
-                    .status(false).name(deviceForm.txtNaamDevice.getValue()).roomid(roomid).build());
+            sensorController.updateSensorDevice(new SensorDTO.Builder().id(Integer.parseInt(sensorForm.deviceForm.lblid.getText()))
+                    .status(false).name(sensorForm.deviceForm.txtNaamDevice.getValue()).sensorType(sensorForm.sensorType.getValue())
+                    .sensordata(sensorForm.sensorData.getValue()).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException e){
@@ -206,24 +215,26 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
         return roomController.getRoomById(roomid);
     }
     private void loadData(){
-        List<DeviceDTO> devices = deviceController.getDevicdsByRoom(roomid);
+        List<SensorDTO> devices = sensorController.getSonsorDevicesByRoom(roomid);
         grid.setItems(devices);
     }
     private void setButtonsToDefault(){
-        deviceForm.resetForm();
+        sensorForm.resetForm();
         txtErrorMessage.setVisible(false);
         if (sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
             btnCreate.setVisible(true);
         }
         btnUpdate.setVisible(false);
     }
-    private void populateRoomForm(DeviceDTO deviceDTO) {
+    private void populateRoomForm(SensorDTO sensorDTO) {
         setButtonsToDefault();
-        if (deviceDTO != null) {
+        if (sensorDTO != null) {
             btnCreate.setVisible(false);
             btnUpdate.setVisible(true);
-            deviceForm.lblid.setText("" + deviceDTO.getId());
-            deviceForm.txtNaamDevice.setValue(deviceDTO.getName());
+            sensorForm.deviceForm.lblid.setText("" + sensorDTO.getId());
+            sensorForm.deviceForm.txtNaamDevice.setValue(sensorDTO.getName());
+            sensorForm.sensorType.setValue(sensorDTO.getSensorType());
+            sensorForm.sensorData.setValue(sensorDTO.getSensordata());
         }
     }
     @Override
