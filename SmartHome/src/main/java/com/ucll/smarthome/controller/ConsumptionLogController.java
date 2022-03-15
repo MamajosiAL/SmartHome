@@ -100,7 +100,7 @@ public class ConsumptionLogController {
                 // run second loop to compare data, if date & house are the same, make total sum and after loop add this to sumlist
                 for (ConsumptionLogDTO clDTO2 : clDTOList) {
                     if(clDTO.getDeviceId() != clDTO2.getDeviceId() && clDTO.getRoomId() == clDTO2.getRoomId() && clDTO.getDate().isEqual(clDTO2.getDate())){
-                        totalConsSum += (clDTO2.getAantalMinuten() * clDTO2.getConsumptionPerHour());
+                        totalConsSum += (clDTO2.getAantalMinuten()  * clDTO2.getConsumptionPerHour() / 60);
                         consId.add(clDTO2.getConsumptionLogId());
                     }
                 }
@@ -137,7 +137,7 @@ public class ConsumptionLogController {
                 // run second loop to compare data, if date & house are the same, make total sum and after loop add this to sumlist
                 for (ConsumptionLogDTO clDTO2 : clDTOList) {
                     if(clDTO.getDeviceId() != clDTO2.getDeviceId() && clDTO.getHouseId() == clDTO2.getHouseId() && clDTO.getDate().isEqual(clDTO2.getDate())){
-                        totalConsSum += (clDTO2.getAantalMinuten() * clDTO2.getConsumptionPerHour());
+                        totalConsSum += (clDTO2.getAantalMinuten()  * clDTO2.getConsumptionPerHour() / 60);
                         consId.add(clDTO2.getConsumptionLogId());
                     }
                 }
