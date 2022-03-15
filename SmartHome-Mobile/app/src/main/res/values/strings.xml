@@ -82,4 +82,5 @@
     <string name="user">User</string>
     <string name="deviceNameChangeSucces">Succesfully changed devices name</string>
     <string name="invalidCredits">Invalid credentials</string>
+    <string name="byHouse">By house</string>
 </resources>

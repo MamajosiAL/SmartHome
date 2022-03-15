@@ -98,9 +98,9 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
 
         cartLine.tooltip().positionMode(TooltipPositionMode.POINT);
 
-        cartLine.title("Consumptions by house");
+        cartLine.title(String.valueOf(R.string.byHouse));
 
-        cartLine.yAxis(0).title("Hoeveel kW");
+        cartLine.yAxis(0).title("kW");
         cartLine.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
 
         List<DataEntry> seriesData = new ArrayList<>();
@@ -109,11 +109,8 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
         for (ConsumptionLog cl : cLogs){
             if(!consDone.contains(cl.getHouseId())){
             for(ConsumptionLog cl1 : cLogs){
-                Log.e(TAG, "populateChart: " + cl1.getConsumptionLogId() + " " + cl1.getConsumptionId() + " " + cl1.getHouseName() );
                 if(cl.getHouseId().equals(cl1.getHouseId()))   {
-                    Log.e(TAG, "populateChart: succes: " + cl1.getConsumptionId() + " " + cl1.getHouseName() );
                     seriesData.add(new CustomDataEntry(cl1.getDate(),cl1.getTotalConsumption()));
-
                 }
             }
                 Set set = Set.instantiate();
@@ -154,7 +151,6 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
     public void onResponse(Call<List<ConsumptionLog>> call, Response<List<ConsumptionLog>> response) {
         if (response != null && response.body() != null) {
             if (response.isSuccessful()) {
-                Log.e(TAG, "onResponse: succes" );
                 consumptionLogs = response.body();
                 populateChart(consumptionLogs);
             }else {
