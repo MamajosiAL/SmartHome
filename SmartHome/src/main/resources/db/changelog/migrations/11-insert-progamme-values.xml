@@ -16,49 +16,49 @@
         <insert tableName="programme" schemaName="smarthome">
             <column name="id" value="1"/>
             <column name="name" value="Fan Oven"/>
-            <column name="tempature" value="0"/>
+            <column name="tempature" value="180"/>
             <column name="type_id" value="1"/>
         </insert>
         <insert tableName="programme" schemaName="smarthome">
             <column name="id" value="2"/>
             <column name="name" value="Grill"/>
-            <column name="tempature" value="0"/>
+            <column name="tempature" value="200"/>
             <column name="type_id" value="1"/>
         </insert>
         <insert tableName="programme" schemaName="smarthome">
             <column name="id" value="3"/>
             <column name="name" value="Conventional Heating"/>
-            <column name="tempature" value="0"/>
+            <column name="tempature" value="190"/>
             <column name="type_id" value="1"/>
         </insert>
         <insert tableName="programme" schemaName="smarthome">
             <column name="id" value="4"/>
             <column name="name" value="Fan with Grill"/>
-            <column name="tempature" value="0"/>
+            <column name="tempature" value="190"/>
             <column name="type_id" value="1"/>
         </insert>
         <insert tableName="programme" schemaName="smarthome">
             <column name="id" value="5"/>
             <column name="name" value="Oven Defrosting"/>
-            <column name="tempature" value="0"/>
+            <column name="tempature" value="50"/>
             <column name="type_id" value="1"/>
         </insert>
         <insert tableName="programme" schemaName="smarthome">
             <column name="id" value="6"/>
             <column name="name" value="Bottom element with grill"/>
-            <column name="tempature" value="0"/>
+            <column name="tempature" value="200"/>
             <column name="type_id" value="1"/>
         </insert>
         <insert tableName="programme" schemaName="smarthome">
             <column name="id" value="7"/>
             <column name="name" value="Plate warming"/>
-            <column name="tempature" value="0"/>
+            <column name="tempature" value="100"/>
             <column name="type_id" value="1"/>
         </insert>
         <insert tableName="programme" schemaName="smarthome">
             <column name="id" value="8"/>
             <column name="name" value="Oven warming"/>
-            <column name="tempature" value="0"/>
+            <column name="tempature" value="180"/>
             <column name="type_id" value="1"/>
         </insert>
         <insert tableName="programme" schemaName="smarthome">
