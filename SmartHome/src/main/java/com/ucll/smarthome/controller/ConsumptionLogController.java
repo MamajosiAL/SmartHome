@@ -38,7 +38,7 @@ public class ConsumptionLogController {
         List<Consumption> consumptionList = consumptionDAO.findAll();
 
         LocalDate today = LocalDate.now();
-        LocalDateTime end = LocalDateTime.of(today.getYear(),today.getMonth(),today.getDayOfMonth(),0,0,0,0);
+        LocalDateTime end = LocalDateTime.of(today.getYear(),today.getMonth(),today.getDayOfMonth(),23,59,0,0);
         LocalDateTime resetdatetime = LocalDateTime.of(today.getYear(),today.getMonth(),today.getDayOfMonth(),0,0,0,0).plusDays(1);
 
         for(Consumption c : consumptionList){
