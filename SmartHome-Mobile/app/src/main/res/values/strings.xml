@@ -80,4 +80,5 @@
     <string name="no">No</string>
     <string name="consumption">Consumption</string>
     <string name="deviceNameChangeSucces">Succesfully changed devices name</string>
+    <string name="invalidCredits">Invalid credentials</string>
 </resources>
