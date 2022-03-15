@@ -9,15 +9,12 @@ import java.util.List;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
 
 public enum SensorType {
-        MOTION("Motionsensor","Bewegingssensor", ""),TEMPERATURE("Temperaturesensor","Temperatuursensor", "°C")
-        ,DAYLIGHT("Lightsensor","Lichtsensor", ""),PRESSURE("Pressuresensor","Druksensor", "psi")
-        ,INFRARED("Infraredsensor","Infraroodsensor", ""),MIC("Microphone","Microfoon", "")
-        ,GENERIC("Sensor","Sensor", "") ,WEIGHT("Loadsensor","Gewichtsenseor","kg")
-        ,MOISTURE("Humiditysensor","Vochtigheidsensor", "%"), TOUCH("Touchsensor","Aanraaksensor","");
+    THERMOSTAT("Thermostat"), MOTION_SENSOR("Motion Sensor"), WATER_LEAK_FREEZE_SENSOR("Water Leak/Freeze Sensor"),
+    WINDOW_DOOR_SENSOR("Window/Door Sensor"), SMART_SMOKE_SENSOR("Smart Smoke Sensor");
 
     private String name, nameBE, unit;
 
-    SensorType(String name, String nameBE, String unit) {
+    SensorType(String name) {
         this.name = name;
         this.nameBE = nameBE;
         this.unit = unit;
