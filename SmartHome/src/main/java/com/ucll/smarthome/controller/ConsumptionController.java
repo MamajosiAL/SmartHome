@@ -146,6 +146,8 @@ public class ConsumptionController {
                 for(ConsumptionDTO cDTO : consumptionList){
                     cDTO.setRoomId(room.getRoomID());
                     cDTO.setHouseId(room.getHouse().getHouseId());
+                    cDTO.setHouseName(room.getHouse().getName());
+                    cDTO.setRoomName(room.getName());
                     consumptionResultList.add(cDTO);
                 }
             }

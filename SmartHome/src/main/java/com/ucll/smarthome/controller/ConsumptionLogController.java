@@ -81,7 +81,7 @@ public class ConsumptionLogController {
             ConsumptionLogDTO addclDTO = new ConsumptionLogDTO.Builder()
                     .consumptionId(clDTO.getConsumptionId()).consumptionLogId(clDTO.getConsumptionLogId()).consumptionPerHour(clDTO.getConsumptionPerHour())
                     .date(clDTO.getDate()).aantalMinuten(clDTO.getAantalMinuten()).deviceId(clDTO.getDeviceId()).houseId(clDTO.getHouseId())
-                    .roomId(clDTO.getRoomId()).unit(clDTO.getUnit()).build();
+                    .roomId(clDTO.getRoomId()).unit(clDTO.getUnit()).houseName(clDTO.getHouseName()).roomName(clDTO.getRoomName()).build();
 
 
             double totalConsSum = clDTO.getAantalMinuten() * clDTO.getConsumptionPerHour();
@@ -118,7 +118,7 @@ public class ConsumptionLogController {
             ConsumptionLogDTO addclDTO = new ConsumptionLogDTO.Builder()
                     .consumptionId(clDTO.getConsumptionId()).consumptionLogId(clDTO.getConsumptionLogId()).consumptionPerHour(clDTO.getConsumptionPerHour())
                     .date(clDTO.getDate()).aantalMinuten(clDTO.getAantalMinuten()).deviceId(clDTO.getDeviceId()).houseId(clDTO.getHouseId())
-                    .roomId(clDTO.getRoomId()).unit(clDTO.getUnit()).build();
+                    .roomId(clDTO.getRoomId()).unit(clDTO.getUnit()).houseName(clDTO.getHouseName()).roomName(clDTO.getRoomName()).build();
 
 
             double totalConsSum = clDTO.getAantalMinuten() * clDTO.getConsumptionPerHour();
@@ -148,6 +148,7 @@ public class ConsumptionLogController {
         List<ConsumptionLogDTO> consumptionLogDTOList = new ArrayList<>();
         for (ConsumptionDTO consumptionDTO: consumptionDTOList) {
             List<ConsumptionLog> temp = consumptionLogDAO.findAllByConsumptionConsumptionId(consumptionDTO.getConsumptionId()).get();
+
             for (ConsumptionLog consumptionLog : temp) {
                 ConsumptionLogDTO consumptionLogDTO = new ConsumptionLogDTO.Builder()
                         .deviceId(consumptionDTO.getDeviceId())
@@ -159,6 +160,8 @@ public class ConsumptionLogController {
                         .consumptionPerHour(consumptionDTO.getConsumptionPerHour())
                         .houseId(consumptionDTO.getHouseId())
                         .roomId(consumptionDTO.getRoomId())
+                        .roomName(consumptionDTO.getRoomName())
+                        .houseName(consumptionDTO.getHouseName())
                         .build();
 
                 consumptionLogDTOList.add(consumptionLogDTO);

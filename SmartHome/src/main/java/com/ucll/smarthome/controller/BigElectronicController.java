@@ -81,6 +81,7 @@ public class BigElectronicController {
         Optional<Programme> programme = programmeDAO.findById(beDTO.getProgramid());
 
         Room room = roomController.roomExists(beDTO.getRoomid());
+        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
 
         if (programme.isPresent()){
             updateBeDeviceWithProgramme(beDTO,programme.get());
@@ -116,6 +117,7 @@ public class BigElectronicController {
     private Optional<Type> getType(Type type){
         return typeDAO.findById(type.getTypeid());
     }
+
     private Optional<Type> getTypeByName(String typeName){
         return typeDAO.findByName(typeName);
     }

@@ -17,6 +17,8 @@ public class ConsumptionLogDTO {
     @JsonFormat(pattern = "dd/MM/YYYY")
     private LocalDate date;
     private int totalConsumption;
+    private String roomName;
+    private String houseName;
 
     public ConsumptionLogDTO() {
     }
@@ -32,6 +34,8 @@ public class ConsumptionLogDTO {
         setRoomId(builder.roomId);
         setDate(builder.date);
         setTotalConsumption(builder.totalConsumption);
+        setHouseName(builder.houseName);
+        setRoomName(builder.roomName);
     }
 
     public Long getConsumptionId() {
@@ -118,6 +122,22 @@ public class ConsumptionLogDTO {
         this.date = date;
     }
 
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getHouseName() {
+        return houseName;
+    }
+
+    public void setHouseName(String houseName) {
+        this.houseName = houseName;
+    }
+
     public static final class Builder {
         private Long consumptionLogId;
         private Long consumptionId;
@@ -129,6 +149,8 @@ public class ConsumptionLogDTO {
         private Long roomId;
         private LocalDate date;
         private int totalConsumption;
+        private String roomName;
+        private String houseName;
 
         public Builder(){}
 
@@ -179,6 +201,16 @@ public class ConsumptionLogDTO {
 
         public Builder totalConsumption(int val){
             totalConsumption = val;
+            return this;
+        }
+
+        public Builder roomName (String val){
+            roomName = val;
+            return this;
+        }
+
+        public Builder houseName (String val){
+            houseName = val;
             return this;
         }
 
