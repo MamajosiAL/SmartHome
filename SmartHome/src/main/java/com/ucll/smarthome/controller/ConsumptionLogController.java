@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -61,17 +62,86 @@ public class ConsumptionLogController {
 
     public List<ConsumptionLogDTO> getConsumptionLogByRoom(long roomid){
         List<ConsumptionDTO> consumptionDTOList = consumptionController.getConsumptionsByRoom(roomid);
-        return getConsumptionLogsByConsumptionList(consumptionDTOList);
+        List<ConsumptionLogDTO> clogDTOList =  getConsumptionLogsByConsumptionList(consumptionDTOList);
+
+        for (ConsumptionLogDTO clogDTO:clogDTOList) {
+            clogDTO.setTotalConsumption((int) Math.round(clogDTO.getAantalMinuten() * clogDTO.getConsumptionPerHour()));
+        }
+        return clogDTOList;
     }
 
     public List<ConsumptionLogDTO> getConsumptionLogByHouse(long houseid){
         List<ConsumptionDTO> consumptionDTOList = consumptionController.getConsumptionsByHouse(houseid);
-        return getConsumptionLogsByConsumptionList(consumptionDTOList);
+        List<ConsumptionLogDTO> clDTOList =  getConsumptionLogsByConsumptionList(consumptionDTOList);
+        List<ConsumptionLogDTO> sumList = new ArrayList<>();
+        List<Long> consId = new ArrayList<>();
+
+        // loop through all consumption logs
+        for (ConsumptionLogDTO clDTO: clDTOList) {
+            ConsumptionLogDTO addclDTO = new ConsumptionLogDTO.Builder()
+                    .consumptionId(clDTO.getConsumptionId()).consumptionLogId(clDTO.getConsumptionLogId()).consumptionPerHour(clDTO.getConsumptionPerHour())
+                    .date(clDTO.getDate()).aantalMinuten(clDTO.getAantalMinuten()).deviceId(clDTO.getDeviceId()).houseId(clDTO.getHouseId())
+                    .roomId(clDTO.getRoomId()).unit(clDTO.getUnit()).build();
+
+
+            double totalConsSum = clDTO.getAantalMinuten() * clDTO.getConsumptionPerHour();
+
+            // check if consumption has already been used
+            if(!consId.contains(clDTO.getConsumptionLogId())){
+
+                // add the consumptionlog id of the first loop
+                consId.add(clDTO.getConsumptionId());
+
+                // run second loop to compare data, if date & house are the same, make total sum and after loop add this to sumlist
+                for (ConsumptionLogDTO clDTO2 : clDTOList) {
+                    if(clDTO.getDeviceId() != clDTO2.getDeviceId() && clDTO.getRoomId() == clDTO2.getRoomId() && clDTO.getDate().isEqual(clDTO2.getDate())){
+                        totalConsSum += (clDTO2.getAantalMinuten() * clDTO2.getConsumptionPerHour());
+                        consId.add(clDTO2.getConsumptionLogId());
+                    }
+                }
+                addclDTO.setTotalConsumption((int) Math.round(totalConsSum));
+                sumList.add(addclDTO);
+            }
+
+        }
+        return sumList;
     }
 
     public List<ConsumptionLogDTO> getConsumptionLogByUser(){
         List<ConsumptionDTO> consumptionDTOList = consumptionController.getConsumptionsByUser();
-        return getConsumptionLogsByConsumptionList(consumptionDTOList);
+        List<ConsumptionLogDTO> clDTOList =  getConsumptionLogsByConsumptionList(consumptionDTOList);
+        List<ConsumptionLogDTO> sumList = new ArrayList<>();
+        List<Long> consId = new ArrayList<>();
+
+        // loop through all consumption logs
+        for (ConsumptionLogDTO clDTO: clDTOList) {
+            ConsumptionLogDTO addclDTO = new ConsumptionLogDTO.Builder()
+                    .consumptionId(clDTO.getConsumptionId()).consumptionLogId(clDTO.getConsumptionLogId()).consumptionPerHour(clDTO.getConsumptionPerHour())
+                    .date(clDTO.getDate()).aantalMinuten(clDTO.getAantalMinuten()).deviceId(clDTO.getDeviceId()).houseId(clDTO.getHouseId())
+                    .roomId(clDTO.getRoomId()).unit(clDTO.getUnit()).build();
+
+
+            double totalConsSum = clDTO.getAantalMinuten() * clDTO.getConsumptionPerHour();
+
+            // check if consumption has already been used
+            if(!consId.contains(clDTO.getConsumptionLogId())){
+
+                // add the consumptionlog id of the first loop
+                consId.add(clDTO.getConsumptionId());
+
+                // run second loop to compare data, if date & house are the same, make total sum and after loop add this to sumlist
+                for (ConsumptionLogDTO clDTO2 : clDTOList) {
+                    if(clDTO.getDeviceId() != clDTO2.getDeviceId() && clDTO.getHouseId() == clDTO2.getHouseId() && clDTO.getDate().isEqual(clDTO2.getDate())){
+                        totalConsSum += (clDTO2.getAantalMinuten() * clDTO2.getConsumptionPerHour());
+                        consId.add(clDTO2.getConsumptionLogId());
+                    }
+                }
+                addclDTO.setTotalConsumption((int) Math.round(totalConsSum));
+                sumList.add(addclDTO);
+            }
+
+        }
+        return sumList;
     }
 
     private List<ConsumptionLogDTO> getConsumptionLogsByConsumptionList(List<ConsumptionDTO> consumptionDTOList) {

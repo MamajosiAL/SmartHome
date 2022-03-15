@@ -16,6 +16,7 @@ public class ConsumptionLogDTO {
     private Long roomId;
     @JsonFormat(pattern = "dd/MM/YYYY")
     private LocalDate date;
+    private int totalConsumption;
 
     public ConsumptionLogDTO() {
     }
@@ -30,6 +31,7 @@ public class ConsumptionLogDTO {
         setHouseId(builder.houseId);
         setRoomId(builder.roomId);
         setDate(builder.date);
+        setTotalConsumption(builder.totalConsumption);
     }
 
     public Long getConsumptionId() {
@@ -75,6 +77,7 @@ public class ConsumptionLogDTO {
     public void setConsumptionPerHour(double consumptionPerHour) {
         this.consumptionPerHour = consumptionPerHour;
     }
+
     public Long getHouseId() {
         return houseId;
     }
@@ -103,6 +106,14 @@ public class ConsumptionLogDTO {
         return date;
     }
 
+    public int getTotalConsumption() {
+        return totalConsumption;
+    }
+
+    public void setTotalConsumption(int totalConsumption) {
+        this.totalConsumption = totalConsumption;
+    }
+
     public void setDate(LocalDate date) {
         this.date = date;
     }
@@ -117,6 +128,7 @@ public class ConsumptionLogDTO {
         private Long houseId;
         private Long roomId;
         private LocalDate date;
+        private int totalConsumption;
 
         public Builder(){}
 
@@ -162,6 +174,11 @@ public class ConsumptionLogDTO {
 
         public Builder date(LocalDate val){
             date = val;
+            return this;
+        }
+
+        public Builder totalConsumption(int val){
+            totalConsumption = val;
             return this;
         }
 
