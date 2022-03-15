@@ -216,6 +216,7 @@ public class ConsumptionController {
                         .aantalMinuten(rec.getAantalMinuten())
                         .device(rec.getDevice().getId())
                         .unit(rec.getUnit())
+                        .consumptionPerHour(rec.getConsumptionPerHour())
                         .build());
 
         return stream.collect(Collectors.toList());
