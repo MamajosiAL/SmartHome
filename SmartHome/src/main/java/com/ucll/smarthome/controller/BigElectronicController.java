@@ -54,7 +54,7 @@ public class BigElectronicController {
         beDao.save(appliances);
     }
     private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO, Programme programme) throws IllegalArgumentException{
-
+        System.out.println(beDTO.toString());
         Room room = roomController.roomExists(beDTO.getRoomid());
 
         BigElectronicDevice apl = appliancesExists(beDTO.getId());
@@ -64,6 +64,7 @@ public class BigElectronicController {
             apl.setType(getType(programme.getType()).orElse(null));
             apl.setTempature(programme.getTempature());
             apl.setTimer(programme.getTimer());
+            beDao.save(apl);
     }
 
     public BigElectronicDTO getProgramValues(long programid){
@@ -92,8 +93,6 @@ public class BigElectronicController {
             apl.setTempature(beDTO.getTempature());
             apl.setTimer(beDTO.getTimer());
         }
-
-
     }
 
     public BigElectronicDTO getDeviceByid(long deviceid) throws IllegalArgumentException{
