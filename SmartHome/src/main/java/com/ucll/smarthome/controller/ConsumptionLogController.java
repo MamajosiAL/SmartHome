@@ -2,8 +2,10 @@ package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.ConsumptionDTO;
 import com.ucll.smarthome.dto.ConsumptionLogDTO;
+import com.ucll.smarthome.dto.RoomDTO;
 import com.ucll.smarthome.persistence.entities.Consumption;
 import com.ucll.smarthome.persistence.entities.ConsumptionLog;
+import com.ucll.smarthome.persistence.entities.Room;
 import com.ucll.smarthome.persistence.repository.ConsumptionDAO;
 import com.ucll.smarthome.persistence.repository.ConsumptionLogDAO;
 import org.springframework.stereotype.Controller;
@@ -12,8 +14,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 public class ConsumptionLogController {
@@ -57,7 +62,7 @@ public class ConsumptionLogController {
     public List<ConsumptionLogDTO> getConsumptionLogByDevice(long deviceid){
         List<ConsumptionDTO> cDTO = consumptionController.getConsumptionsByDeviceId(deviceid);
 
-        return getConsumptionLogsByConsumptionList(cDTO);
+        return ConsumptionSortByDate(getConsumptionLogsByConsumptionList(cDTO));
     }
 
     public List<ConsumptionLogDTO> getConsumptionLogByRoom(long roomid){
@@ -67,7 +72,7 @@ public class ConsumptionLogController {
         for (ConsumptionLogDTO clogDTO:clogDTOList) {
             clogDTO.setTotalConsumption((int) Math.round(clogDTO.getAantalMinuten() * clogDTO.getConsumptionPerHour()));
         }
-        return clogDTOList;
+        return ConsumptionSortByDate(clogDTOList);
     }
 
     public List<ConsumptionLogDTO> getConsumptionLogByHouse(long houseid){
@@ -104,7 +109,7 @@ public class ConsumptionLogController {
             }
 
         }
-        return sumList;
+        return ConsumptionSortByDate(sumList);
     }
 
     public List<ConsumptionLogDTO> getConsumptionLogByUser(){
@@ -141,7 +146,8 @@ public class ConsumptionLogController {
             }
 
         }
-        return sumList;
+
+        return ConsumptionSortByDate(sumList);
     }
 
     private List<ConsumptionLogDTO> getConsumptionLogsByConsumptionList(List<ConsumptionDTO> consumptionDTOList) {
@@ -171,4 +177,26 @@ public class ConsumptionLogController {
         return consumptionLogDTOList;
     }
 
+
+    private List<ConsumptionLogDTO> ConsumptionSortByDate(List<ConsumptionLogDTO> sumList){
+
+        Stream<ConsumptionLogDTO> stream = sumList.stream()
+                .sorted(Comparator.comparing(ConsumptionLogDTO::getDate))
+                .map(rec -> new ConsumptionLogDTO.Builder()
+                        .deviceId(rec.getDeviceId())
+                        .consumptionLogId(rec.getConsumptionLogId())
+                        .date(rec.getDate())
+                        .consumptionId(rec.getConsumptionId())
+                        .aantalMinuten(rec.getAantalMinuten())
+                        .unit(rec.getUnit())
+                        .consumptionPerHour(rec.getConsumptionPerHour())
+                        .houseId(rec.getHouseId())
+                        .roomId(rec.getRoomId())
+                        .roomName(rec.getRoomName())
+                        .houseName(rec.getHouseName())
+                        .totalConsumption(rec.getTotalConsumption())
+                        .build());
+
+        return stream.collect(Collectors.toList());
+    }
 }
