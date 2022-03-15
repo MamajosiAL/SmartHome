@@ -107,13 +107,15 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
         List<Integer> consDone = new ArrayList<>();
 
         for (ConsumptionLog cl : cLogs){
+            if(!consDone.contains(cl.getHouseId())){
             for(ConsumptionLog cl1 : cLogs){
-                if(cl.getConsumptionId() == cl1.getConsumptionId() && !consDone.contains(cl1.getConsumptionId()))   {
+                Log.e(TAG, "populateChart: " + cl1.getConsumptionLogId() + " " + cl1.getConsumptionId() + " " + cl1.getHouseName() );
+                if(cl.getHouseId().equals(cl1.getHouseId()))   {
+                    Log.e(TAG, "populateChart: succes: " + cl1.getConsumptionId() + " " + cl1.getHouseName() );
                     seriesData.add(new CustomDataEntry(cl1.getDate(),cl1.getTotalConsumption()));
+
                 }
             }
-
-            if(!consDone.contains(cl.getConsumptionId())){
                 Set set = Set.instantiate();
                 set.data(seriesData);
                 Mapping seriesMapping = set.mapAs("{ x: 'x', value: 'value' }");
@@ -131,7 +133,7 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
                         .offsetY(5d);
 
             }
-            consDone.add(cl.getConsumptionId());
+            consDone.add(cl.getHouseId());
         }
 
         cartLine.legend().enabled(true);
