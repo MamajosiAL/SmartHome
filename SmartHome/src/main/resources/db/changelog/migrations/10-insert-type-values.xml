@@ -12,11 +12,11 @@
         </preConditions>
         <insert tableName="type" schemaName="smarthome">
             <column name="id" value="1"/>
-            <column name="name" value="oven"/>
+            <column name="name" value="Oven"/>
         </insert>
         <insert tableName="type" schemaName="smarthome">
             <column name="id" value="2"/>
-            <column name="name" value="Cooling Devices"/>
+            <column name="name" value="Cooling Device"/>
         </insert>
         <insert tableName="type" schemaName="smarthome">
             <column name="id" value="3"/>

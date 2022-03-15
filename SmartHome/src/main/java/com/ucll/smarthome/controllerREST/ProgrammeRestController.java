@@ -2,6 +2,7 @@ package com.ucll.smarthome.controllerREST;
 
 import com.ucll.smarthome.controller.ProgrammeConttoller;
 import com.ucll.smarthome.dto.ProgrammeDTO;
+import com.ucll.smarthome.dto.TypeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,10 @@ public class ProgrammeRestController {
     @GetMapping("/{id}")
     public ResponseEntity<List<ProgrammeDTO>> getProgramsByType(@PathVariable("id") long typeid){
         return new ResponseEntity(programmeConttoller.getProgramsByTypeId(typeid), HttpStatus.OK);
+    }
+
+    @GetMapping("types")
+    public ResponseEntity<List<TypeDTO>> getTypes(){
+        return new ResponseEntity(programmeConttoller.getTypes(),HttpStatus.OK);
     }
 }
