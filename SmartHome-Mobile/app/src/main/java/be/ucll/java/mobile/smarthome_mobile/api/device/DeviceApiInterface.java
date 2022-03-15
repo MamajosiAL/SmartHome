@@ -28,7 +28,7 @@ public interface DeviceApiInterface {
     Call<String> createDeviceInRoom(@Body Device device, @Header("Cookie") String authHeader);
 
     @PUT("/devices/update")
-    Call<String> updateDeviceInRoom(@Body Device device, @Header("Cookie") String authHeader);
+    Call<String> updateDeviceInRoom(@Body DeviceAllParams device, @Header("Cookie") String authHeader);
 
     @GET("/devices/{id}")
     Call<DeviceAllParams> getDeviceById(@Path("id") Integer deviceid, @Header("Cookie") String authHeader);
@@ -48,7 +48,7 @@ public interface DeviceApiInterface {
     Call<String> createBigElektroInRoom(@Body BigElectro bigElectro, @Header("Cookie") String authHeader);
 
     @PUT("/appliances/update")
-    Call<String> updateBigElektroInRoom(@Body BigElectro bigElectro, @Header("Cookie") String authHeader);
+    Call<String> updateBigElektroInRoom(@Body DeviceAllParams bigElectro, @Header("Cookie") String authHeader);
 
     @GET("/appliances/{id}")
     Call<DeviceAllParams> getBigElektroById(@Path("id") Integer bigElectroid, @Header("Cookie") String authHeader);
@@ -62,7 +62,7 @@ public interface DeviceApiInterface {
     Call<String> createMediaInRoom(@Body Media media, @Header("Cookie") String authHeader);
 
     @PUT("/audios/update")
-    Call<String> updateMediaInRoom(@Body Media media, @Header("Cookie") String authHeader);
+    Call<String> updateMediaInRoom(@Body DeviceAllParams media, @Header("Cookie") String authHeader);
 
     @GET("/audios/{id}")
     Call<DeviceAllParams> getMediaById(@Path("id") Integer mediaid, @Header("Cookie") String authHeader);
@@ -76,7 +76,7 @@ public interface DeviceApiInterface {
     Call<String> createSensorInRoom(@Body Sensor sensor, @Header("Cookie") String authHeader);
 
     @PUT("/sensors/update")
-    Call<String> updateSensorInRoom(@Body Sensor sensor, @Header("Cookie") String authHeader);
+    Call<String> updateSensorInRoom(@Body DeviceAllParams sensor, @Header("Cookie") String authHeader);
 
     @GET("/sensors/{id}")
     Call<DeviceAllParams> getSensorById(@Path("id") Integer sensorid, @Header("Cookie") String authHeader);

@@ -54,7 +54,7 @@ public class BigElectronicController {
         beDao.save(appliances);
     }
     private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO, Programme programme) throws IllegalArgumentException{
-
+        System.out.println(beDTO.toString());
         Room room = roomController.roomExists(beDTO.getRoomid());
 
         BigElectronicDevice apl = appliancesExists(beDTO.getId());
@@ -64,6 +64,7 @@ public class BigElectronicController {
             apl.setType(getType(programme.getType()).orElse(null));
             apl.setTempature(programme.getTempature());
             apl.setTimer(programme.getTimer());
+            beDao.save(apl);
     }
 
     public BigElectronicDTO getProgramValues(long programid){
@@ -80,6 +81,7 @@ public class BigElectronicController {
         Optional<Programme> programme = programmeDAO.findById(beDTO.getProgramid());
 
         Room room = roomController.roomExists(beDTO.getRoomid());
+        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
 
         if (programme.isPresent()){
             updateBeDeviceWithProgramme(beDTO,programme.get());
@@ -92,8 +94,6 @@ public class BigElectronicController {
             apl.setTempature(beDTO.getTempature());
             apl.setTimer(beDTO.getTimer());
         }
-
-
     }
 
     public BigElectronicDTO getDeviceByid(long deviceid) throws IllegalArgumentException{
@@ -117,6 +117,7 @@ public class BigElectronicController {
     private Optional<Type> getType(Type type){
         return typeDAO.findById(type.getTypeid());
     }
+
     private Optional<Type> getTypeByName(String typeName){
         return typeDAO.findByName(typeName);
     }

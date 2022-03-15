@@ -35,6 +35,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder>{
         holder.username.setText(users.get(position).getUsername());
         if (users.get(position).isIsadmin()) {
             holder.isAdmin.setText("Admin") ;
+        }else{
+            holder.isAdmin.setText(R.string.user);
         }
 
        // implement setONCLickListener on itemView

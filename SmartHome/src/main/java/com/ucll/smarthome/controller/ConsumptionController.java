@@ -146,6 +146,8 @@ public class ConsumptionController {
                 for(ConsumptionDTO cDTO : consumptionList){
                     cDTO.setRoomId(room.getRoomID());
                     cDTO.setHouseId(room.getHouse().getHouseId());
+                    cDTO.setHouseName(room.getHouse().getName());
+                    cDTO.setRoomName(room.getName());
                     consumptionResultList.add(cDTO);
                 }
             }
@@ -216,6 +218,7 @@ public class ConsumptionController {
                         .aantalMinuten(rec.getAantalMinuten())
                         .device(rec.getDevice().getId())
                         .unit(rec.getUnit())
+                        .consumptionPerHour(rec.getConsumptionPerHour())
                         .build());
 
         return stream.collect(Collectors.toList());

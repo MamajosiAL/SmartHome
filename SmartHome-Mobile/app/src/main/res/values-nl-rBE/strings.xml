@@ -31,4 +31,22 @@
     <string name="users">Gebruikers</string>
     <string name="title_rooms">Kamers</string>
     <string name="addUserToHouse">Gebruiker toevoegen aan huis</string>
+    <string name="byHouse">Per huis</string>
+    <string name="yes">Ja</string>
+    <string name="no">Neen</string>
+    <string name="consumption">Consumptie</string>
+    <string name="user">Gebruiker</string>
+    <string name="deviceNameChangeSucces">Apparaat naam veranderen succesvol</string>
+    <string name="deleteConfMessage">Bent u zeker dat u dit wilt verwijderen</string>
+    <string name="deviceStatusChangeSucces">Apparaat status veranderen succesvol</string>
+    <string name="onOff">Aan/Uit</string>
+    <string name="deviceSensorDataLabel">Sensor data:</string>
+    <string name="deviceRoomLabel">Kamer:</string>
+    <string name="deviceStatusLabel">Status:</string>
+    <string name="deviceCategoryLabel">Categorie:</string>
+    <string name="deviceTypeLabel">Type:</string>
+    <string name="deviceProgramLabel">Programma:</string>
+    <string name="deviceTempLabel">Temperatuur:</string>
+    <string name="deviceTimerLabel">Timer:</string>
+    <string name="deviceVolumeLabel">Volume:</string>
 </resources>

@@ -1,12 +1,9 @@
 package be.ucll.java.mobile.smarthome_mobile;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -15,18 +12,19 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.slider.RangeSlider;
-import com.google.android.material.slider.Slider;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import java.util.HashMap;
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceDeleter;
+import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceNameEditor;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceStatusToggler;
 import be.ucll.java.mobile.smarthome_mobile.api.media.VolumeChangeAdapter;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
+import be.ucll.java.mobile.smarthome_mobile.pojo.BigElectro;
+import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
 import be.ucll.java.mobile.smarthome_mobile.pojo.DeviceAllParams;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Media;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Sensor;
@@ -47,7 +45,7 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
     private int roomId;
     private boolean edit = false;
     private boolean hasResponded;
-
+    private HashMap<TextView, String> initialTexts = new HashMap<>();
     private RangeSlider volumeSlider;
     private Switch toggleStatusSwitch;
     private ImageView editDeviceButton, deleteDeviceButton;
@@ -239,26 +237,23 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
             }
         });
 
-        volumeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-            @Override
-            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-                // check if the editvolume has called getdevicedata if not, it doesn't update the volume
-                // otherwise the volumeslider will break.
-                if(hasResponded){
-                    device.setVolume(Math.round(slider.getValues().get(0)));
-                    editVolume();
-                    Log.e(TAG, "onValueChange: " + slider.getValues().get(0));
-                }
-                hasResponded = false;
+        volumeSlider.addOnChangeListener((slider, value, fromUser) -> {
+            // check if the editvolume has called getdevicedata if not, it doesn't update the volume
+            // otherwise the volumeslider will break.
+            if(hasResponded){
+                device.setVolume(Math.round(slider.getValues().get(0)));
+                editVolume();
+                Log.e(TAG, "onValueChange: " + slider.getValues().get(0));
             }
+            hasResponded = false;
         });
 
     }
 
     private void editVolume() {
         try{
-            Media media = deviceAllParamsToMedia(device);
-            new VolumeChangeAdapter(this).changeVolume(media);
+            //Media media = deviceAllParamsToMedia(device);
+            new VolumeChangeAdapter(this).changeVolume(device);
         } catch (Exception e){
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
             Log.e(TAG,e.getMessage());
@@ -288,7 +283,11 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
     public void setDevice(DeviceAllParams device){
 
         // GENERIC
-        name.setText(device.getName());
+        String deviceName = device.getName();
+        this.name.setText(deviceName);
+        initialTexts.put(name, deviceName);
+
+
         toggleStatusSwitch.setChecked(device.getStatus());
 
         // BIG ELECTRO
@@ -344,6 +343,18 @@ public class DeviceActivity extends AppCompatActivity implements Callback<Device
     // TODO : edit device
     public void toggleTextViewEditable(TextView textView){
         if(edit){
+
+            //check if text has changed, if so submit changes
+            if(initialTexts.containsKey(textView)&&!initialTexts.get(textView).isEmpty()){
+                if (!initialTexts.get(textView).equals(textView.getText())){
+                    DeviceAllParams updatedDevice = device;
+                    updatedDevice.setName(String.valueOf(textView.getText()));
+                    new DeviceNameEditor(this).editName(device, deviceCategory);
+                }
+            }else {
+                throw new DataNotFoundException("No textview exists in initialTexts");
+            }
+
             // remove editable
             textView.setCursorVisible(false);
             textView.setFocusableInTouchMode(false);

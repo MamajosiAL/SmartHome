@@ -16,6 +16,9 @@ public class ConsumptionLogDTO {
     private Long roomId;
     @JsonFormat(pattern = "dd/MM/YYYY")
     private LocalDate date;
+    private int totalConsumption;
+    private String roomName;
+    private String houseName;
 
     public ConsumptionLogDTO() {
     }
@@ -30,6 +33,9 @@ public class ConsumptionLogDTO {
         setHouseId(builder.houseId);
         setRoomId(builder.roomId);
         setDate(builder.date);
+        setTotalConsumption(builder.totalConsumption);
+        setHouseName(builder.houseName);
+        setRoomName(builder.roomName);
     }
 
     public Long getConsumptionId() {
@@ -75,6 +81,7 @@ public class ConsumptionLogDTO {
     public void setConsumptionPerHour(double consumptionPerHour) {
         this.consumptionPerHour = consumptionPerHour;
     }
+
     public Long getHouseId() {
         return houseId;
     }
@@ -103,8 +110,32 @@ public class ConsumptionLogDTO {
         return date;
     }
 
+    public int getTotalConsumption() {
+        return totalConsumption;
+    }
+
+    public void setTotalConsumption(int totalConsumption) {
+        this.totalConsumption = totalConsumption;
+    }
+
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getHouseName() {
+        return houseName;
+    }
+
+    public void setHouseName(String houseName) {
+        this.houseName = houseName;
     }
 
     public static final class Builder {
@@ -117,6 +148,9 @@ public class ConsumptionLogDTO {
         private Long houseId;
         private Long roomId;
         private LocalDate date;
+        private int totalConsumption;
+        private String roomName;
+        private String houseName;
 
         public Builder(){}
 
@@ -162,6 +196,21 @@ public class ConsumptionLogDTO {
 
         public Builder date(LocalDate val){
             date = val;
+            return this;
+        }
+
+        public Builder totalConsumption(int val){
+            totalConsumption = val;
+            return this;
+        }
+
+        public Builder roomName (String val){
+            roomName = val;
+            return this;
+        }
+
+        public Builder houseName (String val){
+            houseName = val;
             return this;
         }
 
