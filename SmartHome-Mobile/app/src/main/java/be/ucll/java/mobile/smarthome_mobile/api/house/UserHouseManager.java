@@ -11,12 +11,9 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.util.concurrent.TimeUnit;
 
-import be.ucll.java.mobile.smarthome_mobile.DeviceActivity;
-import be.ucll.java.mobile.smarthome_mobile.HouseActivity;
 import be.ucll.java.mobile.smarthome_mobile.R;
 import be.ucll.java.mobile.smarthome_mobile.UserInHouseActivity;
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
-import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.pojo.House_User;
 import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
 import be.ucll.java.mobile.smarthome_mobile.util.ReceivedCookiesInterceptor;
@@ -29,12 +26,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @SuppressWarnings("ALL")
-public class UserHousePromovater implements Callback<String> {
+public class UserHouseManager implements Callback<String> {
     private final String TAG = this.getClass().getSimpleName();
     private UserInHouseActivity context;
     private ProgressDialog progressDialog;
 
-    public UserHousePromovater(UserInHouseActivity context) {
+    public UserHouseManager(UserInHouseActivity context) {
         this.context = context;
     }
 
@@ -60,9 +57,15 @@ public class UserHousePromovater implements Callback<String> {
                 .build();
     }
 
-    private void startRequest(House_User houseAdmin) {
+    private void startPromoteRequest(House_User houseAdmin) {
         HouseApiInterface houseApi = getClient().create(HouseApiInterface.class);
         Call<String> call = houseApi.setUserAsAdminInHouse(houseAdmin, AuthorizationManager.getInstance(context).getSessionId());
+        call.enqueue(this);
+    }
+
+    private void startRemoveRequest(House_User houseUser) {
+        HouseApiInterface houseApi = getClient().create(HouseApiInterface.class);
+        Call<String> call = houseApi.removeUserFromHouse(houseUser.getHouseid(),houseUser.getUserid(), AuthorizationManager.getInstance(context).getSessionId());
         call.enqueue(this);
     }
 
@@ -71,7 +74,7 @@ public class UserHousePromovater implements Callback<String> {
         if (response != null && response.body() != null) {
             if (response.isSuccessful()) {
                 context.getUsersInHouseData();
-                Toast.makeText(context, context.getText(R.string.userPromovatedSucces), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, context.getText(R.string.userAccessChangedSucces), Toast.LENGTH_LONG).show();
             }else {
                 Log.e(TAG, context.getString(R.string.responseErrorCode) + response.code());
                 progressDialog.dismiss();
@@ -87,14 +90,22 @@ public class UserHousePromovater implements Callback<String> {
     }
 
     public void promoteUserToAdminForHouse(Integer userId, int houseId) {
-        if(userId>0&&houseId>0){
-            House_User houseAdmin = new House_User();
-            houseAdmin.setHouseid(houseId);
-            houseAdmin.setUserid(userId);
-            houseAdmin.setIsadmin(true);
-            startRequest(houseAdmin);
-        }else {
+        startPromoteRequest(convert(userId, houseId));
+    }
+
+    private House_User convert(int userId, int houseId) {
+        if (userId > 0 && houseId > 0) {
+            House_User houseUser = new House_User();
+            houseUser.setHouseid(houseId);
+            houseUser.setUserid(userId);
+            houseUser.setIsadmin(true);
+            return houseUser;
+        } else {
             throw new IllegalArgumentException("userid or houseid is 0 or invalid");
         }
+    }
+
+    public void removeUserFromHouse(int userId, int houseId) {
+        startRemoveRequest(convert(userId, houseId));
     }
 }
