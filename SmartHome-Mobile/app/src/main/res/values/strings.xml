@@ -85,6 +85,7 @@
     <string name="byHouse">By house</string>
     <string name="promovateUserForHouse">Promovate user to admin</string>
     <string name="house">House: </string>
-    <string name="userPromovatedSucces">User succesfully promovated</string>
+    <string name="userPromotedSucces">User succesfully promoted</string>
     <string name="swipeInfo">Swipe right to promote, swipe left to remove</string>
+    <string name="userAccessChangedSucces">User access changed succesfully</string>
 </resources>

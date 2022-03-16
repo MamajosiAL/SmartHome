@@ -14,7 +14,7 @@ import java.util.List;
 
 import be.ucll.java.mobile.smarthome_mobile.R;
 import be.ucll.java.mobile.smarthome_mobile.UserInHouseActivity;
-import be.ucll.java.mobile.smarthome_mobile.api.house.UserHousePromovater;
+import be.ucll.java.mobile.smarthome_mobile.api.house.UserHouseManager;
 import be.ucll.java.mobile.smarthome_mobile.pojo.User;
 import be.ucll.java.mobile.smarthome_mobile.util.SwipeListener;
 
@@ -52,14 +52,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder>{
             holder.itemView.setOnTouchListener(new SwipeListener(){
                 @Override
                 public void onLeftToRightSwipe() {
-                    new UserHousePromovater((UserInHouseActivity) context).promoteUserToAdminForHouse(current.getId(),((UserInHouseActivity) context).getIntent().getIntExtra("houseId",0));
+                    new UserHouseManager((UserInHouseActivity) context).promoteUserToAdminForHouse(current.getId(),((UserInHouseActivity) context).getIntent().getIntExtra("houseId",0));
                 }
 
                 @Override
                 public void onRightToLeftSwipe() {
-                    //TODO: delete user access for house
-                    Toast.makeText(context, R.string.notImplementedMessage, Toast.LENGTH_LONG).show();
-                    //new UserHousePromovater((UserInHouseActivity) context).promoteUserToAdminForHouse(current.getId(),((UserInHouseActivity) context).getIntent().getIntExtra("houseId",0));
+                    new UserHouseManager((UserInHouseActivity) context).removeUserFromHouse(current.getId(),((UserInHouseActivity) context).getIntent().getIntExtra("houseId",0));
                 }
             });
         }catch (Exception e){
