@@ -52,8 +52,9 @@ public class BigElectronicController {
                 .tempature(beDTO.getTempature())
                 .timer(null)
                 .room(roomController.roomExists(beDTO.getRoomid())).build();
+
         beDao.save(appliances);
-        consumptionController.createConsumption(new ConsumptionDTO.Builder().device(beDTO.getId()).build());
+        consumptionController.createConsumption(new ConsumptionDTO.Builder().device(appliances.getId()).build());
     }
     private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO, Programme programme) throws IllegalArgumentException{
         System.out.println(beDTO.toString());

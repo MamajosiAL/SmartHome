@@ -70,6 +70,15 @@ public class BigElectronicDevice extends Device {
         this.timer = timer;
     }
 
+    @Override
+    public String toString() {
+        return "BigElectronicDevice{" +
+                "type=" + type +
+                ", programme=" + programme +
+                ", tempature=" + tempature +
+                ", timer=" + timer +
+                '}';
+    }
 
     public static final class Builder {
         private Type type;
