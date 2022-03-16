@@ -120,7 +120,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         hrlDeviceGrid = new HorizontalLayout();
         grid = new Grid<>();
         grid.setItems(new ArrayList<DeviceDTO>(0));
-        grid.addColumn(DeviceDTO::getName).setHeader("Naam");
+        grid.addColumn(DeviceDTO::getName).setHeader(msgSrc.getMessage("Bview.Naam",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(deviceDTO -> {
             aSwitch = new ToggleButton();
             aSwitch.setValue(deviceDTO.isStatus());
@@ -154,7 +154,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
     }
 
     private void handleClickDelete(ClickEvent<Button> e, long id) {
-        WarningDialog w = new WarningDialog("Weet u zeker dat u dit apparaat wilt verwijderen");
+        WarningDialog w = new WarningDialog(msgSrc.getMessage("bview.warn",null,getLocale()));
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {

@@ -1,6 +1,7 @@
 package com.ucll.smarthome.view.dialogs;
 
 
+import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -9,10 +10,14 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
 public class WarningDialog extends Dialog {
 
     private Label lblTitle;
+    @Autowired
+    private MessageSource msgSrc;
 
     private HorizontalLayout hlButtons;
     private VerticalLayout vrlLayout;
@@ -25,12 +30,13 @@ public class WarningDialog extends Dialog {
         vrlLayout = new VerticalLayout();
         vrlLayout.setSizeFull();
         vrlLayout.setPadding(false);
+        msgSrc = BeanUtil.getBean(MessageSource.class);
 
         hlButtons = new HorizontalLayout();
         lblTitle = new Label(description);
         vrlLayout.add(lblTitle);
 
-        btnCancel = new Button("Annuleren");
+        btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(event -> {
             okClicked = false;
             this.close();

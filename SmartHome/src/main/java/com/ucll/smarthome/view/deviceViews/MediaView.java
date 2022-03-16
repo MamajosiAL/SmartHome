@@ -134,7 +134,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
         hrlDeviceGrid = new HorizontalLayout();
         grid = new Grid<>();
         grid.setItems(new ArrayList<MediaDTO>(0));
-        grid.addColumn(MediaDTO::getName).setHeader("Naam");
+        grid.addColumn(MediaDTO::getName).setHeader(msgSrc.getMessage("Bview.Naam",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(mediaDTO -> {
             aSwitch = new ToggleButton();
             aSwitch.setValue(mediaDTO.isStatus());
@@ -163,7 +163,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
             }
             integerField.addValueChangeListener(e->handleChangeZender(e,mediaDTO));
             return integerField;
-        })).setHeader("Zender");
+        })).setHeader(msgSrc.getMessage("bview.Zender",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnDelete = new Button(new Icon(VaadinIcon.TRASH));
             btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
@@ -215,7 +215,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
     }
 
     private void handleClickDelete(ClickEvent<Button> e, long id) {
-        WarningDialog w = new WarningDialog("Weet u zeker dat u dit apparaat wilt verwijderen");
+        WarningDialog w = new WarningDialog(msgSrc.getMessage("bview.warn",null,getLocale()));
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {
