@@ -13,6 +13,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -25,18 +26,18 @@ public interface UserApiInterface {
     Call<String> login(@Body Login credentials , @Header("Authorization") String authHeader);
 
     @PUT("/users/update")
-    Call<String> updateUser(@Body User user, @Header("Authorization") String authHeader);
+    Call<String> updateUser(@Body User user, @Header("Cookie") String authHeader);
 
     @GET("/users/user")
-    Call<String> getUser(@Header("Authorization") String authHeader);
+    Call<String> getUser(@Header("Cookie") String authHeader);
 
-    @GET("/users/house")
-    Call<List<User>> getUsersByHouseId(@Query("id") Integer houseid, @Header("Authorization") String authHeader);
+    @GET("/users/house/{id}")
+    Call<List<User>> getUsersByHouseId(@Path("id") Integer houseid, @Header("Cookie") String authHeader);
 
     // for GET request
     @GET("/users")
     Call<User> getUserById(@Query("id") Integer id);
 
     @DELETE("users/delete")
-    Call<User> deleteCurrentLoggedInUser(@Header("Authorization") String authHeader);
+    Call<User> deleteCurrentLoggedInUser(@Header("Cookie") String authHeader);
 }

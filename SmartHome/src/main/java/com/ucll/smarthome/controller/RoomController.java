@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,7 +44,6 @@ public class RoomController {
         if(!userSecurityFunc.checkCurrentUserIsAdmin(house.get().getHouseId())) throw new AccessDeniedException("User is not admin of house");
 
         Room r = new Room.Builder().name(roomDTO.getName()).house(house.get()).build();
-
         dao.save(r);
 
     }
@@ -69,12 +69,12 @@ public class RoomController {
 
     public List<RoomDTO> getRoomsByHouse(long houseid) throws IllegalArgumentException{
         if (houseid <= 0) throw new IllegalArgumentException("Invalid id");
-        Optional<List<Room>> lst = dao.findAllByHouseHouseId(houseid);
-        if (lst.isEmpty()) throw new IllegalArgumentException("Couldn't find anny rooms");
         if(userSecurityFunc.getHouseUser(houseid).isEmpty()) throw new NotFoundException("User is not part of this house");
-
-        return roomListToDtoList(lst.get());
-
+        //Optional<List<Room>> lst = dao.findAllByHouseHouseId(houseid);
+        Stream<RoomDTO> stream = dao.findAllByHouseHouseId(houseid).get().stream()
+                .sorted(Comparator.comparing(Room::getRoomID))
+                .map(rec -> new RoomDTO.Builder().id(rec.getRoomID()).name(rec.getName()).build());
+        return stream.collect(Collectors.toList());
     }
 
     public void deleteRoom(long roomId) throws IllegalArgumentException {

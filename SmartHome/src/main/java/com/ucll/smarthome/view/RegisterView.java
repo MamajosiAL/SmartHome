@@ -14,6 +14,7 @@ import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
@@ -43,7 +44,7 @@ public class RegisterView extends VerticalLayout {
     private TextField txtFirstname;
     private TextField txtLasname;
     private TextField txtUsername;
-    private TextField txtEmail;
+    private EmailField emailField;
     private PasswordField password;
     private PasswordField confirmPassword;
     private Button buttonCreate;
@@ -60,7 +61,7 @@ public class RegisterView extends VerticalLayout {
         addClassName("Register-view");
 
         vrl.setMaxWidth("40em");
-        hTitel = new H1("Registreer");
+        hTitel = new H1(msgSrc.getMessage("rview.titel",null,getLocale()));
         txtErrorMessage = new H5();
         txtErrorMessage.setVisible(false);
         vrl.add(hTitel,txtErrorMessage,createRegisterForm());
@@ -74,33 +75,34 @@ public class RegisterView extends VerticalLayout {
         registerForm = new FormLayout();
 
 
-        txtFirstname = new TextField("First name");
+        txtFirstname = new TextField(msgSrc.getMessage("rview.firstname",null,getLocale()));
         txtFirstname.setRequired(true);
-        txtFirstname.setErrorMessage("Verplicht veld");
+        txtFirstname.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
 
-        txtLasname = new TextField("Last name");
+        txtLasname = new TextField(msgSrc.getMessage("rview.lastname",null,getLocale()));
         txtLasname.setRequired(true);
-        txtLasname.setErrorMessage("Verplicht veld");
+        txtLasname.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
 
-        txtUsername = new TextField("Username");
+        txtUsername = new TextField(msgSrc.getMessage("lview.username",null,getLocale()));
         txtUsername.setRequired(true);
-        txtUsername.setErrorMessage("Verplicht veld");
-        txtEmail = new TextField("Email");
-        txtEmail.setRequired(true);
-        txtEmail.setErrorMessage("Verplicht veld");
-        password = new PasswordField("Password");
+        txtUsername.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
+        emailField = new EmailField("Email");
+        emailField.setRequiredIndicatorVisible(true);
+        emailField.setPattern("[^@\\s]+@[^@\\s]+\\.[^@\\s]+");
+        emailField.setErrorMessage(msgSrc.getMessage("rview.errormessagemail",null,getLocale()));
+        password = new PasswordField(msgSrc.getMessage("lview.password",null,getLocale()));
         password.setRequired(true);
-        password.setErrorMessage("Verplicht veld");
-        confirmPassword = new PasswordField("Confirm password");
+        password.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
+        confirmPassword = new PasswordField(msgSrc.getMessage("rview.confirmpassword",null,getLocale()));
         confirmPassword.setRequired(true);
-        confirmPassword.setErrorMessage("Verplicht veld");
-        buttonCreate = new Button("Create");
-        buttonCancel = new Button("Cancel");
+        confirmPassword.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
+        buttonCreate = new Button(msgSrc.getMessage("rview.buttonCr",null,getLocale()));
+        buttonCancel = new Button(msgSrc.getMessage("rview.buttonCa", null,getLocale()));
         buttonCancel.addClickListener(this::handelclickEventCancel);
         buttonCreate.addClickListener(this::handelclickEventCreate);
 
         registerForm.add(
-             txtFirstname, txtLasname, txtUsername, txtEmail,password,confirmPassword,buttonCancel,buttonCreate
+             txtFirstname, txtLasname, txtUsername, emailField,password,confirmPassword,buttonCancel,buttonCreate
         );
         registerForm.setResponsiveSteps(new FormLayout.ResponsiveStep("0",2));
 
@@ -111,14 +113,13 @@ public class RegisterView extends VerticalLayout {
     private void handelclickEventCreate(ClickEvent<Button> buttonClickEvent) {
 
         try{
-            if (!password.getValue().equals(confirmPassword.getValue())) throw new IllegalArgumentException("Wachtwoorden zijn niet het zelfde");
+            if (!password.getValue().equals(confirmPassword.getValue())) throw new IllegalArgumentException(msgSrc.getMessage("rview.exception",null,getLocale()));
                 UserDTO userDTO = new UserDTO.Builder().username(txtUsername.getValue()).firstname(txtFirstname.getValue()).name(txtLasname.getValue())
-                    .email(txtEmail.getValue()).password(password.getValue()).build();
+                    .email(emailField.getValue()).password(password.getValue()).build();
 
             userController.createUser(userDTO);
             getUI().ifPresent(ui -> ui.navigate("login"));
         }catch (IllegalArgumentException ex){
-            Notification.show(ex.getMessage(), 5000, Notification.Position.MIDDLE).addThemeVariants(NotificationVariant.LUMO_ERROR);
             txtErrorMessage.setVisible(true);
             txtErrorMessage.setText(ex.getMessage());
 
@@ -129,8 +130,6 @@ public class RegisterView extends VerticalLayout {
     private void handelclickEventCancel(ClickEvent<Button> buttonClickEvent) {
         getUI().ifPresent(ui -> ui.navigate("login"));
     }
-
-
 }
 
 

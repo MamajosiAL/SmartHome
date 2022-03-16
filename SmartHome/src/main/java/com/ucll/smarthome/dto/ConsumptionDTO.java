@@ -8,6 +8,10 @@ public class ConsumptionDTO {
     private int aantalMinuten;
     private String unit;
     private double consumptionPerHour;
+    private Long houseId;
+    private Long roomId;
+    private String roomName;
+    private String houseName;
 
     public ConsumptionDTO() {
     }
@@ -18,6 +22,10 @@ public class ConsumptionDTO {
         setAantalMinuten(builder.aantalMinuten);
         setUnit(builder.unit);
         setConsumptionPerHour(builder.consumptionPerHour);
+        setHouseId(builder.houseId);
+        setRoomId(builder.roomId);
+        setHouseName(builder.houseName);
+        setRoomName(builder.roomName);
     }
 
     public Long getConsumptionId() {
@@ -63,6 +71,37 @@ public class ConsumptionDTO {
     public void setConsumptionPerHour(double consumptionPerHour) {
         this.consumptionPerHour = consumptionPerHour;
     }
+    public Long getHouseId() {
+        return houseId;
+    }
+
+    public void setHouseId(Long houseId) {
+        this.houseId = houseId;
+    }
+
+    public Long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getHouseName() {
+        return houseName;
+    }
+
+    public void setHouseName(String houseName) {
+        this.houseName = houseName;
+    }
 
     public static final class Builder {
         private Long consumptionId;
@@ -70,6 +109,10 @@ public class ConsumptionDTO {
         private int aantalMinuten;
         private String unit;
         private double consumptionPerHour;
+        private Long houseId;
+        private Long roomId;
+        private String roomName;
+        private String houseName;
 
         public Builder(){}
 
@@ -93,8 +136,28 @@ public class ConsumptionDTO {
             return this;
         }
 
-        private Builder consumptionPerHour(double val){
+        public Builder consumptionPerHour(double val){
             consumptionPerHour = val;
+            return this;
+        }
+
+        public Builder houseId(Long val){
+            houseId = val;
+            return this;
+        }
+
+        public Builder roomId(Long val){
+            roomId = val;
+            return this;
+        }
+
+        public Builder roomName (String val){
+            roomName = val;
+            return this;
+        }
+
+        public Builder houseName (String val){
+            houseName = val;
             return this;
         }
 

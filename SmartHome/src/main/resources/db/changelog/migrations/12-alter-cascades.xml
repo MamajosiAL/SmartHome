@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="12" author="Mathias Clement">
+        <dropForeignKeyConstraint
+                baseTableName="room"
+                baseTableSchemaName="smarthome"
+                constraintName="fk_house"/>
+        <addForeignKeyConstraint baseTableName="room"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="house_id"
+                                 constraintName="fk_house"
+                                 referencedTableName="house"
+                                 referencedColumnNames="houseid"
+                                 referencedTableSchemaName="smarthome"
+                                 onDelete="CASCADE"
+        />
+        <dropForeignKeyConstraint
+                baseTableName="device"
+                baseTableSchemaName="smarthome"
+                constraintName="fk_room"/>
+        <addForeignKeyConstraint baseTableName="device"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="room_id"
+                                 constraintName="fk_room"
+                                 referencedTableName="room"
+                                 referencedColumnNames="roomid"
+                                 referencedTableSchemaName="smarthome"
+                                 onDelete="CASCADE"
+        />
+        <dropForeignKeyConstraint
+                baseTableName="consumption"
+                baseTableSchemaName="smarthome"
+                constraintName="fk_device_consumption"/>
+        <addForeignKeyConstraint baseTableName="consumption"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="deviceid"
+                                 constraintName="fk_device_consumption"
+                                 referencedTableName="device"
+                                 referencedColumnNames="id"
+                                 referencedTableSchemaName="smarthome"
+                                 onDelete="CASCADE"
+        />
+        <dropForeignKeyConstraint
+                baseTableName="consumptionlog"
+                baseTableSchemaName="smarthome"
+                constraintName="fk_consumptionlog"/>
+        <addForeignKeyConstraint baseTableName="consumptionlog"
+                                 baseTableSchemaName="smarthome"
+                                 baseColumnNames="consumptionid"
+                                 constraintName="fk_consumptionlog"
+                                 referencedTableName="consumption"
+                                 referencedColumnNames="consumptionid"
+                                 referencedTableSchemaName="smarthome"
+                                 onDelete="CASCADE"
+        />
+    </changeSet>
+</databaseChangeLog>

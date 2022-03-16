@@ -27,6 +27,7 @@ import java.util.Locale;
 @Route("login")
 @PageTitle("login")
 @CssImport("styles/main-view.css")
+@CssImport("styles/custom.css")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
     @Autowired
@@ -35,7 +36,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 
     private VerticalLayout vrl;
-    private Button buttonRegister = new Button("Register");
+    private Button buttonRegister;
     private LoginI18n i18n;
     private LoginForm frmLogin;
 
@@ -46,16 +47,18 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         addClassName("login-view");
 
         i18n = LoginI18n.createDefault();
-        i18n.getForm().setTitle("Smarthome Login Alterd");
-        i18n.getForm().setUsername("Gebruikersnaam");
-        i18n.getForm().setPassword("Wachtwoord");
-        i18n.getErrorMessage().setTitle("Login niet gelukt");
-        i18n.getErrorMessage().setMessage("Controlleer of u het juiste Gebruikersnaam en wachtwoord hebt ingevuld en probeer opnieuw");
+        i18n.getForm().setTitle("Smarthome Login");
+        i18n.getForm().setUsername(msgSrc.getMessage("lview.username",null,getLocale()));
+        i18n.getForm().setPassword(msgSrc.getMessage("lview.password",null,getLocale()));
+        i18n.getErrorMessage().setTitle(msgSrc.getMessage("lview.loginfail",null,getLocale()));
+        i18n.getErrorMessage().setMessage(msgSrc.getMessage("lview.loginfailmessage",null,getLocale()));
 
 
         frmLogin = new LoginForm(i18n);
         frmLogin.setAction("login");
         frmLogin.setForgotPasswordButtonVisible(false);
+
+        buttonRegister = new Button(msgSrc.getMessage("lview.regbutton",null,getLocale()));
 
         add(frmLogin,buttonRegister);
         this.setAlignItems(Alignment.CENTER);

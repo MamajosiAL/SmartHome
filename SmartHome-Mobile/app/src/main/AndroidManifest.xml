@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="be.ucll.java.mobile.smarthome_mobile">
+    package="be.ucll.java.mobile.smarthome_mobile" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -11,11 +12,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHomeMobile"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".AddUserToHouseActivity"
+            android:exported="false" />
+        <activity android:name=".AddRoomActivity" />
+        <activity android:name=".AddDeviceActivity" />
         android:usesCleartextTraffic="true">
-        <activity android:name=".DeviceActivity"></activity>
+        <activity android:name=".AddRoomActivity" />
+        <activity android:name=".AddDeviceActivity"/>
+        <activity android:name=".DeviceActivity" />
         <activity android:name=".RoomActivity" />
         <activity android:name=".HouseActivity" />
         <activity android:name=".AddHouseActivity" />
+        <activity android:name=".UserInHouseActivity"/>
         <activity
             android:name=".LogOutActivity"
             android:label="@string/title_activity_log_out"
@@ -31,7 +41,7 @@
         <activity android:name=".ManageActivity" />
         <activity android:name=".ConsumptionActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,5 +1,6 @@
 package com.ucll.smarthome.controller;
 
+import com.ucll.smarthome.dto.ConsumptionDTO;
 import com.ucll.smarthome.dto.DeviceDTO;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.*;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.webjars.NotFoundException;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,14 +43,14 @@ public class DeviceController {
                 .room(roomController.roomExists(deviceDTO.getRoomid()))
                 .build();
         deviceDAO.save(device);
-
+        long deviceid = device.getId();
+        consumptionController.createConsumption(new ConsumptionDTO.Builder().device(deviceid).build());
     }
     public void updateDevice(DeviceDTO deviceDTO) throws IllegalArgumentException{
         if (deviceDTO == null ) throw new IllegalArgumentException("Input data missing");
         if (deviceDTO.getName() == null || deviceDTO.getName().trim() .equals("")) throw new IllegalArgumentException("Name of device is not filled in");
 
         Room room = roomController.roomExists(deviceDTO.getRoomid());
-        if(!userSecurityFunc.checkCurrentUserIsAdmin(room.getHouse().getHouseId())) throw new NotFoundException("User is not admin of house");
 
         Device device =  deviceExists(deviceDTO.getId());
 
@@ -70,7 +72,8 @@ public class DeviceController {
         if(userSecurityFunc.getHouseUser(room.getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
 
         Stream<DeviceDTO> stream = deviceDAO.findAllByRoomAndCategoryid(room,4).stream()
-                .map(rec -> new DeviceDTO.Builder().id(rec.getId()).name(rec.getName()).status(rec.isStatus()).build());
+                .sorted(Comparator.comparing(Device::getId))
+                .map(rec -> new DeviceDTO.Builder().id(rec.getId()).name(rec.getName()).status(rec.isStatus()).roomid(rec.getRoom().getRoomID()).build());
         return stream.collect(Collectors.toList());
     }
 

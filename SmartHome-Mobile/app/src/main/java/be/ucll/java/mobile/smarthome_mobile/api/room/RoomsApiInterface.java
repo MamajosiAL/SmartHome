@@ -24,8 +24,8 @@ public interface RoomsApiInterface {
     Call<String> updateRoom(@Body Room updatedRoom, @Header("Cookie") String authHeader);
 
     // for GET request
-    @GET("/rooms/house")
-    Call<List<Room>> getRoomsFromHouseWithAccessForUserInSession(@Query("id") Integer houseid, @Header("Cookie") String authHeader);
+    @GET("/rooms/house/{id}")
+    Call<List<Room>> getRoomsFromHouseWithAccessForUserInSession(@Path("id") Integer houseid, @Header("Cookie") String authHeader);
 
     @GET("/rooms")
     Call<Room> getRoomById(@Query("id") Integer roomid, @Header("Cookie") String authHeader);

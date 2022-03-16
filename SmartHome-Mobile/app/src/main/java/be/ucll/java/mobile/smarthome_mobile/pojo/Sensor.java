@@ -12,7 +12,7 @@ public class Sensor extends Device{
 
     @SerializedName("sensordata")
     @Expose
-    private Long sensordata;
+    private Integer sensordata;
 
     public String getSensorType() {
         return sensorType;
@@ -22,11 +22,11 @@ public class Sensor extends Device{
         this.sensorType = sensorType;
     }
 
-    public Long getSensordata() {
+    public Integer getSensordata() {
         return sensordata;
     }
 
-    public void setSensordata(Long sensordata) {
+    public void setSensordata(Integer sensordata) {
         this.sensordata = sensordata;
     }
 

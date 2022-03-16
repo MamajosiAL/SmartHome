@@ -8,13 +8,13 @@ public class Media extends Device{
 
     @SerializedName("volume")
     @Expose
-    private Long Volume;
+    private Integer Volume;
 
-    public Long getVolume() {
+    public Integer getVolume() {
         return Volume;
     }
 
-    public void setVolume(Long volume) {
+    public void setVolume(Integer volume) {
         Volume = volume;
     }
 

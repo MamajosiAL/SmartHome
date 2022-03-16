@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface ConsumptionLogDAO extends JpaRepository<ConsumptionLog,Long> {
-    Optional<List<ConsumptionLog>> findAllByConsumption(Consumption consumption);
+    Optional<List<ConsumptionLog>> findAllByConsumptionConsumptionId(long consumptionId);
 }

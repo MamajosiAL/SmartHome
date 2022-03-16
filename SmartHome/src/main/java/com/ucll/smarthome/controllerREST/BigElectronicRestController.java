@@ -33,7 +33,7 @@ public class BigElectronicRestController {
     @PutMapping("/update")
     public ResponseEntity updateApplianceDevice(@RequestBody BigElectronicDTO beDTO){
         try {
-            beController.updateApplianceDevice(beDTO);
+            beController.updateBeDeviceDevice(beDTO);
             return new ResponseEntity("Appliance device successfully updated",HttpStatus.OK);
 
         }catch (IllegalArgumentException ex){
@@ -57,24 +57,5 @@ public class BigElectronicRestController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping("/{id}/delete")
-    public ResponseEntity deleteApplianceDevice(@PathVariable("id") long deviceid){
-        try{
-            beController.deleteApplianceDeviceById(deviceid);
-            return new ResponseEntity("Appliance device successfully deleted",HttpStatus.OK);
 
-        }catch (IllegalArgumentException ex){
-            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PutMapping("{id}/changestatus")
-    public ResponseEntity changeStatus(@PathVariable("id") long bigElectorId){
-        try{
-            beController.changeStatus(bigElectorId);
-            return new ResponseEntity("appliance status changed",HttpStatus.OK);
-        }catch (IllegalArgumentException ex){
-            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
 }

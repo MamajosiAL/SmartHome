@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +15,7 @@ import java.util.List;
 import be.ucll.java.mobile.smarthome_mobile.HouseActivity;
 import be.ucll.java.mobile.smarthome_mobile.R;
 import be.ucll.java.mobile.smarthome_mobile.pojo.House;
-import be.ucll.java.mobile.smarthome_mobile.pojo.Room;
+import be.ucll.java.mobile.smarthome_mobile.HouseActivity;
 
 public class HousesAdapter extends RecyclerView.Adapter<HousesViewHolder>{
     Context context;
