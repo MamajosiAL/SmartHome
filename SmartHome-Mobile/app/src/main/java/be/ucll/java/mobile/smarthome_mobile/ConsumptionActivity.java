@@ -84,7 +84,6 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
 
     public void populateChart(List<ConsumptionLog> cLogs){
 
-
         Cartesian cartLine = AnyChart.line();
 
         cartLine.animation(true);

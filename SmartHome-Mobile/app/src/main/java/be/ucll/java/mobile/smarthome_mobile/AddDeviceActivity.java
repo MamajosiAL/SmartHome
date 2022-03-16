@@ -54,7 +54,6 @@ public class AddDeviceActivity extends AppCompatActivity implements Callback<Str
     private ArrayAdapter spinnerAdapterCat;
     private ArrayAdapter spinnerAdapterType;
 
-    //public Fragment formBody;
     private EditText name;
     private Button addButton;
     private TextView typeTitle;

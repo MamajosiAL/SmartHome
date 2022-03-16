@@ -26,5 +26,8 @@ public class UsersViewHolder extends RecyclerView.ViewHolder implements ViewLink
         name = itemView.findViewById(R.id.user_name);
         email = itemView.findViewById(R.id.user_email);
     */}
+
+    //when swiped right, the user gets promovated to admin
+
 }
 

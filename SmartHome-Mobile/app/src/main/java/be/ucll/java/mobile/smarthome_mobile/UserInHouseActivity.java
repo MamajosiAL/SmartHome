@@ -40,7 +40,7 @@ public class UserInHouseActivity extends AppCompatActivity implements Callback<L
     private RecyclerView recyclerViewUsers;
     private ProgressDialog progressDialog;
     private TextView title;
-    List<User> usersFromHouse;
+    private List<User> usersFromHouse;
 
 
     public void getUsersInHouseData() {
@@ -107,8 +107,9 @@ public class UserInHouseActivity extends AppCompatActivity implements Callback<L
         // set a LinearLayoutManager with default vertical orientation
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewUsers.setLayoutManager(linearLayoutManager);
+
         // call the constructor of housesAdapter to send the reference and data to Adapter
-        UsersAdapter usersAdapter = new UsersAdapter(this,usersFromHouse);
+        UsersAdapter usersAdapter = new UsersAdapter(UserInHouseActivity.this,usersFromHouse);
         recyclerViewUsers.setAdapter(usersAdapter); // set the Adapter to RecyclerView
     }
 

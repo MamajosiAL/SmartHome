@@ -9,7 +9,7 @@ import java.util.List;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
 
 public enum BigElectroType {
-    OVEN("Oven","Oven"),COOLING_DEVICE("Cooling Device","Cooling apparaat"),DISHWASHER("Dishwasher","Vaatwasser"),DRYER("Dryer","Droogkast"),COOLING("Cooling Device","Koeling");
+    OVEN("Oven","Oven"),WASHING("Washing Machine","was apparaat"),DISHWASHER("Dishwasher","Vaatwasser"),DRYER("Dryer","Droogkast"),COOLING("Cooling Device","Koeling");
     private String name, nameBE;
 
     BigElectroType(String name, String nameBE) {

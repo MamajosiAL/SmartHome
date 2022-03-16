@@ -83,4 +83,8 @@
     <string name="deviceNameChangeSucces">Succesfully changed devices name</string>
     <string name="invalidCredits">Invalid credentials</string>
     <string name="byHouse">By house</string>
+    <string name="promovateUserForHouse">Promovate user to admin</string>
+    <string name="house">House: </string>
+    <string name="userPromovatedSucces">User succesfully promovated</string>
+    <string name="swipeInfo">Swipe right to promote, swipe left to remove</string>
 </resources>

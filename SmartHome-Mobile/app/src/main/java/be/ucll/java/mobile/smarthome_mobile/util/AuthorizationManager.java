@@ -27,7 +27,7 @@ public class AuthorizationManager {
         if(sessionId==null||sessionId.equals("")) {
             throw new SignupException("already logged in!");
         }else {
-            this.sessionId = sessionId;
+            setSessionId(sessionId);
             Toast.makeText(context, context.getString(R.string.signinSucces), Toast.LENGTH_LONG).show();
         }
     }
