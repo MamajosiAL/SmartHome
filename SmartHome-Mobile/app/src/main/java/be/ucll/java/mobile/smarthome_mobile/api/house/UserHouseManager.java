@@ -79,6 +79,8 @@ public class UserHouseManager implements Callback<String> {
                 Log.e(TAG, context.getString(R.string.responseErrorCode) + response.code());
                 progressDialog.dismiss();
             }
+        }else{
+            Toast.makeText(context, response.message(), Toast.LENGTH_LONG).show();
         }
     }
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import be.ucll.java.mobile.smarthome_mobile.R;
@@ -17,10 +18,10 @@ import be.ucll.java.mobile.smarthome_mobile.pojo.Room;
 
 public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
     private final String TAG = this.getClass().getSimpleName();
-    Context context;
+    AppCompatActivity context;
     List<Room> roomsFromHouse;
 
-    public RoomsAdapter(Context context, List<Room> roomsFromHouse) {
+    public RoomsAdapter(AppCompatActivity context, List<Room> roomsFromHouse) {
         this.roomsFromHouse = roomsFromHouse;
         this.context = context;
     }
@@ -44,6 +45,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
             intent.putExtra("roomId", roomsFromHouse.get(position).getId());
             intent.putExtra("roomName", roomsFromHouse.get(position).getName());
             intent.putExtra("houseId", roomsFromHouse.get(position).getHouseid());
+            intent.putExtra("houseName", context.getIntent().getStringExtra("houseName"));
             context.startActivity(intent);
             // display a toast with user name
             //Toast.makeText(context, roomsFromHouse.get(position).getName(), Toast.LENGTH_SHORT).show();

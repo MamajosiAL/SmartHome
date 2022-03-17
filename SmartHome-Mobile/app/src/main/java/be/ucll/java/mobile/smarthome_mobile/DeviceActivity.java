@@ -37,6 +37,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@SuppressWarnings("ALL")
 public class DeviceActivity extends AppCompatActivity implements Callback<DeviceAllParams> {
     private final String TAG = this.getClass().getSimpleName();
     private ProgressDialog progressDialog;
