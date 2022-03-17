@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d936c4c8-e92c-43b6-add8-b5b31189f0f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_23_[Default_Changelist]/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_23_[Default_Changelist]/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_23_[Default_Changelist]/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_23_[Default_Changelist]/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_23_[Default_Changelist]/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_23_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_24_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/deviceViews/DeviceView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/deviceViews/DeviceView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/deviceViews/MediaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/deviceViews/MediaView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/deviceViews/SensorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/deviceViews/SensorView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/forms/MediaForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/forms/MediaForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/DeviceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/DeviceActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Media/MediaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Media/MediaAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Media/MediaViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Media/MediaViewHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorViewHolder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\mathi\.android\avd\Pixel_2_API_25.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_4_XL_API_30]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -56,6 +72,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -65,18 +88,34 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="25stPj0WK1m6sO6Q3nJG1aDhWXA" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_4_XL_API_30" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2022-03-13T12:23:32.573Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="be.ucll.java.mobile.smarthome_mobile.api.device" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="SmartHome-Mobile.app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -84,7 +123,6 @@
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
       <option name="ALL_USERS" value="false" />
-      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -135,7 +173,10 @@
       </method>
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="d936c4c8-e92c-43b6-add8-b5b31189f0f8" name="Default Changelist" comment="" />
@@ -144,6 +185,14 @@
       <option name="presentableId" value="Default" />
       <updated>1646327599913</updated>
     </task>
+    <task id="LOCAL-00001" summary="Delete device and device toggle status">
+      <created>1647178150703</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647178150703</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,5 +206,91 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Delete device and device toggle status" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete device and device toggle status" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="718" y="148" key="#com.intellij.ide.util.MemberChooser" timestamp="1647171714449">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="718" y="148" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647171714449" />
+    <state x="774" y="245" key="AndroidCreateXmlResourceDialog" timestamp="1647177960771">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="774" y="245" key="AndroidCreateXmlResourceDialog/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647177960771" />
+    <state x="433" y="0" key="CommitChangelistDialog2" timestamp="1647178148986">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="433" y="0" key="CommitChangelistDialog2/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178148986" />
+    <state x="0" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1647174172469">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647174172469" />
+    <state width="1863" height="73" key="GridCell.Tab.0.bottom" timestamp="1647178021416">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1863" height="73" key="GridCell.Tab.0.bottom/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
+    <state width="1863" height="73" key="GridCell.Tab.0.center" timestamp="1647178021416">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1863" height="73" key="GridCell.Tab.0.center/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
+    <state width="1863" height="73" key="GridCell.Tab.0.left" timestamp="1647178021416">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1863" height="73" key="GridCell.Tab.0.left/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
+    <state width="1863" height="73" key="GridCell.Tab.0.right" timestamp="1647178021416">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1863" height="73" key="GridCell.Tab.0.right/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
+    <state width="1863" height="73" key="GridCell.Tab.1.bottom" timestamp="1647178021417">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1863" height="73" key="GridCell.Tab.1.bottom/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
+    <state width="1863" height="73" key="GridCell.Tab.1.center" timestamp="1647178021417">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1863" height="73" key="GridCell.Tab.1.center/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
+    <state width="1863" height="73" key="GridCell.Tab.1.left" timestamp="1647178021417">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1863" height="73" key="GridCell.Tab.1.left/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
+    <state width="1863" height="73" key="GridCell.Tab.1.right" timestamp="1647178021417">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1863" height="73" key="GridCell.Tab.1.right/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
+    <state x="452" y="179" key="Vcs.Push.Dialog.v2" timestamp="1647178222429">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="452" y="179" key="Vcs.Push.Dialog.v2/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178222429" />
+    <state x="736" y="409" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1647168262688">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="736" y="409" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647168262688" />
+    <state x="-1482" y="32" width="1235" height="998" maximized="true" key="dock-window-1" timestamp="1647166665384">
+      <screen x="-1920" y="0" width="1920" height="1032" />
+    </state>
+    <state x="-1482" y="32" width="1235" height="998" maximized="true" key="dock-window-1/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647166665384" />
+    <state x="-1388" y="234" key="run.anything.popup" timestamp="1647169626510">
+      <screen x="-1920" y="0" width="1920" height="1032" />
+    </state>
+    <state x="-1388" y="234" key="run.anything.popup/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647169626510" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DeviceDeleter.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo typeName="retrofit2.Response" fieldName="body" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

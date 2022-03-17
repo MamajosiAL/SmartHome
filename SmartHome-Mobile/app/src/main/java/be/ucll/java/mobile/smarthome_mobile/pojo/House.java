@@ -12,6 +12,10 @@ public class House {
     @Expose
     private Integer userid;
 
+    @SerializedName("username")
+    @Expose
+    private String username;
+
     /**
      * No args constructor for use in serialization
      *
@@ -25,11 +29,12 @@ public class House {
      * @param id
      * @param userid
      */
-    public House(Integer id, String name, Integer userid) {
+    public House(Integer id, String name, Integer userid, String username) {
         super();
         this.id = id;
         this.name = name;
         this.userid = userid;
+        this.username = username;
     }
 
     public Integer getId() {
@@ -71,4 +76,11 @@ public class House {
         return this;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

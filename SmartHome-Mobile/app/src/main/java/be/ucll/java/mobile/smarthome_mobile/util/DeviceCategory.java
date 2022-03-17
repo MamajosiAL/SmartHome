@@ -65,4 +65,8 @@ public enum DeviceCategory {
         }
         return result;
     }
+
+    public static boolean matchedAny(@NonNull String name){
+        return((DeviceCategory.getNames().contains(name)||DeviceCategory.getNamesBE().contains(name))&&!name.isEmpty());
+    }
 }

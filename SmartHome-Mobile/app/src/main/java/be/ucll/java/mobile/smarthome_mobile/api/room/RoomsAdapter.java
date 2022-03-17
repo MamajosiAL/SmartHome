@@ -3,6 +3,7 @@ package be.ucll.java.mobile.smarthome_mobile.api.room;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import be.ucll.java.mobile.smarthome_mobile.RoomActivity;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Room;
 
 public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
+    private final String TAG = this.getClass().getSimpleName();
     Context context;
     List<Room> roomsFromHouse;
 
@@ -41,6 +43,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsViewHolder>{
             Intent intent = new Intent(context, RoomActivity.class);
             intent.putExtra("roomId", roomsFromHouse.get(position).getId());
             intent.putExtra("roomName", roomsFromHouse.get(position).getName());
+            intent.putExtra("houseId", roomsFromHouse.get(position).getHouseid());
             context.startActivity(intent);
             // display a toast with user name
             //Toast.makeText(context, roomsFromHouse.get(position).getName(), Toast.LENGTH_SHORT).show();

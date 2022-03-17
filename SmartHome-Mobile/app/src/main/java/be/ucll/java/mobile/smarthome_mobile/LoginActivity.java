@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.TimeUnit;
 
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
@@ -86,17 +87,16 @@ public class LoginActivity extends AppCompatActivity implements Callback<String>
         logIn.setOnClickListener(view -> {
             // validate the fields and call sign method to implement the api
             if (validate(username) && validate(password)) {
-                login();
+                try {
+                    login();
+                }catch (Exception e){
+                    Log.e(TAG,e.getMessage());
+                }
             }
         });
     }
 
     private void login() {
-        // display a progress dialog
-        progressDialog = new ProgressDialog(LoginActivity.this);
-        progressDialog.setCancelable(false); // set cancelable to false
-        progressDialog.setMessage("Please Wait"); // set message
-        progressDialog.show(); // show progress dialog
         startRequest();
     }
 
@@ -133,6 +133,9 @@ public class LoginActivity extends AppCompatActivity implements Callback<String>
                 Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
                 progressDialog.dismiss();
             }
+        }else{
+            username.setError(getString(R.string.invalidCredits));
+            password.setError(getString(R.string.invalidCredits));
         }
     }
 

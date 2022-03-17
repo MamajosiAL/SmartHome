@@ -71,7 +71,7 @@ public class RoomController {
         if (houseid <= 0) throw new IllegalArgumentException("Invalid id");
         if(userSecurityFunc.getHouseUser(houseid).isEmpty()) throw new NotFoundException("User is not part of this house");
         //Optional<List<Room>> lst = dao.findAllByHouseHouseId(houseid);
-        Stream<RoomDTO> stream = dao.findAllByHouseHouseId(houseid).stream()
+        Stream<RoomDTO> stream = dao.findAllByHouseHouseId(houseid).get().stream()
                 .sorted(Comparator.comparing(Room::getRoomID))
                 .map(rec -> new RoomDTO.Builder().id(rec.getRoomID()).name(rec.getName()).build());
         return stream.collect(Collectors.toList());
@@ -97,7 +97,7 @@ public class RoomController {
     public List<RoomDTO> getRoomsByHouseSchedule(long houseid) throws IllegalArgumentException{
         if (houseid <= 0) throw new IllegalArgumentException("Invalid id");
         //Optional<List<Room>> lst = dao.findAllByHouseHouseId(houseid);
-        Stream<RoomDTO> stream = dao.findAllByHouseHouseId(houseid).stream()
+        Stream<RoomDTO> stream = dao.findAllByHouseHouseId(houseid).get().stream()
                 .sorted(Comparator.comparing(Room::getRoomID))
                 .map(rec -> new RoomDTO.Builder().id(rec.getRoomID()).name(rec.getName()).build());
         return stream.collect(Collectors.toList());

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import java.util.Locale;
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceApiInterface;
 import be.ucll.java.mobile.smarthome_mobile.api.device.DevicesAdapter;
+import be.ucll.java.mobile.smarthome_mobile.api.house.HouseDeleter;
+import be.ucll.java.mobile.smarthome_mobile.api.room.RoomDeleter;
 import be.ucll.java.mobile.smarthome_mobile.exception.DataNotFoundException;
 import be.ucll.java.mobile.smarthome_mobile.pojo.BigElectro;
 import be.ucll.java.mobile.smarthome_mobile.pojo.Device;
@@ -43,11 +46,12 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
     private final String TAG = this.getClass().getSimpleName();
     private RecyclerView recyclerViewDevices;
     private TextView title;
-    private ImageView editButton;
+    private ImageView editButton , deletebutton;
     private Spinner dropdownList;
     private ProgressDialog progressDialog;
     private String selectedItem;
     List<Device> devicesInRoomFromHouse;
+    private int roomId, houseId;
 
     public void getRoomsListData() {
         progressDialog = new ProgressDialog(this);
@@ -65,7 +69,8 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
             DeviceApiInterface deviceApiInterface = retrofit.create(DeviceApiInterface.class);
 
             //fetch roomId
-            int roomId = this.getIntent().getIntExtra("roomId",0);
+            roomId = this.getIntent().getIntExtra("roomId",0);
+            houseId = this.getIntent().getIntExtra("houseId",0);
             //check if roomId is not null
 
             if(roomId==0){
@@ -108,7 +113,7 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
         recyclerViewDevices.setLayoutManager(linearLayoutManager);
         // call the constructor of housesAdapter to send the reference and data to Adapter
 
-        DevicesAdapter roomsAdapter = new DevicesAdapter(this, devicesInRoomFromHouse, selectedItem.toString(), this.getIntent().getStringExtra("roomName"));
+        DevicesAdapter roomsAdapter = new DevicesAdapter(this, devicesInRoomFromHouse, selectedItem.toString(), this.getIntent().getStringExtra("roomName"), roomId);
         recyclerViewDevices.setAdapter(roomsAdapter); // set the Adapter to RecyclerView
     }
 
@@ -120,6 +125,8 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
         NavigationManager.initialise(this);
 
         title = findViewById(R.id.titleRoom);
+
+        deletebutton = findViewById(R.id.imgDeleteRoom);
 
         if (AuthorizationManager.getInstance(this).isSignedIn()) {
             dropdownList = findViewById(R.id.spinDeviceCategory);
@@ -146,6 +153,17 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
                 }
             });
 
+            deletebutton.setOnClickListener(v -> {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.deleteConfirmation)
+                        .setMessage(R.string.deleteConfMessage)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(R.string.yes, (dialog, whichButton) -> deleteRoom())
+                        .setNegativeButton(R.string.no, null).show();
+            });
+
+
+
             recyclerViewDevices = findViewById(R.id.recyclerViewDevices);
             title.setText(this.getIntent().getStringExtra("roomName"));
             try {
@@ -162,6 +180,17 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void deleteRoom(){
+        try{
+
+            String roomName = this.getIntent().getStringExtra("roomName");
+            new RoomDeleter(this).delete();
+        } catch (Exception e){
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            Log.e(TAG,e.getMessage());
         }
     }
 

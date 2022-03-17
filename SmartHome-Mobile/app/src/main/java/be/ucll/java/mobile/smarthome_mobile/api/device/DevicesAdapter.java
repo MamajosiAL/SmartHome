@@ -22,12 +22,14 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesViewHolder> {
     List<Device> devices;
     String deviceCategory;
     String roomName;
+    int roomId;
 
-    public DevicesAdapter(Context context, List<Device> devices, String deviceCategory, String roomName){
+    public DevicesAdapter(Context context, List<Device> devices, String deviceCategory, String roomName, int roomId){
         this.context = context;
         this.devices = devices;
         this.deviceCategory = deviceCategory;
         this.roomName = roomName;
+        this.roomId = roomId;
     }
 
     @Override
@@ -46,7 +48,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesViewHolder> {
             Intent intent = new Intent(context, DeviceActivity.class);
             intent.putExtra("deviceId", devices.get(position).getId());
             intent.putExtra("deviceName", devices.get(position).getName());
-            intent.putExtra("roomId", devices.get(position).getRoomid());
+            intent.putExtra("roomId", roomId);
             intent.putExtra("deviceCategory", deviceCategory);
             intent.putExtra("roomName", roomName);
             context.startActivity(intent);

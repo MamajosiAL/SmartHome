@@ -2,10 +2,8 @@ package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.ConsumptionDTO;
 import com.ucll.smarthome.functions.UserSecurityFunc;
-import com.ucll.smarthome.persistence.entities.Consumption;
-import com.ucll.smarthome.persistence.entities.Device;
-import com.ucll.smarthome.persistence.repository.ConsumptionDAO;
-import com.ucll.smarthome.persistence.repository.DeviceDAO;
+import com.ucll.smarthome.persistence.entities.*;
+import com.ucll.smarthome.persistence.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,7 @@ import org.webjars.NotFoundException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -30,12 +29,20 @@ public class ConsumptionController {
     private final ConsumptionDAO consumptionDAO;
     private final DeviceDAO deviceDAO;
     private final UserSecurityFunc userSecurityFunc;
+    private final RoomDAO roomDAO;
+    private final HouseDAO houseDAO;
+    private final House_UserDAO house_userDAO;
+    private final UserDAO userDAO;
 
     @Autowired
-    public ConsumptionController(ConsumptionDAO consumptionDAO, DeviceDAO deviceDAO, UserSecurityFunc userSecurityFunc) {
+    public ConsumptionController(ConsumptionDAO consumptionDAO, DeviceDAO deviceDAO, UserSecurityFunc userSecurityFunc, RoomDAO roomDAO, HouseDAO houseDAO, House_UserDAO house_userDAO, UserDAO userDAO) {
         this.consumptionDAO = consumptionDAO;
         this.deviceDAO = deviceDAO;
         this.userSecurityFunc = userSecurityFunc;
+        this.roomDAO = roomDAO;
+        this.houseDAO = houseDAO;
+        this.house_userDAO = house_userDAO;
+        this.userDAO = userDAO;
     }
 
     public void createConsumption(ConsumptionDTO consumptionDTO){
@@ -113,7 +120,7 @@ public class ConsumptionController {
                 }
             }
         }
-        return ConsumptionListToConsumptionDTOList(consumptionList.get());
+        return consumptionListToConsumptionDTOList(consumptionList.get());
     }
 
     public List<Consumption> getConsumptionsByDevice(Device device){
@@ -122,6 +129,63 @@ public class ConsumptionController {
 
         if(consumptionList.isEmpty()) throw new IllegalArgumentException("This device has no consumption");
         return consumptionList.get();
+    }
+
+    public List<ConsumptionDTO> getConsumptionsByRoom(long roomId){
+        if(roomId <= 0) throw new IllegalArgumentException("room id not valid");
+        Room room = roomDAO.getById(roomId);
+
+        if(userSecurityFunc.getHouseUser(room.getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of this house");
+
+        List<Device> devices = deviceDAO.findAllByRoom(room);
+        List<ConsumptionDTO> consumptionResultList = new ArrayList<>();
+
+        for (Device d : devices) {
+            List<ConsumptionDTO> consumptionList = getConsumptionsByDeviceId(d.getId());
+            if(!consumptionList.isEmpty()){
+                for(ConsumptionDTO cDTO : consumptionList){
+                    cDTO.setRoomId(room.getRoomID());
+                    cDTO.setHouseId(room.getHouse().getHouseId());
+                    cDTO.setHouseName(room.getHouse().getName());
+                    cDTO.setRoomName(room.getName());
+                    consumptionResultList.add(cDTO);
+                }
+            }
+        }
+        return consumptionResultList;
+    }
+
+    public List<ConsumptionDTO> getConsumptionsByHouse(long houseId){
+        if(houseId <= 0) throw new IllegalArgumentException("room id not valid");
+        Optional<House> house = houseDAO.findById(houseId);
+        if(house.isEmpty()) throw new NotFoundException("house not found");
+        Optional<List<Room>> rooms = roomDAO.findAllByHouseHouseId(house.get().getHouseId());
+
+        //security
+        if(userSecurityFunc.getHouseUser(house.get().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of this house");
+
+        List<ConsumptionDTO> consumptionList = new ArrayList<>();
+        if(rooms.isPresent()){
+            for (Room room : rooms.get()){
+                consumptionList.addAll(getConsumptionsByRoom(room.getRoomID()));
+            }
+        }
+        return consumptionList;
+    }
+
+    public List<ConsumptionDTO> getConsumptionsByUser(){
+        long userId = userSecurityFunc.getLoggedInUserId();
+        Optional<User> user = userDAO.findById(userId);
+        if(user.isEmpty()) throw new NotFoundException("User not found");
+
+        List<House_User> house_user = house_userDAO.findAllByUser(user.get());
+
+        List<ConsumptionDTO> consumptionDTOList = new ArrayList<>();
+        for(House_User hu : house_user){
+            consumptionDTOList.addAll(getConsumptionsByHouse(hu.getHouse().getHouseId()));
+        }
+
+        return consumptionDTOList;
     }
 
     public Consumption consumptionExists(long consumptionid){
@@ -170,13 +234,14 @@ public class ConsumptionController {
                 .build();
     }
 
-    private List<ConsumptionDTO> ConsumptionListToConsumptionDTOList(List<Consumption> lst) {
+    private List<ConsumptionDTO> consumptionListToConsumptionDTOList(List<Consumption> lst) {
         Stream<ConsumptionDTO> stream = lst.stream()
                 .map(rec-> new ConsumptionDTO.Builder()
                         .consumptionId(rec.getConsumptionId())
                         .aantalMinuten(rec.getAantalMinuten())
                         .device(rec.getDevice().getId())
                         .unit(rec.getUnit())
+                        .consumptionPerHour(rec.getConsumptionPerHour())
                         .build());
 
         return stream.collect(Collectors.toList());

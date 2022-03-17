@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.ucll.java.mobile.smarthome_mobile.api.Connection;
+import be.ucll.java.mobile.smarthome_mobile.api.device.DeviceDeleter;
+import be.ucll.java.mobile.smarthome_mobile.api.house.HouseDeleter;
 import be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter;
 import be.ucll.java.mobile.smarthome_mobile.api.room.RoomsAdapter;
 import be.ucll.java.mobile.smarthome_mobile.api.room.RoomsApiInterface;
@@ -40,9 +44,12 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
     private final String TAG = this.getClass().getSimpleName();
     private RecyclerView recyclerViewRooms;
     private TextView title;
-    private ImageView editButton;
+    private ImageView editButton, deletebutton;
+    private Button userToHouseButton;
+    private House house;
     private ProgressDialog progressDialog;
     List<Room> roomsFromHouse;
+
 
     public void getRoomsListData() {
         progressDialog = new ProgressDialog(HouseActivity.this);
@@ -92,6 +99,9 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
 
         title = findViewById(R.id.titleHouse);
         roomsFromHouse = new ArrayList<>();
+        userToHouseButton = findViewById(R.id.button);
+        deletebutton = findViewById(R.id.imgDeleteHouse);
+
 
         if (AuthorizationManager.getInstance(this).isSignedIn()) {
             recyclerViewRooms = findViewById(R.id.recyclerViewRooms);
@@ -111,10 +121,36 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                 });*/
+                userToHouseButton.setOnClickListener(v -> {
+                    Intent intent = new Intent (this, UserInHouseActivity.class);
+                    intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));
+                    intent.putExtra("houseName", this.getIntent().getStringExtra("houseName"));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                });
+
+                deletebutton.setOnClickListener(v -> {
+                    new AlertDialog.Builder(this)
+                            .setTitle(R.string.deleteConfirmation)
+                            .setMessage(R.string.deleteConfMessage)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(R.string.yes, (dialog, whichButton) -> deleteHouse())
+                            .setNegativeButton(R.string.no, null).show();
+                });
+
                 getRoomsListData();
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void deleteHouse(){
+        try{
+            new HouseDeleter(this).delete(this.getIntent().getIntExtra("houseId",0));
+        } catch (Exception e){
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            Log.e(TAG,e.getMessage());
         }
     }
 
