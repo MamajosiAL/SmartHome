@@ -24,7 +24,6 @@
     <string name="sensorType">Sensor type</string>
     <string name="deviceType">Device type</string>
     <string name="role">Rol</string>
-    <string name="email" translatable="false">Email</string>
     <string name="addRoomToHouse">Kamer toevoegen aan huis</string>
     <string name="rooms">Kamers</string>
     <string name="addUsers">Gebruiker toevoegen</string>
@@ -49,4 +48,39 @@
     <string name="deviceTempLabel">Temperatuur:</string>
     <string name="deviceTimerLabel">Timer:</string>
     <string name="deviceVolumeLabel">Volume:</string>
+    <string name="first_fragment_label">Eerste fragment</string>
+    <string name="second_fragment_label">Tweede fragment</string>
+    <string name="next">Volgende</string>
+    <string name="previous">Vorige</string>
+    <string name="missingValuesInFields">Opgelet: lege waardes in velden</string>
+    <string name="signinSucces">Succesvol ingelogd</string>
+    <string name="signoutSucces">Succesvol uitgelogd</string>
+    <string name="login">Inloggen</string>
+    <string name="logout">Uitloggen</string>
+    <string name="myAccount">Mijn account</string>
+    <string name="redirectedToLogin">Terug naar log in pagina</string>
+    <string name="addNewHouse">Nieuw huis toevoegen</string>
+    <string name="add">Toevoegen</string>
+    <string name="roomDefaultTitle">Kamer titel</string>
+    <string name="deviceCategory">Apparaat categorie</string>
+    <string name="devices">Apparaten</string>
+    <string name="addNewDevice">Nieuw apparaat toevoegen</string>
+    <string name="bigElectroType">Type</string>
+    <string name="deviceSensorTypeLabel">Sensor type:</string>
+    <string name="deleteConfirmation">Bevestig verwijderen</string>
+    <string name="invalidCredits">Ongeldige inloggegevens</string>
+    <string name="promovateUserForHouse">Gebruiker promoveren tot beheerder</string>
+    <string name="swipeInfo">Rechts swipen om te promoveren, links om te verwijderen</string>
+    <string name="userAccessChangedSucces">Gebruikerstoegang succesvol gewijzigd</string>
+    <string name="userPromotedSucces">Gebruiker succesvol gepromoveerd</string>
+    <string name="hello_first_fragment">Hallo eerste fragment</string>
+    <string name="hello_second_fragment">Hallo tweede fragment</string>
+    <string name="title_activity_login">Inloggen activiteit</string>
+    <string name="title_activity_account">Account activiteit</string>
+    <string name="title_activity_log_out">Uitloggen activiteit</string>
+    <string name="namePlaceholder">~naam</string>
+    <string name="firstnamePlaceholder">~voornaam</string>
+    <string name="usernamePlaceholder">~gebruikersnaam</string>
+    <string name="house">Huis:</string>
+    <string name="admin">Beheerder</string>
 </resources>
