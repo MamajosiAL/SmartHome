@@ -26,6 +26,9 @@ public class User {
     @SerializedName("isadmin")
     @Expose
     private boolean isadmin;
+    @SerializedName("isOwner")
+    @Expose
+    private boolean isOwner;
 
     /**
      * No args constructor for use in serialization
@@ -132,5 +135,13 @@ public class User {
 
     public void setIsadmin(boolean isadmin) {
         this.isadmin = isadmin;
+    }
+
+    public boolean isOwner() {
+        return isOwner;
+    }
+
+    public void setOwner(boolean owner) {
+        isOwner = owner;
     }
 }

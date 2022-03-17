@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import be.ucll.java.mobile.smarthome_mobile.util.AuthorizationManager;
+
 
 public class ManageLoggedInFragment extends Fragment {
     private final String TAG = this.getClass().getSimpleName();
@@ -60,7 +62,8 @@ public class ManageLoggedInFragment extends Fragment {
             Log.d(TAG, "buttons initiated, started adding listeners");
             logOut.setOnClickListener(v -> {
                 Log.d(TAG, "Button " + logOut.getClass().getSimpleName()+" pressed");
-                startActivity(new Intent(getContext(), LogOutActivity.class));
+                AuthorizationManager.getInstance(getContext()).signOut();
+                startActivity(new Intent(getContext(), LoginActivity.class));
             });
             myAccount.setOnClickListener(v -> {
                 Log.d(TAG, "Button " + myAccount.getClass().getSimpleName()+" pressed");

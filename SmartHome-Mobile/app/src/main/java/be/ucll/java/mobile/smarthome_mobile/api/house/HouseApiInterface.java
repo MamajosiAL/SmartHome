@@ -45,6 +45,6 @@ public interface HouseApiInterface {
     Call<String> deleteHouse(@Path("id") Integer houseid, @Header("Cookie") String authHeader);
 
     // DELETE user from house
-    @DELETE("/{houseid}/user/{userid}")
+    @DELETE("/houses/{houseid}/user/{userid}")
     Call<String> removeUserFromHouse(@Path("houseid") Integer houseid, @Path("userid") Integer userid, @Header("Cookie") String authHeader);
 }

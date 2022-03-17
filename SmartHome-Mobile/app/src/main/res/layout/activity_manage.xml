@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/fragmentManage_container_view"
         android:layout_gravity="bottom"
+        android:background="@color/primairy"
         app:elevation="0dp"
         app:itemBackground="@color/primairy"
         app:itemIconTint="@drawable/selector"

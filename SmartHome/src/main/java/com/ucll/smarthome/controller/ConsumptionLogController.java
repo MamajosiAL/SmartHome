@@ -10,6 +10,7 @@ import com.ucll.smarthome.persistence.repository.ConsumptionDAO;
 import com.ucll.smarthome.persistence.repository.ConsumptionLogDAO;
 import org.springframework.stereotype.Controller;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -38,7 +39,7 @@ public class ConsumptionLogController {
         List<Consumption> consumptionList = consumptionDAO.findAll();
 
         LocalDate today = LocalDate.now();
-        LocalDateTime end = LocalDateTime.of(today.getYear(),today.getMonth(),today.getDayOfMonth(),0,0,0,0);
+        LocalDateTime end = LocalDateTime.of(today.getYear(),today.getMonth(),today.getDayOfMonth(),23,59,0,0);
         LocalDateTime resetdatetime = LocalDateTime.of(today.getYear(),today.getMonth(),today.getDayOfMonth(),0,0,0,0).plusDays(1);
 
         for(Consumption c : consumptionList){
@@ -88,8 +89,8 @@ public class ConsumptionLogController {
                     .date(clDTO.getDate()).aantalMinuten(clDTO.getAantalMinuten()).deviceId(clDTO.getDeviceId()).houseId(clDTO.getHouseId())
                     .roomId(clDTO.getRoomId()).unit(clDTO.getUnit()).houseName(clDTO.getHouseName()).roomName(clDTO.getRoomName()).build();
 
+            double totalConsSum = clDTO.getAantalMinuten()/ 60f * clDTO.getConsumptionPerHour();
 
-            double totalConsSum = clDTO.getAantalMinuten() * clDTO.getConsumptionPerHour();
 
             // check if consumption has already been used
             if(!consId.contains(clDTO.getConsumptionLogId())){
@@ -100,11 +101,17 @@ public class ConsumptionLogController {
                 // run second loop to compare data, if date & house are the same, make total sum and after loop add this to sumlist
                 for (ConsumptionLogDTO clDTO2 : clDTOList) {
                     if(clDTO.getDeviceId() != clDTO2.getDeviceId() && clDTO.getRoomId() == clDTO2.getRoomId() && clDTO.getDate().isEqual(clDTO2.getDate())){
-                        totalConsSum += (clDTO2.getAantalMinuten() * clDTO2.getConsumptionPerHour());
+                        totalConsSum += (clDTO2.getAantalMinuten()/60f  * clDTO2.getConsumptionPerHour());
                         consId.add(clDTO2.getConsumptionLogId());
                     }
                 }
-                addclDTO.setTotalConsumption((int) Math.round(totalConsSum));
+
+                totalConsSum = totalConsSum * 100;
+                totalConsSum = Math.round(totalConsSum);
+                totalConsSum = totalConsSum / 100;
+                addclDTO.setTotalConsumption(totalConsSum);
+
+                addclDTO.setTotalConsumption(totalConsSum);
                 sumList.add(addclDTO);
             }
 
@@ -125,8 +132,7 @@ public class ConsumptionLogController {
                     .date(clDTO.getDate()).aantalMinuten(clDTO.getAantalMinuten()).deviceId(clDTO.getDeviceId()).houseId(clDTO.getHouseId())
                     .roomId(clDTO.getRoomId()).unit(clDTO.getUnit()).houseName(clDTO.getHouseName()).roomName(clDTO.getRoomName()).build();
 
-
-            double totalConsSum = clDTO.getAantalMinuten() * clDTO.getConsumptionPerHour();
+            double totalConsSum = (clDTO.getAantalMinuten() / 60f) * clDTO.getConsumptionPerHour();
 
             // check if consumption has already been used
             if(!consId.contains(clDTO.getConsumptionLogId())){
@@ -137,11 +143,15 @@ public class ConsumptionLogController {
                 // run second loop to compare data, if date & house are the same, make total sum and after loop add this to sumlist
                 for (ConsumptionLogDTO clDTO2 : clDTOList) {
                     if(clDTO.getDeviceId() != clDTO2.getDeviceId() && clDTO.getHouseId() == clDTO2.getHouseId() && clDTO.getDate().isEqual(clDTO2.getDate())){
-                        totalConsSum += (clDTO2.getAantalMinuten() * clDTO2.getConsumptionPerHour());
+                        totalConsSum += (clDTO2.getAantalMinuten() / 60f  * clDTO2.getConsumptionPerHour());
                         consId.add(clDTO2.getConsumptionLogId());
                     }
                 }
-                addclDTO.setTotalConsumption((int) Math.round(totalConsSum));
+
+                totalConsSum = totalConsSum * 100;
+                totalConsSum = Math.round(totalConsSum);
+                totalConsSum = totalConsSum / 100;
+                addclDTO.setTotalConsumption(totalConsSum);
                 sumList.add(addclDTO);
             }
 

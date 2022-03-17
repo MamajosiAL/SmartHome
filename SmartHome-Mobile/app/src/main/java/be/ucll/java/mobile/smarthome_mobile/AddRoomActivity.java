@@ -107,6 +107,7 @@ public class AddRoomActivity extends AppCompatActivity implements Callback<Strin
             if (response.isSuccessful()) {
                 Intent intent = new Intent(this, HouseActivity.class);
                 intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));
+                intent.putExtra("houseName", this.getIntent().getStringExtra("houseName"));
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }else {

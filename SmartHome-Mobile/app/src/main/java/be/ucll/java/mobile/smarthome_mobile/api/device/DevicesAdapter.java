@@ -38,7 +38,6 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesViewHolder> {
         return new DevicesViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(DevicesViewHolder holder, final int position){
         holder.name.setText(devices.get(position).getName());
