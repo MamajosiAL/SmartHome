@@ -67,6 +67,7 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
     private Button btnMedia;
     private Button btnSensor;
     private Button btnDevice;
+    private Button btnBack;
 
 
     public RoomView() {
@@ -90,6 +91,8 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         verticalLayoutlf = new VerticalLayout();
         verticalLayoutlf.setWidthFull();
         lphLayout = new HorizontalLayout();
+        btnBack = new Button("Wonignen");
+        btnBack.addClickListener(e->handleClickBack(e));
         grid = new Grid<>();
         grid.setItems(new ArrayList<RoomDTO>(0));
         grid.addColumn(RoomDTO::getName).setHeader(msgSrc.getMessage("rview.kamer",null,getLocale()));
@@ -122,11 +125,14 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         grid.setHeightFull();
         grid.asSingleSelect().addValueChangeListener(event -> populateRoomForm(event.getValue()));
         verticalLayoutlf.add(lphLayout);
-        verticalLayoutlf.add(grid);
+        verticalLayoutlf.add(btnBack,grid);
         verticalLayoutlf.setWidth("80%");
         return  verticalLayoutlf;
     }
 
+    private void handleClickBack(ClickEvent<Button> e) {
+        getUI().ifPresent(ui -> ui.navigate("houses"));
+    }
     private void handleClickBigElectro(ClickEvent<Button> e, long roomid) {
         getUI().ifPresent(ui->ui.navigate("big_electronic's/" + roomid));
     }
@@ -154,6 +160,7 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         txtErrorMessage = new H5();
         txtErrorMessage.setVisible(false);
         houseTitle = new H3();
+
 
         btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(this:: handleClickCancel);
@@ -262,7 +269,9 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
             }
 
         } catch (IllegalArgumentException e) {
-            Notification.show(e.getMessage() ,3000, Notification.Position.TOP_CENTER);
+           txtErrorMessage.setVisible(true);
+           txtErrorMessage.setText(e.getMessage());
+           getUI().ifPresent(ui -> ui.navigate("houses"));
         }
     }
 }

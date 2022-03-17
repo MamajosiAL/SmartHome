@@ -70,6 +70,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
     private Button btnCancel;
     private Button btnCreate;
     private Button btnUpdate;
+    private Button btnBack;
 
     public DeviceView() {
         deviceController = BeanUtil.getBean(DeviceController.class);
@@ -122,6 +123,8 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         vrlDeviceGrid = new VerticalLayout();
         vrlDeviceGrid.setSizeFull();
         hrlDeviceGrid = new HorizontalLayout();
+        btnBack = new Button("Kamers");
+        btnBack.addClickListener(e->handleClickBack(e));
         grid = new Grid<>();
         grid.setItems(new ArrayList<DeviceDTO>(0));
         grid.addColumn(DeviceDTO::getName).setHeader(msgSrc.getMessage("Bview.Naam",null,getLocale()));
@@ -140,7 +143,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         grid.setHeightFull();
         grid.asSingleSelect().addValueChangeListener(event -> populateRoomForm(event.getValue()));
         vrlDeviceGrid.add(hrlDeviceGrid);
-        vrlDeviceGrid.add(grid);
+        vrlDeviceGrid.add(btnBack,grid);
         vrlDeviceGrid.setWidth("80%");
         return vrlDeviceGrid;
     }
@@ -204,6 +207,9 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         grid.asSingleSelect().clear();
         setButtonsToDefault();
     }
+    private void handleClickBack(ClickEvent<Button> e) {
+        getUI().ifPresent(ui -> ui.navigate("rooms/"+roomid));
+    }
 
     private RoomDTO getRoom(){
         return roomController.getRoomById(roomid);
@@ -238,9 +244,12 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
             if (!sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
                 grid.removeColumnByKey("delete");
                 btnCreate.setVisible(false);
+                btnCancel.setVisible(false);
+                deviceForm.setVisible(false);
             }
         } catch (IllegalArgumentException e) {
-            Notification.show(e.getMessage() ,3000, Notification.Position.TOP_CENTER);
+            txtErrorMessage.setText(e.getMessage());
+            txtErrorMessage.setVisible(true);
         }
 
     }

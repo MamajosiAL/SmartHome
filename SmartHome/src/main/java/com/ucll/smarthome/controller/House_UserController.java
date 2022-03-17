@@ -119,6 +119,7 @@ public class House_UserController {
      * @return house_user
      */
     public House_User getHouseUserByHouseAndUser(House house, User user){
+        if (!userSecurityFunc.checkCurrentUserIsOwner(house.getHouseId())) throw new IllegalArgumentException("Your not the owner of this home");
         Optional<House_User> house_user = dao.findByHouseAndUser(house,user);
         if(house_user.isEmpty()) throw new NotFoundException("user is not part of house");
         return house_user.get();

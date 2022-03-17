@@ -21,7 +21,6 @@ public class SensorForm extends FormLayout {
         super();
         msgSrc = BeanUtil.getBean(MessageSource.class);
         deviceForm = new DeviceForm();
-        deviceForm.lblid = new Label("");
         sensorType = new Select<>();
         sensorType.setItems("Thermostat","Motion Sensor","Water Leak/Freeze Sensor","Window/Door Sensor","Smart Smoke Sensor");
         sensorType.setEmptySelectionAllowed(true);
@@ -32,7 +31,7 @@ public class SensorForm extends FormLayout {
         sensorData.setValue(0.00);
         sensorData.setMin(0.00);
         sensorData.setLabel("Sensor data");
-        addFormItem(deviceForm.txtNaamDevice, "Device naam");
+        addFormItem(deviceForm.txtNaamDevice, "");
         addFormItem(sensorType, "");
         addFormItem(sensorData, "");
     }

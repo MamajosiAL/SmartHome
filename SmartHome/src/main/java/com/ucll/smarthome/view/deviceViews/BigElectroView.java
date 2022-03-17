@@ -69,6 +69,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
     private Button btnCancel;
     private Button btnCreate;
     private Button btnUpdate;
+    private Button btnBack;
     private SimpleTimer simpleTimer;
 
     public BigElectroView() {
@@ -124,6 +125,8 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         vrlDeviceGrid = new VerticalLayout();
         vrlDeviceGrid.setSizeFull();
         hrlDeviceGrid = new HorizontalLayout();
+        btnBack = new Button("Kamers");
+        btnBack.addClickListener(e->handleClickBack(e));
         grid = new Grid<>();
         grid.setItems(new ArrayList<BigElectronicDTO>(0));
         grid.addColumn(BigElectronicDTO::getName).setHeader("Naam");
@@ -173,7 +176,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         grid.setHeightFull();
         grid.asSingleSelect().addValueChangeListener(event -> populateRoomForm(event.getValue()));
         vrlDeviceGrid.add(hrlDeviceGrid);
-        vrlDeviceGrid.add(grid);
+        vrlDeviceGrid.add(btnBack,grid);
         vrlDeviceGrid.setWidth("80%");
         return vrlDeviceGrid;
     }
@@ -198,6 +201,9 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
             txtErrorMessage.setText(ex.getMessage());
             txtErrorMessage.setVisible(true);
         }
+    }
+    private void handleClickBack(ClickEvent<Button> e) {
+        getUI().ifPresent(ui -> ui.navigate("rooms/" + roomid));
     }
 
     private void handleClickDelete(ClickEvent<Button> e, long id) {
@@ -315,9 +321,12 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
             if (!sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
                 grid.removeColumnByKey("delete");
                 btnCreate.setVisible(false);
+                bigElectroForm.setVisible(false);
+                btnCancel.setVisible(false);
             }
         } catch (IllegalArgumentException e) {
-            Notification.show(e.getMessage() ,3000, Notification.Position.TOP_CENTER);
+            txtErrorMessage.setText(e.getMessage());
+            txtErrorMessage.setVisible(true);
         }
 
     }
