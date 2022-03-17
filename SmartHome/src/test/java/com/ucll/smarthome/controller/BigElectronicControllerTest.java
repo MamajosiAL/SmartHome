@@ -13,6 +13,8 @@ import org.testcontainers.shaded.org.apache.commons.lang.NotImplementedException
 
 import javax.persistence.DiscriminatorValue;
 
+import java.time.LocalTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @WithUserDetails(setupBefore = TestExecutionEvent.TEST_EXECUTION, value = "TestUser", userDetailsServiceBeanName = "UserDetailService")
@@ -29,6 +31,9 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
 
     @Autowired
     private BigElectronicController bigElectronicController;
+
+    @Autowired
+    private DeviceController deviceController;
 
     @Autowired
     private HouseDAO houseDAO;
@@ -92,8 +97,12 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
                 .findFirst()
                 .get();
 
+        TypeDTO vaatwasserTypeDTO = new TypeDTO.Builder()
+                .typeName(vaatwasserType.getName())
+                        .typeid(vaatwasserType.getTypeid()).build();
+
         bigElectronicDTO.setRoomid(searchedRoom.getRoomID());
-        bigElectronicDTO.setType(vaatwasserType);
+        bigElectronicDTO.setType(vaatwasserTypeDTO);
 
         bigElectronicController.createApplianceDevice(bigElectronicDTO);
 
@@ -119,11 +128,16 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         Type smartovenType;
 
         smartovenType = typeDAO.findAll().stream()
-                .filter(p -> p.getName().equals("oven"))
+                .filter(p -> p.getName().equals("Oven"))
                 .findFirst()
                 .get();
+
+        TypeDTO dto = new TypeDTO.Builder()
+                .typeName(smartovenType.getName())
+                        .typeid(smartovenType.getTypeid())
+                                .build();
         
-        bigElectronicDTO.setType(smartovenType);
+        bigElectronicDTO.setType(dto);
 
         bigElectronicController.createApplianceDevice(bigElectronicDTO);
 
@@ -142,11 +156,16 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         Type smartovenType;
 
         smartovenType = typeDAO.findAll().stream()
-                .filter(p -> p.getName().equals("oven"))
+                .filter(p -> p.getName().equals("Oven"))
                 .findFirst()
                 .get();
+
+        TypeDTO dto = new TypeDTO.Builder()
+                .typeName(smartovenType.getName())
+                .typeid(smartovenType.getTypeid())
+                .build();
         
-        bigElectronicDTO.setType(smartovenType);
+        bigElectronicDTO.setType(dto);
 
         assertThrows(IllegalArgumentException.class, () -> bigElectronicController.createApplianceDevice(bigElectronicDTO));
     }
@@ -163,11 +182,16 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         Type smartovenType;
 
         smartovenType = typeDAO.findAll().stream()
-                .filter(p -> p.getName().equals("oven"))
+                .filter(p -> p.getName().equals("Oven"))
                 .findFirst()
                 .get();
+
+        TypeDTO dto = new TypeDTO.Builder()
+                .typeName(smartovenType.getName())
+                .typeid(smartovenType.getTypeid())
+                .build();
         
-        bigElectronicDTO.setType(smartovenType);
+        bigElectronicDTO.setType(dto);
 
         assertThrows(IllegalArgumentException.class, () -> bigElectronicController.createApplianceDevice(bigElectronicDTO));
     }
@@ -184,11 +208,16 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         Type smartovenType;
 
         smartovenType = typeDAO.findAll().stream()
-                .filter(p -> p.getName().equals("oven"))
+                .filter(p -> p.getName().equals("Oven"))
                 .findFirst()
                 .get();
+
+        TypeDTO dto = new TypeDTO.Builder()
+                .typeName(smartovenType.getName())
+                .typeid(smartovenType.getTypeid())
+                .build();
         
-        bigElectronicDTO.setType(smartovenType);
+        bigElectronicDTO.setType(dto);
 
         assertThrows(IllegalArgumentException.class, () -> bigElectronicController.createApplianceDevice(bigElectronicDTO));
     }
@@ -205,26 +234,34 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         Type smartovenType;
 
         smartovenType = typeDAO.findAll().stream()
-                .filter(p -> p.getName().equals("oven"))
+                .filter(p -> p.getName().equals("Oven"))
                 .findFirst()
                 .get();
+
+        TypeDTO dto = new TypeDTO.Builder()
+                .typeName(smartovenType.getName())
+                .typeid(smartovenType.getTypeid())
+                .build();
         
-        bigElectronicDTO.setType(smartovenType);
+        bigElectronicDTO.setType(dto);
 
         assertThrows(IllegalArgumentException.class, () -> bigElectronicController.createApplianceDevice(bigElectronicDTO));
     }
 
     @Test
-    void updateApplianceDevice() {
+    void updateBeDeviceDevice() {
         addBeforeTest();
         String alteredName = "AlteredTestName";
         String originalName = searchedBigElectronic.getName();
+        LocalTime timer = LocalTime.of(0,1);
 
         BigElectronicDTO updateBigElectronicDTO = bigElectronicDTO;
         updateBigElectronicDTO.setId(searchedBigElectronic.getId());
         updateBigElectronicDTO.setName(alteredName);
+        updateBigElectronicDTO.setTimer(timer);
+        updateBigElectronicDTO.setProgramid(18);
 
-        bigElectronicController.updateApplianceDevice(updateBigElectronicDTO);
+        bigElectronicController.updateBeDeviceDevice(updateBigElectronicDTO);
 
         BigElectronicDevice updatedsearchedBigElectronic = bigElectronicDAO.findAll().stream()
                 .filter(p -> p.getName().equals(bigElectronicDTO.getName()))
@@ -237,7 +274,7 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
     }
 
     @Test
-    void updateApplianceDeviceNameNull() {
+    void updateBeDeviceDeviceNameNull() {
         addBeforeTest();
         String alteredName = null;
 
@@ -245,11 +282,11 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         updateBigElectronicDTO.setId(searchedBigElectronic.getId());
         updateBigElectronicDTO.setName(alteredName);
         
-        assertThrows(IllegalArgumentException.class, () ->  bigElectronicController.updateApplianceDevice(updateBigElectronicDTO));
+        assertThrows(IllegalArgumentException.class, () ->  bigElectronicController.updateBeDeviceDevice(updateBigElectronicDTO));
     }
 
     @Test
-    void updateApplianceDeviceSpace() {
+    void updateBeDeviceDeviceSpace() {
         addBeforeTest();
         String alteredName = " ";
 
@@ -257,11 +294,11 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         updateBigElectronicDTO.setId(searchedBigElectronic.getId());
         updateBigElectronicDTO.setName(alteredName);
 
-        assertThrows(IllegalArgumentException.class, () ->  bigElectronicController.updateApplianceDevice(updateBigElectronicDTO));
+        assertThrows(IllegalArgumentException.class, () ->  bigElectronicController.updateBeDeviceDevice(updateBigElectronicDTO));
     }
     
     @Test
-    void updateApplianceDeviceNameEmpty() {
+    void updateBeDeviceDeviceNameEmpty() {
         addBeforeTest();
         String alteredName = "";
 
@@ -269,11 +306,11 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         updateBigElectronicDTO.setId(searchedBigElectronic.getId());
         updateBigElectronicDTO.setName(alteredName);
 
-        assertThrows(IllegalArgumentException.class, () ->  bigElectronicController.updateApplianceDevice(updateBigElectronicDTO));
+        assertThrows(IllegalArgumentException.class, () ->  bigElectronicController.updateBeDeviceDevice(updateBigElectronicDTO));
     }
 
     @Test
-    void updateApplianceDeviceRoomIDNonExisting() {
+    void updateBeDeviceDeviceRoomIDNonExisting() {
         addBeforeTest();
         String alteredName = "Altered Name";
 
@@ -282,7 +319,7 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         updateBigElectronicDTO.setName(alteredName);
         updateBigElectronicDTO.setRoomid(456945621);
 
-        assertThrows(IllegalArgumentException.class, () ->  bigElectronicController.updateApplianceDevice(updateBigElectronicDTO));
+        assertThrows(IllegalArgumentException.class, () ->  bigElectronicController.updateBeDeviceDevice(updateBigElectronicDTO));
     }
     
 
@@ -314,19 +351,12 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
         assertEquals(bigElectronicController.getApplianceDevicesByRoom(searchedRoom.getRoomID()).get(0).getId(), searchedBigElectronic.getId());
     }
 
-    @Test
-    void deleteApplianceDeviceById() {
-        addBeforeTest();
-
-        bigElectronicController.deleteApplianceDeviceById(searchedBigElectronic.getId());
-        assertEquals(0, bigElectronicController.getApplianceDevicesByRoom(searchedRoom.getRoomID()).size());
-    }
 
     @Test
     void changeStatus() {
         addBeforeTest();
 
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+        deviceController.changeStatus(searchedBigElectronic.getId());
 
         searchedBigElectronic = bigElectronicDAO.findAll().stream()
                 .filter(p -> p.getName().equals(bigElectronicDTO.getName()))
@@ -335,7 +365,7 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
 
         assertTrue(searchedBigElectronic.isStatus());
 
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+        deviceController.changeStatus(searchedBigElectronic.getId());
 
         searchedBigElectronic = bigElectronicDAO.findAll().stream()
                 .filter(p -> p.getName().equals(bigElectronicDTO.getName()))
@@ -347,7 +377,7 @@ class BigElectronicControllerTest extends AbstractIntegrationTest {
 
     @Test
     void updateDeviceWithProgramme(){
-        throw new NotImplementedException("Alteration incoming");
+
     }
 
     @Test

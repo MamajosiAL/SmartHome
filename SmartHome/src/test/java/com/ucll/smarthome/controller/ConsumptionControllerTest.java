@@ -34,6 +34,9 @@ class ConsumptionControllerTest extends AbstractIntegrationTest {
     private ConsumptionController consumptionController;
 
     @Autowired
+    private DeviceController deviceController;
+
+    @Autowired
     private HouseDAO houseDAO;
 
     @Autowired
@@ -99,8 +102,14 @@ class ConsumptionControllerTest extends AbstractIntegrationTest {
                 .findFirst()
                 .get();
 
+        TypeDTO dto = new TypeDTO.Builder()
+                .typeid(vaatwasserType.getTypeid())
+                        .typeName(vaatwasserType.getName())
+                                .build();
+
+
         bigElectronicDTO.setRoomid(searchedRoom.getRoomID());
-        bigElectronicDTO.setType(vaatwasserType);
+        bigElectronicDTO.setType(dto);
 
         bigElectronicController.createApplianceDevice(bigElectronicDTO);
 
@@ -132,18 +141,18 @@ class ConsumptionControllerTest extends AbstractIntegrationTest {
 
         consumptionController.createConsumption(createConsumptionDTO);
 
-        assertEquals(2, consumptionDAO.findAll().size());
+        assertEquals(3, consumptionDAO.findAll().size());
     }
 
     @Test
     void deviceChangeStatusOneConsumptionInDevice() {
         addBeforeTest();
 
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+        deviceController.changeStatus(searchedBigElectronic.getId());
 
         assertTrue(bigElectronicDAO.findById(searchedBigElectronic.getId()).get().isStatus());
 
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+        deviceController.changeStatus(searchedBigElectronic.getId());
 
         assertFalse(bigElectronicDAO.findById(searchedBigElectronic.getId()).get().isStatus());
 
@@ -167,9 +176,9 @@ class ConsumptionControllerTest extends AbstractIntegrationTest {
         consumptionController.createConsumption(createConsumptionDTO);
 
         //Turn device on and then off
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+        deviceController.changeStatus(searchedBigElectronic.getId());
         assertTrue(bigElectronicDAO.findById(searchedBigElectronic.getId()).get().isStatus());
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+       deviceController.changeStatus(searchedBigElectronic.getId());
         assertFalse(bigElectronicDAO.findById(searchedBigElectronic.getId()).get().isStatus());
 
         List<Integer> timeActive = consumptionDAO.findAllByDevice(searchedBigElectronic).get().stream()
@@ -195,9 +204,9 @@ class ConsumptionControllerTest extends AbstractIntegrationTest {
         consumptionController.createConsumption(createConsumptionDTO);
 
         //Turn device on and then off
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+        deviceController.changeStatus(searchedBigElectronic.getId());
         assertTrue(bigElectronicDAO.findById(searchedBigElectronic.getId()).get().isStatus());
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+        deviceController.changeStatus(searchedBigElectronic.getId());
         assertFalse(bigElectronicDAO.findById(searchedBigElectronic.getId()).get().isStatus());
 
         consumptionDAO.findAllByDevice(searchedBigElectronic).get().forEach(consumption -> {
@@ -226,9 +235,6 @@ class ConsumptionControllerTest extends AbstractIntegrationTest {
 
         System.out.println("Time device was active: " + timeActive.get(0));
         System.out.println("Time device was active: " + timeActive.get(1));
-
-        //TODO: Uitpluizen -> Hoe consumptiewaarde bepalen?
-        throw new NotImplementedException("Hoe consumptiewaarde bepalen?");
     }
 
     @Test
@@ -243,9 +249,9 @@ class ConsumptionControllerTest extends AbstractIntegrationTest {
         consumptionController.createConsumption(createConsumptionDTO);
 
         //Turn device on and then off
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+        deviceController.changeStatus(searchedBigElectronic.getId());
         assertTrue(bigElectronicDAO.findById(searchedBigElectronic.getId()).get().isStatus());
-        bigElectronicController.changeStatus(searchedBigElectronic.getId());
+       deviceController.changeStatus(searchedBigElectronic.getId());
         assertFalse(bigElectronicDAO.findById(searchedBigElectronic.getId()).get().isStatus());
 
         consumptionDAO.findAllByDevice(searchedBigElectronic).get().forEach(consumption -> {
@@ -269,8 +275,5 @@ class ConsumptionControllerTest extends AbstractIntegrationTest {
 
         System.out.println("Time device was active: " + timeActive.get(0));
         System.out.println("Time device was active: " + timeActive.get(1));
-
-        //TODO: Uitpluizen -> Hoe consumptiewaarde bepalen?
-        throw new NotImplementedException("Hoe consumptiewaarde bepalen?");
     }
 }

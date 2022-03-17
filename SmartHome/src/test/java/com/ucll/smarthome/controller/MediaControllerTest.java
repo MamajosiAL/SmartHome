@@ -379,25 +379,6 @@ class MediaControllerTest extends AbstractIntegrationTest {
         assertEquals(mediaController.getAdioDevicesByRoom(mediaDevice.getRoom().getRoomID()).get(0).getId(), mediaDevice.getId());
     }
 
-    @Test
-    void deleteAudioDevice() {
-        addBeforeTest();
-
-        mediaController.deleteAudioDevice(mediaDevice.getId());
-
-        assertEquals(0, mediaController.getAdioDevicesByRoom(searchedRoom.getRoomID()).size());
-    }
-
-    @Test
-    void changeStatus() {
-        addBeforeTest();
-
-        assertFalse(mediaController.getAudioDeviceById(mediaDevice.getId()).isStatus());
-
-        mediaController.changeStatus(mediaDevice.getId());
-
-        assertTrue(mediaController.getAudioDeviceById(mediaDevice.getId()).isStatus());
-    }
 
     @Test
     void addDeviceWithCategory(){

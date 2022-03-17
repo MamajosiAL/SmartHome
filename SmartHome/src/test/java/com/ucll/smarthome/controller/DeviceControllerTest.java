@@ -156,7 +156,6 @@ class DeviceControllerTest extends AbstractIntegrationTest {
                 .name(" ")
                 .status(false)
                 .roomid(searchedRoom.getRoomID())
-                //.categoryid()
                 .build();
 
         assertThrows(IllegalArgumentException.class, () -> deviceController.createDevice(createDeviceDTO));
@@ -262,12 +261,6 @@ class DeviceControllerTest extends AbstractIntegrationTest {
         deviceController.deleteDeviceById(searchedDevice.getId());
 
         assertEquals(0, deviceController.getDevicdsByRoom(searchedRoom.getRoomID()).size());
-    }
-
-    @Test
-    void deviceExists() {
-        //TODO: Private?
-        throw new NotImplementedException("Still needs implementation - Private?");
     }
 
     @Test

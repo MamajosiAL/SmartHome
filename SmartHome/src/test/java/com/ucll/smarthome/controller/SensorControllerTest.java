@@ -6,6 +6,7 @@ import com.ucll.smarthome.persistence.entities.Device;
 import com.ucll.smarthome.persistence.entities.House;
 import com.ucll.smarthome.persistence.entities.Room;
 import com.ucll.smarthome.persistence.entities.SensorDevice;
+import com.ucll.smarthome.persistence.entities.enums.SensorType;
 import com.ucll.smarthome.persistence.repository.HouseDAO;
 import com.ucll.smarthome.persistence.repository.RoomDAO;
 import com.ucll.smarthome.persistence.repository.SensorDAO;
@@ -36,6 +37,9 @@ class SensorControllerTest extends AbstractIntegrationTest {
     private SensorController sensorController;
 
     @Autowired
+    private DeviceController deviceController;
+
+    @Autowired
     private HouseDAO houseDAO;
 
     @Autowired
@@ -62,7 +66,7 @@ class SensorControllerTest extends AbstractIntegrationTest {
 
     private SensorDTO sensorDTO = new SensorDTO.Builder()
             .name("TestingSensor")
-            .sensorType("Smart Stekker")
+            .sensorType("Motion Sensor")
             .status(false)
             .sensordata(24)
             .build();
@@ -110,7 +114,7 @@ class SensorControllerTest extends AbstractIntegrationTest {
 
         SensorDTO createSensorDTO = new SensorDTO.Builder()
                 .name("TestingSensor")
-                .sensorType("Smart Stekker")
+                .sensorType("Motion Sensor")
                 .status(false)
                 .sensordata(24)
                 .roomid(searchedRoom.getRoomID())
@@ -282,14 +286,6 @@ class SensorControllerTest extends AbstractIntegrationTest {
         assertEquals(sensorController.getSonsorDevicesByRoom(searchedRoom.getRoomID()).get(0).getId(), sensorDevice.getId());
     }
 
-    @Test
-    void deleteDevice() {
-        addBeforeTest();
-
-        sensorController.deleteSensorDeviceById(sensorDevice.getId());
-
-        assertEquals(0, sensorController.getSonsorDevicesByRoom(searchedRoom.getRoomID()).size());
-    }
 
     @Test
     void changeStatus() {
@@ -297,7 +293,7 @@ class SensorControllerTest extends AbstractIntegrationTest {
 
         assertFalse(sensorController.getSensorDeviceById(sensorDevice.getId()).isStatus());
 
-        sensorController.changeStatus(sensorDevice.getId());
+        deviceController.changeStatus(sensorDevice.getId());
 
         assertTrue(sensorController.getSensorDeviceById(sensorDevice.getId()).isStatus());
     }

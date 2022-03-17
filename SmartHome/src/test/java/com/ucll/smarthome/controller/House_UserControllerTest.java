@@ -114,7 +114,7 @@ class House_UserControllerTest extends AbstractIntegrationTest {
         House_User hs = house_userController.getHouseUserByHouseAndUser(searchedHouse, user2info);
 
         House_UserDTO house_userDTO = new House_UserDTO.Builder()
-                .id(hs.getId())
+                .houseid(hs.getHouse().getHouseId())
                 .isadmin(true)
                 .build();
 
