@@ -9,6 +9,7 @@ import com.ucll.smarthome.dto.House_UserDTO;
 import com.ucll.smarthome.dto.UserDTO;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.ucll.smarthome.functions.UserSecurityFunc;
+import com.ucll.smarthome.view.dialogs.WarningDialog;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 
@@ -19,6 +20,7 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -32,6 +34,8 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.*;
 import liquibase.pro.packaged.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.security.access.AccessDeniedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +52,10 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     private House_UserController huC;
     @Autowired
     private final UserSecurityFunc sec;
+    private MessageSource msgSrc;
 
+
+    private H5 txtErrorMessage;
     private SplitLayout splitLayout;
     private VerticalLayout verticalLayoutlf;
     private HorizontalLayout lphLayout;
@@ -60,13 +67,13 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     private Button btnDelete;
     private Button btnAdd;
     private Grid<UserDTO> grid;
+    private Button btnBack;
 
 
     public ManageUsersView() {
         super();
         sec = BeanUtil.getBean(UserSecurityFunc.class);
-
-
+        msgSrc = BeanUtil.getBean(MessageSource.class);
         usc = BeanUtil.getBean(UserController.class);
         hsc = BeanUtil.getBean(HouseController.class);
 
@@ -86,12 +93,14 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
         verticalLayoutlf.setWidthFull();
         lphLayout = new HorizontalLayout();
 
+        btnBack = new Button("Woningen");
+        btnBack.addClickListener(e->handleClickBack(e));
 
         grid = new Grid<>();
         grid.setItems(new ArrayList<UserDTO>(0));
-        grid.addColumn(UserDTO::getUsername).setHeader("Gebruikersnaam");
-        grid.addColumn(UserDTO::getFirstname).setHeader("Voornaam");
-        grid.addColumn(UserDTO::getName).setHeader("Naam");
+        grid.addColumn(UserDTO::getUsername).setHeader(msgSrc.getMessage("lview.username",null,getLocale()));
+        grid.addColumn(UserDTO::getFirstname).setHeader(msgSrc.getMessage("rview.firstname",null,getLocale()));
+        grid.addColumn(UserDTO::getName).setHeader(msgSrc.getMessage("rview.lastname",null,getLocale()));
         grid.addColumn(UserDTO::getEmail).setHeader("Email");
         grid.addColumn(new ComponentRenderer<>(userDTO -> {
             checkbox = new Checkbox();
@@ -110,19 +119,34 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
 
 
         verticalLayoutlf.add(lphLayout);
-        verticalLayoutlf.add(grid);
+        verticalLayoutlf.add(btnBack,grid);
         verticalLayoutlf.setWidth("80%");
 
         return verticalLayoutlf;
     }
 
+    private void handleClickBack(ClickEvent<Button> e) {
+        getUI().ifPresent(ui -> ui.navigate("houses"));
+    }
+
     private void handleClickDelete(ClickEvent<Button> e, long userid) {
-        try {
-            huC.deleteSingleHouseUser(huC.getHouseUserByHouseIdAndUserId(houseid,userid));
-            loadData();
-        }catch(IllegalArgumentException ex){
-            Notification.show(ex.getMessage() ,3000, Notification.Position.TOP_CENTER);
-        }
+        WarningDialog w = new WarningDialog("Weet u zeker dat u deze gebruiker wilt verwijderen van u woning");
+        w.setCloseOnEsc(false);
+        w.setCloseOnOutsideClick(false);
+        w.addOpenedChangeListener(event -> {
+            if (!event.isOpened() && w.wasOkButtonClicked()) {
+                try {
+                    huC.deleteSingleHouseUser(huC.getHouseUserByHouseIdAndUserId(houseid,userid));
+                }catch (IllegalArgumentException | AccessDeniedException ex){
+                    txtErrorMessage.setText(ex.getMessage());
+                    txtErrorMessage.setVisible(true);
+                }
+                grid.asSingleSelect().clear();
+                loadData();
+            }
+        });
+        w.open();
+
     }
 
     private Component createAddUserToHouseLayout(){
@@ -132,16 +156,18 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
         horizontalLayoutrh.setSpacing(true);
 
         houseTitle = new H3();
-        users = new ComboBox<>("Zoek naar gebruiker");
+        txtErrorMessage = new H5();
+        txtErrorMessage.setVisible(false);
+        users = new ComboBox<>( msgSrc.getMessage("mview.search",null,getLocale()));
         List<UserDTO> lstUsers = usc.getAllUsers();
         users.setItems(lstUsers);
         users.setItemLabelGenerator(UserDTO::getUsername);
 
-        btnAdd = new Button("Toevoegen");
+        btnAdd = new Button(msgSrc.getMessage("hview.buttonCr",null,getLocale()));
         btnAdd.addClickListener(this::handleClickAdd);
 
         horizontalLayoutrh.add(btnAdd);
-        verticalLayoutrh.add(houseTitle,users);
+        verticalLayoutrh.add(houseTitle,txtErrorMessage,users);
         verticalLayoutrh.add(horizontalLayoutrh);
         verticalLayoutrh.setWidth("20%");
         return verticalLayoutrh;
@@ -150,12 +176,14 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     private void handleClickAdd(ClickEvent<Button> buttonClickEvent) {
         try {
             UserDTO userDTO =  users.getValue();
-            if (userDTO == null) throw new IllegalArgumentException("Geen gebruiker geselecteerd");
+            if (userDTO == null) throw new IllegalArgumentException(msgSrc.getMessage("mview.exc",null,getLocale()));
             huC.registerUserToHouseNotOwner(new HouseDTO.Builder().id(houseid).username(userDTO.getUsername()).build());
             users.clear();
             loadData();
+            txtErrorMessage.setVisible(false);
         }catch (IllegalArgumentException ex){
-            Notification.show(ex.getMessage() ,3000, Notification.Position.TOP_CENTER);
+            txtErrorMessage.setText(ex.getMessage());
+            txtErrorMessage.setVisible(true);
         }
     }
 
@@ -163,9 +191,11 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
         try {
             House_UserDTO house_userDTO = new House_UserDTO.Builder().houseid(houseid).userid(userid).isadmin(checkbox.getValue()).build();
             huC.updateUserSetAdmin(house_userDTO);
-        }catch (IllegalArgumentException ex){
             loadData();
-            Notification.show(ex.getMessage() ,3000, Notification.Position.TOP_CENTER);
+        }catch (IllegalArgumentException ex){
+
+            txtErrorMessage.setVisible(true);
+            txtErrorMessage.setText(ex.getMessage());
         }
     }
 
@@ -175,8 +205,10 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
 
     public void loadData(){
         try {
-            List<UserDTO> users = usc.getUsersByHouse(houseid);
-            grid.setItems(users);
+            if (sec.checkCurrentUserIsOwner(getHouse().getId())) {
+                List<UserDTO> users = usc.getUsersByHouse(houseid);
+                grid.setItems(users);
+            }
         } catch (IllegalArgumentException e) {
             Notification.show(e.getMessage() ,3000, Notification.Position.TOP_CENTER);
         }
@@ -188,10 +220,25 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
         try {
             houseid = id;
             houseTitle.setText(getHouse().getName());
-            List<UserDTO> users = usc.getUsersByHouse(id);
-            grid.setItems(users);
+
+            if (sec.checkCurrentUserIsOwner(getHouse().getId())){
+
+                List<UserDTO> users = usc.getUsersByHouse(id);
+                grid.setItems(users);
+            }
+            if (!sec.checkCurrentUserIsOwner(getHouse().getId())){
+                txtErrorMessage.setText("Je bent niet de eigenaar van dit huis. Je kan hier niks doen.");
+                txtErrorMessage.setVisible(true);
+                users.setItems(new ArrayList<>());
+                btnAdd.setVisible(false);
+
+                //Notification.show("Je hebt hier geen toegang toe" ,3000, Notification.Position.TOP_CENTER);
+                getUI().ifPresent(ui -> ui.navigate(HouseView.class));
+            }
+
         } catch (IllegalArgumentException e) {
-           Notification.show(e.getMessage() ,3000, Notification.Position.TOP_CENTER);
+           txtErrorMessage.setText(e.getMessage());
+           txtErrorMessage.setVisible(true);
         }
     }
 }

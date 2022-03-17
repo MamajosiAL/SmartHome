@@ -73,7 +73,7 @@ public class ConsumptionController {
     public void deviceChangeStatus(Device device){
         List<Consumption> consumptionList = getConsumptionsByDevice(device);
 
-        if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
+        //if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("User is not part of house");
         // status wordt aangezet
         if(!device.isStatus()){
                 for(Consumption c : consumptionList){
@@ -125,7 +125,7 @@ public class ConsumptionController {
 
     public List<Consumption> getConsumptionsByDevice(Device device){
         Optional<List<Consumption>> consumptionList = consumptionDAO.findAllByDevice(device);
-        if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("ccontroller.userpartof");
+        //if(userSecurityFunc.getHouseUser(device.getRoom().getHouse().getHouseId()).isEmpty()) throw new NotFoundException("ccontroller.userpartof");
 
         if(consumptionList.isEmpty()) throw new IllegalArgumentException("This device has no consumption");
         return consumptionList.get();
@@ -200,6 +200,29 @@ public class ConsumptionController {
         int max = 2000;
         int random =  (int)Math.floor(Math.random()*(max-min+1)+min);
         return (double)random / 1000;
+    }
+    public void deviceChangeStatusScheduled(Device device){
+        List<Consumption> consumptionList = getConsumptionsByDevice(device);
+
+        // status wordt aangezet
+        if(!device.isStatus()){
+            for(Consumption c : consumptionList){
+                c.setStartDatumEnTijd(LocalDateTime.now());
+            }
+            device.setStatus(true);
+        }
+        // status wordt uitgezet
+        else{
+            for(Consumption c : consumptionList){
+                if(c.getStartDatumEnTijd() != null){
+                    LocalDateTime start = c.getStartDatumEnTijd();
+                    LocalDateTime end = LocalDateTime.now();
+                    long minutes = ChronoUnit.MINUTES.between(start,end);
+                    c.setAantalMinuten(c.getAantalMinuten() + (int)minutes);
+                }
+            }
+            device.setStatus(false);
+        }
     }
 
     private ConsumptionDTO consumptionToConsumptionDTO(Consumption consumption){

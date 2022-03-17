@@ -25,9 +25,19 @@
     </repositories>
     <dependencies>
         <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-charts-flow</artifactId>
+            <version>19.0.2</version>
+        </dependency>
+        <dependency>
             <groupId>com.vaadin.componentfactory</groupId>
             <artifactId>togglebutton</artifactId>
             <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.flowingcode.addons</groupId>
+            <artifactId>simple-timer</artifactId>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.vaadin.addon</groupId>

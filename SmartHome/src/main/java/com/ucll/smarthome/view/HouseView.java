@@ -13,6 +13,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -49,6 +50,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         private VerticalLayout verticalLayoutrh;
         private HorizontalLayout horizontalLayoutrh;
         private HouseForm hfrm;
+        private H5 txtErrorMessage;
 
         private Grid<HouseDTO> grid;
         private Span role;
@@ -133,7 +135,8 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         horizontalLayoutrh.setWidthFull();
         horizontalLayoutrh.setSpacing(true);
 
-
+        txtErrorMessage = new H5();
+        setVisible(false);
 
         btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(this:: handleClickCancel);
@@ -178,7 +181,9 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
 
     private void handleClickCreate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show(msgSrc.getMessage("hview.validationerror",null,getLocale()), 3000, Notification.Position.MIDDLE);
+
+            txtErrorMessage.setVisible(true);
+            txtErrorMessage.setText(msgSrc.getMessage("hview.validationerror",null,getLocale()));
             return;
         }
         try {
@@ -188,23 +193,26 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
             hfrm.resetForm();
             loadData();
         } catch (IllegalArgumentException event){
-            Notification.show(event.getMessage(), 3000, Notification.Position.MIDDLE);
+           txtErrorMessage.setText(event.getMessage());
+           txtErrorMessage.setVisible(true);
         }
 
 
     }
     private void handleClickUpdate(ClickEvent<Button> e) {
         if(!hfrm.isformValid()){
-            Notification.show(msgSrc.getMessage("hview.validationerror",null,getLocale()), 3000, Notification.Position.MIDDLE);
+            txtErrorMessage.setVisible(true);
+            txtErrorMessage.setText(msgSrc.getMessage("hview.validationerror",null,getLocale()));
+            return;
         }
         try{
             HouseDTO houseDTO = new HouseDTO.Builder().id(Integer.parseInt(hfrm.lblId.getText())).name(hfrm.txtnaamhuis.getValue()).build();
             hc.updateHouse(houseDTO);
-            Notification.show(msgSrc.getMessage("hview.houseadjusted",null,getLocale()),3000,Notification.Position.TOP_CENTER);
             loadData();
             setButtonsToDefault();
         } catch (IllegalArgumentException | NotFoundException event){
-            Notification.show(event.getMessage(), 3000, Notification.Position.TOP_CENTER);
+           txtErrorMessage.setText(event.getMessage());
+           txtErrorMessage.setVisible(true);
         }
     }
 
@@ -217,7 +225,8 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
                 try {
                     hc.deleteHouse(Integer.parseInt(hfrm.lblId.getText()));
                 }catch (IllegalArgumentException | AccessDeniedException ex){
-                    Notification.show(ex.getMessage(), 3000, Notification.Position.TOP_CENTER);
+                   txtErrorMessage.setVisible(true);
+                   txtErrorMessage.setText(ex.getMessage());
                 }
                 grid.asSingleSelect().clear();
                 setButtonsToDefault();
@@ -243,6 +252,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         btnCreate.setVisible(true);
         btnUpdate.setVisible(false);
         btnDelete.setVisible(false);
+        txtErrorMessage.setVisible(false);
     }
     private void populateHouseForm(HouseDTO houseDTO){
         setButtonsToDefault();

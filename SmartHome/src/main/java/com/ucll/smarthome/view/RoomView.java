@@ -67,6 +67,7 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
     private Button btnMedia;
     private Button btnSensor;
     private Button btnDevice;
+    private Button btnBack;
 
 
     public RoomView() {
@@ -90,13 +91,16 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         verticalLayoutlf = new VerticalLayout();
         verticalLayoutlf.setWidthFull();
         lphLayout = new HorizontalLayout();
+        btnBack = new Button("Wonignen");
+        btnBack.addClickListener(e->handleClickBack(e));
         grid = new Grid<>();
         grid.setItems(new ArrayList<RoomDTO>(0));
-        grid.addColumn(RoomDTO::getName).setHeader("Kamer");
+        grid.addColumn(RoomDTO::getName).setHeader(msgSrc.getMessage("rview.kamer",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnBigElectro = new Button(new Icon(VaadinIcon.AUTOMATION));
+            btnBigElectro.addClickListener(e -> handleClickBigElectro(e,roomDTO.getId()));
             return btnBigElectro;
-        })).setHeader("Groot electro").setTextAlign(ColumnTextAlign.CENTER);
+        })).setHeader(msgSrc.getMessage("rview.Grootelec",null,getLocale())).setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnMedia = new Button(new Icon(VaadinIcon.CAMERA));
             btnMedia.addClickListener(e->handleClickMedia(e,roomDTO.getId()));
@@ -111,7 +115,7 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
             btnDevice = new Button(new Icon(VaadinIcon.TAB_A));
             btnDevice.addClickListener(e -> handleClickDevice(e, roomDTO.getId()));
             return btnDevice;
-        })).setHeader("Niet gecategorizeerd").setTextAlign(ColumnTextAlign.CENTER);
+        })).setHeader(msgSrc.getMessage("rview.cata",null,getLocale())).setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnDelete = new Button(new Icon(VaadinIcon.TRASH));
             btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
@@ -121,9 +125,16 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         grid.setHeightFull();
         grid.asSingleSelect().addValueChangeListener(event -> populateRoomForm(event.getValue()));
         verticalLayoutlf.add(lphLayout);
-        verticalLayoutlf.add(grid);
+        verticalLayoutlf.add(btnBack,grid);
         verticalLayoutlf.setWidth("80%");
         return  verticalLayoutlf;
+    }
+
+    private void handleClickBack(ClickEvent<Button> e) {
+        getUI().ifPresent(ui -> ui.navigate("houses"));
+    }
+    private void handleClickBigElectro(ClickEvent<Button> e, long roomid) {
+        getUI().ifPresent(ui->ui.navigate("big_electronic's/" + roomid));
     }
 
     private void handleClickSensor(ClickEvent<Button> e, long roomid) {
@@ -150,6 +161,7 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         txtErrorMessage.setVisible(false);
         houseTitle = new H3();
 
+
         btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(this:: handleClickCancel);
 
@@ -171,7 +183,7 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
     }
 
     private void handleClickDelete(ClickEvent<Button> buttonClickEvent,long roomid) {
-        WarningDialog w = new WarningDialog("Weet u zeker dat u deze kamer wilt verwijderen");
+        WarningDialog w = new WarningDialog(msgSrc.getMessage("rview.warn",null,getLocale()));
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {
@@ -257,7 +269,9 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
             }
 
         } catch (IllegalArgumentException e) {
-            Notification.show(e.getMessage() ,3000, Notification.Position.TOP_CENTER);
+           txtErrorMessage.setVisible(true);
+           txtErrorMessage.setText(e.getMessage());
+           getUI().ifPresent(ui -> ui.navigate("houses"));
         }
     }
 }

@@ -3,6 +3,7 @@ package com.ucll.smarthome.persistence.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -21,6 +22,8 @@ public class BigElectronicDevice extends Device {
     @Column(name = "timer")
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime timer;
+    @Column(name ="endprogramme")
+    private LocalDateTime endProgramme;
 
     public BigElectronicDevice() {
     }
@@ -30,11 +33,21 @@ public class BigElectronicDevice extends Device {
         setProgramme(builder.programme);
         setTempature(builder.tempature);
         setTimer(builder.timer);
+        setEndProgramme(builder.endProgramme);
         setId(builder.id);
         setCategoryid(builder.categoryid);
         setName(builder.name);
         setStatus(builder.status);
         setRoom(builder.room);
+    }
+
+
+    public LocalDateTime getEndProgramme() {
+        return endProgramme;
+    }
+
+    public void setEndProgramme(LocalDateTime endProgramme) {
+        this.endProgramme = endProgramme;
     }
 
     public Type getType() {
@@ -76,6 +89,7 @@ public class BigElectronicDevice extends Device {
         private Programme programme;
         private double tempature;
         private LocalTime timer;
+        private LocalDateTime endProgramme;
         private Long id;
         private int categoryid;
         private String name;
@@ -102,6 +116,11 @@ public class BigElectronicDevice extends Device {
 
         public Builder timer(LocalTime val) {
             timer = val;
+            return this;
+        }
+
+        public Builder endProgramme(LocalDateTime val) {
+            endProgramme = val;
             return this;
         }
 
