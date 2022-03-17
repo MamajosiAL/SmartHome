@@ -26,10 +26,6 @@
         <activity android:name=".AddHouseActivity" />
         <activity android:name=".UserInHouseActivity" />
         <activity
-            android:name=".LogOutActivity"
-            android:label="@string/title_activity_log_out"
-            android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />
-        <activity
             android:name=".AccountActivity"
             android:label="@string/title_activity_account"
             android:theme="@style/Theme.SmartHomeMobile.NoActionBar" />

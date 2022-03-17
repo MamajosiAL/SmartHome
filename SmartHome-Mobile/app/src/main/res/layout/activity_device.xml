@@ -32,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deviceRoomLabel"
+                android:textColor="@color/textColorBlue"
                 android:textSize="18sp" />
 
             <TextView
@@ -54,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deviceCategoryLabel"
+                android:textColor="@color/textColorBlue"
                 android:textSize="18sp" />
 
             <TextView
@@ -77,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deviceTypeLabel"
+                android:textColor="@color/textColorBlue"
                 android:textSize="18sp" />
 
             <TextView
@@ -99,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deviceProgramLabel"
+                android:textColor="@color/textColorBlue"
                 android:textSize="18sp" />
 
             <TextView
@@ -120,6 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deviceTempLabel"
+                android:textColor="@color/textColorBlue"
                 android:textSize="18sp" />
 
             <TextView
@@ -142,6 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deviceTimerLabel"
+                android:textColor="@color/textColorBlue"
                 android:textSize="18sp" />
 
             <TextView
@@ -163,6 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deviceSensorTypeLabel"
+                android:textColor="@color/textColorBlue"
                 android:textSize="18sp" />
 
             <TextView
@@ -185,6 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deviceSensorDataLabel"
+                android:textColor="@color/textColorBlue"
                 android:textSize="18sp" />
 
             <TextView
@@ -227,12 +235,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:editable="true"
         android:fontFamily="sans-serif"
         android:text="~deviceName"
         android:textAlignment="center"
-        android:textColor="@color/textColorBlue"
+        android:textColor="@color/accent"
+        android:textColorHighlight="@color/ic_launcher_background"
         android:textSize="30sp"
-        android:editable="true"
         app:layout_constraintEnd_toStartOf="@+id/imgEditDevice"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

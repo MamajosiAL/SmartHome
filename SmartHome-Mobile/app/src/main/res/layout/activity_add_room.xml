@@ -21,7 +21,7 @@
             android:fontFamily="sans-serif"
             android:text="@string/addRoomToHouse"
             android:textAlignment="center"
-            android:textColor="@color/textColorBlue"
+            android:textColor="@color/accent"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@id/btnAddRoom"
             app:layout_constraintEnd_toEndOf="parent"
