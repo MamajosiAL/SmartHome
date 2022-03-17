@@ -23,6 +23,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -46,20 +47,20 @@ import java.util.List;
 @Route(value = "media's",layout = MainView.class)
 public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
 
-    @Autowired
+
     private DeviceController deviceController;
-    @Autowired
+
     private MediaController mediaController;
-    @Autowired
+
     private ConsumptionController consumptionController;
 
 
-    @Autowired
+
     private final UserSecurityFunc sec;
-    @Autowired
+
     private final RoomController roomController;
 
-    @Autowired
+
     private MessageSource msgSrc;
 
     private Grid<MediaDTO> grid;
@@ -77,6 +78,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
     private Button btnCreate;
     private Button btnUpdate;
     private Button btnBack;
+    private H3 roomTitle;
 
     public PaperSlider paperSlider;
     public IntegerField integerField;
@@ -110,6 +112,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
         txtErrorMessage = new H5();
         txtErrorMessage.setVisible(false);
 
+        roomTitle = new H3();
         btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(this:: handleClickCancel);
 
@@ -122,7 +125,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
         btnUpdate.setVisible(false);
 
         horizontalLayoutrh.add(btnCancel,btnCreate,btnUpdate);
-        verticalLayoutrh.add(txtErrorMessage,mediaForm);
+        verticalLayoutrh.add(roomTitle,txtErrorMessage,mediaForm);
         verticalLayoutrh.add(horizontalLayoutrh);
         verticalLayoutrh.setWidth("20%");
         return verticalLayoutrh;
@@ -305,6 +308,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
         try {
             roomid = id;
             loadData();
+            roomTitle.setText(getRoom().getName());
             if (!sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
                 grid.removeColumnByKey("delete");
                 btnCreate.setVisible(false);

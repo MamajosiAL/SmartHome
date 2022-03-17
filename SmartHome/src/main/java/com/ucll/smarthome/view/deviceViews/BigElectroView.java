@@ -4,6 +4,7 @@ package com.ucll.smarthome.view.deviceViews;
 import com.flowingcode.vaadin.addons.simpletimer.SimpleTimer;
 import com.ucll.smarthome.controller.*;
 import com.ucll.smarthome.dto.BigElectronicDTO;
+import com.ucll.smarthome.dto.DeviceDTO;
 import com.ucll.smarthome.dto.RoomDTO;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.ucll.smarthome.functions.UserSecurityFunc;
@@ -18,6 +19,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
@@ -56,6 +58,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
     private MessageSource msgSrc;
 
     private Grid<BigElectronicDTO> grid;
+    private H3 roomTitle;
     private long roomid;
     private VerticalLayout vrlDeviceGrid;
     private VerticalLayout verticalLayoutrh;
@@ -71,7 +74,8 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
     private Button btnUpdate;
     private Button btnBack;
     private SimpleTimer simpleTimer;
-
+    private Button btnEdit;
+    private Button btnSaveName;
     public BigElectroView() {
         deviceController = BeanUtil.getBean(DeviceController.class);
         programmeConttoller = BeanUtil.getBean(ProgrammeConttoller.class);
@@ -97,6 +101,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         horizontalLayoutrh.setWidthFull();
         horizontalLayoutrh.setSpacing(true);
 
+        roomTitle = new H3();
 
         bigElectroForm = new BigElectroForm();
         txtErrorMessage = new H5();
@@ -113,11 +118,29 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         btnUpdate.addClickListener(this::handleClickUpdate);
         btnUpdate.setVisible(false);
 
-        horizontalLayoutrh.add(btnCancel,btnCreate,btnUpdate);
-        verticalLayoutrh.add(txtErrorMessage,bigElectroForm);
+        btnSaveName = new Button("Opslaan");
+        btnSaveName.setVisible(false);
+        btnSaveName.addClickListener(this::handleSaveName);
+        horizontalLayoutrh.add(btnCancel,btnSaveName,btnCreate,btnUpdate);
+        verticalLayoutrh.add(roomTitle,txtErrorMessage,bigElectroForm);
         verticalLayoutrh.add(horizontalLayoutrh);
         verticalLayoutrh.setWidth("20%");
         return verticalLayoutrh;
+    }
+
+    private void handleSaveName(ClickEvent<Button> buttonClickEvent) {
+        try {
+            deviceController.updateDevice(new DeviceDTO.Builder().id(Integer.parseInt(bigElectroForm.deviceForm.lblid.getText()))
+                    .name(bigElectroForm.deviceForm.txtNaamDevice.getValue()).status(bigElectroForm.deviceForm.isStatus).roomid(roomid).build());
+
+            setButtonsToDefault();
+            loadData();
+
+        }catch (IllegalArgumentException e){
+            txtErrorMessage.setText(e.getMessage());
+            txtErrorMessage.setVisible(true);
+        }
+
     }
 
 
@@ -166,6 +189,15 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         })).setHeader(msgSrc.getMessage( "bview.timer",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(bigElectronicDTO -> {
             if (!bigElectronicDTO.isStatus()){
+                btnEdit = new Button(new Icon(VaadinIcon.EDIT));
+                btnEdit.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_TERTIARY);
+                btnEdit.addClickListener(e-> handleEdit(e,bigElectronicDTO));
+                return btnEdit;
+            }
+            return new Span();
+        })).setKey("editName");
+        grid.addColumn(new ComponentRenderer<>(bigElectronicDTO -> {
+            if (!bigElectronicDTO.isStatus()){
                 btnDelete = new Button(new Icon(VaadinIcon.TRASH));
                 btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
                 btnDelete.addClickListener(e-> handleClickDelete(e,bigElectronicDTO.getId()));
@@ -179,6 +211,22 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         vrlDeviceGrid.add(btnBack,grid);
         vrlDeviceGrid.setWidth("80%");
         return vrlDeviceGrid;
+    }
+
+    private void handleEdit(ClickEvent<Button> e,BigElectronicDTO bigElectronicDTO) {
+        try {
+             bigElectroForm.deviceForm.setVisible(true);
+             bigElectroForm.typeDTOSelect.setVisible(false);
+             bigElectroForm.deviceForm.lblid.setText("" + bigElectronicDTO.getId());
+             bigElectroForm.deviceForm.txtNaamDevice.setValue(bigElectronicDTO.getName());
+             bigElectroForm.deviceForm.isStatus = bigElectronicDTO.isStatus();
+             btnCreate.setVisible(false);
+             btnSaveName.setVisible(true);
+
+        }catch (IllegalArgumentException ex){
+            txtErrorMessage.setText(ex.getMessage());
+            txtErrorMessage.setVisible(true);
+        }
     }
 
     private void handleClickOnOf(ClickEvent<ToggleButton> e,BigElectronicDTO bigElectronicDTO) {
@@ -285,6 +333,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
             bigElectroForm.setVisible(false);
             btnCancel.setVisible(false);
         }
+        btnSaveName.setVisible(false);
         btnUpdate.setVisible(false);
     }
     private void populateRoomForm(BigElectronicDTO bigElectronicDTO) {
@@ -294,6 +343,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
                 aSwitch.setReadOnly(true);
                 btnCreate.setVisible(false);
                 btnUpdate.setVisible(true);
+                bigElectroForm.deviceForm.isStatus = bigElectronicDTO.isStatus();
                 bigElectroForm.deviceForm.lblid.setText("" + bigElectronicDTO.getId());
                 bigElectroForm.deviceForm.txtNaamDevice.setValue(bigElectronicDTO.getName());
                 bigElectroForm.typeDTOSelect.setValue(bigElectronicDTO.getType());
@@ -325,6 +375,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         try {
             roomid = id;
             loadData();
+            roomTitle.setText(getRoom().getName());
             if (!sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
                 grid.removeColumnByKey("delete");
                 btnCreate.setVisible(false);
