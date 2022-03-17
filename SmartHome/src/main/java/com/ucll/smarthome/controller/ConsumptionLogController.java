@@ -218,6 +218,7 @@ public class ConsumptionLogController {
         LocalDate date = LocalDate.now();
         List<Consumption> clist = consumptionDAO.findAll();
 
+        date = date.minusDays(1);
         System.out.println(clist.size());
         for (int i = 0; i < 60; i++){
             for(Consumption c : clist){
