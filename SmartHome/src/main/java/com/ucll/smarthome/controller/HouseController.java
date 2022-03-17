@@ -157,8 +157,7 @@ public class HouseController {
      * @param userid user id to find house_user
      */
     public void deleteUserFromHouse(long houseid, long userid){
-        long loggedInUserId = userSecurityFunc.getLoggedInUserId();
-        if(!userSecurityFunc.checkCurrentUserIsOwner(loggedInUserId)) throw new AccessDeniedException("Logged in user is not owner of this house");
+        if(!userSecurityFunc.checkCurrentUserIsOwner(houseid)) throw new AccessDeniedException("Logged in user is not owner of this house");
 
         House_User house_user = house_userController.getHouseUserByHouseIdAndUserId(houseid,userid);
         house_userController.deleteSingleHouseUser(house_user);
