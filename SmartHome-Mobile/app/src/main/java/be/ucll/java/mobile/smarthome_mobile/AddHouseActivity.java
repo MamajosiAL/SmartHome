@@ -112,6 +112,9 @@ public class AddHouseActivity extends AppCompatActivity implements Callback<Stri
                 Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
                 progressDialog.dismiss();
             }
+        }else{
+            name.setError(getString(R.string.invalidCredits));
+            progressDialog.dismiss();
         }
     }
 
