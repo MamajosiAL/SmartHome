@@ -127,13 +127,11 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
             }
         }
 
-        Log.e(TAG, "populateChart: " + cLogs.size() );
         for (ConsumptionLog cl : cLogs){
             List<String> datesDone = new ArrayList<>();
             if(!consDone.contains(cl.getHouseId())){
             for(ConsumptionLog cl1 : cLogs){
                 if(cl.getHouseId().equals(cl1.getHouseId()))   {
-                    int i = 1;
                     seriesData.add(new ValueDataEntry(cl1.getDate(),cl1.getTotalConsumption()));
                     datesDone.add(cl1.getDate());
                 }
@@ -142,11 +140,6 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
                     if(!datesDone.contains(d)){
                         seriesData.add(new ValueDataEntry(d,null));
                     }
-                }
-
-                for (DataEntry d: seriesData) {
-                    Log.e(TAG, "populateChart: this is the value in dataentry: " + d.getValue("value") );
-                    System.out.println();
                 }
 
                 Set set = Set.instantiate();
