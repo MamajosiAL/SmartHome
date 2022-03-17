@@ -182,7 +182,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
     }
 
     private void handleClickBack(ClickEvent<Button> e) {
-        getUI().ifPresent(ui -> ui.navigate("rooms/"+roomid));
+        getUI().ifPresent(ui -> ui.navigate("rooms/"+getRoom().getHouseid()));
     }
     private void handleChangeZender(AbstractField.ComponentValueChangeEvent<IntegerField, Integer> e, MediaDTO mediaDTO) {
         try {

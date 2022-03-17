@@ -162,7 +162,7 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
     }
 
     private void handleClickBack(ClickEvent<Button> e) {
-        getUI().ifPresent(ui -> ui.navigate("rooms/"+roomid));
+        getUI().ifPresent(ui -> ui.navigate("rooms/"+getRoom().getHouseid()));
     }
     private void handleChangeType(AbstractField.ComponentValueChangeEvent<Select<String>, String> e) {
         if (e.getValue()!=null){

@@ -36,20 +36,16 @@ public class Scheduler {
         consumptionLogController.createDailyConsumptionLog();
     }
 
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 1000)
     public void checkIfTimeOfBigElectroIsOver(){
-        System.out.println("test:" + System.currentTimeMillis()/1000);
 
             for (HouseDTO houseDTO: houseController.getAllHouses()){
-                System.out.println("in house");
                 for (RoomDTO roomDTO: roomController.getRoomsByHouseSchedule(houseDTO.getId())){
                     for (BigElectronicDTO beDTO: bigElectronicController.getBigelectronicScheduled(roomDTO.getId())){
                         if (beDTO.isStatus() && beDTO.getEindeProgramma().isBefore(LocalDateTime.now())){
                             deviceController.changeStatus(beDTO.getId());
                             bigElectronicController.beSetToOf(beDTO.getId());
-                            System.out.println("done");
                         }
-                        System.out.println("not done");
                     }
                 }
             }

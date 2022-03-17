@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/manifest.webmanifest",
                 "/sw.js",
                 "/icons/**",
-                "/img/**",
+                "/images/**",
                 "/styles/**",
                 "/frontend/**",
                 "/webjars/**",

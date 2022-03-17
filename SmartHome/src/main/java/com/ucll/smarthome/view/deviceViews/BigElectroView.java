@@ -203,7 +203,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         }
     }
     private void handleClickBack(ClickEvent<Button> e) {
-        getUI().ifPresent(ui -> ui.navigate("rooms/" + roomid));
+        getUI().ifPresent(ui -> ui.navigate("rooms/" + getRoom().getHouseid()));
     }
 
     private void handleClickDelete(ClickEvent<Button> e, long id) {
