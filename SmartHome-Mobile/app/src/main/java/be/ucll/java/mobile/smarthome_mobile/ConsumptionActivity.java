@@ -18,6 +18,7 @@ import com.anychart.chart.common.listener.Event;
 import com.anychart.chart.common.listener.ListenersInterface;
 import com.anychart.charts.Cartesian;
 import com.anychart.core.cartesian.series.Line;
+import com.anychart.core.utils.OrdinalZoom;
 import com.anychart.data.Mapping;
 import com.anychart.data.Set;
 import com.anychart.enums.Anchor;
@@ -89,13 +90,13 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
 
         getConsumptionLogs();
 
-        btnGoToConsPerHouse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ConsumptionPerHouseActivity.class);
-                startActivity(intent);
-            }
-        });
+       // btnGoToConsPerHouse.setOnClickListener(new View.OnClickListener() {
+       //     @Override
+       //     public void onClick(View v) {
+       //         Intent intent = new Intent(v.getContext(),ConsumptionPerHouseActivity.class);
+       //         startActivity(intent);
+       //     }
+       // });
     }
 
     public void populateChart(List<ConsumptionLog> cLogs){
@@ -104,6 +105,12 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
 
         cartLine.animation(true);
         cartLine.padding(10d, 20d, 5d, 20d);
+
+        cartLine.xScroller(true);
+        OrdinalZoom xZoom = cartLine.xZoom();
+        xZoom.setToPointsCount(6, false, null);
+        xZoom.getStartRatio();
+        xZoom.getEndRatio();
 
         cartLine.crosshair().enabled(true);
         cartLine.crosshair()
