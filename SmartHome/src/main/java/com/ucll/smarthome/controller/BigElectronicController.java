@@ -2,6 +2,7 @@ package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.BigElectronicDTO;
 import com.ucll.smarthome.dto.ConsumptionDTO;
+import com.ucll.smarthome.dto.ConsumptionDTO;
 import com.ucll.smarthome.dto.TypeDTO;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.persistence.entities.*;
@@ -59,13 +60,14 @@ public class BigElectronicController {
         consumptionController.createConsumption(new ConsumptionDTO.Builder().device(appliances.getId()).build());
     }
     private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO, Programme programme) throws IllegalArgumentException{
-
+        System.out.println(beDTO.toString());
         Room room = roomController.roomExists(beDTO.getRoomid());
 
         BigElectronicDevice apl = appliancesExists(beDTO.getId());
             apl.setName(beDTO.getName());
             apl.setStatus(beDTO.isStatus());
             apl.setProgramme(programme);
+            apl.setType(getType(programme.getType()).orElse(null));
             apl.setTempature(programme.getTempature());
             apl.setTimer(programme.getTimer());
     }
@@ -154,6 +156,7 @@ public class BigElectronicController {
     private Optional<Type> getType(Type type){
         return typeDAO.findById(type.getTypeid());
     }
+
     private Optional<Type> getTypeByName(String typeName){
         return typeDAO.findByName(typeName);
     }

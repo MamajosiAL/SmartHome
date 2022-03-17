@@ -24,6 +24,7 @@ public class ConsumtionView extends VerticalLayout  {
     private HorizontalLayout horizontalLayout;
     private Select<HouseDTO> houseDTOSelect;
     private Chart chart;
+    private DataSeries ds;
 
     public ConsumtionView() {
         houseController = BeanUtil.getBean(HouseController.class);
@@ -38,10 +39,13 @@ public class ConsumtionView extends VerticalLayout  {
         horizontalLayout.setWidth("40%");
         horizontalLayout.setAlignItems(Alignment.CENTER);
 
+
+
         add(horizontalLayout,createGraph());
 
         setHeightFull();
         setAlignItems(Alignment.CENTER);
+
 
     }
     private Component createGraph(){
@@ -60,8 +64,7 @@ public class ConsumtionView extends VerticalLayout  {
 
         DataSeries ds = new DataSeries();
         ds.setName("Test");
-        ds.setData(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3,
-                13.9, 9.6);
+        ds.setData(7.0);
 
         conf.addSeries(ds);
         Legend legend = conf.getLegend();
@@ -69,14 +72,17 @@ public class ConsumtionView extends VerticalLayout  {
         legend.setVerticalAlign(VerticalAlign.MIDDLE);
         legend.setAlign(HorizontalAlign.RIGHT);
 
+        conf.setSeries(loadData());
         return chart;
     }
 
     private void handleChangeSelect(AbstractField.ComponentValueChangeEvent<Select<HouseDTO>, HouseDTO> e) {
     }
 
-    public void loadData() {
+    public DataSeries loadData() {
+        ds= new DataSeries();
 
+        return ds;
     }
 
 }
