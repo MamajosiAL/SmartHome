@@ -76,6 +76,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
     private Button btnCancel;
     private Button btnCreate;
     private Button btnUpdate;
+    private Button btnBack;
 
     public PaperSlider paperSlider;
     public IntegerField integerField;
@@ -132,9 +133,11 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
         vrlDeviceGrid = new VerticalLayout();
         vrlDeviceGrid.setSizeFull();
         hrlDeviceGrid = new HorizontalLayout();
+        btnBack = new Button("Kamers");
+        btnBack.addClickListener(e->handleClickBack(e));
         grid = new Grid<>();
         grid.setItems(new ArrayList<MediaDTO>(0));
-        grid.addColumn(MediaDTO::getName).setHeader("Naam");
+        grid.addColumn(MediaDTO::getName).setHeader(msgSrc.getMessage("Bview.Naam",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(mediaDTO -> {
             aSwitch = new ToggleButton();
             aSwitch.setValue(mediaDTO.isStatus());
@@ -163,7 +166,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
             }
             integerField.addValueChangeListener(e->handleChangeZender(e,mediaDTO));
             return integerField;
-        })).setHeader("Zender");
+        })).setHeader(msgSrc.getMessage("bview.Zender",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnDelete = new Button(new Icon(VaadinIcon.TRASH));
             btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
@@ -173,11 +176,14 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
         grid.setHeightFull();
         grid.asSingleSelect().addValueChangeListener(event -> populateRoomForm(event.getValue()));
         vrlDeviceGrid.add(hrlDeviceGrid);
-        vrlDeviceGrid.add(grid);
+        vrlDeviceGrid.add(btnBack,grid);
         vrlDeviceGrid.setWidth("80%");
         return vrlDeviceGrid;
     }
 
+    private void handleClickBack(ClickEvent<Button> e) {
+        getUI().ifPresent(ui -> ui.navigate("rooms/"+roomid));
+    }
     private void handleChangeZender(AbstractField.ComponentValueChangeEvent<IntegerField, Integer> e, MediaDTO mediaDTO) {
         try {
             mediaController.updateAudioDevice(new MediaDTO.Builder().id(mediaDTO.getId()).name(mediaDTO.getName())
@@ -215,7 +221,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
     }
 
     private void handleClickDelete(ClickEvent<Button> e, long id) {
-        WarningDialog w = new WarningDialog("Weet u zeker dat u dit apparaat wilt verwijderen");
+        WarningDialog w = new WarningDialog(msgSrc.getMessage("bview.warn",null,getLocale()));
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {
@@ -250,7 +256,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
     private void handleClickUpdate(ClickEvent<Button> buttonClickEvent) {
         try {
             mediaController.updateAudioDevice(new MediaDTO.Builder().id(Integer.parseInt(mediaForm.deviceForm.lblid.getText())).name(mediaForm.deviceForm.txtNaamDevice.getValue())
-                    .status(false).volume(mediaForm.volume.getValue()).zender(mediaForm.zender.getValue()).roomid(roomid).build());
+                    .status(mediaForm.deviceForm.isStatus).volume(mediaForm.volume.getValue()).zender(mediaForm.zender.getValue()).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException e){
@@ -288,6 +294,7 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
             mediaForm.deviceForm.txtNaamDevice.setValue(mediaDTO.getName());
             mediaForm.volume.setValue(mediaDTO.getVolume());
             mediaForm.zender.setValue(mediaDTO.getZender());
+            mediaForm.deviceForm.isStatus = mediaDTO.isStatus();
         }
     }
     @Override
@@ -298,10 +305,12 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
             if (!sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
                 grid.removeColumnByKey("delete");
                 btnCreate.setVisible(false);
+                btnCancel.setVisible(false);
                 mediaForm.setVisible(false);
             }
         } catch (IllegalArgumentException e) {
-            Notification.show(e.getMessage() ,3000, Notification.Position.TOP_CENTER);
+            txtErrorMessage.setText(e.getMessage());
+            txtErrorMessage.setVisible(true);
         }
 
     }

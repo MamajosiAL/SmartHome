@@ -22,7 +22,7 @@
     "@vaadin/vaadin-avatar": "1.0.4",
     "@vaadin/vaadin-board": "2.2.0",
     "@vaadin/vaadin-button": "2.4.0",
-    "@vaadin/vaadin-charts": "6.3.3",
+    "@vaadin/vaadin-charts": "8.0.2",
     "@vaadin/vaadin-checkbox": "2.5.1",
     "@vaadin/vaadin-combo-box": "5.4.9",
     "@vaadin/vaadin-confirm-dialog": "1.3.0",
@@ -112,7 +112,7 @@
       "@vaadin/vaadin-avatar": "1.0.4",
       "@vaadin/vaadin-board": "2.2.0",
       "@vaadin/vaadin-button": "2.4.0",
-      "@vaadin/vaadin-charts": "6.3.3",
+      "@vaadin/vaadin-charts": "8.0.2",
       "@vaadin/vaadin-checkbox": "2.5.1",
       "@vaadin/vaadin-combo-box": "5.4.9",
       "@vaadin/vaadin-confirm-dialog": "1.3.0",
@@ -180,6 +180,6 @@
       "webpack-dev-server": "3.11.0",
       "webpack-merge": "4.2.2"
     },
-    "hash": "2c67de518c6276a990437f21458cf07f6e29bf7c028a17eaa84f1144aa45599c"
+    "hash": "b9d1e7675dd43e7118161d9a9326c04dc43784c37f9b914044d2311513f7af79"
   }
 }

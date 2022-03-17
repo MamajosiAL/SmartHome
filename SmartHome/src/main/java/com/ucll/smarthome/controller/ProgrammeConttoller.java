@@ -2,6 +2,7 @@ package com.ucll.smarthome.controller;
 
 import com.ucll.smarthome.dto.ProgrammeDTO;
 import com.ucll.smarthome.dto.TypeDTO;
+import com.ucll.smarthome.persistence.entities.Programme;
 import com.ucll.smarthome.persistence.entities.Type;
 import com.ucll.smarthome.persistence.repository.ProgrammeDAO;
 import com.ucll.smarthome.persistence.repository.TypeDAO;
@@ -41,5 +42,11 @@ public class ProgrammeConttoller {
                 .sorted(Comparator.comparing(Type::getTypeid))
                 .map(rec -> new TypeDTO.Builder().typeid(rec.getTypeid()).typeName(rec.getName()).build());
         return stream.collect(Collectors.toList());
+    }
+    public ProgrammeDTO getProgramById(long id) throws  IllegalArgumentException{
+        if (programmeDAO.findById(id).isEmpty()) throw new IllegalArgumentException("Programme is not found");
+        Programme programme = programmeDAO.getById(id);
+
+        return new ProgrammeDTO.Builder().id(programme.getProgramid()).name(programme.getName()).temp(programme.getTempature()).build();
     }
 }

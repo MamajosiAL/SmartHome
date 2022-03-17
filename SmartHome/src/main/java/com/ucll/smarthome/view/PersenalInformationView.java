@@ -63,24 +63,24 @@ public class PersenalInformationView extends VerticalLayout {
     private Component createRegisterForm(){
         personalForm = new FormLayout();
 
-        txtFirstname = new TextField("Voornaam");
+        txtFirstname = new TextField(msgSrc.getMessage("rview.firstname",null,getLocale()));
         txtFirstname.setRequired(true);
-        txtFirstname.setErrorMessage("rview.errormessage");
+        txtFirstname.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
         txtFirstname.setReadOnly(true);
 
-        txtLasname = new TextField("rview.lastname");
+        txtLasname = new TextField(msgSrc.getMessage("rview.lastname",null,getLocale()));
         txtLasname.setRequired(true);
-        txtLasname.setErrorMessage("rview.errormessage");
+        txtLasname.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
         txtLasname.setReadOnly(true);
 
-        txtUsername = new TextField("lview.username");
+        txtUsername = new TextField(msgSrc.getMessage("lview.username",null,getLocale()));
         txtUsername.setRequired(true);
-        txtUsername.setErrorMessage("Verplicht veld");
+        txtUsername.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
         txtUsername.setReadOnly(true);
         emailField = new EmailField("Email");
         emailField.setRequiredIndicatorVisible(true);
         emailField.setPattern("[^@\\s]+@[^@\\s]+\\.[^@\\s]+");
-        emailField.setErrorMessage("Foutieve email");
+        emailField.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
         emailField.setReadOnly(true);
 
         btnUpdate = new Button(new Icon(VaadinIcon.EDIT));

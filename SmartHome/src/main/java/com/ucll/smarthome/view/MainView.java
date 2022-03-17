@@ -37,16 +37,15 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
 
     private HouseView hview;
     private PersenalInformationView pView;
-    private ConsumptieView cView;
-    private BeheerView bView;
+    private ConsumtionView bView;
 
     private Button logoutButton;
     private Tab tab1;
-    private static final String tabname1 = "huizen";
+    private static final String tabname1 = "Woningen";
     private Tab tab2;
     private static final String tabname2 = "Acount";
     private Tab tab3;
-    private static final String tabname3 = "beheer";
+    private static final String tabname3 = "Verbruik";
     private Tabs tabs;
 
     public MainView() {
@@ -84,11 +83,16 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         tab2.getElement().addEventListener("click", event ->{
             handleClickAcoutn(event);
         });
-        tabs.setOrientation(Tabs.Orientation.VERTICAL);
-        tabs.addSelectedChangeListener(event ->{
-            handleTabClicked(event);
+        tab3.getElement().addEventListener("click", event ->{
+            handleClickConsuption(event);
         });
+        tabs.setOrientation(Tabs.Orientation.VERTICAL);
         addToDrawer(tabs);
+    }
+
+    private void handleClickConsuption(DomEvent event) {
+        setContent(bView);
+        getUI().ifPresent(ui -> ui.navigate("consumption"));
     }
 
     private void handleClickAcoutn(DomEvent event) {
@@ -102,19 +106,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         getUI().ifPresent(ui -> ui.navigate("houses"));
     }
 
-    private void handleTabClicked(Tabs.SelectedChangeEvent event) {
-        Tab selTab = tabs.getSelectedTab();
-        if(selTab.getLabel() != null){
-            if(selTab.getLabel().equals(tabname1)){
-                setContent(hview);
-                getUI().ifPresent(ui-> ui.navigate("houses"));
-            }else if(selTab.getLabel().equals(tabname2)){
-                setContent(cView);
-            }else{
-                setContent(bView);
-            }
-        }
-    }
+
 
     @PostConstruct
     private void setMainViewContent() {
@@ -123,11 +115,10 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
 
         pView = new PersenalInformationView();
 
-        cView = new ConsumptieView();
-        cView.loadData();
 
-        bView = new BeheerView();
-        cView.loadData();
+
+        bView = new ConsumtionView();
+        bView.loadData();
 
         this.setContent(hview);
     }
