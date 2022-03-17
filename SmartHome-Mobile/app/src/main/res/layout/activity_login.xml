@@ -14,11 +14,12 @@
             android:id="@+id/imageView2"
             android:layout_width="139dp"
             android:layout_height="131dp"
+            android:layout_marginTop="16dp"
             android:src="@mipmap/ic_launcher_round"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogInFormToRegisterPage" />
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/titleLogIn"
@@ -34,10 +35,9 @@
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/txtLogInUsername"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <EditText
             android:id="@+id/txtLogInUsername"
