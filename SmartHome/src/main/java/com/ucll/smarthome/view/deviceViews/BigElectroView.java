@@ -280,6 +280,10 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         txtErrorMessage.setVisible(false);
         if (sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
             btnCreate.setVisible(true);
+            bigElectroForm.deviceForm.txtNaamDevice.setVisible(true);
+        }else {
+            bigElectroForm.setVisible(false);
+            btnCancel.setVisible(false);
         }
         btnUpdate.setVisible(false);
     }
@@ -298,6 +302,9 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
                     bigElectroForm.programmeDTOSelect.setVisible(true);
                     bigElectroForm.timer.setVisible(true);
                 }
+                bigElectroForm.setVisible(true);
+                bigElectroForm.deviceForm.txtNaamDevice.setVisible(false);
+                btnCancel.setVisible(true);
                 bigElectroForm.temperature.setVisible(true);
                 bigElectroForm.temperature.setValue(bigElectronicDTO.getTempature());
             }else {

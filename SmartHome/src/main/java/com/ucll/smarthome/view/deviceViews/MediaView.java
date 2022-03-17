@@ -296,6 +296,9 @@ public class MediaView extends VerticalLayout implements HasUrlParameter<Long> {
             mediaForm.zender.setValue(mediaDTO.getZender());
             mediaForm.deviceForm.isStatus = mediaDTO.isStatus();
         }
+        if (!sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
+            btnUpdate.setVisible(false);
+        }
     }
     @Override
     public void setParameter(BeforeEvent beforeEvent, Long id) {

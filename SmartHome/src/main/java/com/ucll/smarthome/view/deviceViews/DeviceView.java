@@ -234,6 +234,9 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
             deviceForm.lblid.setText("" + deviceDTO.getId());
             deviceForm.txtNaamDevice.setValue(deviceDTO.getName());
             deviceForm.isStatus = deviceDTO.isStatus();
+            if (!sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
+                btnUpdate.setVisible(false);
+            }
         }
     }
     @Override

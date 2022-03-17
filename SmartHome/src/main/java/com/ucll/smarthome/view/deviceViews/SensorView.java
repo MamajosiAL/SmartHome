@@ -249,11 +249,16 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
     }
     private void setButtonsToDefault(){
         sensorForm.resetForm();
-        sensorForm.sensorType.setVisible(true);
-        sensorForm.sensorData.setVisible(true);
+        if (sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
+            sensorForm.sensorType.setVisible(true);
+            sensorForm.sensorData.setVisible(true);
+        }
         txtErrorMessage.setVisible(false);
         if (sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
             btnCreate.setVisible(true);
+        }else  {
+            sensorForm.sensorData.setVisible(false);
+
         }
         btnUpdate.setVisible(false);
     }
@@ -275,6 +280,12 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
             if (sensorDTO.getSensorType() != null ){
                 if (!sensorDTO.getSensorType().equals("Thermostat")){
                 sensorForm.sensorData.setVisible(false);}
+            }
+            if (!sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
+                if (!sensorDTO.getSensorType().equals("Thermostat")){
+                    btnUpdate.setVisible(false);
+                  }
+
             }
 
 
