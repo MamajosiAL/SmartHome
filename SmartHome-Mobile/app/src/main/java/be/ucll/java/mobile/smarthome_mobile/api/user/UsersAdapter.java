@@ -40,17 +40,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
         // set the data
         User current = users.get(position);
         holder.username.setText(current.getUsername());
-        if (current.isIsadmin()) {
-            holder.username.setText(users.get(position).getUsername());
-            if (users.get(position).isOwner()) {
-                holder.isAdmin.setText(R.string.owner);
-            }
-            if (users.get(position).isIsadmin()) {
-                holder.isAdmin.setText("Admin");
-            } else {
-                holder.isAdmin.setText(R.string.user);
-            }
-
+        if(users.get(position).isOwner()){
+            holder.isAdmin.setText(R.string.owner);
+        }else if(users.get(position).isIsadmin()){
+            holder.isAdmin.setText(R.string.admin);
+        }else{
+            holder.isAdmin.setText(R.string.user);
+        }
             try {
                 //when swiped right, the user gets promoted to admin
                 //when swiped left, the user gets removed
@@ -81,12 +77,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
             });
         }
 
-    }
         @Override
         public int getItemCount () {
             return users.size(); // size of the list items
         }
-
-
 
 }

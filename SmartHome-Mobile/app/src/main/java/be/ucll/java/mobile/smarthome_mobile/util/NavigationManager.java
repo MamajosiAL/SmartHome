@@ -17,6 +17,7 @@ import be.ucll.java.mobile.smarthome_mobile.ManageActivity;
 import be.ucll.java.mobile.smarthome_mobile.R;
 import be.ucll.java.mobile.smarthome_mobile.RegisterActivity;
 import be.ucll.java.mobile.smarthome_mobile.RoomActivity;
+import be.ucll.java.mobile.smarthome_mobile.UserInHouseActivity;
 
 public class NavigationManager {
     private static final String TAG = "NavigationManager";
@@ -42,7 +43,8 @@ public class NavigationManager {
         if (context instanceof MainActivity||
             context instanceof HouseActivity||
             context instanceof RoomActivity ||
-            context instanceof DeviceActivity) {
+            context instanceof DeviceActivity ||
+            context instanceof UserInHouseActivity) {
                 bottomNavigationView.setSelectedItemId(R.id.navHouses);
         } else if (context instanceof ConsumptionActivity){
             bottomNavigationView.setSelectedItemId(R.id.navConsumption);
