@@ -29,7 +29,7 @@ public interface UserApiInterface {
     Call<String> updateUser(@Body User user, @Header("Cookie") String authHeader);
 
     @GET("/users/user")
-    Call<String> getUser(@Header("Cookie") String authHeader);
+    Call<User> getUser(@Header("Cookie") String authHeader);
 
     @GET("/users/house/{id}")
     Call<List<User>> getUsersByHouseId(@Path("id") Integer houseid, @Header("Cookie") String authHeader);
