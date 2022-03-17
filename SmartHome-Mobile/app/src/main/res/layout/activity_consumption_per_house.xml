@@ -4,43 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConsumptionActivity">
+    tools:context=".ConsumptionPerHouseActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNavigation"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnGetConsumptionByHouse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/byHouse" />
+
 
         <TextView
-            android:id="@+id/titleManage"
+            android:id="@+id/titleConsByHouse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="sans-serif"
             android:text="@string/title_consumption"
             android:textAlignment="center"
-            android:textColor="@color/accent"
+            android:textColor="@color/textColorBlue"
             android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinConsumptionHouses" />
+
+        <Spinner
+            android:id="@+id/spinConsumptionHouses"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginStart="32dp"
+            android:visibility="visible"
+            android:layout_marginEnd="32dp"
+            android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.anychart.AnyChartView
-            android:id="@+id/chartConsByUser"
+            android:id="@+id/chartConsByHouse"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleManage" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleConsByHouse" />
+
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -48,7 +59,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/primairy"
         app:itemBackground="@color/primairy"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"

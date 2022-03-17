@@ -88,8 +88,9 @@
     <string name="userPromotedSucces">User succesfully promoted</string>
     <string name="swipeInfo">Swipe right to promote, swipe left to remove</string>
     <string name="userAccessChangedSucces">User access changed succesfully</string>
-    <string name="emailPlaceholder">~email</string>
+    <string name="emailPlaceholder" translatable="false">~email</string>
     <string name="namePlaceholder">~name</string>
     <string name="firstnamePlaceholder">~firstname</string>
     <string name="usernamePlaceholder">~username</string>
+    <string name="admin">Admin</string>
 </resources>

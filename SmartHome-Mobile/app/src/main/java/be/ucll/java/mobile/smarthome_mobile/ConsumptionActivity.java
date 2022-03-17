@@ -3,14 +3,19 @@ package be.ucll.java.mobile.smarthome_mobile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.chart.common.listener.Event;
+import com.anychart.chart.common.listener.ListenersInterface;
 import com.anychart.charts.Cartesian;
 import com.anychart.core.cartesian.series.Line;
 import com.anychart.data.Mapping;
@@ -45,6 +50,7 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
     private ProgressDialog progressDialog;
     List<ConsumptionLog> consumptionLogs;
     AnyChartView anyChartView;
+    Button btnGoToConsPerHouse;
 
     public void getConsumptionLogs(){
         progressDialog = new ProgressDialog(ConsumptionActivity.this);
@@ -78,8 +84,17 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
 
         NavigationManager.initialise(this);
         anyChartView = findViewById(R.id.chartConsByUser);
+        btnGoToConsPerHouse = findViewById(R.id.btnGetConsumptionByHouse);
 
         getConsumptionLogs();
+
+        btnGoToConsPerHouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),ConsumptionPerHouseActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void populateChart(List<ConsumptionLog> cLogs){
@@ -97,21 +112,36 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
 
         cartLine.tooltip().positionMode(TooltipPositionMode.POINT);
 
-        cartLine.title(String.valueOf(R.string.byHouse));
+        cartLine.title(getResources().getString(R.string.byHouse));
 
         cartLine.yAxis(0).title("kW");
         cartLine.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
 
         List<DataEntry> seriesData = new ArrayList<>();
         List<Integer> consDone = new ArrayList<>();
+        List<String> datesCheck = new ArrayList<>();
+
+        for (ConsumptionLog c: cLogs) {
+            if(!datesCheck.contains(c.getDate())){
+                datesCheck.add(c.getDate());
+            }
+        }
 
         for (ConsumptionLog cl : cLogs){
+            List<String> datesDone = new ArrayList<>();
             if(!consDone.contains(cl.getHouseId())){
             for(ConsumptionLog cl1 : cLogs){
                 if(cl.getHouseId().equals(cl1.getHouseId()))   {
-                    seriesData.add(new CustomDataEntry(cl1.getDate(),cl1.getTotalConsumption()));
+                    seriesData.add(new ValueDataEntry(cl1.getDate(),cl1.getTotalConsumption()));
+                    datesDone.add(cl1.getDate());
                 }
             }
+                for (String d : datesCheck) {
+                    if(!datesDone.contains(d)){
+                        seriesData.add(new ValueDataEntry(d,null));
+                    }
+                }
+
                 Set set = Set.instantiate();
                 set.data(seriesData);
                 Mapping seriesMapping = set.mapAs("{ x: 'x', value: 'value' }");
@@ -128,8 +158,9 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
                         .offsetX(5d)
                         .offsetY(5d);
 
+                // if cl is done put the house id in consDone list
+                consDone.add(cl.getHouseId());
             }
-            consDone.add(cl.getHouseId());
         }
 
         cartLine.legend().enabled(true);
@@ -137,13 +168,6 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
         cartLine.legend().padding(0d, 0d, 10d, 0d);
 
         anyChartView.setChart(cartLine);
-    }
-
-    private class CustomDataEntry extends ValueDataEntry {
-
-        CustomDataEntry(String x, Number value) {
-            super(x, value);
-        }
     }
 
     @Override

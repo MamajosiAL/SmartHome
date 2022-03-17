@@ -50,7 +50,6 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
     private ProgressDialog progressDialog;
     List<Room> roomsFromHouse;
 
-
     public void getRoomsListData() {
         progressDialog = new ProgressDialog(HouseActivity.this);
         progressDialog.create();

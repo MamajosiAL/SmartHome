@@ -166,8 +166,6 @@ public class ConsumptionLogController {
             List<ConsumptionLog> temp = consumptionLogDAO.findAllByConsumptionConsumptionId(consumptionDTO.getConsumptionId()).get();
 
             for (ConsumptionLog consumptionLog : temp) {
-                System.out.println(consumptionLog.getConsumption().getConsumptionPerHour());
-
                 ConsumptionLogDTO consumptionLogDTO = new ConsumptionLogDTO.Builder()
                         .deviceId(consumptionDTO.getDeviceId())
                         .consumptionLogId(consumptionLog.getId())

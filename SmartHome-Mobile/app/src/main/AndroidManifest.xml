@@ -25,6 +25,7 @@
         <activity android:name=".HouseActivity" />
         <activity android:name=".AddHouseActivity" />
         <activity android:name=".UserInHouseActivity" />
+        <activity android:name=".ConsumptionPerHouseActivity"/>
         <activity
             android:name=".AccountActivity"
             android:label="@string/title_activity_account"

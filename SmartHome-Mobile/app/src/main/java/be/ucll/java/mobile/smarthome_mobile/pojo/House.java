@@ -83,4 +83,9 @@ public class House {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

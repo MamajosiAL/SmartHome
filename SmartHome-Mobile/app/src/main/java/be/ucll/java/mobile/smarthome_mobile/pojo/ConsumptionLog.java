@@ -35,7 +35,7 @@ public class ConsumptionLog {
 
     @SerializedName("totalConsumption")
     @Expose
-    private Integer totalConsumption;
+    private double totalConsumption;
 
     @SerializedName("houseName")
     @Expose
@@ -44,6 +44,16 @@ public class ConsumptionLog {
     @SerializedName("roomName")
     @Expose
     private String roomName;
+
+    // to get houseid for consumptionApiInterface getHousesForConsumption
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+
+    // to get housename for consumptionApiInterface getHousesForConsumption
+    @SerializedName("name")
+    @Expose
+    private String name;
 
 
     public Integer getConsumptionLogId() {
@@ -102,11 +112,11 @@ public class ConsumptionLog {
         this.date = date;
     }
 
-    public Integer getTotalConsumption() {
+    public double getTotalConsumption() {
         return totalConsumption;
     }
 
-    public void setTotalConsumption(Integer totalConsumption) {
+    public void setTotalConsumption(double totalConsumption) {
         this.totalConsumption = totalConsumption;
     }
 
@@ -124,5 +134,21 @@ public class ConsumptionLog {
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

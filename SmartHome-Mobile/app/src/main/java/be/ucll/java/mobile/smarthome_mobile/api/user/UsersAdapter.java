@@ -18,7 +18,7 @@ import be.ucll.java.mobile.smarthome_mobile.api.house.UserHouseManager;
 import be.ucll.java.mobile.smarthome_mobile.pojo.User;
 import be.ucll.java.mobile.smarthome_mobile.util.SwipeListener;
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder>{
+public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
     private final String TAG = this.getClass().getSimpleName();
     Context context;
     List<User> users;
@@ -40,48 +40,46 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder>{
         // set the data
         User current = users.get(position);
         holder.username.setText(current.getUsername());
-        if (current.isIsadmin()) {
-            holder.isAdmin.setText("Admin") ;
+        if(users.get(position).isOwner()){
+            holder.isAdmin.setText(R.string.owner);
+        }else if(users.get(position).isIsadmin()){
+            holder.isAdmin.setText(R.string.admin);
         }else{
             holder.isAdmin.setText(R.string.user);
         }
+            try {
+                //when swiped right, the user gets promoted to admin
+                //when swiped left, the user gets removed
+                holder.itemView.setOnTouchListener(new SwipeListener() {
+                    @Override
+                    public void onLeftToRightSwipe() {
+                        new UserHouseManager((UserInHouseActivity) context).promoteUserToAdminForHouse(current.getId(), ((UserInHouseActivity) context).getIntent().getIntExtra("houseId", 0));
+                    }
 
-        try{
-            //when swiped right, the user gets promoted to admin
-            //when swiped left, the user gets removed
-            holder.itemView.setOnTouchListener(new SwipeListener(){
-                @Override
-                public void onLeftToRightSwipe() {
-                    new UserHouseManager((UserInHouseActivity) context).promoteUserToAdminForHouse(current.getId(),((UserInHouseActivity) context).getIntent().getIntExtra("houseId",0));
-                }
+                    @Override
+                    public void onRightToLeftSwipe() {
+                        new UserHouseManager((UserInHouseActivity) context).removeUserFromHouse(current.getId(), ((UserInHouseActivity) context).getIntent().getIntExtra("houseId", 0));
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e(TAG, e.getMessage());
+            }
 
+
+            // implement setONCLickListener on itemView
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onRightToLeftSwipe() {
-                    new UserHouseManager((UserInHouseActivity) context).removeUserFromHouse(current.getId(),((UserInHouseActivity) context).getIntent().getIntExtra("houseId",0));
+                public void onClick(View view) {
+                    // display a toast with user name
+                    Toast.makeText(context, context.getText(R.string.swipeInfo), Toast.LENGTH_SHORT).show();
                 }
             });
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.e(TAG, e.getMessage());
         }
 
-
-       // implement setONCLickListener on itemView
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // display a toast with user name
-                Toast.makeText(context, context.getText(R.string.swipeInfo), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-
-    @Override
-    public int getItemCount() {
-        return users.size(); // size of the list items
-    }
-
+        @Override
+        public int getItemCount () {
+            return users.size(); // size of the list items
+        }
 
 }
