@@ -129,7 +129,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         btnBack.addClickListener(e->handleClickBack(e));
         grid = new Grid<>();
         grid.setItems(new ArrayList<BigElectronicDTO>(0));
-        grid.addColumn(BigElectronicDTO::getName).setHeader("Naam");
+        grid.addColumn(BigElectronicDTO::getName).setHeader(msgSrc.getMessage("Bview.Naam",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(bigElectronicDTO -> {
             aSwitch = new ToggleButton();
             aSwitch.setValue(bigElectronicDTO.isStatus());
@@ -149,7 +149,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
                 return  new Span( programmeConttoller.getProgramById(bigElectronicDTO.getProgramid()).getName());
             }
             return new Span();
-        })).setHeader("Programme");
+        })).setHeader(msgSrc.getMessage("bview.programma",null,getLocale()));
         grid.addColumn(BigElectronicDTO::getTempature).setHeader("Temp °C");
         grid.addColumn(new ComponentRenderer<>(bigElectronicDTO -> {
             if (bigElectronicDTO.isStatus()){
@@ -163,7 +163,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
             }
            return new Span();
 
-        })).setHeader("time");
+        })).setHeader(msgSrc.getMessage( "bview.timer",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(bigElectronicDTO -> {
             if (!bigElectronicDTO.isStatus()){
                 btnDelete = new Button(new Icon(VaadinIcon.TRASH));

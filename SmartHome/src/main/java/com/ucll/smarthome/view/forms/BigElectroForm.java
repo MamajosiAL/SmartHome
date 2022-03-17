@@ -57,7 +57,7 @@ public class BigElectroForm extends FormLayout {
         });
         typeDTOSelect.addValueChangeListener(e->handleChangeType(e));
         programmeDTOSelect = new Select<>();
-        programmeDTOSelect.setLabel("Programma");
+        programmeDTOSelect.setLabel(msgSrc.getMessage("bview.programma",null,getLocale()));
         programmeDTOSelect.setEmptySelectionAllowed(true);
         programmeDTOSelect.setVisible(false);
         programmeDTOSelect.addValueChangeListener(e -> handleChangeProgramme(e));
