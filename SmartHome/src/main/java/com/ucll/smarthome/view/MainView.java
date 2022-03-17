@@ -44,7 +44,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
 
     private Button logoutButton;
     private Tab tab1;
-    private static final String tabname1 = "Woningen";
+    private static final String tabname1 = "Huizen";
     private Tab tab2;
     private static final String tabname2 = "Acount";
     private Tab tab3;
@@ -119,10 +119,7 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
 
         pView = new PersenalInformationView();
 
-
-
         bView = new ConsumtionView();
-        bView.loadData();
 
         this.setContent(hview);
     }

@@ -181,16 +181,10 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
     }
 
     private void handleClickCreate(ClickEvent<Button> e) {
-        if(!hfrm.isformValid()){
 
-            txtErrorMessage.setVisible(true);
-            txtErrorMessage.setText(msgSrc.getMessage("hview.validationerror",null,getLocale()));
-            return;
-        }
         try {
             HouseDTO houseDTO = new HouseDTO.Builder().name(hfrm.txtnaamhuis.getValue()).build();
             hc.createHouse(houseDTO);
-            Notification.show(msgSrc.getMessage("hview.createhouse",null,getLocale()),3000,Notification.Position.TOP_CENTER);
             hfrm.resetForm();
             loadData();
         } catch (IllegalArgumentException event){
