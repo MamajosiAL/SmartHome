@@ -9,7 +9,6 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.anychart.APIlib;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
@@ -103,6 +102,7 @@ public class ConsumptionPerHouseActivity extends AppCompatActivity {
         anyChartView = findViewById(R.id.chartConsByHouse);
         dropdownListHouses = findViewById(R.id.spinConsumptionHouses);
         houses = new ArrayList<>();
+        cartLine = AnyChart.line();
 
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -174,7 +174,7 @@ public class ConsumptionPerHouseActivity extends AppCompatActivity {
         }
 
         List<DataEntry> seriesData = new ArrayList<>();
-
+        cartLine.removeAllSeries();
         for (ConsumptionLog cl : cLogs){
             List<String> datesDone = new ArrayList<>();
 
@@ -198,10 +198,11 @@ public class ConsumptionPerHouseActivity extends AppCompatActivity {
                     }
                 }
 
-                APIlib.getInstance().setActiveAnyChartView(anyChartView);
                 Set set = Set.instantiate();
                 set.data(seriesData);
                 Mapping seriesMapping = set.mapAs("{ x: 'x', value: 'value' }");
+
+                cartLine.addSeries(seriesMapping);
 
                 Line series1 = cartLine.line(seriesMapping);
                 series1.name(cl.getRoomName());
@@ -223,6 +224,8 @@ public class ConsumptionPerHouseActivity extends AppCompatActivity {
         cartLine.legend().enabled(true);
         cartLine.legend().fontSize(13d);
         cartLine.legend().padding(0d, 0d, 10d, 0d);
+
+        cartLine.draw(true);
         anyChartView.setChart(cartLine);
     }
 }
