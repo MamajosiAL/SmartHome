@@ -136,7 +136,7 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         horizontalLayoutrh.setSpacing(true);
 
         txtErrorMessage = new H5();
-        setVisible(false);
+        txtErrorMessage.setVisible(false);
 
         btnCancel = new Button(msgSrc.getMessage("rview.buttonCa",null,getLocale()));
         btnCancel.addClickListener(this:: handleClickCancel);

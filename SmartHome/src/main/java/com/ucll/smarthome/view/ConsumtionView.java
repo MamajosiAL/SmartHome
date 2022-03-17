@@ -1,7 +1,10 @@
 package com.ucll.smarthome.view;
 
 import com.ucll.smarthome.controller.ConsumptionController;
+import com.ucll.smarthome.controller.ConsumptionLogController;
 import com.ucll.smarthome.controller.HouseController;
+import com.ucll.smarthome.dto.ConsumptionDTO;
+import com.ucll.smarthome.dto.ConsumptionLogDTO;
 import com.ucll.smarthome.dto.HouseDTO;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.AbstractField;
@@ -14,20 +17,27 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.router.Route;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 
 @Route(value = "consumption",layout = MainView.class)
 @JsModule("@vaadin/vaadin-charts/theme/vaadin-chart-default-theme")
 public class ConsumtionView extends VerticalLayout  {
 
     private HouseController houseController;
-    private ConsumptionController consumptionController;
+    private ConsumptionLogController consumptionLogController;
     private HorizontalLayout horizontalLayout;
     private Select<HouseDTO> houseDTOSelect;
     private Chart chart;
+    private DataSeries ds;
 
     public ConsumtionView() {
         houseController = BeanUtil.getBean(HouseController.class);
-        consumptionController = BeanUtil.getBean(ConsumptionController.class);
+        consumptionLogController = BeanUtil.getBean(ConsumptionLogController.class);
 
         horizontalLayout = new HorizontalLayout();
         houseDTOSelect = new Select<>();
@@ -54,8 +64,13 @@ public class ConsumtionView extends VerticalLayout  {
 
         YAxis yAxis = conf.getyAxis();
         yAxis.setTitle("kWh");
-        conf.getxAxis().setCategories("Jan", "Feb", "Mar", "Apr",
-                "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+        List<ConsumptionLogDTO> lst = consumptionLogController.getConsumptionLogByUser();
+        List<String> lstDates= new ArrayList<>();
+        for (ConsumptionLogDTO consumptionDTO: lst){
+            lstDates.add(consumptionDTO.getDate().toString());
+
+        }
+       conf.getxAxis().setCategories(String.valueOf(lstDates));
 
         PlotOptionsLine plotOptions = new PlotOptionsLine();
         plotOptions.setEnableMouseTracking(false);
@@ -63,8 +78,7 @@ public class ConsumtionView extends VerticalLayout  {
 
         DataSeries ds = new DataSeries();
         ds.setName("Test");
-        ds.setData(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3,
-                13.9, 9.6);
+        ds.setData(7.0);
 
         conf.addSeries(ds);
         Legend legend = conf.getLegend();
@@ -72,16 +86,17 @@ public class ConsumtionView extends VerticalLayout  {
         legend.setVerticalAlign(VerticalAlign.MIDDLE);
         legend.setAlign(HorizontalAlign.RIGHT);
 
-
-
+        conf.setSeries(loadData());
         return chart;
     }
 
     private void handleChangeSelect(AbstractField.ComponentValueChangeEvent<Select<HouseDTO>, HouseDTO> e) {
     }
 
-    public void loadData() {
+    public DataSeries loadData() {
+        ds= new DataSeries();
 
+        return ds;
     }
 
 }
