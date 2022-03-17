@@ -17,37 +17,15 @@
         android:textAlignment="center"
         android:textColor="@color/accent"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/imgDeleteUser"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imgEditUser"
-        android:layout_width="34dp"
-        android:layout_height="32dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/titleAccount"
-        app:layout_constraintTop_toTopOf="@+id/titleAccount"
-        app:srcCompat="@drawable/ic_edit_24"
-        tools:layout_editor_absoluteX="328dp" />
-
-    <ImageView
-        android:id="@+id/imgDeleteUser"
-        android:layout_width="34dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/titleAccount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/titleAccount"
-        app:srcCompat="@drawable/ic_delete_24"
-        tools:visibility="invisible" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/titleAccount"
         tools:layout_editor_absoluteX="0dp">
