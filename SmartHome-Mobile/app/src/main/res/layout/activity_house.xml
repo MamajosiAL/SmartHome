@@ -23,15 +23,15 @@
 
         <TextView
             android:id="@+id/titleHouse"
-            android:layout_width="273dp"
+            android:layout_width="wrap_content"
             android:layout_height="43dp"
-            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif"
             android:text="@string/title_rooms"
             android:textAlignment="center"
             android:textColor="@color/accent"
             android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,7 +68,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/titleHouse"
             app:layout_constraintTop_toTopOf="@+id/titleHouse"
-            app:srcCompat="@drawable/ic_edit_24" />
+            app:srcCompat="@drawable/ic_edit_24"
+            tools:visibility="invisible" />
 
         <ImageView
             android:id="@+id/imgDeleteHouse"

@@ -107,6 +107,9 @@ public class RegisterActivity extends AppCompatActivity implements Callback<Stri
                 Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
                 progressDialog.dismiss();
             }
+        }else{
+            username.setError(getString(R.string.invalidCredits));
+            password.setError(getString(R.string.invalidCredits));
         }
     }
 

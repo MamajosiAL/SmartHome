@@ -114,6 +114,9 @@ public class AddRoomActivity extends AppCompatActivity implements Callback<Strin
                 Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
                 progressDialog.dismiss();
             }
+        }else{
+            name.setError(getString(R.string.invalidCredits));
+            progressDialog.dismiss();
         }
     }
 
