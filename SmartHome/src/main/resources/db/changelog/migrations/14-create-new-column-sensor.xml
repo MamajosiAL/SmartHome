@@ -15,5 +15,10 @@
                 <constraints nullable="true"/>
             </column>
         </addColumn>
+        <addColumn tableName="device" schemaName="smarthome">
+            <column name="endprogramme" type="DATETIME">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
     </changeSet>
 </databaseChangeLog>

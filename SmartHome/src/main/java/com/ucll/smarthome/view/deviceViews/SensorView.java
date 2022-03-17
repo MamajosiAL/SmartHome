@@ -161,6 +161,8 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
     private void handleChangeType(AbstractField.ComponentValueChangeEvent<Select<String>, String> e) {
         if (e.getValue()!=null){
             sensorForm.sensorData.setVisible(e.getValue().equals("Thermostat"));
+        }else{
+            sensorForm.sensorData.setVisible(true);
         }
 
 
@@ -217,7 +219,7 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
                 sensorForm.sensorData.setValue(0.00);
             }
             sensorController.updateSensorDevice(new SensorDTO.Builder().id(Integer.parseInt(sensorForm.deviceForm.lblid.getText()))
-                    .status(false).name(sensorForm.deviceForm.txtNaamDevice.getValue())
+                    .status(sensorForm.deviceForm.isStatus).name(sensorForm.deviceForm.txtNaamDevice.getValue())
                     .sensordata(sensorForm.sensorData.getValue()).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
@@ -259,6 +261,7 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
             sensorForm.sensorType.setValue(sensorDTO.getSensorType());
             sensorForm.sensorType.setVisible(false);
             sensorForm.sensorType.setLabel("");
+            sensorForm.deviceForm.isStatus = sensorDTO.isStatus();
             if (sensorDTO.getSensorType() == null || sensorDTO.getSensorType().equals("Thermostat") ){
                 sensorForm.sensorData.setVisible(true);
                 sensorForm.sensorData.setValue(sensorDTO.getSensordata());

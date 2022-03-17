@@ -3,16 +3,18 @@ package com.ucll.smarthome.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ucll.smarthome.persistence.entities.Type;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class BigElectronicDTO extends DeviceDTO {
 
 
-    private Type type;
+    private TypeDTO type;
     private long programid;
     private double tempature;
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime timer;
+    private LocalDateTime eindeProgramma;
 
 
     public BigElectronicDTO() {
@@ -23,6 +25,7 @@ public class BigElectronicDTO extends DeviceDTO {
         setProgramid(builder.programid);
         setTempature(builder.tempature);
         setTimer(builder.timer);
+        setEindeProgramma(builder.eindeProgramma);
         setId(builder.id);
         setName(builder.name);
         setStatus(builder.status);
@@ -31,11 +34,19 @@ public class BigElectronicDTO extends DeviceDTO {
     }
 
 
-    public Type getType() {
+    public LocalDateTime getEindeProgramma() {
+        return eindeProgramma;
+    }
+
+    public void setEindeProgramma(LocalDateTime eindeProgramma) {
+        this.eindeProgramma = eindeProgramma;
+    }
+
+    public TypeDTO getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(TypeDTO type) {
         this.type = type;
     }
 
@@ -65,10 +76,11 @@ public class BigElectronicDTO extends DeviceDTO {
 
 
     public static final class Builder {
-        private Type type;
+        private TypeDTO type;
         private long programid;
         private double tempature;
         private LocalTime timer;
+        private LocalDateTime eindeProgramma;
         private long id;
         private String name;
         private boolean status;
@@ -78,7 +90,7 @@ public class BigElectronicDTO extends DeviceDTO {
         public Builder() {
         }
 
-        public Builder type(Type val) {
+        public Builder type(TypeDTO val) {
             type = val;
             return this;
         }
@@ -95,6 +107,11 @@ public class BigElectronicDTO extends DeviceDTO {
 
         public Builder timer(LocalTime val) {
             timer = val;
+            return this;
+        }
+
+        public Builder eindeProgramma(LocalDateTime val) {
+            eindeProgramma = val;
             return this;
         }
 

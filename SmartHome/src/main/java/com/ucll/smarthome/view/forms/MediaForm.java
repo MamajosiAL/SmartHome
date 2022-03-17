@@ -27,7 +27,7 @@ public class MediaForm extends FormLayout {
         zender.setHasControls(true);
         zender.setMin(1);
         zender.setMax(999);
-        addFormItem(deviceForm.txtNaamDevice,"Apparaat naam");
+        addFormItem(deviceForm.txtNaamDevice,"");
 
     }
 

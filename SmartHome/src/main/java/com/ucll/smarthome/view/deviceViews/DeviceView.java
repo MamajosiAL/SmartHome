@@ -191,7 +191,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
     private void handleClickUpdate(ClickEvent<Button> buttonClickEvent) {
         try {
             deviceController.updateDevice(new DeviceDTO.Builder().id(Integer.parseInt(deviceForm.lblid.getText()))
-                    .status(false).name(deviceForm.txtNaamDevice.getValue()).roomid(roomid).build());
+                    .status(deviceForm.isStatus).name(deviceForm.txtNaamDevice.getValue()).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException e){
@@ -227,6 +227,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
             btnUpdate.setVisible(true);
             deviceForm.lblid.setText("" + deviceDTO.getId());
             deviceForm.txtNaamDevice.setValue(deviceDTO.getName());
+            deviceForm.isStatus = deviceDTO.isStatus();
         }
     }
     @Override

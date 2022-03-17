@@ -11,22 +11,27 @@ public class DeviceForm extends FormLayout {
     @Autowired
     private MessageSource msgSrc;
     public Label lblid;
+    public Boolean isStatus;
     public TextField txtNaamDevice;
 
     public DeviceForm() {
         super();
+        isStatus = Boolean.FALSE;
         msgSrc = BeanUtil.getBean(MessageSource.class);
         lblid = new Label("");
         txtNaamDevice = new TextField();
         txtNaamDevice.setRequired(true);
+        txtNaamDevice.setRequiredIndicatorVisible(true);
+        txtNaamDevice.setLabel("Apparaat naam");
         txtNaamDevice.setErrorMessage(msgSrc.getMessage("rview.errormessage",null,getLocale()));
-        addFormItem(txtNaamDevice, "Device naam");
+        addFormItem(txtNaamDevice, "");
     }
 
     public void resetForm(){
         lblid.setText("");
         txtNaamDevice.clear();
         txtNaamDevice.setInvalid(false);
+
     }
 
 }

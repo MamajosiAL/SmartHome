@@ -1,15 +1,15 @@
 package com.ucll.smarthome.view.deviceViews;
 
-import com.ucll.smarthome.controller.ConsumptionController;
-import com.ucll.smarthome.controller.DeviceController;
-import com.ucll.smarthome.controller.RoomController;
-import com.ucll.smarthome.dto.DeviceDTO;
+
+import com.flowingcode.vaadin.addons.simpletimer.SimpleTimer;
+import com.ucll.smarthome.controller.*;
+import com.ucll.smarthome.dto.BigElectronicDTO;
 import com.ucll.smarthome.dto.RoomDTO;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.view.MainView;
 import com.ucll.smarthome.view.dialogs.WarningDialog;
-import com.ucll.smarthome.view.forms.DeviceForm;
+import com.ucll.smarthome.view.forms.BigElectroForm;
 import com.vaadin.componentfactory.ToggleButton;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
@@ -18,6 +18,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H5;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -28,48 +29,52 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.security.access.AccessDeniedException;
 
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
 import java.util.List;
 
 @Route(value = "big_electronic's",layout = MainView.class)
 public class BigElectroView extends VerticalLayout implements HasUrlParameter<Long> {
 
-    @Autowired
+
     private DeviceController deviceController;
-    @Autowired
-    private ConsumptionController consumptionController;
-
-
-    @Autowired
+    private BigElectronicController bigElectronicController;
+    private ProgrammeConttoller programmeConttoller;
     private final UserSecurityFunc sec;
-    @Autowired
     private final RoomController roomController;
 
-    @Autowired
-    private MessageSource msgSrc;
 
-    private Grid<DeviceDTO> grid;
+    private MessageSource msgSrc;
+    ThreadPoolTaskScheduler taskScheduler;
+
+    private Grid<BigElectronicDTO> grid;
     private long roomid;
     private VerticalLayout vrlDeviceGrid;
     private VerticalLayout verticalLayoutrh;
     private HorizontalLayout horizontalLayoutrh;
     private HorizontalLayout hrlDeviceGrid;
     private SplitLayout splitLayout;
-    private DeviceForm deviceForm;
+    private BigElectroForm bigElectroForm;
     private ToggleButton aSwitch;
     private H5 txtErrorMessage;
     private Button btnDelete;
     private Button btnCancel;
     private Button btnCreate;
     private Button btnUpdate;
+    private SimpleTimer simpleTimer;
 
     public BigElectroView() {
         deviceController = BeanUtil.getBean(DeviceController.class);
-        consumptionController = BeanUtil.getBean(ConsumptionController.class);
+        programmeConttoller = BeanUtil.getBean(ProgrammeConttoller.class);
+        bigElectronicController = BeanUtil.getBean(BigElectronicController.class);
         sec = BeanUtil.getBean(UserSecurityFunc.class);
         roomController = BeanUtil.getBean(RoomController.class);
         msgSrc = BeanUtil.getBean(MessageSource.class);
@@ -91,7 +96,8 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         horizontalLayoutrh.setWidthFull();
         horizontalLayoutrh.setSpacing(true);
 
-        deviceForm = new DeviceForm();
+
+        bigElectroForm = new BigElectroForm();
         txtErrorMessage = new H5();
         txtErrorMessage.setVisible(false);
 
@@ -102,12 +108,12 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         btnCreate = new Button(msgSrc.getMessage("hview.buttonCr",null,getLocale()));
         btnCreate.addClickListener(this:: handleClickCreate);
 
-        btnUpdate = new Button(msgSrc.getMessage("hview.save",null,getLocale()));
+        btnUpdate = new Button("Start");
         btnUpdate.addClickListener(this::handleClickUpdate);
         btnUpdate.setVisible(false);
 
         horizontalLayoutrh.add(btnCancel,btnCreate,btnUpdate);
-        verticalLayoutrh.add(txtErrorMessage,deviceForm);
+        verticalLayoutrh.add(txtErrorMessage,bigElectroForm);
         verticalLayoutrh.add(horizontalLayoutrh);
         verticalLayoutrh.setWidth("20%");
         return verticalLayoutrh;
@@ -119,19 +125,50 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         vrlDeviceGrid.setSizeFull();
         hrlDeviceGrid = new HorizontalLayout();
         grid = new Grid<>();
-        grid.setItems(new ArrayList<DeviceDTO>(0));
-        grid.addColumn(DeviceDTO::getName).setHeader("Naam");
-        grid.addColumn(new ComponentRenderer<>(deviceDTO -> {
+        grid.setItems(new ArrayList<BigElectronicDTO>(0));
+        grid.addColumn(BigElectronicDTO::getName).setHeader("Naam");
+        grid.addColumn(new ComponentRenderer<>(bigElectronicDTO -> {
             aSwitch = new ToggleButton();
-            aSwitch.setValue(deviceDTO.isStatus());
-            aSwitch.addClickListener(e-> handleClickOnOf(e,deviceDTO));
+            aSwitch.setValue(bigElectronicDTO.isStatus());
+            if (bigElectronicDTO.isStatus()){
+                aSwitch.setValue(true);
+                aSwitch.addClickListener(e->handleClickOnOf(e,bigElectronicDTO));
+            }else {
+                aSwitch.setValue(false);
+                aSwitch.setReadOnly(true);
+            }
             return aSwitch;
+
         })).setHeader("I/O").setTextAlign(ColumnTextAlign.CENTER);
-        grid.addColumn(new ComponentRenderer<>(roomDTO -> {
-            btnDelete = new Button(new Icon(VaadinIcon.TRASH));
-            btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
-            btnDelete.addClickListener(e-> handleClickDelete(e,roomDTO.getId()));
-            return btnDelete;
+        grid.addColumn(bigElectronicDTO -> bigElectronicDTO.getType().getTypeName()).setHeader("Type");
+        grid.addColumn(new ComponentRenderer<>( bigElectronicDTO -> {
+            if (bigElectronicDTO.isStatus()){
+                return  new Span( programmeConttoller.getProgramById(bigElectronicDTO.getProgramid()).getName());
+            }
+            return new Span();
+        })).setHeader("Programme");
+        grid.addColumn(BigElectronicDTO::getTempature).setHeader("Temp °C");
+        grid.addColumn(new ComponentRenderer<>(bigElectronicDTO -> {
+            if (bigElectronicDTO.isStatus()){
+                simpleTimer = new SimpleTimer();
+                simpleTimer.setHours(true);
+                simpleTimer.setMinutes(true);
+                simpleTimer.setStartTime(calculateSeconds(bigElectronicDTO.getEindeProgramma()));
+                simpleTimer.start();
+                simpleTimer.addTimerEndEvent(e->handleTimeEnd(e,bigElectronicDTO));
+                return simpleTimer;
+            }
+           return new Span();
+
+        })).setHeader("time");
+        grid.addColumn(new ComponentRenderer<>(bigElectronicDTO -> {
+            if (!bigElectronicDTO.isStatus()){
+                btnDelete = new Button(new Icon(VaadinIcon.TRASH));
+                btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
+                btnDelete.addClickListener(e-> handleClickDelete(e,bigElectronicDTO.getId()));
+                return btnDelete;
+            }
+           return new Span();
         })).setKey("delete");
         grid.setHeightFull();
         grid.asSingleSelect().addValueChangeListener(event -> populateRoomForm(event.getValue()));
@@ -141,10 +178,20 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         return vrlDeviceGrid;
     }
 
-    private void handleClickOnOf(ClickEvent<ToggleButton> e,DeviceDTO deviceDTO) {
+    private void handleClickOnOf(ClickEvent<ToggleButton> e,BigElectronicDTO bigElectronicDTO) {
+        handleStart(bigElectronicDTO.getId());
+        bigElectronicController.beSetToOf(bigElectronicDTO.getId());
+        loadData();
+    }
+
+    private void handleTimeEnd(SimpleTimer.TimerEndedEvent e, BigElectronicDTO bigElectronicDTO) {
+        loadData();
+    }
+
+    private void handleStart(long deviceid) {
         try {
 
-            deviceController.changeStatus(deviceDTO.getId());
+            deviceController.changeStatus(deviceid);
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException ex){
@@ -175,8 +222,8 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
     }
     private void handleClickCreate(ClickEvent<Button> buttonClickEvent) {
         try {
-            deviceController.createDevice(new DeviceDTO.Builder().name(deviceForm.txtNaamDevice.getValue())
-                    .status(false).roomid(roomid).build());
+            bigElectronicController.createApplianceDevice(new BigElectronicDTO.Builder().name(bigElectroForm.deviceForm.txtNaamDevice.getValue())
+                    .status(false).type(bigElectroForm.typeDTOSelect.getValue()).roomid(roomid).build());
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException e){
@@ -187,8 +234,21 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
 
     private void handleClickUpdate(ClickEvent<Button> buttonClickEvent) {
         try {
-            deviceController.updateDevice(new DeviceDTO.Builder().id(Integer.parseInt(deviceForm.lblid.getText()))
-                    .status(false).name(deviceForm.txtNaamDevice.getValue()).roomid(roomid).build());
+            long programid;
+            if (bigElectroForm.programmeDTOSelect.getValue() == null){
+                programid = 0;
+            }else {
+                programid = bigElectroForm.programmeDTOSelect.getValue().getId();
+            }
+            LocalTime time = bigElectroForm.timer.getValue();
+            int devicid = Integer.parseInt(bigElectroForm.deviceForm.lblid.getText());
+            bigElectronicController.updateBeDeviceDevice(new BigElectronicDTO.Builder().id(devicid)
+                    .status(false).name(bigElectroForm.deviceForm.txtNaamDevice.getValue()).tempature(bigElectroForm.temperature.getValue())
+                    .programid(programid)
+                    .timer(time).type(bigElectroForm.typeDTOSelect.getValue())
+                    .roomid(roomid).build());
+            handleStart(devicid);
+
             setButtonsToDefault();
             loadData();
         }catch (IllegalArgumentException e){
@@ -206,25 +266,46 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         return roomController.getRoomById(roomid);
     }
     private void loadData(){
-        List<DeviceDTO> devices = deviceController.getDevicdsByRoom(roomid);
+        List<BigElectronicDTO> devices = bigElectronicController.getApplianceDevicesByRoom(roomid);
         grid.setItems(devices);
     }
     private void setButtonsToDefault(){
-        deviceForm.resetForm();
+        bigElectroForm.resetForm();
         txtErrorMessage.setVisible(false);
         if (sec.checkCurrentUserIsAdmin(getRoom().getHouseid())){
             btnCreate.setVisible(true);
         }
         btnUpdate.setVisible(false);
     }
-    private void populateRoomForm(DeviceDTO deviceDTO) {
+    private void populateRoomForm(BigElectronicDTO bigElectronicDTO) {
         setButtonsToDefault();
-        if (deviceDTO != null) {
-            btnCreate.setVisible(false);
-            btnUpdate.setVisible(true);
-            deviceForm.lblid.setText("" + deviceDTO.getId());
-            deviceForm.txtNaamDevice.setValue(deviceDTO.getName());
+        if (bigElectronicDTO != null) {
+            if (!bigElectronicDTO.isStatus()){
+                aSwitch.setReadOnly(true);
+                btnCreate.setVisible(false);
+                btnUpdate.setVisible(true);
+                bigElectroForm.deviceForm.lblid.setText("" + bigElectronicDTO.getId());
+                bigElectroForm.deviceForm.txtNaamDevice.setValue(bigElectronicDTO.getName());
+                bigElectroForm.typeDTOSelect.setValue(bigElectronicDTO.getType());
+                bigElectroForm.typeDTOSelect.setVisible(false);
+                if (!bigElectronicDTO.getType().getTypeName().equals("Cooling Device")){
+                    bigElectroForm.programmeDTOSelect.setVisible(true);
+                    bigElectroForm.timer.setVisible(true);
+                }
+                bigElectroForm.temperature.setVisible(true);
+                bigElectroForm.temperature.setValue(bigElectronicDTO.getTempature());
+            }else {
+                setButtonsToDefault();
+            }
         }
+    }
+    private long calculateSeconds(LocalDateTime endTime){
+        if (endTime.isBefore(LocalDateTime.now())){
+            return 0;
+        }
+         LocalDateTime now =  LocalDateTime.now();
+         long seconds = ChronoUnit.SECONDS.between(now,endTime);
+         return seconds;
     }
     @Override
     public void setParameter(BeforeEvent beforeEvent, Long id) {
