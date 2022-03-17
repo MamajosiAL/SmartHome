@@ -9,6 +9,7 @@ import com.ucll.smarthome.functions.BeanUtil;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.view.MainView;
 import com.ucll.smarthome.view.dialogs.WarningDialog;
+import com.ucll.smarthome.view.forms.BigElectroForm;
 import com.ucll.smarthome.view.forms.DeviceForm;
 import com.vaadin.componentfactory.ToggleButton;
 import com.vaadin.flow.component.ClickEvent;
