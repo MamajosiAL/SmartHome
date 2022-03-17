@@ -209,4 +209,27 @@ public class ConsumptionLogController {
 
         return stream.collect(Collectors.toList());
     }
+
+
+    public void createData(){
+        int min = 1;
+        int max = 1000;
+
+        LocalDate date = LocalDate.now();
+        List<Consumption> clist = consumptionDAO.findAll();
+
+        System.out.println(clist.size());
+        for (int i = 0; i < 60; i++){
+            for(Consumption c : clist){
+                int random =  (int)Math.floor(Math.random()*(max-min+1)+min);
+                ConsumptionLog consumptionLog = new ConsumptionLog.Builder()
+                        .consumption(c)
+                        .minutesPerDay(random)
+                        .date(date)
+                        .build();
+                consumptionLogDAO.save(consumptionLog);
+            }
+            date = date.minusDays(1);
+        }
+    }
 }
