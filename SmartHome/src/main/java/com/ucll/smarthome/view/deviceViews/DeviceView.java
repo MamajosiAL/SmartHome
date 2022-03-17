@@ -208,7 +208,7 @@ public class DeviceView extends VerticalLayout implements HasUrlParameter<Long> 
         setButtonsToDefault();
     }
     private void handleClickBack(ClickEvent<Button> e) {
-        getUI().ifPresent(ui -> ui.navigate("rooms/"+roomid));
+        getUI().ifPresent(ui -> ui.navigate("rooms/"+getRoom().getHouseid()));
     }
 
     private RoomDTO getRoom(){

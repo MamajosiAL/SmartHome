@@ -11,6 +11,7 @@ import com.vaadin.flow.component.button.Button;
 import com.ucll.smarthome.functions.BeanUtil;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H5;
@@ -41,7 +42,6 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         @Autowired
         private MessageSource msgSrc;
         private final HouseController hc;
-        private ManageUsersView mvw;
         private final UserSecurityFunc sec;
 
         private SplitLayout splitLayout;
@@ -65,7 +65,6 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         super();
         sec = BeanUtil.getBean(UserSecurityFunc.class);
         msgSrc = BeanUtil.getBean(MessageSource.class);
-
         hc = BeanUtil.getBean(HouseController.class);
 
         this.setSizeFull();
@@ -142,7 +141,9 @@ public class HouseView extends VerticalLayout implements BeforeEnterObserver {
         btnCancel.addClickListener(this:: handleClickCancel);
 
         btnCreate = new Button("Toevoegen");
+        btnCreate.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         btnCreate.addClickListener(this::handleClickCreate);
+
 
         btnCreate = new Button(msgSrc.getMessage("hview.buttonCr",null,getLocale()));
         btnCreate.addClickListener(this:: handleClickCreate);

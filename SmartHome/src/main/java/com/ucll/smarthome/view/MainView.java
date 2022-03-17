@@ -16,8 +16,11 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.dom.DomEvent;
 import com.vaadin.flow.router.*;
+import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -27,8 +30,8 @@ import java.util.Locale;
 
 @Route("")
 @PageTitle("Home")
-@CssImport("styles/main-view.css")
-@CssImport("styles/custom.css")
+@Theme(value = Lumo.class,variant = Lumo.LIGHT)
+@CssImport(value = "./styles/main-view.css",themeFor = "vaadin-app-layout")
 public class MainView extends AppLayout  implements BeforeEnterObserver{
     @Autowired
     private MessageSource msgSrc;
@@ -58,20 +61,21 @@ public class MainView extends AppLayout  implements BeforeEnterObserver{
         header.setId("header-layout");
 
         //hier nog misschien een image
-        Image img = new Image("images/imagesmarthome.jpg","smarthome logo");
-        img.setHeight("30px");
-        img.setId("aligneer-rechts");
+        StreamResource imageResource = new StreamResource("SmartHome-logo.svg",
+                () -> getClass().getResourceAsStream("/img/SmartHome-logo.svg"));
+       ;
 
         logoutButton = new Button(msgSrc.getMessage("mview.logout",null,getLocale()));
         logoutButton.addClickListener(buttonClickEvent -> handleclickEvent(buttonClickEvent));
         logoutButton.setHeight("30px");
         logoutButton.setId("aligneer-rechts");
+        Image image = new Image("frontend/styles/SmartHome-logo.svg" , "Image not found");
 
         addToNavbar(new DrawerToggle(),
                 new Html("<span>&nbsp;&nbsp;</span>"),
                 header,
-                new Html("<span>&nbsp;&nbsp;</span>"),
-                new Icon(VaadinIcon.HOME),/*img,*/ logoutButton);
+                new Html("<span>&nbsp;&nbsp;</span>")
+               ,/*img,*/ logoutButton);
         tab1 = new Tab(tabname1);
         tab2 = new Tab(tabname2);
         //hier misschien nog dat ge tab 3 alleen ziet als admin?

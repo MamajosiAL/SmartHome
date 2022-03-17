@@ -38,13 +38,10 @@ public class ConsumtionView extends VerticalLayout  {
         horizontalLayout.setWidth("40%");
         horizontalLayout.setAlignItems(Alignment.CENTER);
 
-
-
         add(horizontalLayout,createGraph());
 
         setHeightFull();
         setAlignItems(Alignment.CENTER);
-
 
     }
     private Component createGraph(){
@@ -71,8 +68,6 @@ public class ConsumtionView extends VerticalLayout  {
         legend.setLayout(LayoutDirection.VERTICAL);
         legend.setVerticalAlign(VerticalAlign.MIDDLE);
         legend.setAlign(HorizontalAlign.RIGHT);
-
-
 
         return chart;
     }
