@@ -32,6 +32,7 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.*;
 import liquibase.pro.packaged.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,8 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     private House_UserController huC;
     @Autowired
     private final UserSecurityFunc sec;
+    private MessageSource msgSrc;
+
 
     private SplitLayout splitLayout;
     private VerticalLayout verticalLayoutlf;
@@ -89,9 +92,9 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
 
         grid = new Grid<>();
         grid.setItems(new ArrayList<UserDTO>(0));
-        grid.addColumn(UserDTO::getUsername).setHeader("Gebruikersnaam");
-        grid.addColumn(UserDTO::getFirstname).setHeader("Voornaam");
-        grid.addColumn(UserDTO::getName).setHeader("Naam");
+        grid.addColumn(UserDTO::getUsername).setHeader(msgSrc.getMessage("lview.username",null,getLocale()));
+        grid.addColumn(UserDTO::getFirstname).setHeader(msgSrc.getMessage("rview.firstname",null,getLocale()));
+        grid.addColumn(UserDTO::getName).setHeader(msgSrc.getMessage("rview.lastname",null,getLocale()));
         grid.addColumn(UserDTO::getEmail).setHeader("Email");
         grid.addColumn(new ComponentRenderer<>(userDTO -> {
             checkbox = new Checkbox();
@@ -132,12 +135,12 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
         horizontalLayoutrh.setSpacing(true);
 
         houseTitle = new H3();
-        users = new ComboBox<>("Zoek naar gebruiker");
+        users = new ComboBox<>( msgSrc.getMessage("mview.search",null,getLocale()));
         List<UserDTO> lstUsers = usc.getAllUsers();
         users.setItems(lstUsers);
         users.setItemLabelGenerator(UserDTO::getUsername);
 
-        btnAdd = new Button("Toevoegen");
+        btnAdd = new Button(msgSrc.getMessage("hview.buttonCr",null,getLocale()));
         btnAdd.addClickListener(this::handleClickAdd);
 
         horizontalLayoutrh.add(btnAdd);
@@ -150,7 +153,7 @@ public class ManageUsersView extends VerticalLayout implements HasUrlParameter<L
     private void handleClickAdd(ClickEvent<Button> buttonClickEvent) {
         try {
             UserDTO userDTO =  users.getValue();
-            if (userDTO == null) throw new IllegalArgumentException("Geen gebruiker geselecteerd");
+            if (userDTO == null) throw new IllegalArgumentException(msgSrc.getMessage("mview.exc",null,getLocale()));
             huC.registerUserToHouseNotOwner(new HouseDTO.Builder().id(houseid).username(userDTO.getUsername()).build());
             users.clear();
             loadData();

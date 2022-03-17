@@ -92,12 +92,12 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
         lphLayout = new HorizontalLayout();
         grid = new Grid<>();
         grid.setItems(new ArrayList<RoomDTO>(0));
-        grid.addColumn(RoomDTO::getName).setHeader("Kamer");
+        grid.addColumn(RoomDTO::getName).setHeader(msgSrc.getMessage("rview.kamer",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnBigElectro = new Button(new Icon(VaadinIcon.AUTOMATION));
             btnBigElectro.addClickListener(e -> handleClickBigElectro(e,roomDTO.getId()));
             return btnBigElectro;
-        })).setHeader("Groot electro").setTextAlign(ColumnTextAlign.CENTER);
+        })).setHeader(msgSrc.getMessage("rview.Grootelec",null,getLocale())).setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnMedia = new Button(new Icon(VaadinIcon.CAMERA));
             btnMedia.addClickListener(e->handleClickMedia(e,roomDTO.getId()));
@@ -112,7 +112,7 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
             btnDevice = new Button(new Icon(VaadinIcon.TAB_A));
             btnDevice.addClickListener(e -> handleClickDevice(e, roomDTO.getId()));
             return btnDevice;
-        })).setHeader("Niet gecategorizeerd").setTextAlign(ColumnTextAlign.CENTER);
+        })).setHeader(msgSrc.getMessage("rview.cata",null,getLocale())).setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(new ComponentRenderer<>(roomDTO -> {
             btnDelete = new Button(new Icon(VaadinIcon.TRASH));
             btnDelete.addThemeVariants(ButtonVariant.LUMO_ICON,ButtonVariant.LUMO_ERROR,ButtonVariant.LUMO_TERTIARY);
@@ -176,7 +176,7 @@ public class RoomView extends VerticalLayout implements HasUrlParameter<Long> {
     }
 
     private void handleClickDelete(ClickEvent<Button> buttonClickEvent,long roomid) {
-        WarningDialog w = new WarningDialog("Weet u zeker dat u deze kamer wilt verwijderen");
+        WarningDialog w = new WarningDialog(msgSrc.getMessage("rview.warn",null,getLocale()));
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {

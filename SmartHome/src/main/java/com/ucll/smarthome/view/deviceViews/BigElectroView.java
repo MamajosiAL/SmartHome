@@ -9,7 +9,7 @@ import com.ucll.smarthome.functions.BeanUtil;
 import com.ucll.smarthome.functions.UserSecurityFunc;
 import com.ucll.smarthome.view.MainView;
 import com.ucll.smarthome.view.dialogs.WarningDialog;
-import com.ucll.smarthome.view.forms.BigElectroForm;
+import com.ucll.smarthome.view.forms.DeviceForm;
 import com.vaadin.componentfactory.ToggleButton;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
@@ -53,7 +53,6 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
 
 
     private MessageSource msgSrc;
-    ThreadPoolTaskScheduler taskScheduler;
 
     private Grid<BigElectronicDTO> grid;
     private long roomid;
@@ -201,7 +200,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
     }
 
     private void handleClickDelete(ClickEvent<Button> e, long id) {
-        WarningDialog w = new WarningDialog("Weet u zeker dat u dit apparaat wilt verwijderen");
+        WarningDialog w = new WarningDialog(msgSrc.getMessage("bview.warn",null,getLocale()));
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {

@@ -135,7 +135,7 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
         hrlDeviceGrid = new HorizontalLayout();
         grid = new Grid<>();
         grid.setItems(new ArrayList<SensorDTO>(0));
-        grid.addColumn(SensorDTO::getName).setHeader("Naam");
+        grid.addColumn(SensorDTO::getName).setHeader(msgSrc.getMessage("Bview.Naam",null,getLocale()));
         grid.addColumn(new ComponentRenderer<>(deviceDTO -> {
             aSwitch = new ToggleButton();
             aSwitch.setValue(deviceDTO.isStatus());
@@ -179,7 +179,7 @@ public class SensorView extends VerticalLayout implements HasUrlParameter<Long> 
     }
 
     private void handleClickDelete(ClickEvent<Button> e, long id) {
-        WarningDialog w = new WarningDialog("Weet u zeker dat u dit apparaat wilt verwijderen");
+        WarningDialog w = new WarningDialog(msgSrc.getMessage("bview.warn",null,getLocale()));
         w.setCloseOnEsc(false);
         w.setCloseOnOutsideClick(false);
         w.addOpenedChangeListener(event -> {
