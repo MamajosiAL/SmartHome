@@ -102,15 +102,6 @@ public class AddHouseActivity extends AppCompatActivity implements Callback<Stri
         call.enqueue(this);
     }
 
-    /**
-     * Invoked for a received HTTP response.
-     * <p>
-     * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
-     * Call {@link Response#isSuccessful()} to determine if the response indicates success.
-     *
-     * @param call
-     * @param response
-     */
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
         if (response != null && response.body() != null) {
@@ -124,13 +115,6 @@ public class AddHouseActivity extends AppCompatActivity implements Callback<Stri
         }
     }
 
-    /**
-     * Invoked when a network exception occurred talking to the server or when an unexpected
-     * exception occurred creating the request or processing the response.
-     *
-     * @param call
-     * @param t
-     */
     @Override
     public void onFailure(Call<String> call, Throwable t) {
         Toast.makeText(this, t.toString(), Toast.LENGTH_LONG).show();

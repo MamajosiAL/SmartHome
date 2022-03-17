@@ -87,6 +87,7 @@ be/ucll/java/mobile/smarthome_mobile/api/user/UserApi.java
 be/ucll/java/mobile/smarthome_mobile/api/user/UsersAdapter.java
  be.ucll.java.mobile.smarthome_mobile.api.user.UsersAdapter
  be.ucll.java.mobile.smarthome_mobile.api.user.UsersAdapter$1
+ be.ucll.java.mobile.smarthome_mobile.api.user.UsersAdapter$2
 androidx/asynclayoutinflater/R.java
  androidx.asynclayoutinflater.R
  androidx.asynclayoutinflater.R$attr
@@ -123,7 +124,6 @@ be/ucll/java/mobile/smarthome_mobile/util/ReceivedCookiesInterceptor.java
  be.ucll.java.mobile.smarthome_mobile.util.ReceivedCookiesInterceptor
 be/ucll/java/mobile/smarthome_mobile/AccountActivity.java
  be.ucll.java.mobile.smarthome_mobile.AccountActivity
- be.ucll.java.mobile.smarthome_mobile.AccountActivity$1
 be/ucll/java/mobile/smarthome_mobile/api/house/HousesAdapter.java
  be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter
  be.ucll.java.mobile.smarthome_mobile.api.house.HousesAdapter$1
@@ -206,6 +206,8 @@ androidx/swiperefreshlayout/R.java
  androidx.swiperefreshlayout.R$string
  androidx.swiperefreshlayout.R$style
  androidx.swiperefreshlayout.R$styleable
+be/ucll/java/mobile/smarthome_mobile/api/device/DeviceNameEditor.java
+ be.ucll.java.mobile.smarthome_mobile.api.device.DeviceNameEditor
 androidx/appcompat/R.java
  androidx.appcompat.R
  androidx.appcompat.R$anim
@@ -284,6 +286,8 @@ androidx/window/R.java
  androidx.window.R$attr
  androidx.window.R$id
  androidx.window.R$styleable
+be/ucll/java/mobile/smarthome_mobile/pojo/ConsumptionLog.java
+ be.ucll.java.mobile.smarthome_mobile.pojo.ConsumptionLog
 androidx/localbroadcastmanager/R.java
  androidx.localbroadcastmanager.R
 be/ucll/java/mobile/smarthome_mobile/api/Media/MediaAdapter.java
@@ -293,12 +297,15 @@ be/ucll/java/mobile/smarthome_mobile/AddGenericFragment.java
  be.ucll.java.mobile.smarthome_mobile.AddGenericFragment
 be/ucll/java/mobile/smarthome_mobile/ConsumptionActivity.java
  be.ucll.java.mobile.smarthome_mobile.ConsumptionActivity
+ be.ucll.java.mobile.smarthome_mobile.ConsumptionActivity$CustomDataEntry
 be/ucll/java/mobile/smarthome_mobile/api/ViewLinker.java
  be.ucll.java.mobile.smarthome_mobile.api.ViewLinker
 be/ucll/java/mobile/smarthome_mobile/pojo/Room.java
  be.ucll.java.mobile.smarthome_mobile.pojo.Room
 be/ucll/java/mobile/smarthome_mobile/api/user/UserApiInterface.java
  be.ucll.java.mobile.smarthome_mobile.api.user.UserApiInterface
+be/ucll/java/mobile/smarthome_mobile/api/Media/VolumeChangeAdapter.java
+ be.ucll.java.mobile.smarthome_mobile.api.media.VolumeChangeAdapter
 androidx/lifecycle/viewmodel/savedstate/R.java
  androidx.lifecycle.viewmodel.savedstate.R
  androidx.lifecycle.viewmodel.savedstate.R$id
@@ -359,15 +366,29 @@ be/ucll/java/mobile/smarthome_mobile/RoomActivity.java
  be.ucll.java.mobile.smarthome_mobile.RoomActivity$1
 be/ucll/java/mobile/smarthome_mobile/pojo/Sensor.java
  be.ucll.java.mobile.smarthome_mobile.pojo.Sensor
+com/anychart/R.java
+ com.anychart.R
+ com.anychart.R$anim
+ com.anychart.R$attr
+ com.anychart.R$bool
+ com.anychart.R$color
+ com.anychart.R$dimen
+ com.anychart.R$drawable
+ com.anychart.R$id
+ com.anychart.R$integer
+ com.anychart.R$layout
+ com.anychart.R$string
+ com.anychart.R$style
+ com.anychart.R$styleable
 be/ucll/java/mobile/smarthome_mobile/api/house/HouseApiInterface.java
  be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface
-be/ucll/java/mobile/smarthome_mobile/LogOutActivity.java
- be.ucll.java.mobile.smarthome_mobile.LogOutActivity
 be/ucll/java/mobile/smarthome_mobile/api/BigElectro/BigElektroAdapter.java
  be.ucll.java.mobile.smarthome_mobile.api.bigelectro.BigElektroAdapter
  be.ucll.java.mobile.smarthome_mobile.api.bigelectro.BigElektroAdapter$1
 be/ucll/java/mobile/smarthome_mobile/api/Sensor/SensorViewHolder.java
  be.ucll.java.mobile.smarthome_mobile.api.sensor.SensorViewHolder
+be/ucll/java/mobile/smarthome_mobile/util/SwipeListener.java
+ be.ucll.java.mobile.smarthome_mobile.util.SwipeListener
 androidx/activity/R.java
  androidx.activity.R
  androidx.activity.R$attr
@@ -392,6 +413,10 @@ androidx/recyclerview/R.java
  androidx.recyclerview.R$string
  androidx.recyclerview.R$style
  androidx.recyclerview.R$styleable
+be/ucll/java/mobile/smarthome_mobile/AddUserToHouseActivity.java
+ be.ucll.java.mobile.smarthome_mobile.AddUserToHouseActivity
+be/ucll/java/mobile/smarthome_mobile/api/house/HouseDeleter.java
+ be.ucll.java.mobile.smarthome_mobile.api.house.HouseDeleter
 androidx/drawerlayout/R.java
  androidx.drawerlayout.R
  androidx.drawerlayout.R$attr
@@ -404,6 +429,8 @@ androidx/drawerlayout/R.java
  androidx.drawerlayout.R$string
  androidx.drawerlayout.R$style
  androidx.drawerlayout.R$styleable
+be/ucll/java/mobile/smarthome_mobile/UserInHouseActivity.java
+ be.ucll.java.mobile.smarthome_mobile.UserInHouseActivity
 androidx/versionedparcelable/R.java
  androidx.versionedparcelable.R
 androidx/lifecycle/ktx/R.java
@@ -513,6 +540,8 @@ com/google/android/material/R.java
  com.google.android.material.R$xml
 androidx/annotation/experimental/R.java
  androidx.annotation.experimental.R
+be/ucll/java/mobile/smarthome_mobile/api/room/RoomDeleter.java
+ be.ucll.java.mobile.smarthome_mobile.api.room.RoomDeleter
 be/ucll/java/mobile/smarthome_mobile/pojo/BigElectro.java
  be.ucll.java.mobile.smarthome_mobile.pojo.BigElectro
 androidx/constraintlayout/widget/R.java
@@ -569,5 +598,7 @@ be/ucll/java/mobile/smarthome_mobile/api/consumption/ConsumptionAdapter.java
  be.ucll.java.mobile.smarthome_mobile.api.consumption.ConsumptionAdapter$1
 be/ucll/java/mobile/smarthome_mobile/LoginActivity.java
  be.ucll.java.mobile.smarthome_mobile.LoginActivity
+be/ucll/java/mobile/smarthome_mobile/api/house/UserHouseManager.java
+ be.ucll.java.mobile.smarthome_mobile.api.house.UserHouseManager
 be/ucll/java/mobile/smarthome_mobile/pojo/Media.java
  be.ucll.java.mobile.smarthome_mobile.pojo.Media

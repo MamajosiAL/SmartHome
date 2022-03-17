@@ -173,6 +173,8 @@ public class RoomActivity extends AppCompatActivity implements Callback<List<Dev
                     Intent intent = new Intent(this, AddDeviceActivity.class);
                     intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));
                     intent.putExtra("roomId", this.getIntent().getIntExtra("roomId",0));
+                    intent.putExtra("roomName", this.getIntent().getStringExtra("roomName"));
+                    intent.putExtra("houseName", this.getIntent().getStringExtra("houseName"));
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                 });

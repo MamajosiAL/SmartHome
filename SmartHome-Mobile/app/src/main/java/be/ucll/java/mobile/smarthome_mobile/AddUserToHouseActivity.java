@@ -120,6 +120,9 @@ public class AddUserToHouseActivity extends AppCompatActivity implements Callbac
                 Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
                 progressDialog.dismiss();
             }
+        }else{
+            name.setError(getString(R.string.invalidCredits));
+            progressDialog.dismiss();
         }
     }
 

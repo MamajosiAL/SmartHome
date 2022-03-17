@@ -6,10 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ConsumptionActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNavigation">
+        android:layout_above="@+id/bottomNavigation"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnGetConsumptionByHouse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/byHouse" />
 
         <TextView
             android:id="@+id/titleManage"
@@ -21,29 +29,26 @@
             android:fontFamily="sans-serif"
             android:text="@string/title_consumption"
             android:textAlignment="center"
-            android:textColor="@color/textColorBlue"
+            android:textColor="@color/accent"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <com.anychart.AnyChartView
             android:id="@+id/chartConsByUser"
             android:layout_width="match_parent"
-            android:layout_height="614dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleManage"
-            tools:layout_editor_absoluteX="-3dp" />/
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleManage" />
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/primairy"
         app:itemBackground="@color/primairy"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"

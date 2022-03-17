@@ -50,7 +50,6 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
     private ProgressDialog progressDialog;
     List<Room> roomsFromHouse;
 
-
     public void getRoomsListData() {
         progressDialog = new ProgressDialog(HouseActivity.this);
         progressDialog.create();
@@ -112,6 +111,7 @@ public class HouseActivity extends AppCompatActivity implements Callback<List<Ro
                 fab.setOnClickListener(view -> {
                     Intent intent = new Intent(this, AddRoomActivity.class);
                     intent.putExtra("houseId", this.getIntent().getIntExtra("houseId",0));
+                    intent.putExtra("houseName", this.getIntent().getStringExtra("houseName"));
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                 });
