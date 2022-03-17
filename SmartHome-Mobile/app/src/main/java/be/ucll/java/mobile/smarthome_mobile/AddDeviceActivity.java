@@ -259,6 +259,9 @@ public class AddDeviceActivity extends AppCompatActivity implements Callback<Str
                 Log.e(TAG, getString(R.string.responseErrorCode) + response.code());
                 progressDialog.dismiss();
             }
+        }else{
+            name.setError(getString(R.string.invalidCredits));
+            progressDialog.dismiss();
         }
     }
 

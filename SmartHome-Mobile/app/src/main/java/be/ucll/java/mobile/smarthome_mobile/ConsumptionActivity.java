@@ -84,17 +84,18 @@ public class ConsumptionActivity extends AppCompatActivity implements Callback<L
 
         NavigationManager.initialise(this);
         anyChartView = findViewById(R.id.chartConsByUser);
-        btnGoToConsPerHouse = findViewById(R.id.btnGetConsumptionByHouse);
+
+        // btnGoToConsPerHouse = findViewById(R.id.btnGetConsumptionByHouse);
 
         getConsumptionLogs();
 
-        btnGoToConsPerHouse.setOnClickListener(new View.OnClickListener() {
+        /*btnGoToConsPerHouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(),ConsumptionPerHouseActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     public void populateChart(List<ConsumptionLog> cLogs){
