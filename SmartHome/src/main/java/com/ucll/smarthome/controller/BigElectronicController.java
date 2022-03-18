@@ -55,7 +55,8 @@ public class BigElectronicController {
                 .type(getTypeByName(beDTO.getType().getTypeName()).orElse(null))
                 .tempature(beDTO.getTempature())
                 .timer(null)
-                .room(roomController.roomExists(beDTO.getRoomid())).build();
+                .room(roomController.roomExists(beDTO.getRoomid()))
+                .endProgramme(LocalDateTime.now()).build();
 
         beDao.save(appliances);
         consumptionController.createConsumption(new ConsumptionDTO.Builder().device(appliances.getId()).build());

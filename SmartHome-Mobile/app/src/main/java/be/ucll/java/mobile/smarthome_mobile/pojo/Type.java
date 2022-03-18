@@ -8,7 +8,7 @@ public class Type {
     @Expose
     private Long typeid;
 
-    @SerializedName("name")
+    @SerializedName("typeName")
     @Expose
     private String name;
 
