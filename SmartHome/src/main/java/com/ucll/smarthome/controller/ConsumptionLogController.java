@@ -187,7 +187,8 @@ public class ConsumptionLogController {
     }
 
 
-    public void createData(){
+    //Was voor mock data aan te maken
+    /*public void createData(){
         int min = 1;
         int max = 500;
 
@@ -208,5 +209,5 @@ public class ConsumptionLogController {
             }
             date = date.minusDays(1);
         }
-    }
+    }*/
 }
