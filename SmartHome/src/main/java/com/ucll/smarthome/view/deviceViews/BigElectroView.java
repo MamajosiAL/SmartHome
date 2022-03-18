@@ -161,7 +161,11 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
                 aSwitch.addClickListener(e->handleClickOnOf(e,bigElectronicDTO));
             }else {
                 aSwitch.setValue(false);
-                aSwitch.setReadOnly(true);
+                if (!bigElectronicDTO.getType().getTypeName().equals("Cooling Device")){
+                    aSwitch.setReadOnly(true);
+                }else {
+                    aSwitch.addClickListener(e->handleClickOnOf(e,bigElectronicDTO));
+                }
             }
             return aSwitch;
 
@@ -299,12 +303,22 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
             LocalTime time = bigElectroForm.timer.getValue();
             int devicid = Integer.parseInt(bigElectroForm.deviceForm.lblid.getText());
 
+
+            boolean status;
+            if (bigElectroForm.typeDTOSelect.getValue().getTypeName().equals("Cooling Device")){
+                status = true;
+            }else {
+                status = true;
+            }
+
             bigElectronicController.updateBeDeviceDevice(new BigElectronicDTO.Builder().id(devicid)
-                    .status(false).name(bigElectroForm.deviceForm.txtNaamDevice.getValue()).tempature(bigElectroForm.temperature.getValue())
+                    .status(status).name(bigElectroForm.deviceForm.txtNaamDevice.getValue()).tempature(bigElectroForm.temperature.getValue())
                     .programid(programid)
                     .timer(time).type(bigElectroForm.typeDTOSelect.getValue())
                     .roomid(roomid).build());
-            handleStart(devicid);
+            if (!bigElectroForm.typeDTOSelect.getValue().getTypeName().equals("Cooling Device")) {
+                handleStart(devicid);
+            }
 
             setButtonsToDefault();
             loadData();
