@@ -64,27 +64,7 @@ public class BigElectronicController {
         }
         consumptionController.createConsumption(new ConsumptionDTO.Builder().device(appliances.getId()).build());
     }
-    private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO, Programme programme) throws IllegalArgumentException{
-        System.out.println(beDTO.toString());
-        Room room = roomController.roomExists(beDTO.getRoomid());
 
-        BigElectronicDevice apl = appliancesExists(beDTO.getId());
-            apl.setName(beDTO.getName());
-            apl.setStatus(beDTO.isStatus());
-            apl.setProgramme(programme);
-            apl.setType(getType(programme.getType()).orElse(null));
-            apl.setTempature(programme.getTempature());
-            apl.setTimer(programme.getTimer());
-
-    }
-
-    public BigElectronicDTO getProgramValues(long programid){
-
-        Optional<Programme> programme = programmeDAO.findById(programid);
-        if (programme.isEmpty()) throw new IllegalArgumentException("Program not found");
-        return new BigElectronicDTO.Builder().tempature(programme.get().getTempature()).timer(programme.get().getTimer()).build();
-
-    }
 
     public void updateBeDeviceDevice(BigElectronicDTO beDTO) throws IllegalArgumentException{
         if (beDTO == null ) throw new IllegalArgumentException("Input data missing");
@@ -167,9 +147,6 @@ public class BigElectronicController {
 
     }
 
-    private Optional<Type> getType(Type type){
-        return typeDAO.findById(type.getTypeid());
-    }
 
     private Optional<Type> getTypeByName(String typeName){
         return typeDAO.findByName(typeName);
