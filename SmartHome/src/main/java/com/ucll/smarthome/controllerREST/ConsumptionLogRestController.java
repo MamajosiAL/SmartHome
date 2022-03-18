@@ -53,5 +53,10 @@ public class ConsumptionLogRestController {
         }
     }
 
+    @GetMapping("/createData")
+    public ResponseEntity createData(){
+        consumptionLogController.createData();
+        return new ResponseEntity("data created",HttpStatus.OK);
+    }
 
 }
