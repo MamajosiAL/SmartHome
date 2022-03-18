@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
@@ -23,26 +28,57 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:Mobile" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d936c4c8-e92c-43b6-add8-b5b31189f0f8" name="Default Changelist" comment="">
+    <list default="true" id="d936c4c8-e92c-43b6-add8-b5b31189f0f8" name="Default Changelist" comment="promote user and logout implemented">
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/SmartHome-Mobile.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/SmartHome-Mobile.app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_23__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_03_2022_18_24__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/ConsumtionView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartHome/src/main/java/com/ucll/smarthome/view/ConsumtionView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_activity_consumption.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_activity_consumption.xml.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_activity_register.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_activity_register.xml.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-nl-rBE_values-nl-rBE.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-nl-rBE_values-nl-rBE.arsc.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_manage_logged_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_manage_logged_in.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\mathi\.android\avd\Pixel_2_API_25.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_4_XL_API_30]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -104,11 +140,21 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2022-03-13T12:23:32.573Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android-custom-viewC:/Users/mathi/AppData/Local/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="multi-representation-previewC:/Users/mathi/AppData/Local/Android/Sdk/sources/android-30/android/view/View.java_selected" value="Custom views" />
   </component>
   <component name="RecentsManager">
+    <key name="android.template.-1914744288">
+      <recent name="be.ucll.java.mobile.smarthome_mobile" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="be.ucll.java.mobile.smarthome_mobile.api.house" />
       <recent name="be.ucll.java.mobile.smarthome_mobile.api.device" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programmeren\Fase2\GIP5\SmartHome\SmartHome-Mobile\app\src\main\res\drawable-v24" />
     </key>
   </component>
   <component name="RunManager">
@@ -127,7 +173,6 @@
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
       <option name="ALL_USERS" value="false" />
-      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -178,7 +223,7 @@
       </method>
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -197,7 +242,42 @@
       <option name="project" value="LOCAL" />
       <updated>1647178150703</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Edit name of device + navigation in roomActivity fix">
+      <created>1647355055008</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647355055008</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Login infinite loading fix">
+      <created>1647358867186</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1647358867186</updated>
+    </task>
+    <task id="LOCAL-00004" summary="promote user and logout implemented">
+      <created>1647441833322</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1647441833322</updated>
+    </task>
+    <task id="LOCAL-00005" summary="remove user to house access">
+      <created>1647446826436</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1647446826436</updated>
+    </task>
+    <task id="LOCAL-00006" summary="account details and style implemented">
+      <created>1647531728740</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1647531728740</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,7 +285,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Mobile" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -213,70 +305,128 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="SHOW_UNVERSIONED_FILES_WHILE_COMMIT" value="false" />
     <MESSAGE value="Delete device and device toggle status" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete device and device toggle status" />
+    <MESSAGE value="Edit name of device + navigation in roomActivity fix" />
+    <MESSAGE value="Login infinite loading fix" />
+    <MESSAGE value="promote user and logout implemented" />
+    <MESSAGE value="remove user to house access implemented" />
+    <MESSAGE value="account details and style implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="account details and style implemented" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="718" y="148" key="#com.intellij.ide.util.MemberChooser" timestamp="1647171714449">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="1056" y="193" key="#com.intellij.ide.util.MemberChooser" timestamp="1647527604106">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="718" y="148" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647171714449" />
-    <state x="774" y="245" key="AndroidCreateXmlResourceDialog" timestamp="1647177960771">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="1056" y="193" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1392@0.0.2560.1392" timestamp="1647527604106" />
+    <state x="944" y="382" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1647531501156">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="944" y="382" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1392@0.0.2560.1392" timestamp="1647531501156" />
+    <state x="944" y="382" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1647527746114">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="944" y="382" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.2560.1392@0.0.2560.1392" timestamp="1647527746114" />
+    <state x="1032" y="330" key="AndroidCreateXmlResourceDialog" timestamp="1647526010374">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="774" y="245" key="AndroidCreateXmlResourceDialog/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647177960771" />
-    <state x="433" y="0" key="CommitChangelistDialog2" timestamp="1647178148986">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="1032" y="330" key="AndroidCreateXmlResourceDialog/0.0.2560.1392@0.0.2560.1392" timestamp="1647526010374" />
+    <state x="577" y="0" width="1089" height="1348" key="CommitChangelistDialog2" timestamp="1647531727622">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="433" y="0" key="CommitChangelistDialog2/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178148986" />
+    <state x="577" y="0" width="1089" height="1348" key="CommitChangelistDialog2/0.0.2560.1392@0.0.2560.1392" timestamp="1647531727622" />
+    <state x="92" y="92" width="2376" height="1208" key="DiffContextDialog" timestamp="1647359238258">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="92" y="92" width="2376" height="1208" key="DiffContextDialog/0.0.2560.1392@0.0.2560.1392" timestamp="1647359238258" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1647174172469">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647174172469" />
-    <state width="1863" height="73" key="GridCell.Tab.0.bottom" timestamp="1647178021416">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="1071" y="579" key="GitRewordDialog" timestamp="1647447126403">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="1071" y="579" key="GitRewordDialog/0.0.2560.1392@0.0.2560.1392" timestamp="1647447126403" />
+    <state width="2503" height="41" key="GridCell.Tab.0.bottom" timestamp="1647531444688">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state width="1863" height="73" key="GridCell.Tab.0.bottom/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
-    <state width="1863" height="73" key="GridCell.Tab.0.center" timestamp="1647178021416">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1863" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1647516464070" />
+    <state width="2503" height="41" key="GridCell.Tab.0.bottom/0.0.2560.1392@0.0.2560.1392" timestamp="1647531444688" />
+    <state width="2503" height="41" key="GridCell.Tab.0.center" timestamp="1647531444687">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state width="1863" height="73" key="GridCell.Tab.0.center/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
-    <state width="1863" height="73" key="GridCell.Tab.0.left" timestamp="1647178021416">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1863" height="268" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1647516464070" />
+    <state width="2503" height="41" key="GridCell.Tab.0.center/0.0.2560.1392@0.0.2560.1392" timestamp="1647531444687" />
+    <state width="2503" height="41" key="GridCell.Tab.0.left" timestamp="1647531444687">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state width="1863" height="73" key="GridCell.Tab.0.left/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
-    <state width="1863" height="73" key="GridCell.Tab.0.right" timestamp="1647178021416">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1863" height="268" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1647516464070" />
+    <state width="2503" height="41" key="GridCell.Tab.0.left/0.0.2560.1392@0.0.2560.1392" timestamp="1647531444687" />
+    <state width="2503" height="41" key="GridCell.Tab.0.right" timestamp="1647531444687">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state width="1863" height="73" key="GridCell.Tab.0.right/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021416" />
-    <state width="1863" height="73" key="GridCell.Tab.1.bottom" timestamp="1647178021417">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1863" height="268" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1647516464070" />
+    <state width="2503" height="41" key="GridCell.Tab.0.right/0.0.2560.1392@0.0.2560.1392" timestamp="1647531444687" />
+    <state width="2503" height="41" key="GridCell.Tab.1.bottom" timestamp="1647531444688">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state width="1863" height="73" key="GridCell.Tab.1.bottom/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
-    <state width="1863" height="73" key="GridCell.Tab.1.center" timestamp="1647178021417">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1863" height="268" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1647516464070" />
+    <state width="2503" height="41" key="GridCell.Tab.1.bottom/0.0.2560.1392@0.0.2560.1392" timestamp="1647531444688" />
+    <state width="2503" height="41" key="GridCell.Tab.1.center" timestamp="1647531444688">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state width="1863" height="73" key="GridCell.Tab.1.center/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
-    <state width="1863" height="73" key="GridCell.Tab.1.left" timestamp="1647178021417">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1863" height="268" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1647516464070" />
+    <state width="2503" height="41" key="GridCell.Tab.1.center/0.0.2560.1392@0.0.2560.1392" timestamp="1647531444688" />
+    <state width="2503" height="41" key="GridCell.Tab.1.left" timestamp="1647531444688">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state width="1863" height="73" key="GridCell.Tab.1.left/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
-    <state width="1863" height="73" key="GridCell.Tab.1.right" timestamp="1647178021417">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1863" height="268" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1647516464070" />
+    <state width="2503" height="41" key="GridCell.Tab.1.left/0.0.2560.1392@0.0.2560.1392" timestamp="1647531444688" />
+    <state width="2503" height="41" key="GridCell.Tab.1.right" timestamp="1647531444688">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state width="1863" height="73" key="GridCell.Tab.1.right/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178021417" />
-    <state x="452" y="179" key="Vcs.Push.Dialog.v2" timestamp="1647178222429">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1863" height="268" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1647516464070" />
+    <state width="2503" height="41" key="GridCell.Tab.1.right/0.0.2560.1392@0.0.2560.1392" timestamp="1647531444688" />
+    <state x="1051" y="617" key="ReplaceDuplicatesPrompt" timestamp="1647442326395">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="1051" y="617" key="ReplaceDuplicatesPrompt/0.0.2560.1392@0.0.2560.1392" timestamp="1647442326395" />
+    <state x="603" y="241" key="Vcs.Push.Dialog.v2" timestamp="1647531786178">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="452" y="179" key="Vcs.Push.Dialog.v2/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647178222429" />
-    <state x="736" y="409" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1647168262688">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="603" y="241" key="Vcs.Push.Dialog.v2/0.0.2560.1392@0.0.2560.1392" timestamp="1647531786178" />
+    <state x="981" y="552" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1647531775798">
+      <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="736" y="409" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647168262688" />
-    <state x="-1482" y="32" width="1235" height="998" maximized="true" key="dock-window-1" timestamp="1647166665384">
-      <screen x="-1920" y="0" width="1920" height="1032" />
+    <state x="736" y="409" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1032@0.0.1920.1032" timestamp="1647511887315" />
+    <state x="981" y="552" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1392@0.0.2560.1392" timestamp="1647531775798" />
+    <state x="279" y="77" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1647511645793">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="279" y="77" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1032@0.0.1920.1032" timestamp="1647511645793" />
+    <state x="18" y="191" width="1772" height="999" key="dock-window-1" timestamp="1647517179420">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="-1482" y="32" width="1235" height="998" maximized="true" key="dock-window-1/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1647166665384" />
+    <state x="18" y="191" width="1772" height="999" key="dock-window-1/0.0.1920.1032@0.0.1920.1032" timestamp="1647517179420" />
+    <state x="496" y="440" width="1647" height="1347" key="dock-window-1/0.0.2560.1392@0.0.2560.1392" timestamp="1647461560538" />
+    <state x="944" y="326" key="extract.method.dialog" timestamp="1647442322474">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="944" y="326" key="extract.method.dialog/0.0.2560.1392@0.0.2560.1392" timestamp="1647442322474" />
     <state x="-1388" y="234" key="run.anything.popup" timestamp="1647169626510">
       <screen x="-1920" y="0" width="1920" height="1032" />
     </state>
@@ -285,16 +435,87 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+        <line-breakpoint suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DeviceDeleter.java</url>
           <line>80</line>
           <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DeviceNameEditor.java</url>
+          <line>107</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DeviceNameEditor.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/device/DeviceNameEditor.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/DeviceActivity.java</url>
+          <line>351</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/DeviceActivity.java</url>
+          <line>294</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/LoginActivity.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/user/UsersAdapter.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/house/UserHouseManager.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/house/UserHouseManager.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/RoomActivity.java</url>
+          <line>167</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/AddDeviceActivity.java</url>
+          <line>255</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/RoomActivity.java</url>
+          <line>177</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/AccountActivity.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/be/ucll/java/mobile/smarthome_mobile/api/house/HouseApiInterface.java</url>
+          <line>48</line>
+          <properties class="be.ucll.java.mobile.smarthome_mobile.api.house.HouseApiInterface" method="removeUserFromHouse" />
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
-        <PinnedItemInfo />
+        <PinnedItemInfo typeName="retrofit2.Response" fieldName="body" />
       </pinned-members>
     </pin-to-top-manager>
   </component>
