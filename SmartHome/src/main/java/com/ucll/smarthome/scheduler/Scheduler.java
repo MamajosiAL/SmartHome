@@ -38,11 +38,10 @@ public class Scheduler {
 
     @Scheduled(fixedDelay = 1000)
     public void checkIfTimeOfBigElectroIsOver(){
-
             for (HouseDTO houseDTO: houseController.getAllHouses()){
                 for (RoomDTO roomDTO: roomController.getRoomsByHouseSchedule(houseDTO.getId())){
                     for (BigElectronicDTO beDTO: bigElectronicController.getBigelectronicScheduled(roomDTO.getId())){
-                        if (beDTO.isStatus() && beDTO.getEindeProgramma().isBefore(LocalDateTime.now())){
+                        if (!beDTO.getType().getTypeName().equals("Cooling Device") && beDTO.isStatus() && beDTO.getEindeProgramma().isBefore(LocalDateTime.now())){
                             deviceController.changeStatus(beDTO.getId());
                             bigElectronicController.beSetToOf(beDTO.getId());
                         }

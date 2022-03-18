@@ -58,6 +58,9 @@ public class BigElectronicController {
                 .room(roomController.roomExists(beDTO.getRoomid())).build();
 
         beDao.save(appliances);
+        if (appliances.getType().getName().equals("Cooling Device")){
+            appliances.setStatus(true);
+        }
         consumptionController.createConsumption(new ConsumptionDTO.Builder().device(appliances.getId()).build());
     }
     private void updateBeDeviceWithProgramme(BigElectronicDTO beDTO, Programme programme) throws IllegalArgumentException{
@@ -71,6 +74,7 @@ public class BigElectronicController {
             apl.setType(getType(programme.getType()).orElse(null));
             apl.setTempature(programme.getTempature());
             apl.setTimer(programme.getTimer());
+
     }
 
     public BigElectronicDTO getProgramValues(long programid){
@@ -85,14 +89,20 @@ public class BigElectronicController {
         if (beDTO == null ) throw new IllegalArgumentException("Input data missing");
         if (beDTO.getName() == null || beDTO.getName().trim().equals("")) throw new IllegalArgumentException("Name of device is not filled in");
         Optional<Programme> programme = programmeDAO.findById(beDTO.getProgramid());
-        if (beDTO.getTimer() == null) throw new IllegalArgumentException("Please fill in the time");
+        if (beDTO.getTimer() == null && !beDTO.getType().getTypeName().equals("Cooling Device")) throw new IllegalArgumentException("Please fill in the time");
         if (beDTO.getType() != null){
             if (!beDTO.getType().getTypeName().equals("Cooling Device") && beDTO.getTempature() < 0){
                 beDTO.setTempature(0);
             }else  {
-                if (programme.isEmpty()) throw new IllegalArgumentException("Programme does not exist");
+                if (programme.isEmpty() && !beDTO.getType().getTypeName().equals("Cooling Device")) throw new IllegalArgumentException("Programme does not exist");
             }
         }
+        if (beDTO.getType().getTypeName().equals("Cooling Device")){
+            BigElectronicDevice apl = appliancesExists(beDTO.getId());
+            apl.setName(beDTO.getName());
+            apl.setStatus(true);
+            apl.setTempature(beDTO.getTempature());
+        }else {
             BigElectronicDevice apl = appliancesExists(beDTO.getId());
             apl.setName(beDTO.getName());
             apl.setStatus(beDTO.isStatus());
@@ -101,6 +111,8 @@ public class BigElectronicController {
             apl.setTimer(beDTO.getTimer());
             apl.setEndProgramme(LocalDateTime.now().plusHours(beDTO.getTimer().getHour()).plusMinutes(beDTO.getTimer().getMinute())
                     .plusSeconds(beDTO.getTimer().getSecond()));
+
+        }
 
 
     }

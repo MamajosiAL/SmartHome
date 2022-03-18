@@ -169,13 +169,15 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
         grid.addColumn(bigElectronicDTO -> bigElectronicDTO.getType().getTypeName()).setHeader("Type");
         grid.addColumn(new ComponentRenderer<>( bigElectronicDTO -> {
             if (bigElectronicDTO.isStatus()){
-                return  new Span( programmeConttoller.getProgramById(bigElectronicDTO.getProgramid()).getName());
+                if (!bigElectronicDTO.getType().getTypeName().equals("Cooling Device")){
+                    return  new Span( programmeConttoller.getProgramById(bigElectronicDTO.getProgramid()).getName());
+                }
             }
             return new Span();
         })).setHeader(msgSrc.getMessage("bview.programma",null,getLocale()));
         grid.addColumn(BigElectronicDTO::getTempature).setHeader("Temp °C");
         grid.addColumn(new ComponentRenderer<>(bigElectronicDTO -> {
-            if (bigElectronicDTO.isStatus()){
+            if (bigElectronicDTO.isStatus() && !bigElectronicDTO.getType().getTypeName().equals("Cooling Device")){
                 simpleTimer = new SimpleTimer();
                 simpleTimer.setHours(true);
                 simpleTimer.setMinutes(true);
@@ -296,6 +298,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
             }
             LocalTime time = bigElectroForm.timer.getValue();
             int devicid = Integer.parseInt(bigElectroForm.deviceForm.lblid.getText());
+
             bigElectronicController.updateBeDeviceDevice(new BigElectronicDTO.Builder().id(devicid)
                     .status(false).name(bigElectroForm.deviceForm.txtNaamDevice.getValue()).tempature(bigElectroForm.temperature.getValue())
                     .programid(programid)
@@ -339,7 +342,7 @@ public class BigElectroView extends VerticalLayout implements HasUrlParameter<Lo
     private void populateRoomForm(BigElectronicDTO bigElectronicDTO) {
         setButtonsToDefault();
         if (bigElectronicDTO != null) {
-            if (!bigElectronicDTO.isStatus()){
+            if (!bigElectronicDTO.isStatus() || bigElectronicDTO.getType().getTypeName().equals("Cooling Device")){
                 aSwitch.setReadOnly(true);
                 btnCreate.setVisible(false);
                 btnUpdate.setVisible(true);
