@@ -134,4 +134,16 @@ public class Consumption {
             return new Consumption(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Consumption{" +
+                "consumptionId=" + consumptionId +
+                ", device=" + device +
+                ", startDatumEnTijd=" + startDatumEnTijd +
+                ", aantalMinuten=" + aantalMinuten +
+                ", unit='" + unit + '\'' +
+                ", consumptionPerHour=" + consumptionPerHour +
+                '}';
+    }
 }

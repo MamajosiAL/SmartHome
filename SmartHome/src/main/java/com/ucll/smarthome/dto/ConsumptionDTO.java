@@ -162,5 +162,17 @@ public class ConsumptionDTO {
         }
 
         public ConsumptionDTO build() { return new ConsumptionDTO(this); }
+
+    }
+
+    @Override
+    public String toString() {
+        return "ConsumptionDTO{" +
+                "consumptionId=" + consumptionId +
+                ", deviceId=" + deviceId +
+                ", aantalMinuten=" + aantalMinuten +
+                ", unit='" + unit + '\'' +
+                ", consumptionPerHour=" + consumptionPerHour +
+                '}';
     }
 }

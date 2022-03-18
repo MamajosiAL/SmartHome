@@ -73,6 +73,18 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>1.15.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>1.15.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
@@ -104,6 +116,25 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+                <plugin>
+                    <groupId>org.apache.tomee.maven</groupId>
+                    <artifactId>tomee-maven-plugin</artifactId>
+                    <version>7.1.1</version>
+                    <configuration>
+                        <tomeeClassifier>webprofile</tomeeClassifier>
+                        <context>ROOT</context>
+                        <synchronization>
+                            <extensions>
+                                <extension>.class</extension>
+                            </extensions>
+                        </synchronization>
+                        <reloadOnUpdate>true</reloadOnUpdate>
+                        <systemVariables>
+                            <openejb.system.apps>true</openejb.system.apps>
+                            <tomee.serialization.class.blacklist>-</tomee.serialization.class.blacklist>
+                        </systemVariables>
+                    </configuration>
+                </plugin>
         </plugins>
     </build>
 
