@@ -53,10 +53,11 @@ public class ConsumptionLogRestController {
         }
     }
 
-    @GetMapping("/createData")
+    //voor mock data te creeren
+/*    @GetMapping("/createData")
     public ResponseEntity createData(){
         consumptionLogController.createData();
         return new ResponseEntity("data created",HttpStatus.OK);
-    }
+    }*/
 
 }
